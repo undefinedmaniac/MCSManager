@@ -1,0 +1,26 @@
+[general]
+useSystemJava : bool
+manualJavaPath : string
+jarName : string
+arguments : string
+workingDir : string
+restartOnCrash : bool
+
+[backup]
+enabled : bool
+backupOnServerStart : bool
+period : int
+maxBackups : int
+destination : string
+location(0-*) : string
+
+[mcscp]
+enabled : bool
+address : string
+port : int
+
+[sleeper]
+enabled : bool
+period : int
+serverSwitcherEnabled : bool
+secondaryServer : string

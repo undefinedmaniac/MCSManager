@@ -1,0 +1,22 @@
+General Config File - MCSManagerConfig.ini
+-defaultServer="server0"
+-server0="PrimaryServerConfigFile.ini"
+-server1="IdleServerConfigFile.ini"
+
+Portal Server Config File - PortalServerConfig.ini
+-portalServerAddress="127.0.0.1"
+-portalServerPort="54620"
+-account0="AdministratorAccount.ini"
+-account1="Tanner5463Account.ini"
+
+Portal Server Account Config File - AdministratorAccount.ini
+-username="Administrator"
+-defaultPermState="True"
+-perm0=""
+-perm1=""
+
+Primary Server Config File - PriamryServerConfigFile.ini
+-all server settings
+-backup settings
+-mcscp client settings
+-server switch settings
