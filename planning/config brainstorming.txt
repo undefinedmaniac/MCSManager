@@ -4,6 +4,7 @@ General Config File - MCSManagerConfig.ini
 -server1="IdleServerConfigFile.ini"
 
 Portal Server Config File - PortalServerConfig.ini
+-enabled="true"
 -portalServerAddress="127.0.0.1"
 -portalServerPort="54620"
 -account0="AdministratorAccount.ini"
