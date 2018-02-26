@@ -2,9 +2,10 @@
 useSystemJava : bool
 manualJavaPath : string
 jarName : string
-arguments : string
 workingDir : string
-restartOnCrash : bool
+arguments : string
+unexpectedShutdownBehavior : string
+alternativeServer : string
 
 [backup]
 enabled : bool
@@ -22,5 +23,6 @@ port : int
 [sleeper]
 enabled : bool
 period : int
-serverSwitcherEnabled : bool
-secondaryServer : string
+
+-jar FTB.jar -Xmx256MB -Mxs128MB
+.+?\s+|.+?$
