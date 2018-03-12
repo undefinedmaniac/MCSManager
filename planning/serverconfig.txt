@@ -1,5 +1,4 @@
 [general]
-useSystemJava : bool
 manualJavaPath : string
 jarName : string
 workingDir : string

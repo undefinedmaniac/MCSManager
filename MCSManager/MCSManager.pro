@@ -15,22 +15,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp \
-    core/mcsmanagermediator.cpp \
-    config/configmanager.cpp \
-    config/serverconfig.cpp \
-    config/backupserviceconfig.cpp
+    config/serverconfig.cpp
 
 HEADERS += \
-    config/interface/iserverconfig.h \
-    config/interface/imcscpclientconfig.h \
-    config/interface/iserversleeperconfig.h \
-    config/interface/ibackupserviceconfig.h \
-    config/interface/igeneralconfig.h \
-    config/interface/irestarterconfig.h \
-    config/interface/ibackupmanagerconfig.h \
-    config/interface/iconfigmanager.h \
-    core/interface/imcsmanagermediator.h \
-    core/mcsmanagermediator.h \
-    config/configmanager.h \
+    config/interfaces/iserverconfig.h \
+    config/interfaces/iserverbackupconfig.h \
+    config/interfaces/ibackupaddonconfig.h \
+    config/interfaces/irestarteraddonconfig.h \
+    config/interfaces/iservermanagerconfig.h \
+    config/interfaces/isleeperaddonconfig.h \
+    config/interfaces/imcscpaddonconfig.h \
     config/serverconfig.h \
-    config/backupserviceconfig.h
+    config/interfaces/ilogreaderaddonconfig.h
