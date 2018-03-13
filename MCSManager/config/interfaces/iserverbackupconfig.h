@@ -7,6 +7,8 @@
 class IServerBackupConfig
 {
 public:
+    virtual ~IServerBackupConfig() {}
+
     virtual int maxBackups() const = 0;
     virtual QString backupDestination() const = 0;
     virtual QStringList backupLocations() const = 0;

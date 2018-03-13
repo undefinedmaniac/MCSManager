@@ -4,6 +4,8 @@
 class IMcscpAddonConfig
 {
 public:
+    virtual ~IMcscpAddonConfig() {}
+
     virtual bool mcscpEnabled() const = 0;
     virtual QString mcscpAddress() const = 0;
     virtual int mcscpPort() const = 0;

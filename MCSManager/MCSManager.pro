@@ -15,7 +15,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp \
-    config/serverconfig.cpp
+    config/serverconfig.cpp \
+    config/generalconfig.cpp \
+    config/configbase.cpp \
+    config/configmanager.cpp
 
 HEADERS += \
     config/interfaces/iserverconfig.h \
@@ -26,4 +29,9 @@ HEADERS += \
     config/interfaces/isleeperaddonconfig.h \
     config/interfaces/imcscpaddonconfig.h \
     config/serverconfig.h \
-    config/interfaces/ilogreaderaddonconfig.h
+    config/interfaces/ilogreaderaddonconfig.h \
+    config/interfaces/igeneralconfig.h \
+    config/generalconfig.h \
+    config/configbase.h \
+    config/interfaces/iconfigmanager.h \
+    config/configmanager.h

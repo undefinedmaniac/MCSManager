@@ -4,6 +4,8 @@
 class IRestarterAddonConfig
 {
 public:
+    virtual ~IRestarterAddonConfig() {}
+
     virtual bool restarterEnabled() const = 0;
     virtual int restarterPeriod() const = 0;
 };

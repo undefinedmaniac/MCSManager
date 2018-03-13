@@ -5,10 +5,12 @@
 #include <QSettings>
 #include <QDebug>
 #include <QRegularExpression>
+#include <QStandardPaths>
 
+#include "configbase.h"
 #include "./interfaces/iserverconfig.h"
 
-class ServerConfig : public IServerConfig
+class ServerConfig : public ConfigBase, public IServerConfig
 {
 public:
     ServerConfig(const QString &filePath);
@@ -41,6 +43,8 @@ public:
     // ISleeperAddonConfig interface
     bool sleeperEnabled() const override;
     int sleeperPeriod() const override;
+    ShutdownBehavior sleeperShutdownBehavior() const override;
+    QString sleeperAlternativeServer() const override;
 
     // IRestarterAddonConfig interface
     bool restarterEnabled() const override;
@@ -55,7 +59,6 @@ protected:
     virtual QStringList getEnabledAddons() const;
 
 private:
-    QSettings mSettings;
     QStringList mArguments, mEnabledAddons, mBackupLocations;
 
     void generateConfigFile();
@@ -63,24 +66,19 @@ private:
     QStringList getArguments() const;
     QStringList getBackupLocations() const;
 
-    QVariant readKey(const QString &base, const QString &key) const;
     QVariant readGeneralKey(const QString &key) const;
     QVariant readBackupKey(const QString &key) const;
     QVariant readSleeperKey(const QString &key) const;
     QVariant readRestarterKey(const QString &key) const;
     QVariant readMcscpKey(const QString &key) const;
 
-    void writeKey(const QString &base, const QString &key, const QVariant &data = QVariant(""));
     void writeGeneralKey(const QString &key, const QVariant &data = QVariant(""));
     void writeBackupKey(const QString &key, const QVariant &data = QVariant(""));
     void writeSleeperKey(const QString &key, const QVariant &data = QVariant(""));
     void writeRestarterKey(const QString &key, const QVariant &data = QVariant(""));
     void writeMcscpKey(const QString &key, const QVariant &data = QVariant(""));
 
-    static int convertToInt(const QVariant &data);
-    static bool convertToBool(const QVariant &data);
-
-    static QString simplifyString(const QString &string);
+    static IServerConfig::ShutdownBehavior convertToShutdownBehavior(const QVariant &data);
 
     //ServerConfig Constants
     static const QString SERVER_CONFIG_BASE,
@@ -105,6 +103,8 @@ private:
                          SLEEPER_CONFIG_BASE,
                          SLEEPER_ENABLED_KEY,
                          SLEEPER_PERIOD_KEY,
+                         SLEEPER_SHUTDOWN_BEHAVIOR_KEY,
+                         SLEEPER_ALTERNATIVE_SERVER_KEY,
                          RESTARTER_NAME,
                          RESTARTER_CONFIG_BASE,
                          RESTARTER_ENABLED_KEY,

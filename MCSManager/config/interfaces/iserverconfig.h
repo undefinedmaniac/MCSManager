@@ -16,6 +16,8 @@ class IServerConfig : public IServerManagerConfig, public IServerBackupConfig,
         public IRestarterAddonConfig, public IMcscpAddonConfig
 {
 public:
+    virtual ~IServerConfig() {}
+
     virtual QString name() const = 0;
     virtual QString javaPath() const = 0;
     virtual QString jarPath() const = 0;

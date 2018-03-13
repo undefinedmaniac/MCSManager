@@ -7,7 +7,7 @@ const QString ServerConfig::SERVER_CONFIG_BASE = QStringLiteral("general"),
               ServerConfig::WORKING_DIRECTORY_KEY = QStringLiteral("workingDirectory"),
               ServerConfig::ARGUMENTS_KEY = QStringLiteral("arguments"),
               ServerConfig::UNEXPECTED_SHUTDOWN_BEHAVIOR_KEY = QStringLiteral("unexpectedShutdownBehavior"),
-              ServerConfig::ALTERNATIVE_SERVER_KEY = QStringLiteral("alternativeServerKey"),
+              ServerConfig::ALTERNATIVE_SERVER_KEY = QStringLiteral("alternativeServer"),
               ServerConfig::LOG_NAME = QStringLiteral("logReader"),
               ServerConfig::LOG_ENABLED_KEY = QStringLiteral("logEnabled"),
               ServerConfig::BACKUP_NAME = QStringLiteral("backup"),
@@ -22,6 +22,8 @@ const QString ServerConfig::SERVER_CONFIG_BASE = QStringLiteral("general"),
               ServerConfig::SLEEPER_CONFIG_BASE = QStringLiteral("sleeper"),
               ServerConfig::SLEEPER_ENABLED_KEY = QStringLiteral("enabled"),
               ServerConfig::SLEEPER_PERIOD_KEY = QStringLiteral("period"),
+              ServerConfig::SLEEPER_SHUTDOWN_BEHAVIOR_KEY = QStringLiteral("shutdownBehavior"),
+              ServerConfig::SLEEPER_ALTERNATIVE_SERVER_KEY = QStringLiteral("alternativeServer"),
               ServerConfig::RESTARTER_NAME = QStringLiteral("restarter"),
               ServerConfig::RESTARTER_CONFIG_BASE = QStringLiteral("restarter"),
               ServerConfig::RESTARTER_ENABLED_KEY = QStringLiteral("enabled"),
@@ -32,17 +34,16 @@ const QString ServerConfig::SERVER_CONFIG_BASE = QStringLiteral("general"),
               ServerConfig::MCSCP_ADDRESS_KEY = QStringLiteral("address"),
               ServerConfig::MCSCP_PORT_KEY = QStringLiteral("port");
 
-ServerConfig::ServerConfig(const QString &filePath) :
-    mSettings(filePath, QSettings::IniFormat)
+ServerConfig::ServerConfig(const QString &filePath) : ConfigBase(filePath)
 {
-    if (mSettings.allKeys().count() <= 0) {
+    if (getSettings().allKeys().count() <= 0) {
         qDebug() << "Error: No data found inside config file " + filePath;
         generateConfigFile();
-    } else {
-        mArguments = getArguments();
-        mEnabledAddons = getEnabledAddons();
-        mBackupLocations = getBackupLocations();
     }
+
+    mArguments = getArguments();
+    mEnabledAddons = getEnabledAddons();
+    mBackupLocations = getBackupLocations();
 }
 
 QString ServerConfig::name() const
@@ -52,7 +53,12 @@ QString ServerConfig::name() const
 
 QString ServerConfig::javaPath() const
 {
-    return readGeneralKey(JAVA_PATH_KEY).toString();
+    QString data = readGeneralKey(JAVA_PATH_KEY).toString();
+
+    if (data == QStringLiteral(""))
+        return QStandardPaths::findExecutable(QStringLiteral("java"));
+
+    return data;
 }
 
 QString ServerConfig::jarPath() const
@@ -76,15 +82,8 @@ QStringList ServerConfig::enabledAddons() const
 }
 
 IServerConfig::ShutdownBehavior ServerConfig::unexpectedShutdownBehavior() const
-{
-    const QString data = simplifyString(readGeneralKey(UNEXPECTED_SHUTDOWN_BEHAVIOR_KEY).toString());
-
-    if (data == QStringLiteral("RESTART"))
-        return ServerConfig::RestartServer;
-    else if (data == QStringLiteral("STARTALTERNATIVESERVER"))
-        return ServerConfig::StartAlternativeServer;
-
-    return ServerConfig::DoNothing;
+{   
+    return convertToShutdownBehavior(readGeneralKey(UNEXPECTED_SHUTDOWN_BEHAVIOR_KEY));
 }
 
 QString ServerConfig::alternativeServerName() const
@@ -135,6 +134,16 @@ bool ServerConfig::sleeperEnabled() const
 int ServerConfig::sleeperPeriod() const
 {
     return convertToInt(readSleeperKey(SLEEPER_PERIOD_KEY));
+}
+
+IServerConfig::ShutdownBehavior ServerConfig::sleeperShutdownBehavior() const
+{
+    return convertToShutdownBehavior(readSleeperKey(SLEEPER_SHUTDOWN_BEHAVIOR_KEY));
+}
+
+QString ServerConfig::sleeperAlternativeServer() const
+{
+    return readSleeperKey(SLEEPER_ALTERNATIVE_SERVER_KEY).toString();
 }
 
 bool ServerConfig::restarterEnabled() const
@@ -202,6 +211,8 @@ void ServerConfig::generateConfigFile()
 
     writeSleeperKey(SLEEPER_ENABLED_KEY);
     writeSleeperKey(SLEEPER_PERIOD_KEY);
+    writeSleeperKey(SLEEPER_SHUTDOWN_BEHAVIOR_KEY);
+    writeSleeperKey(SLEEPER_ALTERNATIVE_SERVER_KEY);
 
     writeRestarterKey(RESTARTER_ENABLED_KEY);
     writeRestarterKey(RESTARTER_PERIOD_KEY);
@@ -210,7 +221,7 @@ void ServerConfig::generateConfigFile()
     writeMcscpKey(MCSCP_ADDRESS_KEY);
     writeMcscpKey(MCSCP_PORT_KEY);
 
-    mSettings.sync();
+    getSettings().sync();
 }
 
 QStringList ServerConfig::getArguments() const
@@ -273,11 +284,6 @@ QVariant ServerConfig::readMcscpKey(const QString &key) const
     return readKey(MCSCP_CONFIG_BASE, key);
 }
 
-void ServerConfig::writeKey(const QString &base, const QString &key, const QVariant &data)
-{
-    mSettings.setValue(base + QStringLiteral("/") + key, data);
-}
-
 void ServerConfig::writeGeneralKey(const QString &key, const QVariant &data)
 {
     writeKey(SERVER_CONFIG_BASE, key, data);
@@ -303,31 +309,14 @@ void ServerConfig::writeMcscpKey(const QString &key, const QVariant &data)
     writeKey(MCSCP_CONFIG_BASE, key, data);
 }
 
-QVariant ServerConfig::readKey(const QString &base, const QString &key) const
+IServerManagerConfig::ShutdownBehavior ServerConfig::convertToShutdownBehavior(const QVariant &data)
 {
-    return mSettings.value(base + QStringLiteral("/") + key);
-}
+    const QString stringData = simplifyString(data.toString());
 
-int ServerConfig::convertToInt(const QVariant &data)
-{
-    bool success = false;
+    if (stringData == QStringLiteral("RESTART"))
+        return IServerConfig::RestartServer;
+    else if (stringData == QStringLiteral("STARTALTERNATIVESERVER"))
+        return IServerConfig::StartAlternativeServer;
 
-    int result = data.toInt(&success);
-
-    if (success)
-        return result;
-
-    return -1;
-}
-
-bool ServerConfig::convertToBool(const QVariant &data)
-{
-    const QString string = simplifyString(data.toString());
-
-    return (string == QStringLiteral("TRUE") || string == QStringLiteral("1"));
-}
-
-QString ServerConfig::simplifyString(const QString &string)
-{
-    return string.toUpper().replace(" ", "");
+    return IServerConfig::DoNothing;
 }

@@ -5,6 +5,8 @@ class ILogReaderAddonConfig
 {
 
 public:
+    virtual ~ILogReaderAddonConfig() {}
+
     virtual bool logReaderEnabled() const = 0;
 };
 

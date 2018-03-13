@@ -10,6 +10,8 @@ public:
         DoNothing, RestartServer, StartAlternativeServer
     };
 
+    virtual ~IServerManagerConfig() {}
+
     virtual ShutdownBehavior unexpectedShutdownBehavior() const = 0;
     virtual QString alternativeServerName() const = 0;
 };
