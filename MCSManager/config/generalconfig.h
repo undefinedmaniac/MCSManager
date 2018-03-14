@@ -6,7 +6,7 @@
 #include <QSettings>
 
 #include "configbase.h"
-#include "./interfaces/igeneralconfig.h"
+#include "config/interfaces/igeneralconfig.h"
 
 class GeneralConfig : public ConfigBase, public IGeneralConfig
 {

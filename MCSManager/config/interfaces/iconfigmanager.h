@@ -3,8 +3,8 @@
 
 #include <QString>
 
-#include "igeneralconfig.h"
-#include "iserverconfig.h"
+class IServerConfig;
+class IGeneralConfig;
 
 class IConfigManager
 {

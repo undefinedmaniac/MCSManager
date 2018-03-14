@@ -6,7 +6,9 @@
 
 #include "config/configmanager.h"
 
-void testFunc() {
+#include "server/minecraftserver.h"
+
+/*void testFunc() {
     ConfigManager manager;
 
     manager.loadConfig(QCoreApplication::applicationDirPath() + QStringLiteral("/config"));
@@ -21,13 +23,24 @@ void testFunc() {
     qDebug() << "Name: " << config->name();
     qDebug() << "Enabled Addons: " << config->enabledAddons();
     qDebug() << "Shutdown Behavior: " << config->unexpectedShutdownBehavior();
-}
+}*/
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    testFunc();
+    ConfigManager configManager;
+
+    configManager.loadConfig(QCoreApplication::applicationDirPath() + QStringLiteral("/config"));
+
+    const IServerConfig *config = configManager.getServerConfig(configManager.getGeneralConfig()->defaultServer());
+
+    MinecraftServer *server;
+
+    if (config != nullptr) {
+        server = new MinecraftServer(config);
+        server->start();
+    }
 
     return a.exec();
 }

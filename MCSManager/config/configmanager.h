@@ -6,11 +6,12 @@
 #include <QString>
 #include <QScopedPointer>
 
-#include "generalconfig.h"
 #include "serverconfig.h"
-#include "./interfaces/igeneralconfig.h"
-#include "./interfaces/iserverconfig.h"
-#include "./interfaces/iconfigmanager.h"
+#include "generalconfig.h"
+#include "configfunctions.h"
+#include "config/interfaces/igeneralconfig.h"
+#include "config/interfaces/iserverconfig.h"
+#include "config/interfaces/iconfigmanager.h"
 
 class ConfigManager : public IConfigManager
 {
@@ -34,8 +35,6 @@ private:
     bool mInitialized = false;
     QHash<QString, IServerConfig*> mServerConfigs;
     QScopedPointer<IGeneralConfig> mGeneralConfig;
-
-    static QString joinPaths(const QString &path1, const QString &path2);
 
     static const QString GENERAL_CONFIG_NAME,
                          CONFIG_DIRECTORY_NAME;

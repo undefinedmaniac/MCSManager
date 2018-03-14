@@ -5,6 +5,8 @@
 #include <QSettings>
 #include <QDebug>
 
+#include "configfunctions.h"
+
 class ConfigBase
 {
 public:
@@ -23,8 +25,6 @@ protected:
 
     static int convertToInt(const QVariant &data);
     static bool convertToBool(const QVariant &data);
-
-    static QString simplifyString(const QString &string);
 
 private:
     QSettings mSettings;

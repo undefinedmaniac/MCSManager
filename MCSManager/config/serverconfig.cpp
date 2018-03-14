@@ -61,7 +61,7 @@ QString ServerConfig::javaPath() const
     return data;
 }
 
-QString ServerConfig::jarPath() const
+QString ServerConfig::jarName() const
 {
     return readGeneralKey(JAR_PATH_KEY).toString();
 }

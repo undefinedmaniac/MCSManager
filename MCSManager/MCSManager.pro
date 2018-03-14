@@ -18,7 +18,9 @@ SOURCES += main.cpp \
     config/serverconfig.cpp \
     config/generalconfig.cpp \
     config/configbase.cpp \
-    config/configmanager.cpp
+    config/configmanager.cpp \
+    server/minecraftserver.cpp \
+    config/configfunctions.cpp
 
 HEADERS += \
     config/interfaces/iserverconfig.h \
@@ -34,4 +36,14 @@ HEADERS += \
     config/generalconfig.h \
     config/configbase.h \
     config/interfaces/iconfigmanager.h \
-    config/configmanager.h
+    config/configmanager.h \
+    server/interfaces/iminecraftserverprocess.h \
+    server/interfaces/iminecraftserverio.h \
+    server/interfaces/iminecraftserveraddonmanager.h \
+    server/addons/interfaces/iminecraftserveraddon.h \
+    server/interfaces/iminecraftserver.h \
+    server/manager/interfaces/iminecraftservermanager.h \
+    server/builder/interfaces/iminecraftserverbuilder.h \
+    server/addons/interfaces/iminecraftserveraddonfactory.h \
+    server/minecraftserver.h \
+    config/configfunctions.h

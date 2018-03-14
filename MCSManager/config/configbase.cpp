@@ -43,8 +43,3 @@ bool ConfigBase::convertToBool(const QVariant &data)
 
     return (string == QStringLiteral("TRUE") || string == QStringLiteral("1"));
 }
-
-QString ConfigBase::simplifyString(const QString &string)
-{
-    return string.toUpper().replace(" ", "");
-}

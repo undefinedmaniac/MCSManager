@@ -8,7 +8,7 @@
 #include <QStandardPaths>
 
 #include "configbase.h"
-#include "./interfaces/iserverconfig.h"
+#include "config/interfaces/iserverconfig.h"
 
 class ServerConfig : public ConfigBase, public IServerConfig
 {
@@ -18,7 +18,7 @@ public:
     // IServerConfig interface
     QString name() const override;
     QString javaPath() const override;
-    QString jarPath() const override;
+    QString jarName() const override;
     QString workingDirectory() const override;
     QStringList arguments() const override;
     QStringList enabledAddons() const override;

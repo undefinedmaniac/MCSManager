@@ -20,7 +20,7 @@ public:
 
     virtual QString name() const = 0;
     virtual QString javaPath() const = 0;
-    virtual QString jarPath() const = 0;
+    virtual QString jarName() const = 0;
     virtual QString workingDirectory() const = 0;
     virtual QStringList arguments() const = 0;
     virtual QStringList enabledAddons() const = 0;
