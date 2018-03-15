@@ -1,7 +1,7 @@
 #ifndef ISERVERCONFIG_H
 #define ISERVERCONFIG_H
 
-#include <QString>
+class QString;
 
 #include "iservermanagerconfig.h"
 #include "iserverbackupconfig.h"

@@ -7,9 +7,11 @@
 #include <QByteArray>
 
 #include "config/interfaces/iserverconfig.h"
+
 #include "server/interfaces/iminecraftserver.h"
 #include "server/addons/interfaces/iminecraftserveraddon.h"
-#include "server/manager/interfaces/iminecraftservermanager.h"
+
+class IMinecraftServerManager;
 
 class MinecraftServer : public QObject, public IMinecraftServer
 {
@@ -43,6 +45,7 @@ public:
     IMinecraftServerAddon *getAddon(const QString &name) const override;
 
 signals:
+    // IMinecraftServerProcess interface
     void started() override;
     void stopped() override;
     void error(QString errorString) override;
@@ -56,7 +59,7 @@ private slots:
 private:
     QProcess mProcess;
     const IServerConfig *mConfig;
-    IMinecraftServerManager *mServerManager;
+    IMinecraftServerManager *mServerManager = nullptr;
     QHash<QString, IMinecraftServerAddon *> mAddons;
 };
 

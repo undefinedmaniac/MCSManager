@@ -1,7 +1,7 @@
 #ifndef IGENERALCONFIG_H
 #define IGENERALCONFIG_H
 
-#include <QString>
+class QString;
 
 class IGeneralConfig
 {

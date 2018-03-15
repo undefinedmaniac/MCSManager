@@ -12,6 +12,7 @@ class GeneralConfig : public ConfigBase, public IGeneralConfig
 {
 public:
     GeneralConfig(const QString &filePath);
+    virtual ~GeneralConfig() {}
 
     // IGeneralConfig interface
     QString defaultServer() const override;

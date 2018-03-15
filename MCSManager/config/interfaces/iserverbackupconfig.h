@@ -1,8 +1,8 @@
 #ifndef ISERVERBACKUPCONFIG_H
 #define ISERVERBACKUPCONFIG_H
 
-#include <QString>
-#include <QStringList>
+class QString;
+class QStringList;
 
 class IServerBackupConfig
 {

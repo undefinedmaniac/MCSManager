@@ -3,6 +3,8 @@
 
 #include "iservermanagerconfig.h"
 
+class QString;
+
 class ISleeperAddonConfig
 {
 public:

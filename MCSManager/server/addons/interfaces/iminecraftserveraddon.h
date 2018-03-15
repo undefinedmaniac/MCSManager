@@ -1,8 +1,7 @@
 #ifndef IMINECRAFTSERVERADDON_H
 #define IMINECRAFTSERVERADDON_H
 
-#include <QString>
-
+class QString;
 class IMinecraftServer;
 
 class IMinecraftServerAddon

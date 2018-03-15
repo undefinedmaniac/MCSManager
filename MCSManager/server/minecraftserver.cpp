@@ -1,7 +1,6 @@
 #include "minecraftserver.h"
 
-MinecraftServer::MinecraftServer(const IServerConfig *config) : mConfig(config),
-    mServerManager(nullptr)
+MinecraftServer::MinecraftServer(const IServerConfig *config) : mConfig(config)
 {
     connect(&mProcess, &QProcess::started, this, &MinecraftServer::started);
     connect(&mProcess, SIGNAL(finished(int)), this, SIGNAL(stopped()));

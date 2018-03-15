@@ -1,7 +1,9 @@
 #ifndef IMINECRAFTSERVERIO_H
 #define IMINECRAFTSERVERIO_H
 
-#include <QByteArray>
+#include "QtGlobal"
+
+class QByteArray;
 
 class IMinecraftServerIo
 {

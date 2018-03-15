@@ -1,0 +1,15 @@
+INPUT(
+./release\configbase.o
+./release\configfunctions.o
+./release\configmanager.o
+./release\generalconfig.o
+./release\serverconfig.o
+./release\minecraftserver.o
+./release\main.o
+./release\mcsmanagercore.o
+./release\minecraftservermanager.o
+./release\mcsmanagercorebase.o
+./release\moc_minecraftserver.o
+./release\moc_mcsmanagercore.o
+./release\moc_minecraftservermanager.o
+);

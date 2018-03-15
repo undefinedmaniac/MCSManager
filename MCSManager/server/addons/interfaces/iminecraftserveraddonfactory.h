@@ -1,9 +1,8 @@
 #ifndef IMINECRAFTSERVERADDONFACTORY_H
 #define IMINECRAFTSERVERADDONFACTORY_H
 
-#include <QString>
-
-#include "server/addons/interfaces/iminecraftserveraddon.h"
+class QString;
+class IMinecraftServerAddon;
 
 class IMinecraftServerAddonFactory
 {

@@ -1,8 +1,7 @@
 #ifndef IMINECRAFTSERVERPROCESS_H
 #define IMINECRAFTSERVERPROCESS_H
 
-#include <QString>
-
+class QString;
 class IServerConfig;
 
 class IMinecraftServerProcess

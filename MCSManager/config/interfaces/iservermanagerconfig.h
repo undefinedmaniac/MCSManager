@@ -1,12 +1,12 @@
 #ifndef ISERVERMANAGERCONFIG_H
 #define ISERVERMANAGERCONFIG_H
 
-#include <QString>
+class QString;
 
 class IServerManagerConfig
 {
 public:
-    enum ShutdownBehavior {
+    enum ShutdownBehavior : unsigned int {
         DoNothing, RestartServer, StartAlternativeServer
     };
 

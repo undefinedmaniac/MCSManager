@@ -1,0 +1,15 @@
+INPUT(
+./debug\configbase.o
+./debug\configfunctions.o
+./debug\configmanager.o
+./debug\generalconfig.o
+./debug\serverconfig.o
+./debug\minecraftserver.o
+./debug\main.o
+./debug\mcsmanagercore.o
+./debug\minecraftservermanager.o
+./debug\mcsmanagercorebase.o
+./debug\moc_minecraftserver.o
+./debug\moc_mcsmanagercore.o
+./debug\moc_minecraftservermanager.o
+);

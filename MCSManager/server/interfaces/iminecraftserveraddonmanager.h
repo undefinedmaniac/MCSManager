@@ -1,8 +1,8 @@
 #ifndef IMINECRAFTSERVERADDONMANAGER_H
 #define IMINECRAFTSERVERADDONMANAGER_H
 
-#include <QStringList>
-
+class QString;
+class QStringList;
 class IMinecraftServerAddon;
 
 class IMinecraftServerAddonManager

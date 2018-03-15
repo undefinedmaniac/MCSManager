@@ -14,6 +14,7 @@ class ServerConfig : public ConfigBase, public IServerConfig
 {
 public:
     ServerConfig(const QString &filePath);
+    virtual ~ServerConfig() {}
 
     // IServerConfig interface
     QString name() const override;

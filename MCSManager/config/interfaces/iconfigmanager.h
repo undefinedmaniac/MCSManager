@@ -1,8 +1,8 @@
 #ifndef ICONFIGMANAGER_H
 #define ICONFIGMANAGER_H
 
-#include <QString>
-
+class QString;
+class QStringList;
 class IServerConfig;
 class IGeneralConfig;
 
