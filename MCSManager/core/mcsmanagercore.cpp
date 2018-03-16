@@ -27,7 +27,7 @@ IServerConfig *McsManagerCore::getServerConfig(const QString &serverName) const
 
 void McsManagerCore::startServer(const QString &serverName)
 {
-
+    qDebug() << "Core: start request for " << serverName;
 }
 
 void McsManagerCore::runBackup(const QString &serverName)

@@ -14,6 +14,6 @@ public:
 
     virtual void setAddonFactory(IMinecraftServerAddonFactory *factory) = 0;
     virtual IMinecraftServerAddonFactory *addonFactory() = 0;
-}
+};
 
 #endif // IMINECRAFTSERVERBUILDER_H

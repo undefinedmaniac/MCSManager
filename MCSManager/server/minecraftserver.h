@@ -44,6 +44,9 @@ public:
     IMinecraftServerAddon *getAddon(const QString &name) override;
     IMinecraftServerAddon *getAddon(const QString &name) const override;
 
+    void startAddons() override;
+    void stopAddons() override;
+
 signals:
     // IMinecraftServerProcess interface
     void started() override;

@@ -9,7 +9,11 @@ INPUT(
 ./release\mcsmanagercore.o
 ./release\minecraftservermanager.o
 ./release\mcsmanagercorebase.o
+./release\minecraftserverbuilder.o
+./release\logreader.o
+./release\minecraftserveraddonbase.o
 ./release\moc_minecraftserver.o
 ./release\moc_mcsmanagercore.o
 ./release\moc_minecraftservermanager.o
+./release\moc_logreader.o
 );

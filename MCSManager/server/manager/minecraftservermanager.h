@@ -2,9 +2,12 @@
 #define MINECRAFTSERVERMANAGER_H
 
 #include <QObject>
+#include <QDebug>
 
 #include "core/mcsmanagercorebase.h"
+#include "core/interfaces/imcsmanagercore.h"
 
+#include "config/interfaces/iserverconfig.h"
 #include "config/interfaces/iservermanagerconfig.h"
 
 #include "server/interfaces/iminecraftserver.h"
@@ -23,14 +26,24 @@ public:
     IMinecraftServer *server() override;
     void startServer() override;
     void stopServer(IServerManagerConfig::ShutdownBehavior behavior =
-            IServerManagerConfig::DoNothing) override;
+            IServerManagerConfig::DoNothing, const QString &altServer = "") override;
 
 private slots:
-    void serverStoped();
+    void serverStarted();
+    void serverStopped();
 
 private:
+    enum InternalState {
+        Idle, StartingServer, ServerStarted,
+        StoppingServer, ServerStopped
+    };
+
+    InternalState mState = Idle;
     const IServerManagerConfig *mConfig = nullptr;
-    IMinecraftServer *mServer;
+    IMinecraftServer *mServer = nullptr;
+
+    void shutdownAction(IServerManagerConfig::ShutdownBehavior behavior,
+                        const QString &altServer = "");
 };
 
 #endif // MINECRAFTSERVERMANAGER_H

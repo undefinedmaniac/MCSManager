@@ -6,7 +6,7 @@ class QString;
 class IServerManagerConfig
 {
 public:
-    enum ShutdownBehavior : unsigned int {
+    enum ShutdownBehavior {
         DoNothing, RestartServer, StartAlternativeServer
     };
 

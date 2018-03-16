@@ -1,9 +1,17 @@
 #ifndef MCSMANAGERCORE_H
 #define MCSMANAGERCORE_H
 
+#include <QDebug>
 #include <QObject>
 
 #include "core/interfaces/imcsmanagercore.h"
+
+#include "config/interfaces/iconfigmanager.h"
+
+#include "server/addons/interfaces/imcscpclient.h"
+#include "server/builder/interfaces/iminecraftserverbuilder.h"
+#include "server/manager/interfaces/iminecraftservermanager.h"
+#include "server/addons/interfaces/iminecraftserveraddonfactory.h"
 
 class McsManagerCore : public QObject, public IMcsManagerCore
 {
@@ -39,7 +47,7 @@ signals:
     void started(QString name) override;
     void stopped(QString name) override;
     void logUpdated() override;
-    void event(QString event) override;
+    void event(IMcscpClient::McscpEvent event) override;
 };
 
 #endif // MCSMANAGERCORE_H

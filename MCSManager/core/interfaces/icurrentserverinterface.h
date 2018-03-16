@@ -1,6 +1,8 @@
 #ifndef ICURRENTSERVERINTERFACE_H
 #define ICURRENTSERVERINTERFACE_H
 
+#include "server/addons/interfaces/imcscpclient.h"
+
 class QString;
 class QByteArray;
 class IServerConfig;
@@ -30,7 +32,7 @@ signals:
     virtual void stopped(QString name) = 0;
 
     virtual void logUpdated() = 0;
-    virtual void event(QString event) = 0;
+    virtual void event(IMcscpClient::McscpEvent event) = 0;
 };
 
 Q_DECLARE_INTERFACE(ICurrentServerInterface, "ICurrentServerInterface")

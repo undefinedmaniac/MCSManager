@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_McsManagerCore_t {
-    QByteArrayData data[7];
-    char stringdata0[54];
+    QByteArrayData data[8];
+    char stringdata0[79];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,11 +37,12 @@ QT_MOC_LITERAL(2, 23, 0), // ""
 QT_MOC_LITERAL(3, 24, 4), // "name"
 QT_MOC_LITERAL(4, 29, 7), // "stopped"
 QT_MOC_LITERAL(5, 37, 10), // "logUpdated"
-QT_MOC_LITERAL(6, 48, 5) // "event"
+QT_MOC_LITERAL(6, 48, 5), // "event"
+QT_MOC_LITERAL(7, 54, 24) // "IMcscpClient::McscpEvent"
 
     },
     "McsManagerCore\0started\0\0name\0stopped\0"
-    "logUpdated\0event"
+    "logUpdated\0event\0IMcscpClient::McscpEvent"
 };
 #undef QT_MOC_LITERAL
 
@@ -68,7 +69,7 @@ static const uint qt_meta_data_McsManagerCore[] = {
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,    6,
+    QMetaType::Void, 0x80000000 | 7,    6,
 
        0        // eod
 };
@@ -82,7 +83,7 @@ void McsManagerCore::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 0: _t->started((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 1: _t->stopped((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 2: _t->logUpdated(); break;
-        case 3: _t->event((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 3: _t->event((*reinterpret_cast< IMcscpClient::McscpEvent(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -109,7 +110,7 @@ void McsManagerCore::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
             }
         }
         {
-            typedef void (McsManagerCore::*_t)(QString );
+            typedef void (McsManagerCore::*_t)(IMcscpClient::McscpEvent );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&McsManagerCore::event)) {
                 *result = 3;
                 return;
@@ -179,7 +180,7 @@ void McsManagerCore::logUpdated()
 }
 
 // SIGNAL 3
-void McsManagerCore::event(QString _t1)
+void McsManagerCore::event(IMcscpClient::McscpEvent _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 3, _a);

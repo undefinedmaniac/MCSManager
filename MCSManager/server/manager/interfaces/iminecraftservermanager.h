@@ -18,7 +18,7 @@ public:
     virtual IMinecraftServer *server() = 0;
 
     virtual void startServer() = 0;
-    virtual void stopServer(IServerManagerConfig::ShutdownBehavior behavior) = 0;
+    virtual void stopServer(IServerManagerConfig::ShutdownBehavior behavior, const QString &altServer) = 0;
 };
 
 #endif // IMINECRAFTSERVERMANAGER_H

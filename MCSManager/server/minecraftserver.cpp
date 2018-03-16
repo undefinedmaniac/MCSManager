@@ -101,6 +101,20 @@ IMinecraftServerAddon *MinecraftServer::getAddon(const QString &name) const
     return mAddons.value(name);
 }
 
+void MinecraftServer::startAddons()
+{
+    foreach (IMinecraftServerAddon *addon, mAddons) {
+        addon->start();
+    }
+}
+
+void MinecraftServer::stopAddons()
+{
+    foreach (IMinecraftServerAddon *addon, mAddons) {
+        addon->stop();
+    }
+}
+
 void MinecraftServer::errorOccurred(QProcess::ProcessError errorType)
 {
     QString errorString;

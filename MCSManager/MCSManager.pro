@@ -24,7 +24,10 @@ SOURCES += \
     main.cpp \
     core/mcsmanagercore.cpp \
     server/manager/minecraftservermanager.cpp \
-    core/mcsmanagercorebase.cpp
+    core/mcsmanagercorebase.cpp \
+    server/builder/minecraftserverbuilder.cpp \
+    server/addons/logreader.cpp \
+    server/addons/minecraftserveraddonbase.cpp
 
 HEADERS += \
     config/interfaces/ibackupaddonconfig.h \
@@ -57,4 +60,12 @@ HEADERS += \
     core/mcsmanagercore.h \
     server/manager/interfaces/iminecraftservermanager.h \
     server/manager/minecraftservermanager.h \
-    core/mcsmanagercorebase.h
+    core/mcsmanagercorebase.h \
+    server/builder/minecraftserverbuilder.h \
+    server/addons/interfaces/iserversleeper.h \
+    server/addons/interfaces/irestarterservice.h \
+    server/addons/interfaces/ibackupservice.h \
+    server/addons/interfaces/imcscpclient.h \
+    server/addons/interfaces/ilogreader.h \
+    server/addons/logreader.h \
+    server/addons/minecraftserveraddonbase.h

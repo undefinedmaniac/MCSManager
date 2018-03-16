@@ -9,7 +9,11 @@ INPUT(
 ./debug\mcsmanagercore.o
 ./debug\minecraftservermanager.o
 ./debug\mcsmanagercorebase.o
+./debug\minecraftserverbuilder.o
+./debug\logreader.o
+./debug\minecraftserveraddonbase.o
 ./debug\moc_minecraftserver.o
 ./debug\moc_mcsmanagercore.o
 ./debug\moc_minecraftservermanager.o
+./debug\moc_logreader.o
 );
