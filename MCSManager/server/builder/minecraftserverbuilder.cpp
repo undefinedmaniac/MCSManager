@@ -12,7 +12,7 @@ IMinecraftServer *MinecraftServerBuilder::getServer(const IServerConfig *config)
     QStringList addons = config->enabledAddons();
 
     foreach (QString addon, addons) {
-        IMinecraftServerAddon *serverAddon = mFactory->getAddon(addon);
+        IMinecraftServerAddon *serverAddon = mFactory->getAddon(addon, mServer.data());
         mServer->addAddon(serverAddon);
     }
 

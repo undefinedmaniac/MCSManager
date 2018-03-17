@@ -2,8 +2,8 @@
 
 MinecraftServer::MinecraftServer(const IServerConfig *config) : mConfig(config)
 {
-    connect(&mProcess, &QProcess::started, this, &MinecraftServer::started);
-    connect(&mProcess, SIGNAL(finished(int)), this, SIGNAL(stopped()));
+    connect(&mProcess, &QProcess::started, this, &MinecraftServer::serverStarted);
+    connect(&mProcess, SIGNAL(finished(int)), this, SLOT(serverStopped()));
     connect(&mProcess, &QProcess::readyReadStandardOutput,
             this, &MinecraftServer::readyReadStandardOutput);
     connect(&mProcess, &QProcess::readyReadStandardError,
@@ -26,6 +26,10 @@ MinecraftServer::~MinecraftServer()
 {
     if (isRunning())
         stop();
+
+    qDeleteAll(mAddons);
+
+    qDebug() << "Minecraft server deleted!";
 }
 
 void MinecraftServer::setServerManager(IMinecraftServerManager *serverManager)
@@ -54,6 +58,8 @@ void MinecraftServer::stop()
 
     if (!mProcess.waitForFinished(5000))
         mProcess.kill();
+
+    mProcess.waitForFinished(-1);
 }
 
 bool MinecraftServer::isRunning() const
@@ -78,6 +84,10 @@ int MinecraftServer::write(const QByteArray &data)
 
 void MinecraftServer::addAddon(IMinecraftServerAddon *addon)
 {
+    if (addon == nullptr)
+        return;
+
+    qDebug() << "Addon added: " << addon->name();
     mAddons.insert(addon->name(), addon);
 }
 
@@ -135,4 +145,18 @@ void MinecraftServer::errorOccurred(QProcess::ProcessError errorType)
     }
 
     emit error(errorString);
+}
+
+void MinecraftServer::serverStarted()
+{
+    qDebug() << "Server [" << mConfig->name() << "] started!";
+    startAddons();
+    emit started();
+}
+
+void MinecraftServer::serverStopped()
+{
+    qDebug() << "Server [" << mConfig->name() << "] stopped!";
+    stopAddons();
+    emit stopped();
 }

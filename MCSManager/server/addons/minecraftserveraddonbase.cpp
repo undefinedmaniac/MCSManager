@@ -10,6 +10,11 @@ IMinecraftServer *MinecraftServerAddonBase::server()
     return mServer;
 }
 
+IMinecraftServer *MinecraftServerAddonBase::server() const
+{
+    return mServer;
+}
+
 QString MinecraftServerAddonBase::name() const
 {
     return mName;

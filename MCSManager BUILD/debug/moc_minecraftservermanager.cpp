@@ -96,8 +96,6 @@ void *MinecraftServerManager::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_MinecraftServerManager.stringdata0))
         return static_cast<void*>(this);
-    if (!strcmp(_clname, "McsManagerCoreBase"))
-        return static_cast< McsManagerCoreBase*>(this);
     if (!strcmp(_clname, "IMinecraftServerManager"))
         return static_cast< IMinecraftServerManager*>(this);
     return QObject::qt_metacast(_clname);

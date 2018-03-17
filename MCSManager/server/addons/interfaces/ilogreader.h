@@ -9,7 +9,6 @@ class ILogReader
 public:
     virtual ~ILogReader() {}
 
-    virtual void setConfig(const ILogReaderAddonConfig *config) = 0;
     virtual const ILogReaderAddonConfig *config() const = 0;
 
     virtual QByteArray readAll(int startPos = 0) const = 0;

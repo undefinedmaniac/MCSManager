@@ -14,18 +14,20 @@ public:
     virtual ~ICurrentServerInterface() {}
 
     virtual QString name() const = 0;
+    virtual bool isRunning() const = 0;
     virtual const IServerConfig *config() const = 0;
 
     virtual void sendChatMsg(const QString &playerName, const QByteArray &message) = 0;
     virtual void sendMcscpCmd(IMcscpCommand *cmd) = 0;
 
+    virtual QByteArray readAllLogData() const = 0;
+    virtual QByteArray readNewLogData() = 0;
+
+public slots:
     virtual void stop() = 0;
     virtual void forceStop() = 0;
     virtual void restart() = 0;
     virtual void forceRestart() = 0;
-
-    virtual QByteArray readAllLogData() const = 0;
-    virtual QByteArray readNewLogData() = 0;
 
 signals:
     virtual void started(QString name) = 0;

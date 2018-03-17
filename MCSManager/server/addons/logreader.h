@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QDebug>
 
+#include "config/interfaces/iserverconfig.h"
+
 #include "server/addons/minecraftserveraddonbase.h"
 #include "server/interfaces/iminecraftserver.h"
 #include "server/addons/interfaces/ilogreader.h"
@@ -14,6 +16,7 @@ class LogReader : public QObject, public MinecraftServerAddonBase, public ILogRe
     Q_INTERFACES(ILogReader)
 public:
     LogReader(const QString &name, IMinecraftServer *server);
+    ~LogReader();
 
     // IMinecraftServerAddon interface
     void start() override;
@@ -21,7 +24,6 @@ public:
     bool isRunning() override;
 
     // ILogReader interface
-    void setConfig(const ILogReaderAddonConfig *config) override;
     const ILogReaderAddonConfig *config() const override;
 
     QByteArray readAll(int startPos = 0) const override;
@@ -34,11 +36,9 @@ signals:
 private slots:
     void readyReadStandardOutput();
     void readyReadStandardError();
-    void serverStopped();
     void testSlot(int startPos);
 
 private:
-    const ILogReaderAddonConfig *mConfig;
     QByteArray mData;
     bool mRunning = false;
 };

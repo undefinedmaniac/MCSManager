@@ -1,12 +1,14 @@
 #ifndef ICONFIGMANAGER_H
 #define ICONFIGMANAGER_H
 
+#include "core/mcsmanagercorebase.h"
+
 class QString;
 class QStringList;
 class IServerConfig;
 class IGeneralConfig;
 
-class IConfigManager
+class IConfigManager : public McsManagerCoreBase
 {
 public:
     virtual ~IConfigManager() {}

@@ -13,8 +13,7 @@ public:
 
     virtual ~IMcscpClient() {}
 
-    virtual void setConfig(const IMcscpAddonConfig *config) = 0;
-    virtual const IMcscpAddonConfig *config() = 0;
+    virtual const IMcscpAddonConfig *config() const = 0;
 
     virtual void sendCmd(IMcscpCommand *cmd) = 0;
 

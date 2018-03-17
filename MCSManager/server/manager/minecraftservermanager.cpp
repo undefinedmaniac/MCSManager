@@ -5,22 +5,23 @@ MinecraftServerManager::MinecraftServerManager()
 
 }
 
-void MinecraftServerManager::setConfig(const IServerManagerConfig *config)
-{
-    mConfig = config;
-}
-
 const IServerManagerConfig *MinecraftServerManager::config() const
 {
-    return mConfig;
+    if (mServer == nullptr)
+        return nullptr;
+
+    return mServer->config();
 }
 
 void MinecraftServerManager::setServer(IMinecraftServer *server)
 {
+    mState = Idle;
     mServer = server;
 
     if (server == nullptr)
         return;
+
+    server->setServerManager(this);
 
     QObject *object = dynamic_cast<QObject *>(server);
 
@@ -38,19 +39,15 @@ void MinecraftServerManager::startServer()
     if (mServer == nullptr)
         return;
 
-    InternalState lastState = mState;
     mState = StartingServer;
 
     mServer->start();
-
-    if (lastState == Idle)
-        mServer->startAddons();
 }
 
 void MinecraftServerManager::stopServer(IServerManagerConfig::ShutdownBehavior behavior,
                                         const QString &altServer)
 {
-    if (mServer == nullptr)
+    if (mServer == nullptr || !mServer->isRunning())
         return;
 
     mState = StoppingServer;
@@ -59,35 +56,32 @@ void MinecraftServerManager::stopServer(IServerManagerConfig::ShutdownBehavior b
     shutdownAction(behavior, altServer);
 }
 
+//Beep boop. The server is up!
 void MinecraftServerManager::serverStarted()
 {
     mState = ServerStarted;
-
-    qDebug() << "Server [" << mServer->config()->name() << "]: Started!";
 }
 
+//Goodbye players, the server is down
 void MinecraftServerManager::serverStopped()
 {
     InternalState lastState = mState;
     mState = ServerStopped;
 
-    //Unexpected shutdown
+    //Unexpected shutdown - someone planted a giant oak tree again!
     if (lastState != StoppingServer) {
-        qDebug() << "Server [" << mServer->config()->name() << "]: Unexpected shutdown!";
-        shutdownAction(mConfig->unexpectedShutdownBehavior(), mConfig->alternativeServerName());
-    }
+        qDebug() << "Unexpected server shutdown!";
 
-    qDebug() << "Server [" << mServer->config()->name() << "]: Stopped!";
+        const IServerManagerConfig *serverConfig = config();
+
+        if (serverConfig != nullptr)
+            shutdownAction(serverConfig->unexpectedShutdownBehavior(), serverConfig->alternativeServerName());
+    }
 }
 
 void MinecraftServerManager::shutdownAction(IServerManagerConfig::ShutdownBehavior behavior,
                                             const QString &altServer)
 {
-    if (behavior != IServerManagerConfig::RestartServer) {
-        mServer->stopAddons();
-        mState = Idle;
-    }
-
     switch (behavior) {
     case IServerManagerConfig::RestartServer:
         startServer();

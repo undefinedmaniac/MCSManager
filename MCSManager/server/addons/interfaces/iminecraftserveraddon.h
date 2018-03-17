@@ -10,6 +10,7 @@ public:
     virtual ~IMinecraftServerAddon() {}
 
     virtual IMinecraftServer *server() = 0;
+    virtual IMinecraftServer *server() const = 0;
     virtual QString name() const = 0;
 
     virtual void start() = 0;

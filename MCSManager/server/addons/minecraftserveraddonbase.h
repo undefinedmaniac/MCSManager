@@ -13,6 +13,7 @@ public:
 
     // IMinecraftServerAddon interface
     IMinecraftServer *server() override;
+    IMinecraftServer *server() const override;
     QString name() const override;
 
 private:

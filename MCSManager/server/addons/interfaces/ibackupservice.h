@@ -8,8 +8,7 @@ class IBackupService
 public:
     virtual ~IBackupService() {}
 
-    virtual void setConfig(const IBackupAddonConfig *config) = 0;
-    virtual const IBackupAddonConfig *config() = 0;
+    virtual const IBackupAddonConfig *config() const = 0;
 };
 
 #endif // IBACKUPSERVICE_H

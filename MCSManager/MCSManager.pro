@@ -27,7 +27,9 @@ SOURCES += \
     core/mcsmanagercorebase.cpp \
     server/builder/minecraftserverbuilder.cpp \
     server/addons/logreader.cpp \
-    server/addons/minecraftserveraddonbase.cpp
+    server/addons/minecraftserveraddonbase.cpp \
+    server/addons/minecraftserveraddonfactory.cpp \
+    server/addons/restarterservice.cpp
 
 HEADERS += \
     config/interfaces/ibackupaddonconfig.h \
@@ -68,4 +70,6 @@ HEADERS += \
     server/addons/interfaces/imcscpclient.h \
     server/addons/interfaces/ilogreader.h \
     server/addons/logreader.h \
-    server/addons/minecraftserveraddonbase.h
+    server/addons/minecraftserveraddonbase.h \
+    server/addons/minecraftserveraddonfactory.h \
+    server/addons/restarterservice.h

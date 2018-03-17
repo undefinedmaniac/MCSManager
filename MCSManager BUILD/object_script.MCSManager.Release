@@ -12,8 +12,11 @@ INPUT(
 ./release\minecraftserverbuilder.o
 ./release\logreader.o
 ./release\minecraftserveraddonbase.o
+./release\minecraftserveraddonfactory.o
+./release\restarterservice.o
 ./release\moc_minecraftserver.o
 ./release\moc_mcsmanagercore.o
 ./release\moc_minecraftservermanager.o
 ./release\moc_logreader.o
+./release\moc_restarterservice.o
 );

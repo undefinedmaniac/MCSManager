@@ -13,20 +13,17 @@
 #include "server/interfaces/iminecraftserver.h"
 #include "server/manager/interfaces/iminecraftservermanager.h"
 
-class MinecraftServerManager : public QObject, public McsManagerCoreBase,
-        public IMinecraftServerManager
+class MinecraftServerManager : public QObject, public IMinecraftServerManager
 {
     Q_OBJECT
 public:
     MinecraftServerManager();
 
-    void setConfig(const IServerManagerConfig *config) override;
     const IServerManagerConfig *config() const override;
     void setServer(IMinecraftServer *server) override;
     IMinecraftServer *server() override;
     void startServer() override;
-    void stopServer(IServerManagerConfig::ShutdownBehavior behavior =
-            IServerManagerConfig::DoNothing, const QString &altServer = "") override;
+    void stopServer(IServerManagerConfig::ShutdownBehavior behavior, const QString &altServer) override;
 
 private slots:
     void serverStarted();
@@ -39,7 +36,6 @@ private:
     };
 
     InternalState mState = Idle;
-    const IServerManagerConfig *mConfig = nullptr;
     IMinecraftServer *mServer = nullptr;
 
     void shutdownAction(IServerManagerConfig::ShutdownBehavior behavior,

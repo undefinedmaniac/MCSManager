@@ -6,8 +6,12 @@ LogReader::LogReader(const QString &name, IMinecraftServer *server) : MinecraftS
 
     QObject::connect(object, SIGNAL(readyReadStandardOutput()), this, SLOT(readyReadStandardOutput()));
     QObject::connect(object, SIGNAL(readyReadStandardError()), this, SLOT(readyReadStandardError()));
-    QObject::connect(object, SIGNAL(stopped()), this, SLOT(serverStopped()));
     QObject::connect(this, SIGNAL(newData(int)), this, SLOT(testSlot(int)));
+}
+
+LogReader::~LogReader()
+{
+    qDebug() << "Log Reader Deleted!";
 }
 
 void LogReader::start()
@@ -18,6 +22,7 @@ void LogReader::start()
 
 void LogReader::stop()
 {
+    clear();
     qDebug() << "Log Reader Stopped!";
     mRunning = false;
 }
@@ -27,14 +32,9 @@ bool LogReader::isRunning()
     return mRunning;
 }
 
-void LogReader::setConfig(const ILogReaderAddonConfig *config)
-{
-    mConfig = config;
-}
-
 const ILogReaderAddonConfig *LogReader::config() const
 {
-    return mConfig;
+    return server()->config();
 }
 
 QByteArray LogReader::readAll(int startPos) const
@@ -64,11 +64,6 @@ void LogReader::readyReadStandardError()
     int startPos = size();
     mData.append(server()->readAllStandardError());
     emit newData(startPos);
-}
-
-void LogReader::serverStopped()
-{
-    clear();
 }
 
 void LogReader::testSlot(int startPos)

@@ -2,6 +2,7 @@
 #define MINECRAFTSERVER_H
 
 #include <QHash>
+#include <QDebug>
 #include <QObject>
 #include <QProcess>
 #include <QByteArray>
@@ -44,9 +45,6 @@ public:
     IMinecraftServerAddon *getAddon(const QString &name) override;
     IMinecraftServerAddon *getAddon(const QString &name) const override;
 
-    void startAddons() override;
-    void stopAddons() override;
-
 signals:
     // IMinecraftServerProcess interface
     void started() override;
@@ -58,12 +56,17 @@ signals:
 
 private slots:
     void errorOccurred(QProcess::ProcessError error);
+    void serverStarted();
+    void serverStopped();
 
 private:
     QProcess mProcess;
     const IServerConfig *mConfig;
     IMinecraftServerManager *mServerManager = nullptr;
     QHash<QString, IMinecraftServerAddon *> mAddons;
+
+    void startAddons() override;
+    void stopAddons() override;
 };
 
 #endif // MINECRAFTSERVER_H

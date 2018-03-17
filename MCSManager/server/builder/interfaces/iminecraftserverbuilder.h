@@ -1,11 +1,13 @@
 #ifndef IMINECRAFTSERVERBUILDER_H
 #define IMINECRAFTSERVERBUILDER_H
 
+#include "core/mcsmanagercorebase.h"
+
 class IServerConfig;
 class IMinecraftServer;
 class IMinecraftServerAddonFactory;
 
-class IMinecraftServerBuilder
+class IMinecraftServerBuilder : public McsManagerCoreBase
 {
 public:
     virtual ~IMinecraftServerBuilder() {}
