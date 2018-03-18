@@ -2,6 +2,7 @@
 
 const QString ServerConfig::SERVER_CONFIG_BASE = QStringLiteral("general"),
               ServerConfig::SERVER_NAME = QStringLiteral("name"),
+              ServerConfig::REAL_SERVER_KEY = QStringLiteral("realServer"),
               ServerConfig::JAVA_PATH_KEY = QStringLiteral("javaPath"),
               ServerConfig::JAR_PATH_KEY = QStringLiteral("jarName"),
               ServerConfig::WORKING_DIRECTORY_KEY = QStringLiteral("workingDirectory"),
@@ -49,6 +50,11 @@ ServerConfig::ServerConfig(const QString &filePath) : ConfigBase(filePath)
 QString ServerConfig::name() const
 {
     return readGeneralKey(SERVER_NAME).toString();
+}
+
+bool ServerConfig::isRealServer() const
+{
+    return convertToBool(readGeneralKey(REAL_SERVER_KEY));
 }
 
 QString ServerConfig::javaPath() const
@@ -194,6 +200,7 @@ void ServerConfig::generateConfigFile()
     qDebug() << "Generating empty config file";
 
     writeGeneralKey(SERVER_NAME);
+    writeGeneralKey(REAL_SERVER_KEY);
     writeGeneralKey(JAVA_PATH_KEY);
     writeGeneralKey(JAR_PATH_KEY);
     writeGeneralKey(WORKING_DIRECTORY_KEY);

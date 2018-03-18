@@ -1,6 +1,7 @@
 #ifndef RESTARTERSERVICE_H
 #define RESTARTERSERVICE_H
 
+#include <QDebug>
 #include <QTimer>
 #include <QObject>
 
@@ -10,7 +11,7 @@
 #include "server/addons/interfaces/irestarterservice.h"
 #include "server/manager/interfaces/iminecraftservermanager.h"
 
-class RestarterService : public QObject, public MinecraftServerAddonBase, public IRestarterService
+class RestarterService : public MinecraftServerAddonBase, public IRestarterService
 {
     Q_OBJECT
 public:

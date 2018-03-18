@@ -103,7 +103,7 @@ void LogReader::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
 }
 
 const QMetaObject LogReader::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_LogReader.data,
+    { &MinecraftServerAddonBase::staticMetaObject, qt_meta_stringdata_LogReader.data,
       qt_meta_data_LogReader,  qt_static_metacall, nullptr, nullptr}
 };
 
@@ -118,18 +118,16 @@ void *LogReader::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_LogReader.stringdata0))
         return static_cast<void*>(this);
-    if (!strcmp(_clname, "MinecraftServerAddonBase"))
-        return static_cast< MinecraftServerAddonBase*>(this);
     if (!strcmp(_clname, "ILogReader"))
         return static_cast< ILogReader*>(this);
     if (!strcmp(_clname, "ILogReader"))
         return static_cast< ILogReader*>(this);
-    return QObject::qt_metacast(_clname);
+    return MinecraftServerAddonBase::qt_metacast(_clname);
 }
 
 int LogReader::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QObject::qt_metacall(_c, _id, _a);
+    _id = MinecraftServerAddonBase::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {

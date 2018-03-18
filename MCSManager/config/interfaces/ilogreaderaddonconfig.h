@@ -1,8 +1,6 @@
 #ifndef ILOGREADERADDONCONFIG_H
 #define ILOGREADERADDONCONFIG_H
 
-#include <QString>
-
 class ILogReaderAddonConfig
 {
 

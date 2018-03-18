@@ -76,7 +76,7 @@ void RestarterService::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
 }
 
 const QMetaObject RestarterService::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_RestarterService.data,
+    { &MinecraftServerAddonBase::staticMetaObject, qt_meta_stringdata_RestarterService.data,
       qt_meta_data_RestarterService,  qt_static_metacall, nullptr, nullptr}
 };
 
@@ -91,16 +91,14 @@ void *RestarterService::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_RestarterService.stringdata0))
         return static_cast<void*>(this);
-    if (!strcmp(_clname, "MinecraftServerAddonBase"))
-        return static_cast< MinecraftServerAddonBase*>(this);
     if (!strcmp(_clname, "IRestarterService"))
         return static_cast< IRestarterService*>(this);
-    return QObject::qt_metacast(_clname);
+    return MinecraftServerAddonBase::qt_metacast(_clname);
 }
 
 int RestarterService::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QObject::qt_metacall(_c, _id, _a);
+    _id = MinecraftServerAddonBase::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {

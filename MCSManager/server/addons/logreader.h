@@ -10,7 +10,7 @@
 #include "server/interfaces/iminecraftserver.h"
 #include "server/addons/interfaces/ilogreader.h"
 
-class LogReader : public QObject, public MinecraftServerAddonBase, public ILogReader
+class LogReader : public MinecraftServerAddonBase, public ILogReader
 {
     Q_OBJECT
     Q_INTERFACES(ILogReader)

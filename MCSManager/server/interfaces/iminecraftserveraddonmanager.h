@@ -15,9 +15,6 @@ public:
     virtual QStringList addons() const = 0;
     virtual IMinecraftServerAddon *getAddon(const QString &name) = 0;
     virtual IMinecraftServerAddon *getAddon(const QString &name) const  = 0;
-
-    virtual void startAddons() = 0;
-    virtual void stopAddons() = 0;
 };
 
 #endif // IMINECRAFTSERVERADDONMANAGER_H

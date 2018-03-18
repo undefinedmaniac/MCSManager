@@ -18,5 +18,6 @@ INPUT(
 ./debug\moc_mcsmanagercore.o
 ./debug\moc_minecraftservermanager.o
 ./debug\moc_logreader.o
+./debug\moc_minecraftserveraddonbase.o
 ./debug\moc_restarterservice.o
 );

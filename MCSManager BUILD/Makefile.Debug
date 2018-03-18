@@ -63,6 +63,7 @@ SOURCES       = ..\MCSManager\config\configbase.cpp \
 		debug\moc_mcsmanagercore.cpp \
 		debug\moc_minecraftservermanager.cpp \
 		debug\moc_logreader.cpp \
+		debug\moc_minecraftserveraddonbase.cpp \
 		debug\moc_restarterservice.cpp
 OBJECTS       = debug/configbase.o \
 		debug/configfunctions.o \
@@ -83,6 +84,7 @@ OBJECTS       = debug/configbase.o \
 		debug/moc_mcsmanagercore.o \
 		debug/moc_minecraftservermanager.o \
 		debug/moc_logreader.o \
+		debug/moc_minecraftserveraddonbase.o \
 		debug/moc_restarterservice.o
 
 DIST          =  ..\MCSManager\config\interfaces\ibackupaddonconfig.h \
@@ -162,7 +164,7 @@ dist:
 	$(ZIP) MCSManager.zip $(SOURCES) $(DIST) ..\MCSManager\MCSManager.pro ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\spec_pre.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\qdevice.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\device_config.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\common\g++-base.conf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\common\angle.conf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\common\windows-vulkan.conf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\common\sanitize.conf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\common\gcc-base.conf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\qconfig.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3danimation.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3danimation_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dcore.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dcore_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dextras.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dextras_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dinput.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dinput_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dlogic.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dlogic_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dquick.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dquick_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dquickextras.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dquickextras_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dquickinput.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dquickinput_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dquickrender.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dquickrender_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3drender.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_3drender_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_accessibility_support_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_axbase.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_axbase_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_axcontainer.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_axcontainer_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_axserver.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_axserver_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_bluetooth.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_bluetooth_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_bootstrap_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_concurrent.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_concurrent_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_core.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_core_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_dbus.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_dbus_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_designer.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_designer_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_designercomponents_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_devicediscovery_support_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_edid_support_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_egl_support_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_fb_support_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_fontdatabase_support_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_gamepad.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_gamepad_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_gui.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_gui_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_help.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_help_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_location.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_location_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_multimedia.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_multimedia_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_network.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_network_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_nfc.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_nfc_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_opengl.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_opengl_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_openglextensions.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_openglextensions_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_packetprotocol_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_platformcompositor_support_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_positioning.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_positioning_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_printsupport.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_printsupport_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_qml.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_qml_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_qmldebug_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_qmldevtools_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_qmltest.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_qmltest_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_quick.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_quick_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_quickparticles_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_quicktemplates2_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_quickwidgets.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_quickwidgets_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_scxml.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_scxml_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_sensors.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_sensors_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_serialbus.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_serialbus_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_serialport.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_serialport_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_sql.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_sql_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_svg.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_svg_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_testlib.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_testlib_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_texttospeech.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_texttospeech_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_theme_support_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_uiplugin.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_uitools.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_uitools_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_webchannel.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_webchannel_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_websockets.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_websockets_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_widgets.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_widgets_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_winextras.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_winextras_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_xml.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_xml_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\qt_functions.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\qt_config.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\win32-g++\qmake.conf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\spec_post.prf .qmake.stash ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\exclusive_builds.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\toolchain.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\default_pre.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\win32\default_pre.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\resolve_config.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\exclusive_builds_post.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\default_post.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\build_pass.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\win32\console.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\qml_debug.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\precompile_header.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\warn_on.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\qt.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\resources.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\moc.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\qmake_use.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\file_copies.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\testcase_targets.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\exceptions.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\yacc.prf ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\lex.prf ..\MCSManager\MCSManager.pro ..\..\..\Qt\5.10.0\mingw53_32\lib\Qt5Cored.prl    ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\data\dummy.cpp ..\MCSManager\config\interfaces\ibackupaddonconfig.h ..\MCSManager\config\interfaces\iconfigmanager.h ..\MCSManager\config\interfaces\igeneralconfig.h ..\MCSManager\config\interfaces\ilogreaderaddonconfig.h ..\MCSManager\config\interfaces\imcscpaddonconfig.h ..\MCSManager\config\interfaces\irestarteraddonconfig.h ..\MCSManager\config\interfaces\iserverbackupconfig.h ..\MCSManager\config\interfaces\iserverconfig.h ..\MCSManager\config\interfaces\iservermanagerconfig.h ..\MCSManager\config\interfaces\isleeperaddonconfig.h ..\MCSManager\config\configbase.h ..\MCSManager\config\configfunctions.h ..\MCSManager\config\configmanager.h ..\MCSManager\config\generalconfig.h ..\MCSManager\config\serverconfig.h ..\MCSManager\server\addons\interfaces\iminecraftserveraddon.h ..\MCSManager\server\addons\interfaces\iminecraftserveraddonfactory.h ..\MCSManager\server\builder\interfaces\iminecraftserverbuilder.h ..\MCSManager\server\interfaces\iminecraftserver.h ..\MCSManager\server\interfaces\iminecraftserveraddonmanager.h ..\MCSManager\server\interfaces\iminecraftserverio.h ..\MCSManager\server\interfaces\iminecraftserverprocess.h ..\MCSManager\server\minecraftserver.h ..\MCSManager\core\interfaces\icurrentserverinterface.h ..\MCSManager\core\interfaces\imcsmanagercore.h ..\MCSManager\core\interfaces\imcsmanagercorebase.h ..\MCSManager\core\interfaces\imcsmanagerinterface.h ..\MCSManager\core\mcsmanagercore.h ..\MCSManager\server\manager\interfaces\iminecraftservermanager.h ..\MCSManager\server\manager\minecraftservermanager.h ..\MCSManager\core\mcsmanagercorebase.h ..\MCSManager\server\builder\minecraftserverbuilder.h ..\MCSManager\server\addons\interfaces\iserversleeper.h ..\MCSManager\server\addons\interfaces\irestarterservice.h ..\MCSManager\server\addons\interfaces\ibackupservice.h ..\MCSManager\server\addons\interfaces\imcscpclient.h ..\MCSManager\server\addons\interfaces\ilogreader.h ..\MCSManager\server\addons\logreader.h ..\MCSManager\server\addons\minecraftserveraddonbase.h ..\MCSManager\server\addons\minecraftserveraddonfactory.h ..\MCSManager\server\addons\restarterservice.h  ..\MCSManager\config\configbase.cpp ..\MCSManager\config\configfunctions.cpp ..\MCSManager\config\configmanager.cpp ..\MCSManager\config\generalconfig.cpp ..\MCSManager\config\serverconfig.cpp ..\MCSManager\server\minecraftserver.cpp ..\MCSManager\main.cpp ..\MCSManager\core\mcsmanagercore.cpp ..\MCSManager\server\manager\minecraftservermanager.cpp ..\MCSManager\core\mcsmanagercorebase.cpp ..\MCSManager\server\builder\minecraftserverbuilder.cpp ..\MCSManager\server\addons\logreader.cpp ..\MCSManager\server\addons\minecraftserveraddonbase.cpp ..\MCSManager\server\addons\minecraftserveraddonfactory.cpp ..\MCSManager\server\addons\restarterservice.cpp    
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug\configbase.o debug\configfunctions.o debug\configmanager.o debug\generalconfig.o debug\serverconfig.o debug\minecraftserver.o debug\main.o debug\mcsmanagercore.o debug\minecraftservermanager.o debug\mcsmanagercorebase.o debug\minecraftserverbuilder.o debug\logreader.o debug\minecraftserveraddonbase.o debug\minecraftserveraddonfactory.o debug\restarterservice.o debug\moc_minecraftserver.o debug\moc_mcsmanagercore.o debug\moc_minecraftservermanager.o debug\moc_logreader.o debug\moc_restarterservice.o
+	-$(DEL_FILE) debug\configbase.o debug\configfunctions.o debug\configmanager.o debug\generalconfig.o debug\serverconfig.o debug\minecraftserver.o debug\main.o debug\mcsmanagercore.o debug\minecraftservermanager.o debug\mcsmanagercorebase.o debug\minecraftserverbuilder.o debug\logreader.o debug\minecraftserveraddonbase.o debug\minecraftserveraddonfactory.o debug\restarterservice.o debug\moc_minecraftserver.o debug\moc_mcsmanagercore.o debug\moc_minecraftservermanager.o debug\moc_logreader.o debug\moc_minecraftserveraddonbase.o debug\moc_restarterservice.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -187,9 +189,9 @@ compiler_moc_predefs_clean:
 debug/moc_predefs.h: ../../../Qt/5.10.0/mingw53_32/mkspecs/features/data/dummy.cpp
 	g++ -fno-keep-inline-dllexport -g -std=gnu++11 -Wextra -Wall -W -dM -E -o debug\moc_predefs.h ..\..\..\Qt\5.10.0\mingw53_32\mkspecs\features\data\dummy.cpp
 
-compiler_moc_header_make_all: debug/moc_minecraftserver.cpp debug/moc_mcsmanagercore.cpp debug/moc_minecraftservermanager.cpp debug/moc_logreader.cpp debug/moc_restarterservice.cpp
+compiler_moc_header_make_all: debug/moc_minecraftserver.cpp debug/moc_mcsmanagercore.cpp debug/moc_minecraftservermanager.cpp debug/moc_logreader.cpp debug/moc_minecraftserveraddonbase.cpp debug/moc_restarterservice.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) debug\moc_minecraftserver.cpp debug\moc_mcsmanagercore.cpp debug\moc_minecraftservermanager.cpp debug\moc_logreader.cpp debug\moc_restarterservice.cpp
+	-$(DEL_FILE) debug\moc_minecraftserver.cpp debug\moc_mcsmanagercore.cpp debug\moc_minecraftservermanager.cpp debug\moc_logreader.cpp debug\moc_minecraftserveraddonbase.cpp debug\moc_restarterservice.cpp
 debug/moc_minecraftserver.cpp: ../../../Qt/5.10.0/mingw53_32/include/QtCore/QHash \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qhash.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qchar.h \
@@ -263,7 +265,6 @@ debug/moc_minecraftserver.cpp: ../../../Qt/5.10.0/mingw53_32/include/QtCore/QHas
 		../MCSManager/config/interfaces/iservermanagerconfig.h \
 		../MCSManager/config/interfaces/iserverbackupconfig.h \
 		../MCSManager/config/interfaces/ilogreaderaddonconfig.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/QString \
 		../MCSManager/config/interfaces/ibackupaddonconfig.h \
 		../MCSManager/config/interfaces/isleeperaddonconfig.h \
 		../MCSManager/config/interfaces/irestarteraddonconfig.h \
@@ -359,7 +360,6 @@ debug/moc_mcsmanagercore.cpp: ../../../Qt/5.10.0/mingw53_32/include/QtCore/QTime
 		../MCSManager/config/interfaces/iservermanagerconfig.h \
 		../MCSManager/config/interfaces/iserverbackupconfig.h \
 		../MCSManager/config/interfaces/ilogreaderaddonconfig.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/QString \
 		../MCSManager/config/interfaces/ibackupaddonconfig.h \
 		../MCSManager/config/interfaces/isleeperaddonconfig.h \
 		../MCSManager/config/interfaces/irestarteraddonconfig.h \
@@ -455,7 +455,6 @@ debug/moc_minecraftservermanager.cpp: ../../../Qt/5.10.0/mingw53_32/include/QtCo
 		../MCSManager/config/interfaces/iservermanagerconfig.h \
 		../MCSManager/config/interfaces/iserverbackupconfig.h \
 		../MCSManager/config/interfaces/ilogreaderaddonconfig.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/QString \
 		../MCSManager/config/interfaces/ibackupaddonconfig.h \
 		../MCSManager/config/interfaces/isleeperaddonconfig.h \
 		../MCSManager/config/interfaces/irestarteraddonconfig.h \
@@ -536,6 +535,14 @@ debug/moc_logreader.cpp: ../../../Qt/5.10.0/mingw53_32/include/QtCore/QObject \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qcontiguouscache.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qsharedpointer.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qsharedpointer_impl.h \
+		../MCSManager/config/interfaces/iserverconfig.h \
+		../MCSManager/config/interfaces/iservermanagerconfig.h \
+		../MCSManager/config/interfaces/iserverbackupconfig.h \
+		../MCSManager/config/interfaces/ilogreaderaddonconfig.h \
+		../MCSManager/config/interfaces/ibackupaddonconfig.h \
+		../MCSManager/config/interfaces/isleeperaddonconfig.h \
+		../MCSManager/config/interfaces/irestarteraddonconfig.h \
+		../MCSManager/config/interfaces/imcscpaddonconfig.h \
 		../MCSManager/server/addons/minecraftserveraddonbase.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/QString \
 		../MCSManager/server/addons/interfaces/iminecraftserveraddon.h \
@@ -550,8 +557,10 @@ debug/moc_logreader.cpp: ../../../Qt/5.10.0/mingw53_32/include/QtCore/QObject \
 		../../../Qt/5.10.0/mingw53_32/bin/moc.exe
 	D:\Qt\5.10.0\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/5.10.0/mingw53_32/mkspecs/win32-g++ -ID:/github/MCSManager/MCSManager -ID:/Qt/5.10.0/mingw53_32/include -ID:/Qt/5.10.0/mingw53_32/include/QtCore -I. -ID:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\MCSManager\server\addons\logreader.h -o debug\moc_logreader.cpp
 
-debug/moc_restarterservice.cpp: ../../../Qt/5.10.0/mingw53_32/include/QtCore/QTimer \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qtimer.h \
+debug/moc_minecraftserveraddonbase.cpp: ../../../Qt/5.10.0/mingw53_32/include/QtCore/QObject \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobject.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobjectdefs.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qnamespace.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qglobal.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qconfig-bootstrapped.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qconfig.h \
@@ -573,10 +582,6 @@ debug/moc_restarterservice.cpp: ../../../Qt/5.10.0/mingw53_32/include/QtCore/QTi
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qmutex.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qnumeric.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qversiontagging.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qbasictimer.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qnamespace.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobject.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobjectdefs.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobjectdefs_impl.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstring.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qchar.h \
@@ -602,15 +607,68 @@ debug/moc_restarterservice.cpp: ../../../Qt/5.10.0/mingw53_32/include/QtCore/QTi
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qvarlengtharray.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qcontainerfwd.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobject_impl.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/QObject \
-		../MCSManager/server/minecraftserver.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/QHash \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qhash.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/QDebug \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/QString \
+		../MCSManager/server/addons/interfaces/iminecraftserveraddon.h \
+		../MCSManager/server/addons/minecraftserveraddonbase.h \
+		debug/moc_predefs.h \
+		../../../Qt/5.10.0/mingw53_32/bin/moc.exe
+	D:\Qt\5.10.0\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/5.10.0/mingw53_32/mkspecs/win32-g++ -ID:/github/MCSManager/MCSManager -ID:/Qt/5.10.0/mingw53_32/include -ID:/Qt/5.10.0/mingw53_32/include/QtCore -I. -ID:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\MCSManager\server\addons\minecraftserveraddonbase.h -o debug\moc_minecraftserveraddonbase.cpp
+
+debug/moc_restarterservice.cpp: ../../../Qt/5.10.0/mingw53_32/include/QtCore/QDebug \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qdebug.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qalgorithms.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qglobal.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qconfig-bootstrapped.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qconfig.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qtcore-config.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qsystemdetection.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qprocessordetection.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qcompilerdetection.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qtypeinfo.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qsysinfo.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qlogging.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qflags.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qatomic.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qbasicatomic.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qatomic_bootstrap.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qgenericatomic.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qatomic_cxx11.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qatomic_msvc.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qglobalstatic.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qmutex.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qnumeric.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qversiontagging.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qhash.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qchar.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qiterator.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qlist.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qrefcount.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qarraydata.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qhashfunctions.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstring.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qbytearray.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qnamespace.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstringliteral.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstringalgorithms.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstringview.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstringbuilder.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qpair.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qbytearraylist.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstringlist.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qregexp.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstringmatcher.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qmap.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qtextstream.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qiodevice.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobject.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobjectdefs.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobjectdefs_impl.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qcoreevent.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qscopedpointer.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qmetatype.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qvarlengtharray.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qcontainerfwd.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobject_impl.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qlocale.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qvariant.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qshareddata.h \
@@ -620,6 +678,12 @@ debug/moc_restarterservice.cpp: ../../../Qt/5.10.0/mingw53_32/include/QtCore/QTi
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qcontiguouscache.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qsharedpointer.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qsharedpointer_impl.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/QTimer \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qtimer.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qbasictimer.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/QObject \
+		../MCSManager/server/minecraftserver.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/QHash \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/QProcess \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qprocess.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/QByteArray \
@@ -627,7 +691,6 @@ debug/moc_restarterservice.cpp: ../../../Qt/5.10.0/mingw53_32/include/QtCore/QTi
 		../MCSManager/config/interfaces/iservermanagerconfig.h \
 		../MCSManager/config/interfaces/iserverbackupconfig.h \
 		../MCSManager/config/interfaces/ilogreaderaddonconfig.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/QString \
 		../MCSManager/config/interfaces/ibackupaddonconfig.h \
 		../MCSManager/config/interfaces/isleeperaddonconfig.h \
 		../MCSManager/config/interfaces/irestarteraddonconfig.h \
@@ -639,6 +702,7 @@ debug/moc_restarterservice.cpp: ../../../Qt/5.10.0/mingw53_32/include/QtCore/QTi
 		../MCSManager/server/interfaces/iminecraftserveraddonmanager.h \
 		../MCSManager/server/addons/interfaces/iminecraftserveraddon.h \
 		../MCSManager/server/addons/minecraftserveraddonbase.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/QString \
 		../MCSManager/server/addons/interfaces/irestarterservice.h \
 		../MCSManager/server/manager/interfaces/iminecraftservermanager.h \
 		../MCSManager/core/mcsmanagercorebase.h \
@@ -1139,7 +1203,6 @@ debug/minecraftserver.o: ../MCSManager/server/minecraftserver.cpp ../MCSManager/
 		../MCSManager/config/interfaces/iservermanagerconfig.h \
 		../MCSManager/config/interfaces/iserverbackupconfig.h \
 		../MCSManager/config/interfaces/ilogreaderaddonconfig.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/QString \
 		../MCSManager/config/interfaces/ibackupaddonconfig.h \
 		../MCSManager/config/interfaces/isleeperaddonconfig.h \
 		../MCSManager/config/interfaces/irestarteraddonconfig.h \
@@ -1233,7 +1296,6 @@ debug/main.o: ../MCSManager/main.cpp ../../../Qt/5.10.0/mingw53_32/include/QtCor
 		../MCSManager/config/interfaces/iservermanagerconfig.h \
 		../MCSManager/config/interfaces/iserverbackupconfig.h \
 		../MCSManager/config/interfaces/ilogreaderaddonconfig.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/QString \
 		../MCSManager/config/interfaces/ibackupaddonconfig.h \
 		../MCSManager/config/interfaces/isleeperaddonconfig.h \
 		../MCSManager/config/interfaces/irestarteraddonconfig.h \
@@ -1256,6 +1318,7 @@ debug/main.o: ../MCSManager/main.cpp ../../../Qt/5.10.0/mingw53_32/include/QtCor
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qfile.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qfiledevice.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/QHash \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/QString \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/QScopedPointer \
 		../MCSManager/config/serverconfig.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/QSettings \
@@ -1277,7 +1340,9 @@ debug/main.o: ../MCSManager/main.cpp ../../../Qt/5.10.0/mingw53_32/include/QtCor
 		../MCSManager/server/addons/minecraftserveraddonfactory.h \
 		../MCSManager/server/addons/logreader.h \
 		../MCSManager/server/addons/minecraftserveraddonbase.h \
-		../MCSManager/server/addons/interfaces/ilogreader.h
+		../MCSManager/server/addons/interfaces/ilogreader.h \
+		../MCSManager/server/addons/restarterservice.h \
+		../MCSManager/server/addons/interfaces/irestarterservice.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\MCSManager\main.cpp
 
 debug/mcsmanagercore.o: ../MCSManager/core/mcsmanagercore.cpp ../MCSManager/core/mcsmanagercore.h \
@@ -1361,7 +1426,6 @@ debug/mcsmanagercore.o: ../MCSManager/core/mcsmanagercore.cpp ../MCSManager/core
 		../MCSManager/config/interfaces/iservermanagerconfig.h \
 		../MCSManager/config/interfaces/iserverbackupconfig.h \
 		../MCSManager/config/interfaces/ilogreaderaddonconfig.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/QString \
 		../MCSManager/config/interfaces/ibackupaddonconfig.h \
 		../MCSManager/config/interfaces/isleeperaddonconfig.h \
 		../MCSManager/config/interfaces/irestarteraddonconfig.h \
@@ -1455,7 +1519,6 @@ debug/minecraftservermanager.o: ../MCSManager/server/manager/minecraftservermana
 		../MCSManager/config/interfaces/iservermanagerconfig.h \
 		../MCSManager/config/interfaces/iserverbackupconfig.h \
 		../MCSManager/config/interfaces/ilogreaderaddonconfig.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/QString \
 		../MCSManager/config/interfaces/ibackupaddonconfig.h \
 		../MCSManager/config/interfaces/isleeperaddonconfig.h \
 		../MCSManager/config/interfaces/irestarteraddonconfig.h \
@@ -1548,7 +1611,6 @@ debug/minecraftserverbuilder.o: ../MCSManager/server/builder/minecraftserverbuil
 		../MCSManager/config/interfaces/iservermanagerconfig.h \
 		../MCSManager/config/interfaces/iserverbackupconfig.h \
 		../MCSManager/config/interfaces/ilogreaderaddonconfig.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/QString \
 		../MCSManager/config/interfaces/ibackupaddonconfig.h \
 		../MCSManager/config/interfaces/isleeperaddonconfig.h \
 		../MCSManager/config/interfaces/irestarteraddonconfig.h \
@@ -1631,6 +1693,14 @@ debug/logreader.o: ../MCSManager/server/addons/logreader.cpp ../MCSManager/serve
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qcontiguouscache.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qsharedpointer.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qsharedpointer_impl.h \
+		../MCSManager/config/interfaces/iserverconfig.h \
+		../MCSManager/config/interfaces/iservermanagerconfig.h \
+		../MCSManager/config/interfaces/iserverbackupconfig.h \
+		../MCSManager/config/interfaces/ilogreaderaddonconfig.h \
+		../MCSManager/config/interfaces/ibackupaddonconfig.h \
+		../MCSManager/config/interfaces/isleeperaddonconfig.h \
+		../MCSManager/config/interfaces/irestarteraddonconfig.h \
+		../MCSManager/config/interfaces/imcscpaddonconfig.h \
 		../MCSManager/server/addons/minecraftserveraddonbase.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/QString \
 		../MCSManager/server/addons/interfaces/iminecraftserveraddon.h \
@@ -1643,9 +1713,10 @@ debug/logreader.o: ../MCSManager/server/addons/logreader.cpp ../MCSManager/serve
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\logreader.o ..\MCSManager\server\addons\logreader.cpp
 
 debug/minecraftserveraddonbase.o: ../MCSManager/server/addons/minecraftserveraddonbase.cpp ../MCSManager/server/addons/minecraftserveraddonbase.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/QString \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstring.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qchar.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/QObject \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobject.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobjectdefs.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qnamespace.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qglobal.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qconfig-bootstrapped.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qconfig.h \
@@ -1667,14 +1738,32 @@ debug/minecraftserveraddonbase.o: ../MCSManager/server/addons/minecraftserveradd
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qmutex.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qnumeric.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qversiontagging.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobjectdefs_impl.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstring.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qchar.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qbytearray.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qrefcount.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qnamespace.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qarraydata.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstringliteral.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstringalgorithms.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstringview.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstringbuilder.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qlist.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qalgorithms.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qiterator.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qhashfunctions.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qpair.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qbytearraylist.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstringlist.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qregexp.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstringmatcher.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qcoreevent.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qscopedpointer.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qmetatype.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qvarlengtharray.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qcontainerfwd.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobject_impl.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/QString \
 		../MCSManager/server/addons/interfaces/iminecraftserveraddon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\minecraftserveraddonbase.o ..\MCSManager\server\addons\minecraftserveraddonbase.cpp
 
@@ -1745,6 +1834,14 @@ debug/minecraftserveraddonfactory.o: ../MCSManager/server/addons/minecraftserver
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qcontiguouscache.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qsharedpointer.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qsharedpointer_impl.h \
+		../MCSManager/config/interfaces/iserverconfig.h \
+		../MCSManager/config/interfaces/iservermanagerconfig.h \
+		../MCSManager/config/interfaces/iserverbackupconfig.h \
+		../MCSManager/config/interfaces/ilogreaderaddonconfig.h \
+		../MCSManager/config/interfaces/ibackupaddonconfig.h \
+		../MCSManager/config/interfaces/isleeperaddonconfig.h \
+		../MCSManager/config/interfaces/irestarteraddonconfig.h \
+		../MCSManager/config/interfaces/imcscpaddonconfig.h \
 		../MCSManager/server/addons/minecraftserveraddonbase.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/QString \
 		../MCSManager/server/addons/interfaces/iminecraftserveraddon.h \
@@ -1754,12 +1851,26 @@ debug/minecraftserveraddonfactory.o: ../MCSManager/server/addons/minecraftserver
 		../MCSManager/server/interfaces/iminecraftserverprocess.h \
 		../MCSManager/server/interfaces/iminecraftserveraddonmanager.h \
 		../MCSManager/server/addons/interfaces/ilogreader.h \
+		../MCSManager/server/addons/restarterservice.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/QTimer \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qtimer.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qbasictimer.h \
+		../MCSManager/server/minecraftserver.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/QHash \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/QProcess \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qprocess.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/QByteArray \
+		../MCSManager/server/addons/interfaces/irestarterservice.h \
+		../MCSManager/server/manager/interfaces/iminecraftservermanager.h \
+		../MCSManager/core/mcsmanagercorebase.h \
+		../MCSManager/core/interfaces/imcsmanagercorebase.h \
 		../MCSManager/server/addons/interfaces/iminecraftserveraddonfactory.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\minecraftserveraddonfactory.o ..\MCSManager\server\addons\minecraftserveraddonfactory.cpp
 
 debug/restarterservice.o: ../MCSManager/server/addons/restarterservice.cpp ../MCSManager/server/addons/restarterservice.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/QTimer \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qtimer.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/QDebug \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qdebug.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qalgorithms.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qglobal.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qconfig-bootstrapped.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qconfig.h \
@@ -1781,44 +1892,37 @@ debug/restarterservice.o: ../MCSManager/server/addons/restarterservice.cpp ../MC
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qmutex.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qnumeric.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qversiontagging.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qbasictimer.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qnamespace.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobject.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobjectdefs.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobjectdefs_impl.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstring.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qhash.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qchar.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qbytearray.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qiterator.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qlist.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qrefcount.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qarraydata.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qhashfunctions.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstring.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qbytearray.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qnamespace.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstringliteral.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstringalgorithms.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstringview.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstringbuilder.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qlist.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qalgorithms.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qiterator.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qhashfunctions.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qpair.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qbytearraylist.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstringlist.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qregexp.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qstringmatcher.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qmap.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qtextstream.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qiodevice.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobject.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobjectdefs.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobjectdefs_impl.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qcoreevent.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qscopedpointer.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qmetatype.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qvarlengtharray.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qcontainerfwd.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qobject_impl.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/QObject \
-		../MCSManager/server/minecraftserver.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/QHash \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qhash.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/QDebug \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qdebug.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qmap.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qtextstream.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/qiodevice.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qlocale.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qvariant.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qshareddata.h \
@@ -1828,6 +1932,12 @@ debug/restarterservice.o: ../MCSManager/server/addons/restarterservice.cpp ../MC
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qcontiguouscache.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qsharedpointer.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qsharedpointer_impl.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/QTimer \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qtimer.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/qbasictimer.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/QObject \
+		../MCSManager/server/minecraftserver.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/QHash \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/QProcess \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/qprocess.h \
 		../../../Qt/5.10.0/mingw53_32/include/QtCore/QByteArray \
@@ -1835,7 +1945,6 @@ debug/restarterservice.o: ../MCSManager/server/addons/restarterservice.cpp ../MC
 		../MCSManager/config/interfaces/iservermanagerconfig.h \
 		../MCSManager/config/interfaces/iserverbackupconfig.h \
 		../MCSManager/config/interfaces/ilogreaderaddonconfig.h \
-		../../../Qt/5.10.0/mingw53_32/include/QtCore/QString \
 		../MCSManager/config/interfaces/ibackupaddonconfig.h \
 		../MCSManager/config/interfaces/isleeperaddonconfig.h \
 		../MCSManager/config/interfaces/irestarteraddonconfig.h \
@@ -1847,6 +1956,7 @@ debug/restarterservice.o: ../MCSManager/server/addons/restarterservice.cpp ../MC
 		../MCSManager/server/interfaces/iminecraftserveraddonmanager.h \
 		../MCSManager/server/addons/interfaces/iminecraftserveraddon.h \
 		../MCSManager/server/addons/minecraftserveraddonbase.h \
+		../../../Qt/5.10.0/mingw53_32/include/QtCore/QString \
 		../MCSManager/server/addons/interfaces/irestarterservice.h \
 		../MCSManager/server/manager/interfaces/iminecraftservermanager.h \
 		../MCSManager/core/mcsmanagercorebase.h \
@@ -1864,6 +1974,9 @@ debug/moc_minecraftservermanager.o: debug/moc_minecraftservermanager.cpp
 
 debug/moc_logreader.o: debug/moc_logreader.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\moc_logreader.o debug\moc_logreader.cpp
+
+debug/moc_minecraftserveraddonbase.o: debug/moc_minecraftserveraddonbase.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\moc_minecraftserveraddonbase.o debug\moc_minecraftserveraddonbase.cpp
 
 debug/moc_restarterservice.o: debug/moc_restarterservice.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\moc_restarterservice.o debug\moc_restarterservice.cpp

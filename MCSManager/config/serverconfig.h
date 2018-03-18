@@ -18,6 +18,7 @@ public:
 
     // IServerConfig interface
     QString name() const override;
+    bool isRealServer() const override;
     QString javaPath() const override;
     QString jarName() const override;
     QString workingDirectory() const override;
@@ -84,6 +85,7 @@ private:
     //ServerConfig Constants
     static const QString SERVER_CONFIG_BASE,
                          SERVER_NAME,
+                         REAL_SERVER_KEY,
                          JAVA_PATH_KEY,
                          JAR_PATH_KEY,
                          WORKING_DIRECTORY_KEY,

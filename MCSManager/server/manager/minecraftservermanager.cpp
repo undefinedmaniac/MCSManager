@@ -25,8 +25,10 @@ void MinecraftServerManager::setServer(IMinecraftServer *server)
 
     QObject *object = dynamic_cast<QObject *>(server);
 
-    QObject::connect(object, SIGNAL(started()), this, SLOT(serverStarted()));
-    QObject::connect(object, SIGNAL(stopped()), this, SLOT(serverStopped()));
+    if (object != nullptr) {
+        QObject::connect(object, SIGNAL(started()), this, SLOT(serverStarted()));
+        QObject::connect(object, SIGNAL(stopped()), this, SLOT(serverStopped()));
+    }
 }
 
 IMinecraftServer *MinecraftServerManager::server()

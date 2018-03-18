@@ -1,12 +1,14 @@
 #ifndef MINECRAFTSERVERADDONBASE_H
 #define MINECRAFTSERVERADDONBASE_H
 
+#include <QObject>
 #include <QString>
 
 #include "server/addons/interfaces/iminecraftserveraddon.h"
 
-class MinecraftServerAddonBase : public IMinecraftServerAddon
+class MinecraftServerAddonBase : public QObject, public IMinecraftServerAddon
 {
+    Q_OBJECT
 public:
     MinecraftServerAddonBase(const QString &name, IMinecraftServer *server);
     virtual ~MinecraftServerAddonBase() {}

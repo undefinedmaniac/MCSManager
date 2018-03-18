@@ -8,6 +8,8 @@ RestarterService::RestarterService(const QString &name, IMinecraftServer *server
 
 void RestarterService::start()
 {
+    qDebug() << "Restarter service started!";
+
     const IRestarterAddonConfig *config = server()->config();
 
     int timerMsecs = config->restarterPeriod() * 1000;

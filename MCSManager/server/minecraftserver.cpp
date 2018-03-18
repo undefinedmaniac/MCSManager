@@ -27,7 +27,15 @@ MinecraftServer::~MinecraftServer()
     if (isRunning())
         stop();
 
-    qDeleteAll(mAddons);
+    foreach (IMinecraftServerAddon *addon, mAddons){
+        QObject *object = dynamic_cast<QObject *>(addon);
+
+        if (object != nullptr)
+            object->deleteLater();
+        else
+            delete addon;
+
+    }
 
     qDebug() << "Minecraft server deleted!";
 }
@@ -54,12 +62,16 @@ void MinecraftServer::start()
 
 void MinecraftServer::stop()
 {
-    mProcess.terminate();
+    if (mConfig->isRealServer()) {
+        const QString stopCommand = QStringLiteral("help");
+        write(stopCommand.toUtf8());
 
-    if (!mProcess.waitForFinished(5000))
-        mProcess.kill();
-
-    mProcess.waitForFinished(-1);
+        if (!mProcess.waitForFinished(10000)) {
+            killServer();
+        }
+    } else {
+        killServer();
+    }
 }
 
 bool MinecraftServer::isRunning() const
@@ -78,7 +90,7 @@ QByteArray MinecraftServer::readAllStandardError()
 }
 
 int MinecraftServer::write(const QByteArray &data)
-{
+{   
     return mProcess.write(data);
 }
 
@@ -159,4 +171,10 @@ void MinecraftServer::serverStopped()
     qDebug() << "Server [" << mConfig->name() << "] stopped!";
     stopAddons();
     emit stopped();
+}
+
+void MinecraftServer::killServer()
+{
+    mProcess.kill();
+    mProcess.waitForFinished(-1);
 }

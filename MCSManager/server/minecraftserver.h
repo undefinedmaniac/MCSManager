@@ -65,8 +65,9 @@ private:
     IMinecraftServerManager *mServerManager = nullptr;
     QHash<QString, IMinecraftServerAddon *> mAddons;
 
-    void startAddons() override;
-    void stopAddons() override;
+    void killServer();
+    void startAddons();
+    void stopAddons();
 };
 
 #endif // MINECRAFTSERVER_H

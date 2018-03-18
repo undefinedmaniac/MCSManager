@@ -19,6 +19,7 @@ public:
     virtual ~IServerConfig() {}
 
     virtual QString name() const = 0;
+    virtual bool isRealServer() const = 0;
     virtual QString javaPath() const = 0;
     virtual QString jarName() const = 0;
     virtual QString workingDirectory() const = 0;

@@ -4,9 +4,11 @@ LogReader::LogReader(const QString &name, IMinecraftServer *server) : MinecraftS
 {
     QObject *object = dynamic_cast<QObject *>(server);
 
-    QObject::connect(object, SIGNAL(readyReadStandardOutput()), this, SLOT(readyReadStandardOutput()));
-    QObject::connect(object, SIGNAL(readyReadStandardError()), this, SLOT(readyReadStandardError()));
-    QObject::connect(this, SIGNAL(newData(int)), this, SLOT(testSlot(int)));
+    if (object != nullptr) {
+        QObject::connect(object, SIGNAL(readyReadStandardOutput()), this, SLOT(readyReadStandardOutput()));
+        QObject::connect(object, SIGNAL(readyReadStandardError()), this, SLOT(readyReadStandardError()));
+        QObject::connect(this, SIGNAL(newData(int)), this, SLOT(testSlot(int)));
+    }
 }
 
 LogReader::~LogReader()

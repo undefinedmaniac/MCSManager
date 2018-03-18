@@ -12,6 +12,7 @@ class MinecraftServerBuilder : public IMinecraftServerBuilder
 {
 public:
     MinecraftServerBuilder(IMinecraftServerAddonFactory *factory = nullptr);
+    ~MinecraftServerBuilder();
 
     // IMinecraftServerBuilder interface
     IMinecraftServer *getServer(const IServerConfig *config) override;
@@ -19,8 +20,10 @@ public:
     IMinecraftServerAddonFactory *addonFactory() override;
 
 private:
-    QScopedPointer<IMinecraftServer> mServer;
+    IMinecraftServer *mServer = nullptr;
     IMinecraftServerAddonFactory *mFactory;
+
+    void deleteServer();
 };
 
 #endif // MINECRAFTSERVERBUILDER_H

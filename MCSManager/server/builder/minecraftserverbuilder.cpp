@@ -5,18 +5,25 @@ MinecraftServerBuilder::MinecraftServerBuilder(IMinecraftServerAddonFactory *fac
 {
 }
 
+MinecraftServerBuilder::~MinecraftServerBuilder()
+{
+    deleteServer();
+}
+
 IMinecraftServer *MinecraftServerBuilder::getServer(const IServerConfig *config)
 {
-    mServer.reset(new MinecraftServer(config));
+    deleteServer();
+
+    mServer = new MinecraftServer(config);
 
     QStringList addons = config->enabledAddons();
 
     foreach (QString addon, addons) {
-        IMinecraftServerAddon *serverAddon = mFactory->getAddon(addon, mServer.data());
+        IMinecraftServerAddon *serverAddon = mFactory->getAddon(addon, mServer);
         mServer->addAddon(serverAddon);
     }
 
-    return mServer.data();
+    return mServer;
 }
 
 void MinecraftServerBuilder::setAddonFactory(IMinecraftServerAddonFactory *factory)
@@ -27,4 +34,16 @@ void MinecraftServerBuilder::setAddonFactory(IMinecraftServerAddonFactory *facto
 IMinecraftServerAddonFactory *MinecraftServerBuilder::addonFactory()
 {
     return mFactory;
+}
+
+void MinecraftServerBuilder::deleteServer()
+{
+    if (mServer != nullptr) {
+        QObject *object = dynamic_cast<QObject *>(mServer);
+
+        if (object != nullptr)
+            object->deleteLater();
+        else
+            delete mServer;
+    }
 }
