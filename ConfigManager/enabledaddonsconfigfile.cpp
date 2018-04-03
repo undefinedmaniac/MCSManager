@@ -7,10 +7,12 @@ EnabledAddonsConfigFile::EnabledAddonsConfigFile(const QString &filePath, const 
 {
     setGroup(GROUP_NAME);
 
-    foreach (const QString &addonName, mRegisteredAddons)
-        setDefaultBool(addonName, false);
+    QHash<QString, QString> defaults;
 
-    applyDefaults();
+    foreach (const QString &addonName, mRegisteredAddons)
+        defaults.insert(addonName, QStringLiteral("false"));
+
+    applyDefaults(defaults);
 }
 
 QStringList EnabledAddonsConfigFile::getEnabledAddons()

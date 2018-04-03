@@ -24,15 +24,10 @@ public:
     void writeBool(const QString &key, bool value) override;
     void writeDouble(const QString &key, double value) override;
 
-    void setDefaultString(const QString &key, const QString &value) override;
-    void setDefaultBool(const QString &key, bool value) override;
-    void setDefaultDouble(const QString &key, double value) override;
-
-    void applyDefaults() override;
+    void applyDefaults(const QHash<QString, QString> &defaults) override;
 
 private:
     QSettings mSettings;
-    QHash<QString, QVariant> mDefaults;
 
     static double convertToDouble(const QVariant &data);
     static bool convertToBool(const QVariant &data);

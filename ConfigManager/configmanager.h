@@ -11,6 +11,9 @@
 #include <QFile>
 #include <QStringList>
 #include <QDirIterator>
+#include <QString>
+
+class ConfigManager;
 
 struct ServerConfig {
     IConfigFile *primary;
@@ -21,14 +24,18 @@ struct ServerConfig {
 class ConfigManager : IConfigManager
 {
 public:
-    ConfigManager();
+    ConfigManager(const QString &configDirectory);
     virtual ~ConfigManager();
 
     // IConfigManager interface
-    void registerAddon(const QString &addonName) override;
-    void loadConfiguration(const QString &configDirectory) override;
-    IConfigFile *getPrimaryConfig() override;
+    void registerAddon(const QString &addonName, const ConfigHash &defaults) override;
+    void setAppPrimaryDefaults(const ConfigHash &defaults) override;
+    void setServerPrimaryDefaults(const ConfigHash &defaults) override;
+    void setServerBackupDefaults(const ConfigHash &defaults) override;
+    void loadConfiguration() override;
+    IConfigFile *getAppConfig() override;
     ServerConfig getServerConfig(const QString &serverName) override;
+    IConfigFile *getAddonConfig(const QString &serverName, const QString &addonName) override;
     QStringList serverList() const override;
 
 protected:
@@ -36,12 +43,25 @@ protected:
     virtual IEnabledAddons *getEnabledAddons(const QString &filePath);
 
 private:
-    IConfigFile *mPrimaryConfig = nullptr;
-    QHash<QString, ServerConfig> mServerConfigs;
-    QVector<IConfigFile *> mConfigFiles;
-    QStringList mRegisteredAddons;
+    struct PrivateServerConfig {
+        IConfigFile *primary;
+        IConfigFile *backup;
+        IEnabledAddons *enabledAddons;
+        QHash<QString, IConfigFile *> addonConfigs;
+    };
 
-    void createEmptyFile(const QString &filePath);
+    const QString mConfigDirectory;
+
+    ConfigHash mAppDefaults;
+    ConfigHash mPrimaryDefaults;
+    ConfigHash mBackupDefaults;
+
+    IConfigFile *mAppConfig = nullptr;
+    QHash<QString, PrivateServerConfig> mServerConfigs;
+
+    QHash<QString, ConfigHash> mRegisteredAddons;
+
+    QVector<IConfigFile *> mConfigFiles;
 
     static const QString PRIMARY_CONFIG_NAME,
                          BACKUP_CONFIG_NAME,
