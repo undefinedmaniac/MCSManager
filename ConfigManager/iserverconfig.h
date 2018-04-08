@@ -1,0 +1,4 @@
+#ifndef ISERVERCONFIG_H
+#define ISERVERCONFIG_H
+
+#endif // ISERVERCONFIG_H

@@ -1,0 +1,4 @@
+#ifndef CONFIGGLOBAL_H
+#define CONFIGGLOBAL_H
+
+#endif // CONFIGGLOBAL_H
