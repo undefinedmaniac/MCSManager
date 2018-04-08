@@ -17,14 +17,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp \
     configfile.cpp \
     configfunctions.cpp \
-    configmanager.cpp \
-    enabledaddonsconfigfile.cpp
+    serverconfig.cpp \
+    configfilefactory.cpp
 
 HEADERS += \
     iconfigmanager.h \
     iconfigfile.h \
     configfile.h \
     configfunctions.h \
-    configmanager.h \
-    ienabledaddons.h \
-    enabledaddonsconfigfile.h
+    iserverconfig.h \
+    serverconfig.h \
+    configfilefactory.h \
+    configglobal.h

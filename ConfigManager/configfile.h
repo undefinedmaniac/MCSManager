@@ -24,7 +24,7 @@ public:
     void writeBool(const QString &key, bool value) override;
     void writeDouble(const QString &key, double value) override;
 
-    void applyDefaults(const QHash<QString, QString> &defaults) override;
+    void applyDefaults(const ConfigData &defaults) override;
 
 private:
     QSettings mSettings;

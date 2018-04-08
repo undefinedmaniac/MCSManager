@@ -1,7 +1,7 @@
 #ifndef ICONFIGFILE_H
 #define ICONFIGFILE_H
 
-#include <QHash>
+#include "configglobal.h"
 
 class QString;
 
@@ -20,7 +20,7 @@ public:
     virtual void writeBool(const QString &key, bool value) = 0;
     virtual void writeDouble(const QString &key, double value) = 0;
 
-    virtual void applyDefaults(const QHash<QString, QString> &defaults) = 0;
+    virtual void applyDefaults(const ConfigData &defaults) = 0;
 };
 
 #endif // ICONFIGFILE_H

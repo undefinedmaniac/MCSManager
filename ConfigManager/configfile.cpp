@@ -47,13 +47,14 @@ void ConfigFile::writeDouble(const QString &key, double value)
     mSettings.setValue(key, value);
 }
 
-void ConfigFile::applyDefaults(const QHash<QString, QString> &defaults)
+void ConfigFile::applyDefaults(const ConfigData &defaults)
 {
-    QHash<QString, QString>::const_iterator i;
-    for (i = defaults.begin(); i != defaults.end(); i++) {
-        if (!mSettings.contains(i.key()))
-            mSettings.setValue(i.key(), i.value());
+    for (int i = 0; i < defaults.size(); i++) {
+        const QPair<QString, QString> &pair = defaults.at(i);
+        if (!mSettings.contains(pair.first))
+            mSettings.setValue(pair.first, pair.second);
     }
+
     mSettings.sync();
 }
 

@@ -4,7 +4,6 @@
 #include "iconfigmanager.h"
 #include "configfunctions.h"
 #include "configfile.h"
-#include "enabledaddonsconfigfile.h"
 
 #include <QDir>
 #include <QHash>
@@ -13,15 +12,7 @@
 #include <QDirIterator>
 #include <QString>
 
-class ConfigManager;
-
-struct ServerConfig {
-    IConfigFile *primary;
-    IConfigFile *backup;
-    IEnabledAddons *enabledAddons;
-};
-
-class ConfigManager : IConfigManager
+class ConfigManager
 {
 public:
     ConfigManager(const QString &configDirectory);
@@ -43,13 +34,6 @@ protected:
     virtual IEnabledAddons *getEnabledAddons(const QString &filePath);
 
 private:
-    struct PrivateServerConfig {
-        IConfigFile *primary;
-        IConfigFile *backup;
-        IEnabledAddons *enabledAddons;
-        QHash<QString, IConfigFile *> addonConfigs;
-    };
-
     const QString mConfigDirectory;
 
     ConfigHash mAppDefaults;
