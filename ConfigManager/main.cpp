@@ -1,12 +1,9 @@
 #include <QCoreApplication>
 #include <QDebug>
 
-#include "serverconfig.h"
+#include "configmanager.h"
 
-int main(int argc, char *argv[])
-{
-    QCoreApplication a(argc, argv);
-
+void testFunc() {
     ConfigData data0;
 
     data0.append(qMakePair(QString("test0"), QString("true")));
@@ -22,15 +19,23 @@ int main(int argc, char *argv[])
     data2.append(qMakePair(QString("test0"), QString("Im an addon")));
     data2.append(qMakePair(QString("test1"), QString("Im an addon")));
 
-    QHash<QString, ConfigData> addonHash;
+    ConfigManager manager;
 
-    addonHash.insert("Addon1", data2);
+    manager.setAppConfigDefaults(data0);
+    manager.setServerConfigDefaults(data1);
+    manager.setBackupConfigDefaults(data2);
+    manager.registerAddon("Addon1", data2);
+    manager.loadConfigs(QCoreApplication::applicationDirPath() + QStringLiteral("/config"));
 
-    ServerConfig server(a.applicationDirPath() + QStringLiteral("/configs/server1"), addonHash);
+    qDebug() << "Server List: " << manager.getServerList();
+    qDebug() << manager.getServerConfig("server1")->getEnabledAddons();
+}
 
-    server.initServerConfig(data0);
-    server.initBackupConfig(data1);
-    server.initEnabledAddons();
+int main(int argc, char *argv[])
+{
+    QCoreApplication a(argc, argv);
+
+    testFunc();
 
     return a.exec();
 }

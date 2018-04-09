@@ -3,7 +3,9 @@
 
 #include "iconfigmanager.h"
 #include "configfunctions.h"
-#include "configfile.h"
+#include "configfilefactory.h"
+#include "iserverconfig.h"
+#include "serverconfigfactory.h"
 
 #include <QDir>
 #include <QHash>
@@ -12,40 +14,31 @@
 #include <QDirIterator>
 #include <QString>
 
-class ConfigManager
+class ConfigManager : public ServerConfigFactory, public ConfigFileFactory, public IConfigManager
 {
 public:
-    ConfigManager(const QString &configDirectory);
-    virtual ~ConfigManager();
+    ConfigManager();
 
     // IConfigManager interface
-    void registerAddon(const QString &addonName, const ConfigHash &defaults) override;
-    void setAppPrimaryDefaults(const ConfigHash &defaults) override;
-    void setServerPrimaryDefaults(const ConfigHash &defaults) override;
-    void setServerBackupDefaults(const ConfigHash &defaults) override;
-    void loadConfiguration() override;
-    IConfigFile *getAppConfig() override;
-    ServerConfig getServerConfig(const QString &serverName) override;
-    IConfigFile *getAddonConfig(const QString &serverName, const QString &addonName) override;
-    QStringList serverList() const override;
+    void registerAddon(const QString &addonName, const ConfigData &defaults) override;
 
-protected:
-    virtual IConfigFile *getConfigFile(const QString &filePath);
-    virtual IEnabledAddons *getEnabledAddons(const QString &filePath);
+    void setAppConfigDefaults(const ConfigData &defaults) override;
+    void setServerConfigDefaults(const ConfigData &defaults) override;
+    void setBackupConfigDefaults(const ConfigData &defaults) override;
+
+    void loadConfigs(const QString &configDirectory) override;
+
+    IConfigFile *getAppConfig() override;
+    IServerConfig *getServerConfig(const QString &serverName) override;
+
+    QStringList getServerList() const override;
 
 private:
-    const QString mConfigDirectory;
-
-    ConfigHash mAppDefaults;
-    ConfigHash mPrimaryDefaults;
-    ConfigHash mBackupDefaults;
+    ConfigData mAppDefaults, mServerDefaults, mBackupDefaults;
+    QHash<QString, ConfigData> mRegisteredAddons;
 
     IConfigFile *mAppConfig = nullptr;
-    QHash<QString, PrivateServerConfig> mServerConfigs;
-
-    QHash<QString, ConfigHash> mRegisteredAddons;
-
-    QVector<IConfigFile *> mConfigFiles;
+    QHash<QString, IServerConfig *> mServerConfigs;
 
     static const QString PRIMARY_CONFIG_NAME,
                          BACKUP_CONFIG_NAME,

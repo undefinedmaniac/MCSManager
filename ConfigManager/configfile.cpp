@@ -12,7 +12,7 @@ void ConfigFile::setGroup(const QString &group)
 
 QString ConfigFile::readString(const QString &key) const
 {
-    return mSettings.value(key, "").toString();
+    return mSettings.value(key, QStringLiteral("")).toString();
 }
 
 bool ConfigFile::readBool(const QString &key) const
@@ -35,9 +35,9 @@ void ConfigFile::writeBool(const QString &key, bool value)
     QString data;
 
     if (value)
-        data = "true";
+        data = QStringLiteral("true");
     else
-        data = "false";
+        data = QStringLiteral("false");
 
     mSettings.setValue(key, data);
 }
@@ -56,23 +56,4 @@ void ConfigFile::applyDefaults(const ConfigData &defaults)
     }
 
     mSettings.sync();
-}
-
-double ConfigFile::convertToDouble(const QVariant &data)
-{
-    bool success = false;
-
-    double result = data.toDouble(&success);
-
-    if (success)
-        return result;
-
-    return -1;
-}
-
-bool ConfigFile::convertToBool(const QVariant &data)
-{
-    const QString string = simplifyString(data.toString());
-
-    return (string == QStringLiteral("TRUE") || string == QStringLiteral("1"));
 }

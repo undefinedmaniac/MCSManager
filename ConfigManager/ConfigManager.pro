@@ -18,7 +18,9 @@ SOURCES += main.cpp \
     configfile.cpp \
     configfunctions.cpp \
     serverconfig.cpp \
-    configfilefactory.cpp
+    configfilefactory.cpp \
+    configmanager.cpp \
+    serverconfigfactory.cpp
 
 HEADERS += \
     iconfigmanager.h \
@@ -28,4 +30,6 @@ HEADERS += \
     iserverconfig.h \
     serverconfig.h \
     configfilefactory.h \
-    configglobal.h
+    configglobal.h \
+    configmanager.h \
+    serverconfigfactory.h

@@ -1,12 +1,10 @@
 #ifndef CONFIGFILE_H
 #define CONFIGFILE_H
 
-#include "iconfigfile.h"
 #include "configfunctions.h"
+#include "iconfigfile.h"
 
 #include <QSettings>
-#include <QHash>
-#include <QDebug>
 
 class ConfigFile : public IConfigFile
 {
@@ -28,9 +26,6 @@ public:
 
 private:
     QSettings mSettings;
-
-    static double convertToDouble(const QVariant &data);
-    static bool convertToBool(const QVariant &data);
 };
 
 #endif // CONFIGFILE_H

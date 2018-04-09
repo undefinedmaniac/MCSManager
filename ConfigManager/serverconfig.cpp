@@ -5,18 +5,16 @@ const QString ServerConfig::SERVER_CONFIG_FILE_NAME = QStringLiteral("config.ini
               ServerConfig::ADDON_FOLDER_NAME = QStringLiteral("addons"),
               ServerConfig::ENABLED_ADDONS_CONFIG_FILE_NAME = QStringLiteral("enabled_addons.ini");
 
-ServerConfig::ServerConfig(const QString &folderPath, const QHash<QString, ConfigData> &addonDefaults) :
+ServerConfig::ServerConfig(const QString &folderPath, const QHash<QString, ConfigData> &registeredAddons) :
     mServerFolderPath(folderPath), mAddonsFolderPath(joinPaths(folderPath, ADDON_FOLDER_NAME)),
-    mEnabledAddons(joinPaths(mAddonsFolderPath, ENABLED_ADDONS_CONFIG_FILE_NAME)), mAddonDefaults(addonDefaults)
+    mEnabledAddons(joinPaths(mAddonsFolderPath, ENABLED_ADDONS_CONFIG_FILE_NAME)), mRegisteredAddons(registeredAddons)
 {
     mEnabledAddons.setGroup(QStringLiteral("enabled_addons"));
+}
 
-    ConfigData enabledAddonsDefaults;
-
-    foreach (const QString &addon, mAddonDefaults.keys())
-        enabledAddonsDefaults.append(qMakePair(addon, QStringLiteral("false")));
-
-    mEnabledAddons.applyDefaults(enabledAddonsDefaults);
+void ServerConfig::setRegisteredAddons(const QHash<QString, ConfigData> &addons)
+{
+    mRegisteredAddons = addons;
 }
 
 void ServerConfig::initServerConfig(const ConfigData &defaults)
@@ -30,6 +28,16 @@ void ServerConfig::initBackupConfig(const ConfigData &defaults)
 }
 
 void ServerConfig::initEnabledAddons()
+{
+    ConfigData enabledAddonsDefaults;
+
+    foreach (const QString &addon, mRegisteredAddons.keys())
+        enabledAddonsDefaults.append(qMakePair(addon, QStringLiteral("false")));
+
+    mEnabledAddons.applyDefaults(enabledAddonsDefaults);
+}
+
+void ServerConfig::initAddonConfigs()
 {
     foreach (const QString &addon, getEnabledAddons())
         createAddonConfig(addon);
@@ -59,7 +67,7 @@ QStringList ServerConfig::getEnabledAddons()
 {
     QStringList enabledAddons;
 
-    foreach (const QString &addon, mAddonDefaults.keys()) {
+    foreach (const QString &addon, mRegisteredAddons.keys()) {
         if (mEnabledAddons.readBool(addon))
             enabledAddons.append(addon);
     }
@@ -79,7 +87,7 @@ IConfigFile *ServerConfig::createAddonConfig(const QString &addonName)
     const QString addonsFolderPath = joinPaths(mServerFolderPath, ADDON_FOLDER_NAME);
     const QString filePath = joinPaths(addonsFolderPath, addonName + QStringLiteral(".ini"));
 
-    IConfigFile * file = loadFile(filePath, mAddonDefaults.value(addonName, ConfigData()));
+    IConfigFile * file = loadFile(filePath, mRegisteredAddons.value(addonName, ConfigData()));
     mAddonConfigs.insert(addonName, file);
 
     return file;
