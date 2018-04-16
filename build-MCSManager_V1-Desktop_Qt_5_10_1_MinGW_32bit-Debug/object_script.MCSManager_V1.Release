@@ -1,0 +1,16 @@
+INPUT(
+./release\main.o
+./release\configfile.o
+./release\configfilefactory.o
+./release\configfunctions.o
+./release\configmanager.o
+./release\serverconfig.o
+./release\serverconfigfactory.o
+./release\mcserver.o
+./release\serverconfigreader.o
+./release\mcsmanagercorechild.o
+./release\sleeperaddon.o
+./release\mcserveraddonbase.o
+./release\moc_mcserver.o
+./release\moc_sleeperaddon.o
+);
