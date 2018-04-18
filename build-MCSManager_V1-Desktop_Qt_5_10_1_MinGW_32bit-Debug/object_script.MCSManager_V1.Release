@@ -11,6 +11,7 @@ INPUT(
 ./release\mcsmanagercorechild.o
 ./release\sleeperaddon.o
 ./release\mcserveraddonbase.o
+./release\sleeperconfigreader.o
 ./release\moc_mcserver.o
 ./release\moc_sleeperaddon.o
 );

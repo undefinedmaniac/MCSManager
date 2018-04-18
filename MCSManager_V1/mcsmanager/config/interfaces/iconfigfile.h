@@ -63,7 +63,7 @@ public:
      * config file
      * @param defaults The list of default keys and values
      */
-    virtual void applyDefaults(const ConfigData &defaults) = 0;
+    virtual void applyDefaults(const ConfigGlobal::ConfigData &defaults) = 0;
 };
 
 #endif // ICONFIGFILE_H

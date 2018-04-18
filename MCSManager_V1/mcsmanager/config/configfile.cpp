@@ -47,7 +47,7 @@ void ConfigFile::writeDouble(const QString &key, double value)
     mSettings.setValue(key, value);
 }
 
-void ConfigFile::applyDefaults(const ConfigData &defaults)
+void ConfigFile::applyDefaults(const ConfigGlobal::ConfigData &defaults)
 {
     for (int i = 0; i < defaults.size(); i++) {
         const QPair<QString, QString> &pair = defaults.at(i);

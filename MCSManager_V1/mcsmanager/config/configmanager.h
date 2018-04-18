@@ -20,11 +20,11 @@ public:
     ConfigManager();
 
     // IConfigManager interface
-    void registerAddon(const QString &addonName, const ConfigData &defaults) override;
+    void registerAddon(const QString &addonName, const ConfigGlobal::ConfigData &defaults) override;
 
-    void setAppConfigDefaults(const ConfigData &defaults) override;
-    void setServerConfigDefaults(const ConfigData &defaults) override;
-    void setBackupConfigDefaults(const ConfigData &defaults) override;
+    void setAppConfigDefaults(const ConfigGlobal::ConfigData &defaults) override;
+    void setServerConfigDefaults(const ConfigGlobal::ConfigData &defaults) override;
+    void setBackupConfigDefaults(const ConfigGlobal::ConfigData &defaults) override;
 
     void loadConfigs(const QString &configDirectory) override;
 
@@ -34,8 +34,8 @@ public:
     QStringList getServerList() const override;
 
 private:
-    ConfigData mAppDefaults, mServerDefaults, mBackupDefaults;
-    QHash<QString, ConfigData> mRegisteredAddons;
+    ConfigGlobal::ConfigData mAppDefaults, mServerDefaults, mBackupDefaults;
+    QHash<QString, ConfigGlobal::ConfigData> mRegisteredAddons;
 
     IConfigFile *mAppConfig = nullptr;
     QHash<QString, IServerConfig *> mServerConfigs;

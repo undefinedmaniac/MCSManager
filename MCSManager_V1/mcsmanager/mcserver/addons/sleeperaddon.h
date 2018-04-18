@@ -1,6 +1,8 @@
 #ifndef SLEEPERADDON_H
 #define SLEEPERADDON_H
 
+#include "mcsmanager/config/configglobal.h"
+#include "mcsmanager/mcserver/addons/sleeperconfigreader.h"
 #include "mcserveraddonbase.h"
 
 #include <QObject>
@@ -26,8 +28,9 @@ private slots:
 
 private:
     bool mIsRunning = false;
-    IConfigFile *mConfig;
     int mPeriod;
+    ConfigGlobal::ShutdownBehavior mShutdownBehavior;
+    QString mAltServer;
 
     QTimer mTimer;
 };

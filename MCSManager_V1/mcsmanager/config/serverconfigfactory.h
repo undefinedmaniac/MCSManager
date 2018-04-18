@@ -10,8 +10,8 @@ public:
     virtual ~ServerConfigFactory();
 
 protected:
-    ServerConfig *getServerConfig(const QString &folderPath, const QHash<QString, ConfigData> &registeredAddons =
-            QHash<QString, ConfigData>());
+    ServerConfig *getServerConfig(const QString &folderPath, const QHash<QString, ConfigGlobal::ConfigData> &registeredAddons =
+            QHash<QString, ConfigGlobal::ConfigData>());
 
 private:
     QVector<IServerConfig *> mServerConfigs;

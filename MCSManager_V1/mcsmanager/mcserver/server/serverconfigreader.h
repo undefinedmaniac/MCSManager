@@ -10,10 +10,6 @@
 class ServerConfigReader
 {
 public:
-    enum ShutdownBehavior {
-        DoNothing, Restart, StartAltServer
-    };
-
     ServerConfigReader(IConfigFile *config);
 
     QString javaPath() const;
@@ -21,10 +17,10 @@ public:
     QString workingDirectory() const;
     QStringList arguments() const;
     bool isRealServer() const;
-    ShutdownBehavior unexpectedShutdownBehavior() const;
+    ConfigGlobal::ShutdownBehavior unexpectedShutdownBehavior() const;
     QString alternativeServer() const;
 
-    static ConfigData getDefaults();
+    static ConfigGlobal::ConfigData getDefaults();
 
     static const QString JAVA_PATH_KEY,
                          JAR_NAME_KEY,

@@ -25,7 +25,8 @@ SOURCES += main.cpp \
     mcsmanager/mcserver/server/serverconfigreader.cpp \
     mcsmanager/core/mcsmanagercorechild.cpp \
     mcsmanager/mcserver/addons/sleeperaddon.cpp \
-    mcsmanager/mcserver/addons/mcserveraddonbase.cpp
+    mcsmanager/mcserver/addons/mcserveraddonbase.cpp \
+    mcsmanager/mcserver/addons/sleeperconfigreader.cpp
 
 HEADERS += \
     mcsmanager/config/interfaces/iconfigfile.h \
@@ -45,4 +46,5 @@ HEADERS += \
     mcsmanager/core/interfaces/imcsmanagercore.h \
     mcsmanager/core/mcsmanagercorechild.h \
     mcsmanager/mcserver/addons/sleeperaddon.h \
-    mcsmanager/mcserver/addons/mcserveraddonbase.h
+    mcsmanager/mcserver/addons/mcserveraddonbase.h \
+    mcsmanager/mcserver/addons/sleeperconfigreader.h

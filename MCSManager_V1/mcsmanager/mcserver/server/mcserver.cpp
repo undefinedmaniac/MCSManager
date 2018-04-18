@@ -25,8 +25,10 @@ McServer::McServer(IServerConfig *config, IMcsManagerCore *core, QObject *parent
 
 McServer::~McServer()
 {
-    if (isRunning())
+    if (isRunning()) {
         stop();
+        mProcess.waitForFinished(-1);
+    }
 
     foreach (IMcServerAddon *addon, mAddons)
         deleteAddon(addon);
@@ -59,6 +61,9 @@ QStringList McServer::getAddonList() const
 
 void McServer::start()
 {
+    if (isRunning())
+        return;
+
     if (mFirstStart) {
         mFirstStart = false;
         initAddons();
@@ -70,13 +75,21 @@ void McServer::start()
 
 void McServer::restart()
 {
+    mState = Restarting;
     stop();
     start();
 }
 
 void McServer::stop()
 {
-    mState = Stopping;
+    if (!isRunning())
+        return;
+
+    if (mState == Started)
+        mState = Stopping;
+    else if (mState != Restarting)
+        //If not stopping or restarting leave
+        return;
 
     if (mIsRealServer) {
         //Stop the server properly
@@ -84,8 +97,6 @@ void McServer::stop()
     } else {
         mProcess.kill();
     }
-
-    mProcess.waitForFinished(-1);
 }
 
 bool McServer::isRunning() const
@@ -126,26 +137,32 @@ void McServer::serverStopped(int exitCode, QProcess::ExitStatus exitStatus)
     qDebug() << "Server Stopped!";
     Q_UNUSED(exitCode);
 
-    bool expected = (mState == Stopping);
-    mState = Stopped;
     stopAddons();
 
-    if (!expected) {
-        qDebug() << "Unexpected stop!";
-        if (exitStatus == QProcess::CrashExit) {
-            qDebug() << "Crash Exit!";
-            start();
-        } else {
-            switch (mShutdownBehavior) {
-            case ServerConfigReader::DoNothing:
-                break;
-            case ServerConfigReader::Restart:
+    bool expected = (mState == Stopping || mState == Restarting);
+
+    if (mState == Restarting) {
+        start();
+    } else {
+        mState = Stopped;
+
+        if (!expected) {
+            qDebug() << "Unexpected stop!";
+            if (exitStatus == QProcess::CrashExit) {
+                qDebug() << "Crash Exit!";
                 start();
-                break;
-            case ServerConfigReader::StartAltServer:
-                if (IMcsManagerCore *core = getCore())
-                    core->startServer(mAltServer);
-                break;
+            } else {
+                switch (mShutdownBehavior) {
+                case ConfigGlobal::DoNothing:
+                    break;
+                case ConfigGlobal::Restart:
+                    start();
+                    break;
+                case ConfigGlobal::StartAltServer:
+                    if (IMcsManagerCore *core = getCore())
+                        core->startServer(mAltServer);
+                    break;
+                }
             }
         }
     }

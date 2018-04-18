@@ -1,6 +1,8 @@
 #ifndef CONFIGFUNCTIONS_H
 #define CONFIGFUNCTIONS_H
 
+#include "configglobal.h"
+
 #include <QVariant>
 #include <QString>
 #include <QDir>
@@ -37,5 +39,15 @@ double convertToDouble(const QVariant &data);
  * @return The boolean
  */
 bool convertToBool(const QVariant &data);
+
+/**
+ * @brief convertToShutdownBehavior Converts a string to a ShutdownBehavior
+ * If the simplified value is equal to "DONOTHING", "RESTART", or "STARTALTSERVER"
+ * respectively, the value will be converted to the associated enum value.
+ * Otherwise, the function will return ShutdownBehavior::DoNothing.
+ * @param data The string
+ * @return The ShutdownBehavior
+ */
+ConfigGlobal::ShutdownBehavior convertToShutdownBehavior(const QString &data);
 
 #endif // CONFIGFUNCTIONS_H

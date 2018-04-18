@@ -13,27 +13,27 @@
 class ServerConfig : public ConfigFileFactory, public IServerConfig
 {
 public:
-    ServerConfig(const QString &folderPath, const QHash<QString, ConfigData> &registeredAddons =
-            QHash<QString, ConfigData>());
+    ServerConfig(const QString &folderPath, const QHash<QString, ConfigGlobal::ConfigData> &registeredAddons =
+            QHash<QString, ConfigGlobal::ConfigData>());
 
     /**
      * @brief setRegisteredAddons Sets the registered addons - this is used in initEnabledAddons()
      * and initAddonConfigs()
      * @param addons The hash of addons and their defaults
      */
-    void setRegisteredAddons(const QHash<QString, ConfigData> &addons);
+    void setRegisteredAddons(const QHash<QString, ConfigGlobal::ConfigData> &addons);
 
     /**
      * @brief initServerConfig Creates the server config file and sets defaults
      * @param defaults The defaults to set
      */
-    void initServerConfig(const ConfigData &defaults);
+    void initServerConfig(const ConfigGlobal::ConfigData &defaults);
 
     /**
      * @brief initBackupConfig Creates the backup config file and sets defaults
      * @param defaults The defaults to set
      */
-    void initBackupConfig(const ConfigData &defaults);
+    void initBackupConfig(const ConfigGlobal::ConfigData &defaults);
 
     /**
      * @brief initEnabledAddons Creates the enabled addons config file. This
@@ -57,14 +57,14 @@ public:
     QStringList getEnabledAddons() override;
 
 private:
-    IConfigFile *loadFile(const QString &filePath, const ConfigData &defaults);
+    IConfigFile *loadFile(const QString &filePath, const ConfigGlobal::ConfigData &defaults);
     IConfigFile *createAddonConfig(const QString &addonName);
 
     const QString mServerFolderPath, mAddonsFolderPath;
 
     ConfigFile mEnabledAddons;
 
-    QHash<QString, ConfigData> mRegisteredAddons;
+    QHash<QString, ConfigGlobal::ConfigData> mRegisteredAddons;
 
     IConfigFile *mServerConfig = nullptr, *mBackupConfig = nullptr;
     QHash<QString, IConfigFile *> mAddonConfigs;

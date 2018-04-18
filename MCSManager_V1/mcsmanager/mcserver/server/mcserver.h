@@ -50,7 +50,7 @@ private slots:
 
 private:
     enum ServerState {
-        Started, Starting, Stopped, Stopping
+        Started, Starting, Stopped, Stopping, Restarting
     };
 
     void initAddons();
@@ -62,7 +62,7 @@ private:
 
     IServerConfig *mConfig;
     bool mIsRealServer;
-    ServerConfigReader::ShutdownBehavior mShutdownBehavior;
+    ConfigGlobal::ShutdownBehavior mShutdownBehavior;
     QString mAltServer;
 
     QProcess mProcess;

@@ -14,22 +14,24 @@ void SleeperAddon::preInit()
 {
     qDebug() << "Pre-Init!";
 
-    //Get the config file
-    mConfig = getServer()->getConfig()->getAddonConfig(getName());
-    mPeriod = mConfig->readDouble(QStringLiteral("period"));
+    SleeperConfigReader reader(getServer()->getConfig()->getAddonConfig(getName()));
+    mPeriod = reader.period();
+    mShutdownBehavior = reader.shutdownBehavior();
+    mAltServer = reader.alternativeServer();
 }
 
 void SleeperAddon::init()
 {
     qDebug() << "Init!";
 
-    if (mPeriod != -1)
+    if (mPeriod > 0) {
         mPeriod *= 1000;
 
-    mTimer.setInterval(mPeriod);
-    mTimer.setTimerType(Qt::VeryCoarseTimer);
+        mTimer.setInterval(mPeriod);
+        mTimer.setTimerType(Qt::VeryCoarseTimer);
 
-    connect(&mTimer, &QTimer::timeout, this, &SleeperAddon::timeout);
+        connect(&mTimer, &QTimer::timeout, this, &SleeperAddon::timeout);
+    }
 }
 
 void SleeperAddon::start()
@@ -54,5 +56,17 @@ bool SleeperAddon::isRunning() const
 void SleeperAddon::timeout()
 {
     qDebug() << "Timed out!";
-    getServer()->stop();
+
+    switch (mShutdownBehavior) {
+    case ConfigGlobal::Restart:
+        getServer()->restart();
+        break;
+    case ConfigGlobal::StartAltServer:
+        if (IMcsManagerCore *core = getCore())
+            core->startServer(mAltServer);
+        break;
+    default:
+        getServer()->stop();
+        break;
+    }
 }

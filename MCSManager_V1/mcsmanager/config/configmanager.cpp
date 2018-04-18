@@ -9,22 +9,22 @@ ConfigManager::ConfigManager()
 {
 }
 
-void ConfigManager::registerAddon(const QString &addonName, const ConfigData &defaults)
+void ConfigManager::registerAddon(const QString &addonName, const ConfigGlobal::ConfigData &defaults)
 {
     mRegisteredAddons.insert(addonName, defaults);
 }
 
-void ConfigManager::setAppConfigDefaults(const ConfigData &defaults)
+void ConfigManager::setAppConfigDefaults(const ConfigGlobal::ConfigData &defaults)
 {
     mAppDefaults = defaults;
 }
 
-void ConfigManager::setServerConfigDefaults(const ConfigData &defaults)
+void ConfigManager::setServerConfigDefaults(const ConfigGlobal::ConfigData &defaults)
 {
     mServerDefaults = defaults;
 }
 
-void ConfigManager::setBackupConfigDefaults(const ConfigData &defaults)
+void ConfigManager::setBackupConfigDefaults(const ConfigGlobal::ConfigData &defaults)
 {
     mBackupDefaults = defaults;
 }

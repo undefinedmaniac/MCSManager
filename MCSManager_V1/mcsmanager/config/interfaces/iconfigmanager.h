@@ -12,12 +12,12 @@ public:
     virtual ~IConfigManager() {}
 
     //Register addons and their default values
-    virtual void registerAddon(const QString &addonName, const ConfigData &defaults) = 0;
+    virtual void registerAddon(const QString &addonName, const ConfigGlobal::ConfigData &defaults) = 0;
 
     //Set defaults for the application and for servers
-    virtual void setAppConfigDefaults(const ConfigData &defaults) = 0;
-    virtual void setServerConfigDefaults(const ConfigData &defaults) = 0;
-    virtual void setBackupConfigDefaults(const ConfigData &defaults) = 0;
+    virtual void setAppConfigDefaults(const ConfigGlobal::ConfigData &defaults) = 0;
+    virtual void setServerConfigDefaults(const ConfigGlobal::ConfigData &defaults) = 0;
+    virtual void setBackupConfigDefaults(const ConfigGlobal::ConfigData &defaults) = 0;
 
     //Search a directory and create the file structure - preload files
     virtual void loadConfigs(const QString &configDirectory) = 0;

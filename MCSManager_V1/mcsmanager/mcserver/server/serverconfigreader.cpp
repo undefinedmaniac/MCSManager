@@ -54,16 +54,9 @@ bool ServerConfigReader::isRealServer() const
     return mConfig->readBool(REAL_SERVER_KEY);
 }
 
-ServerConfigReader::ShutdownBehavior ServerConfigReader::unexpectedShutdownBehavior() const
+ConfigGlobal::ShutdownBehavior ServerConfigReader::unexpectedShutdownBehavior() const
 {
-    const QString data = simplifyString(mConfig->readString(UNEXPECTED_SHUTDOWN_BEHAVIOR_KEY));
-
-    if (data == QStringLiteral("RESTART"))
-        return Restart;
-    else if (data == QStringLiteral("STARTALTSERVER"))
-        return StartAltServer;
-
-    return DoNothing;
+    return convertToShutdownBehavior(mConfig->readString(UNEXPECTED_SHUTDOWN_BEHAVIOR_KEY));
 }
 
 QString ServerConfigReader::alternativeServer() const
@@ -71,15 +64,15 @@ QString ServerConfigReader::alternativeServer() const
     return mConfig->readString(ALTERNATIVE_SERVER_KEY);
 }
 
-ConfigData ServerConfigReader::getDefaults()
+ConfigGlobal::ConfigData ServerConfigReader::getDefaults()
 {
-    ConfigData data;
+    ConfigGlobal::ConfigData data;
     data.append(qMakePair(REAL_SERVER_KEY, QStringLiteral("true")));
     data.append(qMakePair(JAVA_PATH_KEY, QStringLiteral("")));
     data.append(qMakePair(JAR_NAME_KEY, QStringLiteral("")));
     data.append(qMakePair(WORKING_DIRECTORY_KEY, QStringLiteral("")));
     data.append(qMakePair(ARGUMENTS_KEY, QStringLiteral("")));
-    data.append(qMakePair(UNEXPECTED_SHUTDOWN_BEHAVIOR_KEY, QStringLiteral("restart")));
+    data.append(qMakePair(UNEXPECTED_SHUTDOWN_BEHAVIOR_KEY, QStringLiteral("Restart")));
     data.append(qMakePair(ALTERNATIVE_SERVER_KEY, QStringLiteral("")));
     return data;
 }
