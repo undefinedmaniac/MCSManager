@@ -4,18 +4,21 @@
 #include "mcsmanager/config/serverconfig.h"
 #include "mcsmanager/mcserver/server/serverconfigreader.h"
 #include "mcsmanager/mcserver/server/mcserver.h"
-#include "mcsmanager/mcserver/addons/sleeperaddon.h"
+#include "mcsmanager/mcserver/addons/mcscp/mcscpaddon.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
     ServerConfig config(joinPaths(QCoreApplication::applicationDirPath(), QStringLiteral("test")));
+
     config.initServerConfig(ServerConfigReader::getDefaults());
+    config.initEnabledAddons();
+    config.initAddonConfigs();
 
     McServer server(&config);
 
-    server.addAddon(new SleeperAddon(&server));
+    server.addAddon(new McscpAddon(&server));
 
     server.start();
 

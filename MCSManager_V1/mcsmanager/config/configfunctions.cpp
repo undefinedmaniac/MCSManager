@@ -31,9 +31,11 @@ bool convertToBool(const QVariant &data)
 
 ConfigGlobal::ShutdownBehavior convertToShutdownBehavior(const QString &data)
 {
-    if (data == QStringLiteral("RESTART"))
+    const QString simpleString = simplifyString(data);
+
+    if (simpleString == QStringLiteral("RESTART"))
         return ConfigGlobal::Restart;
-    else if (data == QStringLiteral("STARTALTSERVER"))
+    else if (simpleString == QStringLiteral("STARTALTSERVER"))
         return ConfigGlobal::StartAltServer;
 
     return ConfigGlobal::DoNothing;

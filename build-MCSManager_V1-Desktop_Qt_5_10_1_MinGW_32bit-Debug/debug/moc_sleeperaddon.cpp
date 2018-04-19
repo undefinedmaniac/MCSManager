@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../MCSManager_V1/mcsmanager/mcserver/addons/sleeperaddon.h"
+#include "../../MCSManager_V1/mcsmanager/mcserver/addons/sleeper/sleeperaddon.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)

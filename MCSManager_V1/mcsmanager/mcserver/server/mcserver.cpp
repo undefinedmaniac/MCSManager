@@ -156,6 +156,7 @@ void McServer::serverStopped(int exitCode, QProcess::ExitStatus exitStatus)
                 case ConfigGlobal::DoNothing:
                     break;
                 case ConfigGlobal::Restart:
+                    qDebug() << "Restarting!";
                     start();
                     break;
                 case ConfigGlobal::StartAltServer:

@@ -218,6 +218,7 @@ Makefile: ../MCSManager_V1/MCSManager_V1.pro ../../../../Qt/5.10.1/mingw53_32/mk
 		../../../../Qt/5.10.1/mingw53_32/mkspecs/features/yacc.prf \
 		../../../../Qt/5.10.1/mingw53_32/mkspecs/features/lex.prf \
 		../MCSManager_V1/MCSManager_V1.pro \
+		../../../../Qt/5.10.1/mingw53_32/lib/Qt5Network.prl \
 		../../../../Qt/5.10.1/mingw53_32/lib/Qt5Core.prl
 	$(QMAKE) -o Makefile ..\MCSManager_V1\MCSManager_V1.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 ../../../../Qt/5.10.1/mingw53_32/mkspecs/features/spec_pre.prf:
@@ -377,6 +378,7 @@ Makefile: ../MCSManager_V1/MCSManager_V1.pro ../../../../Qt/5.10.1/mingw53_32/mk
 ../../../../Qt/5.10.1/mingw53_32/mkspecs/features/yacc.prf:
 ../../../../Qt/5.10.1/mingw53_32/mkspecs/features/lex.prf:
 ../MCSManager_V1/MCSManager_V1.pro:
+../../../../Qt/5.10.1/mingw53_32/lib/Qt5Network.prl:
 ../../../../Qt/5.10.1/mingw53_32/lib/Qt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\MCSManager_V1\MCSManager_V1.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
