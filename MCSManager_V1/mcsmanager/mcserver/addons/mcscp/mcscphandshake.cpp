@@ -60,3 +60,8 @@ bool McscpHandshake::isComplete()
 {
     return mState == Complete;
 }
+
+void McscpHandshake::reset()
+{
+    mState = Idle;
+}

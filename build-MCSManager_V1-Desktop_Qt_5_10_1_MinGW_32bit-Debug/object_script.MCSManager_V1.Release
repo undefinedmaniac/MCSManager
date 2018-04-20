@@ -15,6 +15,9 @@ INPUT(
 ./release\serverconfigreader.o
 ./release\main.o
 ./release\mcscphandshake.o
+./release\mcscpcache.o
+./release\mcscpperformancereport.o
+./release\mcscpplayerreport.o
 ./release\moc_mcscpaddon.o
 ./release\moc_sleeperaddon.o
 ./release\moc_mcserver.o

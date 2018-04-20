@@ -30,6 +30,12 @@ public:
      */
     bool isComplete();
 
+    /**
+     * @brief reset Resets the handshake process
+     * so that it may be used with a new client
+     */
+    void reset();
+
 private:
     enum State {
         Idle, SendProtocol, SendReady,

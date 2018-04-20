@@ -31,7 +31,12 @@ SOURCES += \
     mcsmanager/mcserver/server/mcserver.cpp \
     mcsmanager/mcserver/server/serverconfigreader.cpp \
     main.cpp \
-    mcsmanager/mcserver/addons/mcscp/mcscphandshake.cpp
+    mcsmanager/mcserver/addons/mcscp/mcscphandshake.cpp \
+    mcsmanager/mcserver/addons/mcscp/mcscpcache.cpp \
+    mcsmanager/mcserver/addons/mcscp/mcscpperformancereport.cpp \
+    mcsmanager/mcserver/addons/mcscp/mcscpplayerreport.cpp \
+    mcsmanager/mcserver/addons/mcscp/mcscpupdatefetcher.cpp \
+    mcsmanager/mcserver/addons/mcscp/mcscpcommand.cpp
 
 HEADERS += \
     mcsmanager/config/interfaces/iconfigfile.h \
@@ -55,4 +60,9 @@ HEADERS += \
     mcsmanager/mcserver/server/interfaces/imcserver.h \
     mcsmanager/mcserver/server/mcserver.h \
     mcsmanager/mcserver/server/serverconfigreader.h \
-    mcsmanager/mcserver/addons/mcscp/mcscphandshake.h
+    mcsmanager/mcserver/addons/mcscp/mcscphandshake.h \
+    mcsmanager/mcserver/addons/mcscp/mcscpcache.h \
+    mcsmanager/mcserver/addons/mcscp/mcscpperformancereport.h \
+    mcsmanager/mcserver/addons/mcscp/mcscpplayerreport.h \
+    mcsmanager/mcserver/addons/mcscp/mcscpupdatefetcher.h \
+    mcsmanager/mcserver/addons/mcscp/mcscpcommand.h

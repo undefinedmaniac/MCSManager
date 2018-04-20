@@ -4,6 +4,7 @@
 #include "../mcserveraddonbase.h"
 #include "mcscpconfigreader.h"
 #include "mcscphandshake.h"
+#include "mcscpcache.h"
 
 #include <QObject>
 #include <QString>
@@ -16,6 +17,8 @@ class McscpAddon : public QObject, public McServerAddonBase
     Q_OBJECT
 public:
     McscpAddon(IMcServer *server, QObject *parent = nullptr);
+
+    void update();
 
     // IMcServerAddon interface
     void preInit() override;
@@ -41,12 +44,15 @@ private:
     int mPort;
 
     QTcpSocket mSocket;
-    QScopedPointer<McscpHandshake> mHandshake;
+    McscpHandshake mHandshake;
 
     QTimer mConnectionTimer;
 
+    McscpCache mCache;
+
     void delayedConnection(int msecs);
     void writeString(const QString &data);
+    void disconnect();
 };
 
 #endif // MCSCPADDON_H

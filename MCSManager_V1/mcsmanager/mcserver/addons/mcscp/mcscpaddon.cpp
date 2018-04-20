@@ -18,6 +18,11 @@ McscpAddon::McscpAddon(IMcServer *server, QObject *parent) :
     mConnectionTimer.setSingleShot(true);
 }
 
+void McscpAddon::update()
+{
+
+}
+
 void McscpAddon::preInit()
 {
     McscpConfigReader reader(getServer()->getConfig()->getAddonConfig(getName()));
@@ -48,6 +53,8 @@ bool McscpAddon::isRunning() const
 
 void McscpAddon::attemptConnection()
 {
+    mConnectionTimer.stop();
+
     if (isRunning())
         mSocket.connectToHost(mAddress, mPort);
 }
@@ -55,9 +62,11 @@ void McscpAddon::attemptConnection()
 void McscpAddon::connected()
 {
     qDebug() << "MCSCP Connected!";
-    mHandshake.reset(new McscpHandshake());
+    mHandshake.reset();
 }
 
+//Oh no, we dropped the connection
+//"That hasen't happened for the longest time" - Billy Joel
 void McscpAddon::disconnected()
 {
     qDebug() << "MCSCP Disconnected!";
@@ -84,9 +93,11 @@ void McscpAddon::bytesWritten(qint64 bytes)
 
 void McscpAddon::readyRead()
 {
-    if (!mHandshake.isNull() && !mHandshake->isComplete()) {
-        mHandshake->processData(QString::fromUtf8(mSocket.readAll()));
-        writeString(mHandshake->getNextMessage());
+    if (!mHandshake.isComplete()) {
+        if (mHandshake.processData(QString::fromUtf8(mSocket.readAll())))
+            writeString(mHandshake.getNextMessage());
+        else
+            disconnect();
     }
 }
 
@@ -98,4 +109,9 @@ void McscpAddon::delayedConnection(int msecs)
 void McscpAddon::writeString(const QString &data)
 {
     mSocket.write(data.toUtf8());
+}
+
+void McscpAddon::disconnect()
+{
+    mSocket.disconnectFromHost();
 }

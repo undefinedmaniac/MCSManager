@@ -15,6 +15,9 @@ INPUT(
 ./debug\serverconfigreader.o
 ./debug\main.o
 ./debug\mcscphandshake.o
+./debug\mcscpcache.o
+./debug\mcscpperformancereport.o
+./debug\mcscpplayerreport.o
 ./debug\moc_mcscpaddon.o
 ./debug\moc_sleeperaddon.o
 ./debug\moc_mcserver.o
