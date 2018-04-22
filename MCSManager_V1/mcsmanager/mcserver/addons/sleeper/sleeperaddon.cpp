@@ -1,20 +1,16 @@
 #include "sleeperaddon.h"
 
 SleeperAddon::SleeperAddon(IMcServer *server, QObject *parent) :
-    QObject(parent), McServerAddonBase(QStringLiteral("server_sleeper"), server)
+    QObject(parent), McServerAddonBase(QStringLiteral("sleeper"), server)
 {
-}
-
-SleeperAddon::~SleeperAddon()
-{
-    qDebug() << "Destroyed!";
+    mTimer.setTimerType(Qt::VeryCoarseTimer);
+    connect(&mTimer, SIGNAL(timeout()), SLOT(sleepTimerExpired()));
 }
 
 void SleeperAddon::preInit()
 {
-    qDebug() << "Pre-Init!";
-
     SleeperConfigReader reader(getServer()->getConfig()->getAddonConfig(getName()));
+
     mPeriod = reader.period();
     mShutdownBehavior = reader.shutdownBehavior();
     mAltServer = reader.alternativeServer();
@@ -22,28 +18,24 @@ void SleeperAddon::preInit()
 
 void SleeperAddon::init()
 {
-    qDebug() << "Init!";
-
-    if (mPeriod > 0) {
-        mPeriod *= 1000;
-
-        mTimer.setInterval(mPeriod);
-        mTimer.setTimerType(Qt::VeryCoarseTimer);
-
-        connect(&mTimer, &QTimer::timeout, this, &SleeperAddon::timeout);
+    IMcscpAddon *mcscpAddon = dynamic_cast<IMcscpAddon*>(getServer()->getAddon(QStringLiteral("mcscp")));
+    if (mcscpAddon != nullptr) {
+        mTable = mcscpAddon->getServerTable();
+        connect(mTable, SIGNAL(KeyUpdate(IMcscpServerTable::Key)), SLOT(playerCountChanged(IMcscpServerTable::Key)));
     }
 }
 
 void SleeperAddon::start()
 {
-    qDebug() << "Started!";
-    mIsRunning = true;
-    mTimer.start();
+    if (mPeriod > 0) {
+        mTimer.setInterval(mPeriod * 60000);
+        mIsRunning = true;
+        checkPlayerCount();
+    }
 }
 
 void SleeperAddon::stop()
 {
-    qDebug() << "Stopped!";
     mIsRunning = false;
     mTimer.stop();
 }
@@ -53,10 +45,14 @@ bool SleeperAddon::isRunning() const
     return mIsRunning;
 }
 
-void SleeperAddon::timeout()
+void SleeperAddon::playerCountChanged(IMcscpServerTable::Key key)
 {
-    qDebug() << "Timed out!";
+    if (mIsRunning && key == IMcscpServerTable::PlayerCount)
+        checkPlayerCount();
+}
 
+void SleeperAddon::sleepTimerExpired()
+{
     switch (mShutdownBehavior) {
     case ConfigGlobal::Restart:
         getServer()->restart();
@@ -69,4 +65,13 @@ void SleeperAddon::timeout()
         getServer()->stop();
         break;
     }
+}
+
+void SleeperAddon::checkPlayerCount()
+{
+    int playerCount = mTable->getPlayerCount();
+    if (playerCount == 0)
+        mTimer.start();
+    else
+        mTimer.stop();
 }

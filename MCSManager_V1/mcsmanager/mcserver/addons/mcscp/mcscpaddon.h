@@ -4,21 +4,36 @@
 #include "../mcserveraddonbase.h"
 #include "mcscpconfigreader.h"
 #include "mcscphandshake.h"
-#include "mcscpcache.h"
+#include "interfaces/imcscpaddon.h"
+#include "mcscpservertable.h"
+#include "mcscpplayertable.h"
+#include "interfaces/imcscpplayertable.h"
 
 #include <QObject>
 #include <QString>
 #include <QScopedPointer>
 #include <QTcpSocket>
 #include <QTimer>
+#include <QRegularExpression>
+#include <QHash>
 
-class McscpAddon : public QObject, public McServerAddonBase
+class McscpAddon : public IMcscpAddon, public McServerAddonBase
 {
     Q_OBJECT
 public:
     McscpAddon(IMcServer *server, QObject *parent = nullptr);
 
-    void update();
+    // IMcscpAddon interface
+    const IMcscpServerTable *getServerTable() const override;
+    const IMcscpPlayerTable *getPlayerTable(const QString &uuid) const override;
+    QStringList getPlayerUuids() const override;
+
+    QString readEntireLog() override;
+    QString readLogFromPos(int startingPos) override;
+
+    void sendToConsole(const QString &command) override;
+    void broadcast(const QString &message) override;
+    void stopServer() override;
 
     // IMcServerAddon interface
     void preInit() override;
@@ -30,8 +45,8 @@ public:
 private slots:
     void attemptConnection();
 
-    void connected();
-    void disconnected();
+    void clientConnected();
+    void clientDisconnected();
     void error(QAbstractSocket::SocketError error);
     void stateChanged(QAbstractSocket::SocketState state);
 
@@ -48,11 +63,37 @@ private:
 
     QTimer mConnectionTimer;
 
-    McscpCache mCache;
+    McscpServerTable mServerTable;
+    QHash<QString, McscpPlayerTable*> mPlayerTables;
+
+    QString mServerLog;
+
+    void removePlayerTable(const QString &uuid);
 
     void delayedConnection(int msecs);
-    void writeString(const QString &data);
     void disconnect();
+    void handshakeComplete();
+
+    void writeString(const QString &data);
+
+    void serverTableUpdate(const QString &key, const QString &value);
+    void playerTableUpdate(const QString &uuid, const QString &key, const QString &value);
+
+    void playerEvent(const QString &type, const QString &uuid);
+    void playerConnected(const QString &uuid);
+    void playerDisconnected(const QString &uuid);
+
+    void messageEvent(const QString &type, const QString &uuid, const QString &message);
+    void deathMessage(const QString &uuid, const QString &message);
+    void chatMessage(const QString &uuid, const QString &message);
+
+    void logEvent(int oldSize);
+
+    static const QRegularExpression SERVER_UPDATE_MATCHER,
+                                    PLAYER_UPDATE_MATCHER,
+                                    PLAYER_EVENT_MATCHER,
+                                    MESSAGE_EVENT_MATCHER,
+                                    SERVER_LOG_MATCHER;
 };
 
 #endif // MCSCPADDON_H

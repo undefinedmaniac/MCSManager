@@ -25,18 +25,17 @@ SOURCES += \
     mcsmanager/core/mcsmanagercorechild.cpp \
     mcsmanager/mcserver/addons/mcscp/mcscpaddon.cpp \
     mcsmanager/mcserver/addons/mcscp/mcscpconfigreader.cpp \
-    mcsmanager/mcserver/addons/sleeper/sleeperaddon.cpp \
-    mcsmanager/mcserver/addons/sleeper/sleeperconfigreader.cpp \
     mcsmanager/mcserver/addons/mcserveraddonbase.cpp \
     mcsmanager/mcserver/server/mcserver.cpp \
     mcsmanager/mcserver/server/serverconfigreader.cpp \
     main.cpp \
     mcsmanager/mcserver/addons/mcscp/mcscphandshake.cpp \
-    mcsmanager/mcserver/addons/mcscp/mcscpcache.cpp \
-    mcsmanager/mcserver/addons/mcscp/mcscpperformancereport.cpp \
-    mcsmanager/mcserver/addons/mcscp/mcscpplayerreport.cpp \
-    mcsmanager/mcserver/addons/mcscp/mcscpupdatefetcher.cpp \
-    mcsmanager/mcserver/addons/mcscp/mcscpcommand.cpp
+    mcsmanager/mcserver/addons/mcscp/mcscpservertable.cpp \
+    mcsmanager/mcserver/addons/restarter/restarteraddon.cpp \
+    mcsmanager/mcserver/addons/restarter/restarterconfigreader.cpp \
+    mcsmanager/mcserver/addons/sleeper/sleeperaddon.cpp \
+    mcsmanager/mcserver/addons/mcscp/mcscpplayertable.cpp \
+    mcsmanager/mcserver/addons/sleeper/sleeperconfigreader.cpp
 
 HEADERS += \
     mcsmanager/config/interfaces/iconfigfile.h \
@@ -54,15 +53,17 @@ HEADERS += \
     mcsmanager/mcserver/addons/interfaces/imcserveraddon.h \
     mcsmanager/mcserver/addons/mcscp/mcscpaddon.h \
     mcsmanager/mcserver/addons/mcscp/mcscpconfigreader.h \
-    mcsmanager/mcserver/addons/sleeper/sleeperaddon.h \
-    mcsmanager/mcserver/addons/sleeper/sleeperconfigreader.h \
     mcsmanager/mcserver/addons/mcserveraddonbase.h \
     mcsmanager/mcserver/server/interfaces/imcserver.h \
     mcsmanager/mcserver/server/mcserver.h \
     mcsmanager/mcserver/server/serverconfigreader.h \
     mcsmanager/mcserver/addons/mcscp/mcscphandshake.h \
-    mcsmanager/mcserver/addons/mcscp/mcscpcache.h \
-    mcsmanager/mcserver/addons/mcscp/mcscpperformancereport.h \
-    mcsmanager/mcserver/addons/mcscp/mcscpplayerreport.h \
-    mcsmanager/mcserver/addons/mcscp/mcscpupdatefetcher.h \
-    mcsmanager/mcserver/addons/mcscp/mcscpcommand.h
+    mcsmanager/mcserver/addons/mcscp/mcscpservertable.h \
+    mcsmanager/mcserver/addons/mcscp/interfaces/imcscpservertable.h \
+    mcsmanager/mcserver/addons/mcscp/interfaces/imcscpaddon.h \
+    mcsmanager/mcserver/addons/restarter/restarteraddon.h \
+    mcsmanager/mcserver/addons/restarter/restarterconfigreader.h \
+    mcsmanager/mcserver/addons/sleeper/sleeperaddon.h \
+    mcsmanager/mcserver/addons/mcscp/interfaces/imcscpplayertable.h \
+    mcsmanager/mcserver/addons/mcscp/mcscpplayertable.h \
+    mcsmanager/mcserver/addons/sleeper/sleeperconfigreader.h

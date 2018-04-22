@@ -5,6 +5,7 @@
 #include "mcsmanager/mcserver/server/serverconfigreader.h"
 #include "mcsmanager/mcserver/server/mcserver.h"
 #include "mcsmanager/mcserver/addons/mcscp/mcscpaddon.h"
+#include "mcsmanager/mcserver/addons/sleeper/sleeperaddon.h"
 
 int main(int argc, char *argv[])
 {
@@ -19,6 +20,7 @@ int main(int argc, char *argv[])
     McServer server(&config);
 
     server.addAddon(new McscpAddon(&server));
+    server.addAddon(new SleeperAddon(&server));
 
     server.start();
 

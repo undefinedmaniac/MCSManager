@@ -30,6 +30,7 @@ public:
 
     virtual bool isRunning() const = 0;
 
+    //Signals
     virtual void started() = 0;
     virtual void stopped(bool expected) = 0;
     virtual void error(QString errorMessage) = 0;

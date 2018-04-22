@@ -1,20 +1,20 @@
 #ifndef SLEEPERADDON_H
 #define SLEEPERADDON_H
 
-#include "mcsmanager/config/configglobal.h"
-#include "sleeperconfigreader.h"
 #include "../mcserveraddonbase.h"
+#include "../mcscp/interfaces/imcscpservertable.h"
+#include "../mcscp/interfaces/imcscpplayertable.h"
+#include "../mcscp/interfaces/imcscpaddon.h"
+#include "sleeperconfigreader.h"
 
 #include <QObject>
 #include <QTimer>
-#include <QDebug>
 
 class SleeperAddon : public QObject, public McServerAddonBase
 {
     Q_OBJECT
 public:
     SleeperAddon(IMcServer *server, QObject *parent = nullptr);
-    ~SleeperAddon();
 
     // IMcServerAddon interface
     void preInit() override;
@@ -23,16 +23,21 @@ public:
     void stop() override;
     bool isRunning() const override;
 
-private slots:
-    void timeout();
+public slots:
+    void playerCountChanged(IMcscpServerTable::Key key);
+    void sleepTimerExpired();
 
 private:
-    bool mIsRunning = false;
     int mPeriod;
     ConfigGlobal::ShutdownBehavior mShutdownBehavior;
     QString mAltServer;
+    bool mIsRunning = false;
+
+    const IMcscpServerTable *mTable;
 
     QTimer mTimer;
+
+    void checkPlayerCount();
 };
 
 #endif // SLEEPERADDON_H

@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_McscpAddon_t {
     QByteArrayData data[13];
-    char stringdata0[165];
+    char stringdata0[177];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,20 +34,21 @@ static const qt_meta_stringdata_McscpAddon_t qt_meta_stringdata_McscpAddon = {
 QT_MOC_LITERAL(0, 0, 10), // "McscpAddon"
 QT_MOC_LITERAL(1, 11, 17), // "attemptConnection"
 QT_MOC_LITERAL(2, 29, 0), // ""
-QT_MOC_LITERAL(3, 30, 9), // "connected"
-QT_MOC_LITERAL(4, 40, 12), // "disconnected"
-QT_MOC_LITERAL(5, 53, 5), // "error"
-QT_MOC_LITERAL(6, 59, 28), // "QAbstractSocket::SocketError"
-QT_MOC_LITERAL(7, 88, 12), // "stateChanged"
-QT_MOC_LITERAL(8, 101, 28), // "QAbstractSocket::SocketState"
-QT_MOC_LITERAL(9, 130, 5), // "state"
-QT_MOC_LITERAL(10, 136, 12), // "bytesWritten"
-QT_MOC_LITERAL(11, 149, 5), // "bytes"
-QT_MOC_LITERAL(12, 155, 9) // "readyRead"
+QT_MOC_LITERAL(3, 30, 15), // "clientConnected"
+QT_MOC_LITERAL(4, 46, 18), // "clientDisconnected"
+QT_MOC_LITERAL(5, 65, 5), // "error"
+QT_MOC_LITERAL(6, 71, 28), // "QAbstractSocket::SocketError"
+QT_MOC_LITERAL(7, 100, 12), // "stateChanged"
+QT_MOC_LITERAL(8, 113, 28), // "QAbstractSocket::SocketState"
+QT_MOC_LITERAL(9, 142, 5), // "state"
+QT_MOC_LITERAL(10, 148, 12), // "bytesWritten"
+QT_MOC_LITERAL(11, 161, 5), // "bytes"
+QT_MOC_LITERAL(12, 167, 9) // "readyRead"
 
     },
-    "McscpAddon\0attemptConnection\0\0connected\0"
-    "disconnected\0error\0QAbstractSocket::SocketError\0"
+    "McscpAddon\0attemptConnection\0\0"
+    "clientConnected\0clientDisconnected\0"
+    "error\0QAbstractSocket::SocketError\0"
     "stateChanged\0QAbstractSocket::SocketState\0"
     "state\0bytesWritten\0bytes\0readyRead"
 };
@@ -94,8 +95,8 @@ void McscpAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->attemptConnection(); break;
-        case 1: _t->connected(); break;
-        case 2: _t->disconnected(); break;
+        case 1: _t->clientConnected(); break;
+        case 2: _t->clientDisconnected(); break;
         case 3: _t->error((*reinterpret_cast< QAbstractSocket::SocketError(*)>(_a[1]))); break;
         case 4: _t->stateChanged((*reinterpret_cast< QAbstractSocket::SocketState(*)>(_a[1]))); break;
         case 5: _t->bytesWritten((*reinterpret_cast< qint64(*)>(_a[1]))); break;
@@ -124,7 +125,7 @@ void McscpAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
 }
 
 QT_INIT_METAOBJECT const QMetaObject McscpAddon::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_McscpAddon.data,
+    { &IMcscpAddon::staticMetaObject, qt_meta_stringdata_McscpAddon.data,
       qt_meta_data_McscpAddon,  qt_static_metacall, nullptr, nullptr}
 };
 
@@ -141,12 +142,12 @@ void *McscpAddon::qt_metacast(const char *_clname)
         return static_cast<void*>(this);
     if (!strcmp(_clname, "McServerAddonBase"))
         return static_cast< McServerAddonBase*>(this);
-    return QObject::qt_metacast(_clname);
+    return IMcscpAddon::qt_metacast(_clname);
 }
 
 int McscpAddon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QObject::qt_metacall(_c, _id, _a);
+    _id = IMcscpAddon::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {

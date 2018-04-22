@@ -4,8 +4,6 @@
 #include "mcsmanager/config/interfaces/iconfigfile.h"
 #include "mcsmanager/config/configfunctions.h"
 
-#include <QString>
-
 class SleeperConfigReader
 {
 public:
