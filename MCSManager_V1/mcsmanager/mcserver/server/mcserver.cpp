@@ -77,7 +77,6 @@ void McServer::restart()
 {
     mState = Restarting;
     stop();
-    start();
 }
 
 void McServer::stop()
@@ -92,11 +91,14 @@ void McServer::stop()
         return;
 
     if (mIsRealServer) {
-        //Stop the server properly
-        mProcess.kill();
-    } else {
-        mProcess.kill();
+        IMcscpAddon *addon = dynamic_cast<IMcscpAddon*>(getAddon(QStringLiteral("mcscp")));
+        if (addon) {
+            addon->stopServer();
+            return;
+        }
     }
+
+    mProcess.kill();
 }
 
 bool McServer::isRunning() const

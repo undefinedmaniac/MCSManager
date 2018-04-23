@@ -6,12 +6,14 @@
 #include "mcsmanager/mcserver/server/mcserver.h"
 #include "mcsmanager/mcserver/addons/mcscp/mcscpaddon.h"
 #include "mcsmanager/mcserver/addons/sleeper/sleeperaddon.h"
+#include "mcsmanager/mcserver/addons/restarter/restarteraddon.h"
+#include "mcsmanager/backup/backupprocess.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    ServerConfig config(joinPaths(QCoreApplication::applicationDirPath(), QStringLiteral("test")));
+    /*ServerConfig config(joinPaths(QCoreApplication::applicationDirPath(), QStringLiteral("test")));
 
     config.initServerConfig(ServerConfigReader::getDefaults());
     config.initEnabledAddons();
@@ -20,9 +22,9 @@ int main(int argc, char *argv[])
     McServer server(&config);
 
     server.addAddon(new McscpAddon(&server));
-    server.addAddon(new SleeperAddon(&server));
+    server.addAddon(new RestarterAddon(&server));
 
-    server.start();
+    server.start();*/
 
     return a.exec();
 }

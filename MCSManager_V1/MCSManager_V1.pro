@@ -35,7 +35,11 @@ SOURCES += \
     mcsmanager/mcserver/addons/restarter/restarterconfigreader.cpp \
     mcsmanager/mcserver/addons/sleeper/sleeperaddon.cpp \
     mcsmanager/mcserver/addons/mcscp/mcscpplayertable.cpp \
-    mcsmanager/mcserver/addons/sleeper/sleeperconfigreader.cpp
+    mcsmanager/mcserver/addons/sleeper/sleeperconfigreader.cpp \
+    mcsmanager/mcsmanagerapplication.cpp \
+    mcsmanager/backup/backupmanager.cpp \
+    mcsmanager/backup/backupprocess.cpp \
+    mcsmanager/backup/backupconfigreader.cpp
 
 HEADERS += \
     mcsmanager/config/interfaces/iconfigfile.h \
@@ -66,4 +70,10 @@ HEADERS += \
     mcsmanager/mcserver/addons/sleeper/sleeperaddon.h \
     mcsmanager/mcserver/addons/mcscp/interfaces/imcscpplayertable.h \
     mcsmanager/mcserver/addons/mcscp/mcscpplayertable.h \
-    mcsmanager/mcserver/addons/sleeper/sleeperconfigreader.h
+    mcsmanager/mcserver/addons/sleeper/sleeperconfigreader.h \
+    mcsmanager/mcsmanagerapplication.h \
+    mcsmanager/backup/backupmanager.h \
+    mcsmanager/backup/interfaces/ibackupmanager.h \
+    mcsmanager/backup/interfaces/ibackupprocess.h \
+    mcsmanager/backup/backupprocess.h \
+    mcsmanager/backup/backupconfigreader.h

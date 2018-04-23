@@ -1,20 +1,19 @@
-#ifndef SLEEPERADDON_H
-#define SLEEPERADDON_H
+#ifndef RESTARTERADDON_H
+#define RESTARTERADDON_H
 
+#include "mcsmanager/mcserver/addons/mcscp/interfaces/imcscpaddon.h"
 #include "mcsmanager/config/configglobal.h"
 #include "restarterconfigreader.h"
 #include "../mcserveraddonbase.h"
 
 #include <QObject>
 #include <QTimer>
-#include <QDebug>
 
 class RestarterAddon : public QObject, public McServerAddonBase
 {
     Q_OBJECT
 public:
     RestarterAddon(IMcServer *server, QObject *parent = nullptr);
-    ~RestarterAddon();
 
     // IMcServerAddon interface
     void preInit() override;
@@ -29,10 +28,13 @@ private slots:
 private:
     bool mIsRunning = false;
     int mPeriod;
-    ConfigGlobal::ShutdownBehavior mShutdownBehavior;
-    QString mAltServer;
+
+    IMcscpAddon *mMcscpAddon = nullptr;
 
     QTimer mTimer;
+    int mSeconds;
+
+    QString getBroadcastMessage();
 };
 
-#endif // SLEEPERADDON_H
+#endif // RESTARTERADDON_H

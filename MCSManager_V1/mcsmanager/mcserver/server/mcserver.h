@@ -6,6 +6,7 @@
 #include "mcsmanager/mcserver/addons/interfaces/imcserveraddon.h"
 #include "serverconfigreader.h"
 #include "mcsmanager/core/mcsmanagercorechild.h"
+#include "mcsmanager/mcserver/addons/mcscp/interfaces/imcscpaddon.h"
 
 #include <QObject>
 #include <QProcess>

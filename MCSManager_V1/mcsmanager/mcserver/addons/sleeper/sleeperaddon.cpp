@@ -4,6 +4,7 @@ SleeperAddon::SleeperAddon(IMcServer *server, QObject *parent) :
     QObject(parent), McServerAddonBase(QStringLiteral("sleeper"), server)
 {
     mTimer.setTimerType(Qt::VeryCoarseTimer);
+    mTimer.setSingleShot(true);
     connect(&mTimer, SIGNAL(timeout()), SLOT(sleepTimerExpired()));
 }
 
