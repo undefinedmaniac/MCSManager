@@ -10,11 +10,15 @@ class IConfigManager;
 class IBackupManager;
 class IMcServerBuilder;
 
-class IMcServer
+#include <QObject>
+
+class IMcServer : public QObject
 {
+    Q_OBJECT
 public:
     friend class McServerAddonBase;
 
+    IMcServer(QObject *parent = nullptr) : QObject(parent) {}
     virtual ~IMcServer() {}
 
     virtual IServerConfig *getConfig() = 0;
@@ -30,10 +34,10 @@ public:
 
     virtual bool isRunning() const = 0;
 
-    //Signals
-    virtual void started() = 0;
-    virtual void stopped(bool expected) = 0;
-    virtual void error(QString errorMessage) = 0;
+signals:
+    void started();
+    void stopped(bool expected);
+    void error(QString errorMessage);
 
 protected:
     virtual IMcsManagerCore *getCore() = 0;

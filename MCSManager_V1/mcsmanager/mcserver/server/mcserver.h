@@ -14,7 +14,7 @@
 #include <QHash>
 #include <QDebug>
 
-class McServer : public QObject, public IMcServer, public McsManagerCoreChild
+class McServer : public IMcServer, public McsManagerCoreChild
 {
     Q_OBJECT
 public:
@@ -40,9 +40,9 @@ protected:
     IMcServerBuilder *getServerBuilder()  override;
 
 signals:
-    void started() override;
-    void stopped(bool expected) override;
-    void error(QString errorMessage) override;
+    void started();
+    void stopped(bool expected);
+    void error(QString errorMessage);
 
 private slots:
     void serverStarted();

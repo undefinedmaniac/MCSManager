@@ -3,6 +3,8 @@
 
 #include "interfaces/imcsmanagercore.h"
 
+#include <QStringList>
+
 class McsManagerCore : public IMcsManagerCore
 {
 public:
@@ -20,6 +22,11 @@ protected:
     IConfigManager *getConfigManager() override;
     IBackupManager *getBackupManager() override;
     IMcServerBuilder *getServerBuilder() override;
+
+private:
+    IConfigManager *mConfigManager;
+    IBackupManager *mBackupManager;
+    IMcServerBuilder *mServerBuilder;
 };
 
 #endif // MCSMANAGERCORE_H

@@ -1,7 +1,7 @@
 #include "mcserver.h"
 
 McServer::McServer(IServerConfig *config, IMcsManagerCore *core, QObject *parent) :
-    QObject(parent), McsManagerCoreChild(core), mConfig(config)
+    IMcServer(parent), McsManagerCoreChild(core), mConfig(config)
 {
     ServerConfigReader reader(config->getServerConfig());
 
