@@ -10,7 +10,7 @@ McscpHandshake::McscpHandshake()
 
 bool McscpHandshake::processData(const QString &data)
 {
-    switch(mState) {
+    switch (mState) {
     case Idle: {
         QRegularExpressionMatch match = PROTOCOL_MATCHER.match(data);
         if (match.hasMatch()) {
@@ -45,7 +45,7 @@ bool McscpHandshake::processData(const QString &data)
 
 QString McscpHandshake::getNextMessage()
 {
-    switch(mState) {
+    switch (mState) {
     case SendProtocol:
         return QStringLiteral("[HANDSHAKE]:[PROTOCOL:") + PROTOCOL +
                 QStringLiteral("]");

@@ -4,25 +4,18 @@ BackupManager::BackupManager(IMcsManagerCore *core) : McsManagerCoreChild(core)
 {
 }
 
-IBackupProcess *BackupManager::getBackupProcess(const QString &serverName)
-{
-    if (IConfigManager *configManager = getConfigManager()) {
-        if (IServerConfig *serverConfig = configManager->getServerConfig(serverName)) {
-            if (IConfigFile *configFile = serverConfig->getBackupConfig()) {
-                BackupConfigReader reader(configFile);
+IBackupProcess *BackupManager::getBackupProcess(const QString &serverName, IConfigFile *file)
+{    
+    BackupConfigReader reader(file);
 
-                BackupProcess *process = new BackupProcess(this);
-                process->setSources(reader.sources());
-                process->setDestination(reader.destination());
+    BackupProcess *process = new BackupProcess(this);
+    process->setServer(serverName);
+    process->setSources(reader.sources());
+    process->setDestination(reader.destination());
 
-                connect(process, SIGNAL(finished()), SLOT(processFinished()));
+    connect(process, SIGNAL(finished()), SLOT(processFinished()));
 
-                return process;
-            }
-        }
-    }
-
-    return nullptr;
+    return process;
 }
 
 int BackupManager::secsSinceLastBackup(const QString &serverName)

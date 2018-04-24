@@ -1,8 +1,16 @@
 #include "backupprocess.h"
 
+#ifdef Q_OS_WIN
+    const QString BackupProcess::SEVEN_ZIP_EXECUTABLE = QStringLiteral("7za.exe");
+#elif Q_OS_LINUX
+    const QString BackupProcess::SEVEN_ZIP_EXECUTABLE = QStringLiteral("");
+#else
+    const QString BackupProcess::SEVEN_ZIP_EXECUTABLE = QStringLiteral("");
+#endif
+
 BackupProcess::BackupProcess(QObject *parent) : IBackupProcess(parent)
 {
-    connect(&mProcess, SIGNAL(finished(int)), SIGNAL(finished()));
+    connect(&mProcess, SIGNAL(finished(int)), SLOT(stepFinished()));
     connect(&mProcess, SIGNAL(error(QProcess::ProcessError)), SIGNAL(error()));
 }
 
@@ -32,29 +40,52 @@ void BackupProcess::start()
         QDateTime dateTime = QDateTime::currentDateTime();
         QDate date = dateTime.date();
         QTime time = dateTime.time();
-        const QString fileName = date.toString(QStringLiteral("dd-MM-yyyy")) + '_' +
-                time.toString(QStringLiteral("hh-mm-ss-a")) + QStringLiteral(".7z");
+        const QString fileName = date.toString(QStringLiteral("MM-dd-yyyy")) % '_' %
+                time.toString(QStringLiteral("hh-mm-ss-a")) % QStringLiteral(".tar");
 
-        QString destination;
-        if (mDestination.endsWith('/')) {
-            destination.append(mDestination);
-        } else {
-            destination.append(mDestination + '/');
-        }
-        destination.append(fileName);
+        mDestinationTar += mDestination;
 
-        mProcess.setProgram("7za.exe");
+        if (!mDestinationTar.endsWith('/'))
+            mDestinationTar += '/';
+
+        mDestinationTar += fileName;
+
         QStringList arguments;
-        arguments.append(QChar('a'));
-        arguments.append(destination);
-        arguments.append(mSources);
-        mProcess.setArguments(arguments);
+        arguments.reserve(3);
+        arguments << QChar('a') << mDestinationTar << mSources;
 
-        mProcess.start();
+        mState = CreateBz2;
+        mProcess.start(SEVEN_ZIP_EXECUTABLE, arguments);
     }
 }
 
 bool BackupProcess::isRunning() const
 {
     return mProcess.state() == QProcess::Running;
+}
+
+void BackupProcess::stepFinished()
+{
+    switch (mState) {
+    case CreateBz2: {
+        QStringList arguments;
+        arguments.reserve(3);
+        arguments << QChar('a') << mDestinationTar % QStringLiteral(".bz2") << mDestinationTar;
+
+        mState = RemoveTar;
+        mProcess.start(SEVEN_ZIP_EXECUTABLE, arguments);
+        break;
+    }
+    case RemoveTar: {
+        QFile::remove(mDestinationTar);
+
+        mState = Idle;
+        mDestinationTar.clear();
+
+        emit finished();
+        break;
+    }
+    default:
+        break;
+    }
 }

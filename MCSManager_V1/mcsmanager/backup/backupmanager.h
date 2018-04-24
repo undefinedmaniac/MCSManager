@@ -19,7 +19,7 @@ public:
     BackupManager(IMcsManagerCore *core);
 
     // IBackupManager interface
-    IBackupProcess *getBackupProcess(const QString &serverName) override;
+    IBackupProcess *getBackupProcess(const QString &serverName, IConfigFile *file) override;
 
     int secsSinceLastBackup(const QString &serverName) override;
 

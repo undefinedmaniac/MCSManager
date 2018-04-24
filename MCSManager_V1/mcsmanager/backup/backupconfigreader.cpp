@@ -29,4 +29,3 @@ QString BackupConfigReader::destination() const
 {
     return mConfig->readString(DESTINATION_KEY);
 }
-

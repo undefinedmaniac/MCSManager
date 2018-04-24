@@ -39,7 +39,9 @@ SOURCES += \
     mcsmanager/mcsmanagerapplication.cpp \
     mcsmanager/backup/backupmanager.cpp \
     mcsmanager/backup/backupprocess.cpp \
-    mcsmanager/backup/backupconfigreader.cpp
+    mcsmanager/backup/backupconfigreader.cpp \
+    mcsmanager/core/mcsmanagercore.cpp \
+    mcsmanager/mcserver/mcserverbuilder.cpp
 
 HEADERS += \
     mcsmanager/config/interfaces/iconfigfile.h \
@@ -76,4 +78,7 @@ HEADERS += \
     mcsmanager/backup/interfaces/ibackupmanager.h \
     mcsmanager/backup/interfaces/ibackupprocess.h \
     mcsmanager/backup/backupprocess.h \
-    mcsmanager/backup/backupconfigreader.h
+    mcsmanager/backup/backupconfigreader.h \
+    mcsmanager/core/mcsmanagercore.h \
+    mcsmanager/mcserver/interfaces/imcserverbuilder.h \
+    mcsmanager/mcserver/mcserverbuilder.h

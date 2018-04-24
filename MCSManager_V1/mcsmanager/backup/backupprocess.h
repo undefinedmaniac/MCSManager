@@ -5,6 +5,9 @@
 
 #include <QProcess>
 #include <QDateTime>
+#include <QStringBuilder>
+#include <QFile>
+#include <QDebug>
 
 class BackupProcess : public IBackupProcess
 {
@@ -21,12 +24,24 @@ public:
     void start() override;
     bool isRunning() const override;
 
+private slots:
+    void stepFinished();
+
 private:
+    enum State {
+        Idle, CreateBz2, RemoveTar
+    };
+
     QProcess mProcess;
+    State mState = Idle;
 
     QStringList mSources;
     QString mDestination;
     QString mServer;
+
+    QString mDestinationTar;
+
+    static const QString SEVEN_ZIP_EXECUTABLE;
 };
 
 #endif // BACKUPPROCESS_H
