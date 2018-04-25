@@ -41,7 +41,7 @@ void ConfigManager::loadConfigs(const QString &configDirectory)
     while (i.hasNext()) {
         i.next();
 
-        ServerConfig *config = ServerConfigFactory::getServerConfig(i.filePath(), mRegisteredAddons);
+        ServerConfig *config = ServerConfigFactory::getServerConfig(i.fileName(), i.filePath(), mRegisteredAddons);
 
         config->initServerConfig(mServerDefaults);
         config->initBackupConfig(mBackupDefaults);

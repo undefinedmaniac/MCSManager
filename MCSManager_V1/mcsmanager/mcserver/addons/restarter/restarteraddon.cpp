@@ -1,9 +1,10 @@
 #include "restarteraddon.h"
 
 RestarterAddon::RestarterAddon(IMcServer *server, QObject *parent) :
-    QObject(parent), McServerAddonBase(QStringLiteral("restarter"), server)
+    QObject(parent), McServerAddonBase(RestarterConfigReader::getAddonName(), server)
 {   
     mTimer.setTimerType(Qt::VeryCoarseTimer);
+    mTimer.setSingleShot(true);
     mTimer.setInterval(1000);
     connect(&mTimer, SIGNAL(timeout()), SLOT(timeout()));
 }
@@ -12,20 +13,33 @@ void RestarterAddon::preInit()
 {
     RestarterConfigReader reader(getServer()->getConfig()->getAddonConfig(getName()));
     mPeriod = reader.period() * 60; //Convert minutes to seconds
+
+    if (mPeriod >= 300)
+        mConfigIsValid = true;
 }
 
 void RestarterAddon::init()
 {
-    mMcscpAddon = dynamic_cast<IMcscpAddon*>(getServer()->getAddon(QStringLiteral("mcscp")));
+    if (mConfigIsValid) {
+        IMcscpAddon *addon = dynamic_cast<IMcscpAddon*>(getServer()->getAddon(QStringLiteral("mcscp")));
+        if (addon) {
+            mMcscpAddonLocated = true;
+            mMcscpAddon = addon;
+        }
+    }
 }
 
 void RestarterAddon::start()
 {
     //300 seconds == 5 minutes
-    if (mPeriod >= 300) {
-        mIsRunning = true;
-        mSeconds = mPeriod;
-        mTimer.start();
+    if (mConfigIsValid) {
+        if (mMcscpAddonLocated) {
+            mIsRunning = true;
+            mSeconds = mPeriod;
+            mTimer.start();
+        } else {
+            //Tell the user that the MCSCP addon is required
+        }
     } else {
         //Tell user that period must be >= 5 minutes;
     }
@@ -48,8 +62,7 @@ void RestarterAddon::timeout()
     if (mSeconds <= 0) {
         mTimer.stop();
         getServer()->restart();
-    } else if (mMcscpAddon != nullptr &&
-               (mSeconds == 300 || mSeconds == 180 || mSeconds == 60 ||
+    } else if ((mSeconds == 300 || mSeconds == 180 || mSeconds == 60 ||
                 mSeconds == 30 || mSeconds == 10 || mSeconds <= 5)) {
         mMcscpAddon->broadcast(getBroadcastMessage());
     }

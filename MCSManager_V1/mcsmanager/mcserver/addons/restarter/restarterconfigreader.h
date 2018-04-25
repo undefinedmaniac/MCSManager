@@ -1,5 +1,5 @@
-#ifndef SLEEPERCONFIGREADER_H
-#define SLEEPERCONFIGREADER_H
+#ifndef RESTARTERCONFIGREADER_H
+#define RESTARTERCONFIGREADER_H
 
 #include "mcsmanager/config/interfaces/iconfigfile.h"
 #include "mcsmanager/config/configfunctions.h"
@@ -13,13 +13,15 @@ public:
 
     int period() const;
 
+    static QString getAddonName();
     static ConfigGlobal::ConfigData getDefaults();
 
 private:
     IConfigFile *mConfig;
 
-    //RestarterConfigReader defaults
-    static const QString PERIOD_KEY;
+    //RestarterConfigReader constants
+    static const QString ADDON_NAME,
+                         PERIOD_KEY;
 };
 
-#endif // SLEEPERCONFIGREADER_H
+#endif // RESTARTERCONFIGREADER_H

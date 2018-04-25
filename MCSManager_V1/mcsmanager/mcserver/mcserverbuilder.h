@@ -14,11 +14,13 @@
 class McServerBuilder : public IMcServerBuilder, public McsManagerCoreChild
 {
 public:
-    McServerBuilder();
+    McServerBuilder(IMcsManagerCore *core);
 
     // IMcServerBuilder interface
     IMcServer *getMcServer(IServerConfig *serverConfig) override;
     void deleteMcServer(IMcServer *server) override;
+
+    virtual ConfigGlobal::DefaultList getAddonDefaults() const override;
 
 protected:
     virtual IMcServerAddon *getAddon(const QString &name, IMcServer *server);

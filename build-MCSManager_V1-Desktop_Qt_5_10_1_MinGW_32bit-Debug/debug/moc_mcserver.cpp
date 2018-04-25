@@ -133,7 +133,7 @@ void McServer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
 }
 
 QT_INIT_METAOBJECT const QMetaObject McServer::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_McServer.data,
+    { &IMcServer::staticMetaObject, qt_meta_stringdata_McServer.data,
       qt_meta_data_McServer,  qt_static_metacall, nullptr, nullptr}
 };
 
@@ -148,16 +148,14 @@ void *McServer::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_McServer.stringdata0))
         return static_cast<void*>(this);
-    if (!strcmp(_clname, "IMcServer"))
-        return static_cast< IMcServer*>(this);
     if (!strcmp(_clname, "McsManagerCoreChild"))
         return static_cast< McsManagerCoreChild*>(this);
-    return QObject::qt_metacast(_clname);
+    return IMcServer::qt_metacast(_clname);
 }
 
 int McServer::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QObject::qt_metacall(_c, _id, _a);
+    _id = IMcServer::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {

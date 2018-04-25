@@ -21,9 +21,9 @@ public:
     virtual IMcServer *getCurrentServer() = 0;
     virtual void startServer(const QString &serverName) = 0;
     virtual QStringList getServerList() = 0;
-    virtual IServerConfig *getServerConfig() = 0;
-    virtual IBackupProcess *getBackupProcess() = 0;
-    virtual BackupList getBackupList(const QString &serverName) = 0;
+    virtual IServerConfig *getServerConfig(const QString &serverName) = 0;
+    virtual IBackupProcess *getBackupProcess(const QString &serverName) = 0;
+    virtual QStringList getBackupList(const QString &serverName) = 0;
 
 protected:
     virtual IConfigManager *getConfigManager() = 0;

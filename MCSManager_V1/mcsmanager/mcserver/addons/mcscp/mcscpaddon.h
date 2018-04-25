@@ -24,6 +24,8 @@ public:
     McscpAddon(IMcServer *server, QObject *parent = nullptr);
 
     // IMcscpAddon interface
+    bool isConnected() const;
+
     const IMcscpServerTable *getServerTable() const override;
     const IMcscpPlayerTable *getPlayerTable(const QString &uuid) const override;
     QStringList getPlayerUuids() const override;
@@ -48,19 +50,16 @@ private slots:
     void clientConnected();
     void clientDisconnected();
     void error(QAbstractSocket::SocketError error);
-    void stateChanged(QAbstractSocket::SocketState state);
-
-    void bytesWritten(qint64 bytes);
     void readyRead();
 
 private:
     bool mIsRunning = false;
+
     QString mAddress;
     int mPort;
 
     QTcpSocket mSocket;
     McscpHandshake mHandshake;
-
     QTimer mConnectionTimer;
 
     McscpServerTable mServerTable;

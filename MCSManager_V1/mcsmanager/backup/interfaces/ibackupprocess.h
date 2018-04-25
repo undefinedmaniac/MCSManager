@@ -14,6 +14,7 @@ public:
     virtual bool isRunning() const = 0;
 
 signals:
+    void aboutToStart();
     void finished();
     void error();
 };

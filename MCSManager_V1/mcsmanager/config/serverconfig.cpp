@@ -5,8 +5,8 @@ const QString ServerConfig::SERVER_CONFIG_FILE_NAME = QStringLiteral("config.ini
               ServerConfig::ADDON_FOLDER_NAME = QStringLiteral("addons"),
               ServerConfig::ENABLED_ADDONS_CONFIG_FILE_NAME = QStringLiteral("enabled_addons.ini");
 
-ServerConfig::ServerConfig(const QString &folderPath, const QHash<QString, ConfigGlobal::ConfigData> &registeredAddons) :
-    mServerFolderPath(folderPath), mAddonsFolderPath(joinPaths(folderPath, ADDON_FOLDER_NAME)),
+ServerConfig::ServerConfig(const QString &name, const QString &folderPath, const QHash<QString, ConfigGlobal::ConfigData> &registeredAddons) :
+    mServerName(name), mServerFolderPath(folderPath), mAddonsFolderPath(joinPaths(folderPath, ADDON_FOLDER_NAME)),
     mEnabledAddons(joinPaths(mAddonsFolderPath, ENABLED_ADDONS_CONFIG_FILE_NAME)), mRegisteredAddons(registeredAddons)
 {
     mEnabledAddons.setGroup(QStringLiteral("enabled_addons"));
@@ -41,6 +41,11 @@ void ServerConfig::initAddonConfigs()
 {
     foreach (const QString &addon, getEnabledAddons())
         createAddonConfig(addon);
+}
+
+QString ServerConfig::getServerName() const
+{
+    return mServerName;
 }
 
 IConfigFile *ServerConfig::getServerConfig()

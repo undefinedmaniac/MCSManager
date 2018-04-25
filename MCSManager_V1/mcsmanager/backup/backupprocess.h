@@ -7,7 +7,7 @@
 #include <QDateTime>
 #include <QStringBuilder>
 #include <QFile>
-#include <QDebug>
+#include <QTimer>
 
 class BackupProcess : public IBackupProcess
 {
@@ -29,7 +29,7 @@ private slots:
 
 private:
     enum State {
-        Idle, CreateBz2, RemoveTar
+        Idle, CreateTar, CreateBz2, RemoveTar
     };
 
     QProcess mProcess;

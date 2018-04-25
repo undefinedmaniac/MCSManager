@@ -26,14 +26,18 @@ public:
 public slots:
     void playerCountChanged(IMcscpServerTable::Key key);
     void sleepTimerExpired();
+    void mcscpConnected();
+    void mcscpDisconnected();
 
 private:
+    bool mIsRunning = false;
+
+    bool mConfigIsValid = false;
     int mPeriod;
     ConfigGlobal::ShutdownBehavior mShutdownBehavior;
     QString mAltServer;
-    bool mIsRunning = false;
 
-    const IMcscpServerTable *mTable;
+    const IMcscpServerTable *mTable = nullptr;
 
     QTimer mTimer;
 

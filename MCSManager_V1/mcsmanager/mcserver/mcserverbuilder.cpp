@@ -23,13 +23,22 @@ void McServerBuilder::deleteMcServer(IMcServer *server)
     server->deleteLater();
 }
 
+ConfigGlobal::DefaultList McServerBuilder::getAddonDefaults() const
+{
+    ConfigGlobal::DefaultList defaults;
+    defaults.append(qMakePair(McscpConfigReader::getAddonName(), McscpConfigReader::getDefaults()));
+    defaults.append(qMakePair(RestarterConfigReader::getAddonName(), RestarterConfigReader::getDefaults()));
+    defaults.append(qMakePair(SleeperConfigReader::getAddonName(), SleeperConfigReader::getDefaults()));
+    return defaults;
+}
+
 IMcServerAddon *McServerBuilder::getAddon(const QString &name, IMcServer *server)
 {
-    if (name == QStringLiteral("mcscp"))
+    if (name == McscpConfigReader::getAddonName())
         return new McscpAddon(server);
-    else if (name == QStringLiteral("restarter"))
+    else if (name == RestarterConfigReader::getAddonName())
         return new RestarterAddon(server);
-    else if (name == QStringLiteral("sleeper"))
+    else if (name == SleeperConfigReader::getAddonName())
         return new SleeperAddon(server);
 
     return nullptr;

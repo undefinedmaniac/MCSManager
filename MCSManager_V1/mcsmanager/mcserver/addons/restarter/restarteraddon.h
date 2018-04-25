@@ -27,8 +27,11 @@ private slots:
 
 private:
     bool mIsRunning = false;
+
+    bool mConfigIsValid = false;
     int mPeriod;
 
+    bool mMcscpAddonLocated = false;
     IMcscpAddon *mMcscpAddon = nullptr;
 
     QTimer mTimer;

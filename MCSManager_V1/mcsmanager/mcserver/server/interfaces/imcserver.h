@@ -21,6 +21,7 @@ public:
     IMcServer(QObject *parent = nullptr) : QObject(parent) {}
     virtual ~IMcServer() {}
 
+    virtual QString getName() const = 0;
     virtual IServerConfig *getConfig() = 0;
 
     virtual void addAddon(IMcServerAddon *addon) = 0;

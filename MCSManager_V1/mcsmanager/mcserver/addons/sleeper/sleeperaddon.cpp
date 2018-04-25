@@ -1,7 +1,7 @@
 #include "sleeperaddon.h"
 
 SleeperAddon::SleeperAddon(IMcServer *server, QObject *parent) :
-    QObject(parent), McServerAddonBase(QStringLiteral("sleeper"), server)
+    QObject(parent), McServerAddonBase(SleeperConfigReader::getAddonName(), server)
 {
     mTimer.setTimerType(Qt::VeryCoarseTimer);
     mTimer.setSingleShot(true);
@@ -12,27 +12,35 @@ void SleeperAddon::preInit()
 {
     SleeperConfigReader reader(getServer()->getConfig()->getAddonConfig(getName()));
 
-    mPeriod = reader.period();
+    mPeriod = reader.period() * 60000; //Convert minutes to milliseconds
     mShutdownBehavior = reader.shutdownBehavior();
     mAltServer = reader.alternativeServer();
+
+    if (mPeriod > 0)
+        mConfigIsValid = true;
 }
 
 void SleeperAddon::init()
 {
-    IMcscpAddon *mcscpAddon = dynamic_cast<IMcscpAddon*>(getServer()->getAddon(QStringLiteral("mcscp")));
-    if (mcscpAddon != nullptr) {
-        mTable = mcscpAddon->getServerTable();
-        connect(mTable, SIGNAL(KeyUpdate(IMcscpServerTable::Key)), SLOT(playerCountChanged(IMcscpServerTable::Key)));
+    if (mConfigIsValid) {
+        IMcscpAddon *mcscpAddon = dynamic_cast<IMcscpAddon*>(getServer()->getAddon(QStringLiteral("mcscp")));
+        if (mcscpAddon) {
+            mTable = mcscpAddon->getServerTable();
+
+            if (mTable) {
+                mTimer.setInterval(mPeriod);
+                connect(mcscpAddon, SIGNAL(connected()), SLOT(mcscpConnected()));
+                connect(mcscpAddon, SIGNAL(disconnected()), SLOT(mcscpDisconnected()));
+                connect(mTable, SIGNAL(KeyUpdate(IMcscpServerTable::Key)), SLOT(playerCountChanged(IMcscpServerTable::Key)));
+            }
+        }
     }
 }
 
 void SleeperAddon::start()
 {
-    if (mPeriod > 0) {
-        mTimer.setInterval(mPeriod * 60000);
+    if (mConfigIsValid && mTable)
         mIsRunning = true;
-        checkPlayerCount();
-    }
 }
 
 void SleeperAddon::stop()
@@ -48,7 +56,7 @@ bool SleeperAddon::isRunning() const
 
 void SleeperAddon::playerCountChanged(IMcscpServerTable::Key key)
 {
-    if (mIsRunning && key == IMcscpServerTable::PlayerCount)
+    if (key == IMcscpServerTable::PlayerCount)
         checkPlayerCount();
 }
 
@@ -68,11 +76,23 @@ void SleeperAddon::sleepTimerExpired()
     }
 }
 
+void SleeperAddon::mcscpConnected()
+{
+    checkPlayerCount();
+}
+
+void SleeperAddon::mcscpDisconnected()
+{
+    mTimer.stop();
+}
+
 void SleeperAddon::checkPlayerCount()
 {
-    int playerCount = mTable->getPlayerCount();
-    if (playerCount == 0)
-        mTimer.start();
-    else
-        mTimer.stop();
+    if (isRunning()) {
+        int playerCount = mTable->getPlayerCount();
+        if (playerCount == 0)
+            mTimer.start();
+        else
+            mTimer.stop();
+    }
 }

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_McscpAddon_t {
-    QByteArrayData data[13];
-    char stringdata0[177];
+    QByteArrayData data[8];
+    char stringdata0[110];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,19 +38,13 @@ QT_MOC_LITERAL(3, 30, 15), // "clientConnected"
 QT_MOC_LITERAL(4, 46, 18), // "clientDisconnected"
 QT_MOC_LITERAL(5, 65, 5), // "error"
 QT_MOC_LITERAL(6, 71, 28), // "QAbstractSocket::SocketError"
-QT_MOC_LITERAL(7, 100, 12), // "stateChanged"
-QT_MOC_LITERAL(8, 113, 28), // "QAbstractSocket::SocketState"
-QT_MOC_LITERAL(9, 142, 5), // "state"
-QT_MOC_LITERAL(10, 148, 12), // "bytesWritten"
-QT_MOC_LITERAL(11, 161, 5), // "bytes"
-QT_MOC_LITERAL(12, 167, 9) // "readyRead"
+QT_MOC_LITERAL(7, 100, 9) // "readyRead"
 
     },
     "McscpAddon\0attemptConnection\0\0"
     "clientConnected\0clientDisconnected\0"
     "error\0QAbstractSocket::SocketError\0"
-    "stateChanged\0QAbstractSocket::SocketState\0"
-    "state\0bytesWritten\0bytes\0readyRead"
+    "readyRead"
 };
 #undef QT_MOC_LITERAL
 
@@ -60,7 +54,7 @@ static const uint qt_meta_data_McscpAddon[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -68,21 +62,17 @@ static const uint qt_meta_data_McscpAddon[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x08 /* Private */,
-       3,    0,   50,    2, 0x08 /* Private */,
-       4,    0,   51,    2, 0x08 /* Private */,
-       5,    1,   52,    2, 0x08 /* Private */,
-       7,    1,   55,    2, 0x08 /* Private */,
-      10,    1,   58,    2, 0x08 /* Private */,
-      12,    0,   61,    2, 0x08 /* Private */,
+       1,    0,   39,    2, 0x08 /* Private */,
+       3,    0,   40,    2, 0x08 /* Private */,
+       4,    0,   41,    2, 0x08 /* Private */,
+       5,    1,   42,    2, 0x08 /* Private */,
+       7,    0,   45,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 6,    5,
-    QMetaType::Void, 0x80000000 | 8,    9,
-    QMetaType::Void, QMetaType::LongLong,   11,
     QMetaType::Void,
 
        0        // eod
@@ -98,9 +88,7 @@ void McscpAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 1: _t->clientConnected(); break;
         case 2: _t->clientDisconnected(); break;
         case 3: _t->error((*reinterpret_cast< QAbstractSocket::SocketError(*)>(_a[1]))); break;
-        case 4: _t->stateChanged((*reinterpret_cast< QAbstractSocket::SocketState(*)>(_a[1]))); break;
-        case 5: _t->bytesWritten((*reinterpret_cast< qint64(*)>(_a[1]))); break;
-        case 6: _t->readyRead(); break;
+        case 4: _t->readyRead(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -111,13 +99,6 @@ void McscpAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QAbstractSocket::SocketError >(); break;
-            }
-            break;
-        case 4:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QAbstractSocket::SocketState >(); break;
             }
             break;
         }
@@ -151,13 +132,13 @@ int McscpAddon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 5;
     }
     return _id;
 }

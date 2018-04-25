@@ -13,8 +13,9 @@
 class ServerConfig : public ConfigFileFactory, public IServerConfig
 {
 public:
-    ServerConfig(const QString &folderPath, const QHash<QString, ConfigGlobal::ConfigData> &registeredAddons =
-            QHash<QString, ConfigGlobal::ConfigData>());
+    ServerConfig(const QString &name, const QString &folderPath,
+                 const QHash<QString, ConfigGlobal::ConfigData> &registeredAddons =
+                 QHash<QString, ConfigGlobal::ConfigData>());
 
     /**
      * @brief setRegisteredAddons Sets the registered addons - this is used in initEnabledAddons()
@@ -50,6 +51,7 @@ public:
     void initAddonConfigs();
 
     // IServerConfig interface
+    QString getServerName() const override;
     IConfigFile *getServerConfig() override;
     IConfigFile *getBackupConfig() override;
     IConfigFile *getAddonConfig(const QString &addonName) override;
@@ -57,10 +59,7 @@ public:
     QStringList getEnabledAddons() override;
 
 private:
-    IConfigFile *loadFile(const QString &filePath, const ConfigGlobal::ConfigData &defaults);
-    IConfigFile *createAddonConfig(const QString &addonName);
-
-    const QString mServerFolderPath, mAddonsFolderPath;
+    const QString mServerName, mServerFolderPath, mAddonsFolderPath;
 
     ConfigFile mEnabledAddons;
 
@@ -73,6 +72,9 @@ private:
                          BACKUP_CONFIG_FILE_NAME,
                          ADDON_FOLDER_NAME,
                          ENABLED_ADDONS_CONFIG_FILE_NAME;
+
+    IConfigFile *loadFile(const QString &filePath, const ConfigGlobal::ConfigData &defaults);
+    IConfigFile *createAddonConfig(const QString &addonName);
 };
 
 #endif // SERVERCONFIG_H

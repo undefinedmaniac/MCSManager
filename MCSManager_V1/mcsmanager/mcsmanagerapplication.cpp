@@ -4,3 +4,8 @@ McsManagerApplication::McsManagerApplication()
 {
 
 }
+
+void McsManagerApplication::start()
+{
+
+}

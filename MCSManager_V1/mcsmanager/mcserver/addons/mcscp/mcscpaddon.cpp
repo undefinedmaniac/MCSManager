@@ -7,7 +7,7 @@ const QRegularExpression McscpAddon::SERVER_UPDATE_MATCHER(QStringLiteral("(?i)\
                          McscpAddon::SERVER_LOG_MATCHER(QStringLiteral("(?i)\\[LOG]:\\[DATA:(.*)]"));
 
 McscpAddon::McscpAddon(IMcServer *server, QObject *parent) :
-    IMcscpAddon(parent), McServerAddonBase(QStringLiteral("mcscp"), server)
+    IMcscpAddon(parent), McServerAddonBase(McscpConfigReader::getAddonName(), server)
 {
     connect(&mSocket, SIGNAL(connected()), SLOT(clientConnected()));
     connect(&mSocket, SIGNAL(disconnected()), SLOT(clientDisconnected()));
@@ -22,6 +22,11 @@ McscpAddon::McscpAddon(IMcServer *server, QObject *parent) :
     connect(&mConnectionTimer, SIGNAL(timeout()), SLOT(attemptConnection()));
 
     mConnectionTimer.setSingleShot(true);
+}
+
+bool McscpAddon::isConnected() const
+{
+    return mSocket.isOpen();
 }
 
 const IMcscpServerTable *McscpAddon::getServerTable() const
@@ -124,10 +129,6 @@ void McscpAddon::error(QAbstractSocket::SocketError error)
     else
         qDebug() << "MCSCP Error:" << mSocket.errorString();
 }
-
-void McscpAddon::stateChanged(QAbstractSocket::SocketState state) {}
-
-void McscpAddon::bytesWritten(qint64 bytes) {}
 
 void McscpAddon::readyRead()
 {

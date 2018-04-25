@@ -11,6 +11,12 @@ public:
     virtual ~IServerConfig() {}
 
     /**
+     * @brief getServerName Gets the name of the server
+     * @return The name of the server
+     */
+    virtual QString getServerName() const = 0;
+
+    /**
      * @brief getServerConfig Gets the server config file
      * @return The server config if available, otherwise nullptr
      */

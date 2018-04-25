@@ -5,6 +5,9 @@
 #include "mcsmanager/config/interfaces/iconfigmanager.h"
 #include "mcsmanager/config/interfaces/iserverconfig.h"
 #include "mcsmanager/core/mcsmanagercorechild.h"
+#include "mcsmanager/mcserver/server/interfaces/imcserver.h"
+#include "mcsmanager/mcserver/addons/mcscp/interfaces/imcscpaddon.h"
+#include "mcsmanager/mcserver/addons/interfaces/imcserveraddon.h"
 #include "backupprocess.h"
 #include "backupconfigreader.h"
 
@@ -24,6 +27,7 @@ public:
     int secsSinceLastBackup(const QString &serverName) override;
 
 private slots:
+    void processAboutToStart();
     void processFinished();
 
 private:

@@ -23,11 +23,14 @@ public:
     ~McServer();
 
     // IMcServer interface
+    QString getName() const;
     IServerConfig *getConfig() override;
+
     void addAddon(IMcServerAddon *addon) override;
     void removeAddon(const QString &addonName) override;
     IMcServerAddon *getAddon(const QString &addonName) override;
     QStringList getAddonList() const override;
+
     void start() override;
     void restart() override;
     void stop() override;

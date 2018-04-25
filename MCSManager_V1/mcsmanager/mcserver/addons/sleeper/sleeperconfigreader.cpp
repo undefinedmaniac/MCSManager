@@ -1,6 +1,7 @@
 #include "sleeperconfigreader.h"
 
-const QString SleeperConfigReader::PERIOD_KEY = QStringLiteral("period"),
+const QString SleeperConfigReader::ADDON_NAME = QStringLiteral("sleeper"),
+              SleeperConfigReader::PERIOD_KEY = QStringLiteral("period"),
               SleeperConfigReader::SHUTDOWN_BEHAVIOR_KEY = QStringLiteral("shutdownBehavior"),
               SleeperConfigReader::ALTERNATIVE_SERVER_KEY = QStringLiteral("alternativeServer");
 
@@ -11,6 +12,11 @@ SleeperConfigReader::SleeperConfigReader(IConfigFile *config) : mConfig(config)
 QString SleeperConfigReader::alternativeServer() const
 {
     return mConfig->readString(ALTERNATIVE_SERVER_KEY);
+}
+
+QString SleeperConfigReader::getAddonName()
+{
+    return ADDON_NAME;
 }
 
 int SleeperConfigReader::period() const

@@ -34,6 +34,11 @@ McServer::~McServer()
         deleteAddon(addon);
 }
 
+QString McServer::getName() const
+{
+    return mConfig->getServerName();
+}
+
 IServerConfig *McServer::getConfig()
 {
     return mConfig;
@@ -41,6 +46,9 @@ IServerConfig *McServer::getConfig()
 
 void McServer::addAddon(IMcServerAddon *addon)
 {
+    if (!addon)
+        return;
+
     mAddons.insert(addon->getName(), addon);
 }
 

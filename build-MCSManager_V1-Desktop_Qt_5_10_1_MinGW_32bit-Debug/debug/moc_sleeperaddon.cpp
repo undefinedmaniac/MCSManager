@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SleeperAddon_t {
-    QByteArrayData data[6];
-    char stringdata0[78];
+    QByteArrayData data[8];
+    char stringdata0[111];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,11 +36,14 @@ QT_MOC_LITERAL(1, 13, 18), // "playerCountChanged"
 QT_MOC_LITERAL(2, 32, 0), // ""
 QT_MOC_LITERAL(3, 33, 22), // "IMcscpServerTable::Key"
 QT_MOC_LITERAL(4, 56, 3), // "key"
-QT_MOC_LITERAL(5, 60, 17) // "sleepTimerExpired"
+QT_MOC_LITERAL(5, 60, 17), // "sleepTimerExpired"
+QT_MOC_LITERAL(6, 78, 14), // "mcscpConnected"
+QT_MOC_LITERAL(7, 93, 17) // "mcscpDisconnected"
 
     },
     "SleeperAddon\0playerCountChanged\0\0"
-    "IMcscpServerTable::Key\0key\0sleepTimerExpired"
+    "IMcscpServerTable::Key\0key\0sleepTimerExpired\0"
+    "mcscpConnected\0mcscpDisconnected"
 };
 #undef QT_MOC_LITERAL
 
@@ -50,7 +53,7 @@ static const uint qt_meta_data_SleeperAddon[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -58,11 +61,15 @@ static const uint qt_meta_data_SleeperAddon[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   24,    2, 0x0a /* Public */,
-       5,    0,   27,    2, 0x0a /* Public */,
+       1,    1,   34,    2, 0x0a /* Public */,
+       5,    0,   37,    2, 0x0a /* Public */,
+       6,    0,   38,    2, 0x0a /* Public */,
+       7,    0,   39,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -76,6 +83,8 @@ void SleeperAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         switch (_id) {
         case 0: _t->playerCountChanged((*reinterpret_cast< IMcscpServerTable::Key(*)>(_a[1]))); break;
         case 1: _t->sleepTimerExpired(); break;
+        case 2: _t->mcscpConnected(); break;
+        case 3: _t->mcscpDisconnected(); break;
         default: ;
         }
     }
@@ -108,13 +117,13 @@ int SleeperAddon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 4)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 2;
+        _id -= 4;
     }
     return _id;
 }

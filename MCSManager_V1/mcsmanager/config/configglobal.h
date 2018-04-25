@@ -6,6 +6,7 @@
 
 namespace ConfigGlobal {
 typedef QVector<QPair<QString, QString>> ConfigData;
+typedef QVector<QPair<QString, ConfigData>> DefaultList;
 
 enum ShutdownBehavior {
     DoNothing, Restart, StartAltServer

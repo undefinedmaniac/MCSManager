@@ -37,6 +37,21 @@ QString BackupProcess::getServer() const
 void BackupProcess::start()
 {
     if (mSources.size() > 0 && !mDestination.isEmpty()) {
+        emit aboutToStart();
+        mState = CreateTar;
+        QTimer::singleShot(2000, this, SLOT(stepFinished()));
+    }
+}
+
+bool BackupProcess::isRunning() const
+{
+    return mProcess.state() == QProcess::Running;
+}
+
+void BackupProcess::stepFinished()
+{
+    switch (mState) {
+    case CreateTar: {
         QDateTime dateTime = QDateTime::currentDateTime();
         QDate date = dateTime.date();
         QTime time = dateTime.time();
@@ -57,16 +72,6 @@ void BackupProcess::start()
         mState = CreateBz2;
         mProcess.start(SEVEN_ZIP_EXECUTABLE, arguments);
     }
-}
-
-bool BackupProcess::isRunning() const
-{
-    return mProcess.state() == QProcess::Running;
-}
-
-void BackupProcess::stepFinished()
-{
-    switch (mState) {
     case CreateBz2: {
         QStringList arguments;
         arguments.reserve(3);

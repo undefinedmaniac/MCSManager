@@ -13,13 +13,15 @@ public:
     ConfigGlobal::ShutdownBehavior shutdownBehavior() const;
     QString alternativeServer() const;
 
+    static QString getAddonName();
     static ConfigGlobal::ConfigData getDefaults();
 
 private:
     IConfigFile *mConfig;
 
-    //SleeperConfigReader defaults
-    static const QString PERIOD_KEY,
+    //SleeperConfigReader constants
+    static const QString ADDON_NAME,
+                         PERIOD_KEY,
                          SHUTDOWN_BEHAVIOR_KEY,
                          ALTERNATIVE_SERVER_KEY;
 };

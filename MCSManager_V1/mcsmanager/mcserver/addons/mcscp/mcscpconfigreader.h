@@ -14,13 +14,15 @@ public:
     QString address() const;
     int port() const;
 
+    static QString getAddonName();
     static ConfigGlobal::ConfigData getDefaults();
 
 private:
     IConfigFile *mConfig;
 
-    //McscpConfigReader defaults
-    static const QString ADDRESS_KEY,
+    //McscpConfigReader constants
+    static const QString ADDON_NAME,
+                         ADDRESS_KEY,
                          PORT_KEY;
 };
 
