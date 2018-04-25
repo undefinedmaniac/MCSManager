@@ -30,7 +30,6 @@ public:
 
     //Get a list of available servers
     virtual QStringList getServerList() const = 0;
-
 };
 
 #endif // ICONFIGMANAGER_H

@@ -57,11 +57,6 @@ private:
         Started, Starting, Stopped, Stopping, Restarting
     };
 
-    void initAddons();
-    void startAddons();
-    void stopAddons();
-    void deleteAddon(IMcServerAddon *addon);
-
     bool mFirstStart = true;
 
     IServerConfig *mConfig;
@@ -73,6 +68,13 @@ private:
     ServerState mState = Stopped;
 
     QHash<QString, IMcServerAddon *> mAddons;
+
+    void stopServer();
+
+    void initAddons();
+    void startAddons();
+    void stopAddons();
+    void deleteAddon(IMcServerAddon *addon);
 };
 
 #endif // MCSERVER_H

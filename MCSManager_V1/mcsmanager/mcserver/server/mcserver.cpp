@@ -83,8 +83,12 @@ void McServer::start()
 
 void McServer::restart()
 {
-    mState = Restarting;
-    stop();
+    if (isRunning()) {
+        mState = Restarting;
+        stopServer();
+    } else {
+        start();
+    }
 }
 
 void McServer::stop()
@@ -92,21 +96,8 @@ void McServer::stop()
     if (!isRunning())
         return;
 
-    if (mState == Started)
-        mState = Stopping;
-    else if (mState != Restarting)
-        //If not stopping or restarting leave
-        return;
-
-    if (mIsRealServer) {
-        IMcscpAddon *addon = dynamic_cast<IMcscpAddon*>(getAddon(QStringLiteral("mcscp")));
-        if (addon) {
-            addon->stopServer();
-            return;
-        }
-    }
-
-    mProcess.kill();
+    mState = Stopping;
+    stopServer();
 }
 
 bool McServer::isRunning() const
@@ -210,6 +201,19 @@ void McServer::serverErrorOccurred(QProcess::ProcessError errorType)
     }
 
     emit error(errorMessage);
+}
+
+void McServer::stopServer()
+{
+    if (mIsRealServer) {
+        IMcscpAddon *addon = dynamic_cast<IMcscpAddon*>(getAddon(QStringLiteral("mcscp")));
+        if (addon) {
+            addon->stopServer();
+            return;
+        }
+    }
+
+    mProcess.kill();
 }
 
 void McServer::initAddons()

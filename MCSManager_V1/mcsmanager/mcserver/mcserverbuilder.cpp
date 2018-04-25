@@ -19,6 +19,9 @@ IMcServer *McServerBuilder::getMcServer(IServerConfig *serverConfig)
 
 void McServerBuilder::deleteMcServer(IMcServer *server)
 {
+    if (!server)
+        return;
+
     mServers.removeOne(server);
     server->deleteLater();
 }

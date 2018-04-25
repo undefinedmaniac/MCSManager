@@ -13,6 +13,8 @@ public:
     QStringList sources() const;
     QString destination() const;
 
+    static ConfigGlobal::ConfigData getDefaults();
+
 private:
     IConfigFile *mConfig;
 

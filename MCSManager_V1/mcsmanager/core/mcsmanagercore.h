@@ -7,12 +7,16 @@
 #include "mcsmanager/config/interfaces/iserverconfig.h"
 #include "mcsmanager/mcserver/server/interfaces/imcserver.h"
 #include "mcsmanager/mcserver/interfaces/imcserverbuilder.h"
+#include "mcsmanager/backup/backupconfigreader.h"
+#include "mcsmanager/mcserver/server/serverconfigreader.h"
 
+#include <QCoreApplication>
 #include <QObject>
 #include <QStringList>
 
-class McsManagerCore : public IMcsManagerCore
+class McsManagerCore : public QObject, public IMcsManagerCore
 {
+    Q_OBJECT
 public:
     McsManagerCore(IConfigManager *configManager, IBackupManager *backupManager,
                    IMcServerBuilder *serverBuilder);
@@ -30,11 +34,19 @@ protected:
     IBackupManager *getBackupManager() override;
     IMcServerBuilder *getServerBuilder() override;
 
+    virtual ConfigGlobal::ConfigData getAppDefaults() const;
+
+private slots:
+    void startNextServer();
+
 private:
     IMcServer *mCurrentServer = nullptr;
     IConfigManager *mConfigManager;
     IBackupManager *mBackupManager;
     IMcServerBuilder *mServerBuilder;
+
+    //Cache
+    QString mNextServerName;
 };
 
 #endif // MCSMANAGERCORE_H

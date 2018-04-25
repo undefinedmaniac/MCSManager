@@ -29,3 +29,11 @@ QString BackupConfigReader::destination() const
 {
     return mConfig->readString(DESTINATION_KEY);
 }
+
+ConfigGlobal::ConfigData BackupConfigReader::getDefaults()
+{
+    ConfigGlobal::ConfigData data;
+    data.append(qMakePair(SOURCES_KEY, QStringLiteral("")));
+    data.append(qMakePair(DESTINATION_KEY, QStringLiteral("")));
+    return data;
+}
