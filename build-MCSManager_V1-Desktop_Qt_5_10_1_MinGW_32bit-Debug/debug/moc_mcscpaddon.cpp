@@ -20,35 +20,35 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_McscpAddon_t {
+struct qt_meta_stringdata_Mcscp__McscpAddon_t {
     QByteArrayData data[8];
-    char stringdata0[110];
+    char stringdata0[117];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_McscpAddon_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Mcscp__McscpAddon_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_McscpAddon_t qt_meta_stringdata_McscpAddon = {
+static const qt_meta_stringdata_Mcscp__McscpAddon_t qt_meta_stringdata_Mcscp__McscpAddon = {
     {
-QT_MOC_LITERAL(0, 0, 10), // "McscpAddon"
-QT_MOC_LITERAL(1, 11, 17), // "attemptConnection"
-QT_MOC_LITERAL(2, 29, 0), // ""
-QT_MOC_LITERAL(3, 30, 15), // "clientConnected"
-QT_MOC_LITERAL(4, 46, 18), // "clientDisconnected"
-QT_MOC_LITERAL(5, 65, 5), // "error"
-QT_MOC_LITERAL(6, 71, 28), // "QAbstractSocket::SocketError"
-QT_MOC_LITERAL(7, 100, 9) // "readyRead"
+QT_MOC_LITERAL(0, 0, 17), // "Mcscp::McscpAddon"
+QT_MOC_LITERAL(1, 18, 17), // "attemptConnection"
+QT_MOC_LITERAL(2, 36, 0), // ""
+QT_MOC_LITERAL(3, 37, 15), // "clientConnected"
+QT_MOC_LITERAL(4, 53, 18), // "clientDisconnected"
+QT_MOC_LITERAL(5, 72, 5), // "error"
+QT_MOC_LITERAL(6, 78, 28), // "QAbstractSocket::SocketError"
+QT_MOC_LITERAL(7, 107, 9) // "readyRead"
 
     },
-    "McscpAddon\0attemptConnection\0\0"
-    "clientConnected\0clientDisconnected\0"
+    "Mcscp::McscpAddon\0attemptConnection\0"
+    "\0clientConnected\0clientDisconnected\0"
     "error\0QAbstractSocket::SocketError\0"
     "readyRead"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_McscpAddon[] = {
+static const uint qt_meta_data_Mcscp__McscpAddon[] = {
 
  // content:
        7,       // revision
@@ -78,7 +78,7 @@ static const uint qt_meta_data_McscpAddon[] = {
        0        // eod
 };
 
-void McscpAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Mcscp::McscpAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         McscpAddon *_t = static_cast<McscpAddon *>(_o);
@@ -105,28 +105,28 @@ void McscpAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     }
 }
 
-QT_INIT_METAOBJECT const QMetaObject McscpAddon::staticMetaObject = {
-    { &IMcscpAddon::staticMetaObject, qt_meta_stringdata_McscpAddon.data,
-      qt_meta_data_McscpAddon,  qt_static_metacall, nullptr, nullptr}
+QT_INIT_METAOBJECT const QMetaObject Mcscp::McscpAddon::staticMetaObject = {
+    { &IMcscpAddon::staticMetaObject, qt_meta_stringdata_Mcscp__McscpAddon.data,
+      qt_meta_data_Mcscp__McscpAddon,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *McscpAddon::metaObject() const
+const QMetaObject *Mcscp::McscpAddon::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *McscpAddon::qt_metacast(const char *_clname)
+void *Mcscp::McscpAddon::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_McscpAddon.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_Mcscp__McscpAddon.stringdata0))
         return static_cast<void*>(this);
-    if (!strcmp(_clname, "McServerAddonBase"))
-        return static_cast< McServerAddonBase*>(this);
+    if (!strcmp(_clname, "Addon::McServerAddonBase"))
+        return static_cast< Addon::McServerAddonBase*>(this);
     return IMcscpAddon::qt_metacast(_clname);
 }
 
-int McscpAddon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Mcscp::McscpAddon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = IMcscpAddon::qt_metacall(_c, _id, _a);
     if (_id < 0)

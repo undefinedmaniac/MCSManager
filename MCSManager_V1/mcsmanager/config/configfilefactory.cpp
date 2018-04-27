@@ -1,5 +1,7 @@
 #include "configfilefactory.h"
 
+using Config::ConfigFileFactory;
+
 ConfigFileFactory::ConfigFileFactory()
 {
 }
@@ -9,9 +11,9 @@ ConfigFileFactory::~ConfigFileFactory()
     qDeleteAll(mConfigFiles);
 }
 
-ConfigFile *ConfigFileFactory::getConfigFile(const QString &filePath)
+Config::ConfigFile *ConfigFileFactory::getConfigFile(const QString &filePath)
 {
-    ConfigFile *file = new ConfigFile(filePath);
+    Config::ConfigFile *file = new Config::ConfigFile(filePath);
     mConfigFiles.append(file);
     return file;
 }

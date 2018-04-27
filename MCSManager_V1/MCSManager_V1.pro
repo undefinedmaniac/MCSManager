@@ -43,7 +43,13 @@ SOURCES += \
     mcsmanager/core/mcsmanagercore.cpp \
     mcsmanager/mcserver/mcserverbuilder.cpp \
     mcsmanager/mcserver/addons/backup_service/backupserviceaddon.cpp \
-    mcsmanager/mcserver/addons/backup_service/backupserviceconfigreader.cpp
+    mcsmanager/mcserver/addons/backup_service/backupserviceconfigreader.cpp \
+    mcsmanager/mcserver/addons/restarter/restarterglobal.cpp \
+    mcsmanager/mcserver/addons/backup_service/backupserviceglobal.cpp \
+    mcsmanager/mcserver/addons/mcscp/mcscpglobal.cpp \
+    mcsmanager/mcserver/addons/sleeper/sleeperglobal.cpp \
+    mcsmanager/backup/backupglobal.cpp \
+    mcsmanager/mcserver/server/serverglobal.cpp
 
 HEADERS += \
     mcsmanager/config/interfaces/iconfigfile.h \
@@ -85,4 +91,10 @@ HEADERS += \
     mcsmanager/mcserver/interfaces/imcserverbuilder.h \
     mcsmanager/mcserver/mcserverbuilder.h \
     mcsmanager/mcserver/addons/backup_service/backupserviceaddon.h \
-    mcsmanager/mcserver/addons/backup_service/backupserviceconfigreader.h
+    mcsmanager/mcserver/addons/backup_service/backupserviceconfigreader.h \
+    mcsmanager/mcserver/addons/restarter/restarterglobal.h \
+    mcsmanager/mcserver/addons/backup_service/backupserviceglobal.h \
+    mcsmanager/mcserver/addons/mcscp/mcscpglobal.h \
+    mcsmanager/mcserver/addons/sleeper/sleeperglobal.h \
+    mcsmanager/backup/backupglobal.h \
+    mcsmanager/mcserver/server/serverglobal.h

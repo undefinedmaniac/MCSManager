@@ -1,11 +1,12 @@
 #ifndef MCSCPPLAYERTABLE_H
 #define MCSCPPLAYERTABLE_H
 
+#include "mcscpglobal.h"
 #include "interfaces/imcscpplayertable.h"
 
-#include <QDebug>
+namespace Mcscp { class McscpPlayerTable; }
 
-class McscpPlayerTable : public IMcscpPlayerTable
+class Mcscp::McscpPlayerTable : public IMcscpPlayerTable
 {
     Q_OBJECT
 public:

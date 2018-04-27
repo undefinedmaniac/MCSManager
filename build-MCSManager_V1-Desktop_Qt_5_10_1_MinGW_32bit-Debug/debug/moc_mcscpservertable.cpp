@@ -20,25 +20,25 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_McscpServerTable_t {
+struct qt_meta_stringdata_Mcscp__McscpServerTable_t {
     QByteArrayData data[1];
-    char stringdata0[17];
+    char stringdata0[24];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_McscpServerTable_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Mcscp__McscpServerTable_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_McscpServerTable_t qt_meta_stringdata_McscpServerTable = {
+static const qt_meta_stringdata_Mcscp__McscpServerTable_t qt_meta_stringdata_Mcscp__McscpServerTable = {
     {
-QT_MOC_LITERAL(0, 0, 16) // "McscpServerTable"
+QT_MOC_LITERAL(0, 0, 23) // "Mcscp::McscpServerTable"
 
     },
-    "McscpServerTable"
+    "Mcscp::McscpServerTable"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_McscpServerTable[] = {
+static const uint qt_meta_data_Mcscp__McscpServerTable[] = {
 
  // content:
        7,       // revision
@@ -54,7 +54,7 @@ static const uint qt_meta_data_McscpServerTable[] = {
        0        // eod
 };
 
-void McscpServerTable::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Mcscp::McscpServerTable::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     Q_UNUSED(_o);
     Q_UNUSED(_id);
@@ -62,26 +62,26 @@ void McscpServerTable::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject McscpServerTable::staticMetaObject = {
-    { &IMcscpServerTable::staticMetaObject, qt_meta_stringdata_McscpServerTable.data,
-      qt_meta_data_McscpServerTable,  qt_static_metacall, nullptr, nullptr}
+QT_INIT_METAOBJECT const QMetaObject Mcscp::McscpServerTable::staticMetaObject = {
+    { &IMcscpServerTable::staticMetaObject, qt_meta_stringdata_Mcscp__McscpServerTable.data,
+      qt_meta_data_Mcscp__McscpServerTable,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *McscpServerTable::metaObject() const
+const QMetaObject *Mcscp::McscpServerTable::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *McscpServerTable::qt_metacast(const char *_clname)
+void *Mcscp::McscpServerTable::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_McscpServerTable.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_Mcscp__McscpServerTable.stringdata0))
         return static_cast<void*>(this);
     return IMcscpServerTable::qt_metacast(_clname);
 }
 
-int McscpServerTable::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Mcscp::McscpServerTable::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = IMcscpServerTable::qt_metacall(_c, _id, _a);
     return _id;

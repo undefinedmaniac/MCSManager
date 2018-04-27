@@ -20,34 +20,35 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_SleeperAddon_t {
+struct qt_meta_stringdata_Sleeper__SleeperAddon_t {
     QByteArrayData data[8];
-    char stringdata0[111];
+    char stringdata0[120];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_SleeperAddon_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Sleeper__SleeperAddon_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_SleeperAddon_t qt_meta_stringdata_SleeperAddon = {
+static const qt_meta_stringdata_Sleeper__SleeperAddon_t qt_meta_stringdata_Sleeper__SleeperAddon = {
     {
-QT_MOC_LITERAL(0, 0, 12), // "SleeperAddon"
-QT_MOC_LITERAL(1, 13, 18), // "playerCountChanged"
-QT_MOC_LITERAL(2, 32, 0), // ""
-QT_MOC_LITERAL(3, 33, 22), // "IMcscpServerTable::Key"
-QT_MOC_LITERAL(4, 56, 3), // "key"
-QT_MOC_LITERAL(5, 60, 17), // "sleepTimerExpired"
-QT_MOC_LITERAL(6, 78, 14), // "mcscpConnected"
-QT_MOC_LITERAL(7, 93, 17) // "mcscpDisconnected"
+QT_MOC_LITERAL(0, 0, 21), // "Sleeper::SleeperAddon"
+QT_MOC_LITERAL(1, 22, 18), // "playerCountChanged"
+QT_MOC_LITERAL(2, 41, 0), // ""
+QT_MOC_LITERAL(3, 42, 22), // "IMcscpServerTable::Key"
+QT_MOC_LITERAL(4, 65, 3), // "key"
+QT_MOC_LITERAL(5, 69, 17), // "sleepTimerExpired"
+QT_MOC_LITERAL(6, 87, 14), // "mcscpConnected"
+QT_MOC_LITERAL(7, 102, 17) // "mcscpDisconnected"
 
     },
-    "SleeperAddon\0playerCountChanged\0\0"
-    "IMcscpServerTable::Key\0key\0sleepTimerExpired\0"
-    "mcscpConnected\0mcscpDisconnected"
+    "Sleeper::SleeperAddon\0playerCountChanged\0"
+    "\0IMcscpServerTable::Key\0key\0"
+    "sleepTimerExpired\0mcscpConnected\0"
+    "mcscpDisconnected"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_SleeperAddon[] = {
+static const uint qt_meta_data_Sleeper__SleeperAddon[] = {
 
  // content:
        7,       // revision
@@ -75,7 +76,7 @@ static const uint qt_meta_data_SleeperAddon[] = {
        0        // eod
 };
 
-void SleeperAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Sleeper::SleeperAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         SleeperAddon *_t = static_cast<SleeperAddon *>(_o);
@@ -90,28 +91,28 @@ void SleeperAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
     }
 }
 
-QT_INIT_METAOBJECT const QMetaObject SleeperAddon::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_SleeperAddon.data,
-      qt_meta_data_SleeperAddon,  qt_static_metacall, nullptr, nullptr}
+QT_INIT_METAOBJECT const QMetaObject Sleeper::SleeperAddon::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_Sleeper__SleeperAddon.data,
+      qt_meta_data_Sleeper__SleeperAddon,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *SleeperAddon::metaObject() const
+const QMetaObject *Sleeper::SleeperAddon::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *SleeperAddon::qt_metacast(const char *_clname)
+void *Sleeper::SleeperAddon::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_SleeperAddon.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_Sleeper__SleeperAddon.stringdata0))
         return static_cast<void*>(this);
-    if (!strcmp(_clname, "McServerAddonBase"))
-        return static_cast< McServerAddonBase*>(this);
+    if (!strcmp(_clname, "Addon::McServerAddonBase"))
+        return static_cast< Addon::McServerAddonBase*>(this);
     return QObject::qt_metacast(_clname);
 }
 
-int SleeperAddon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Sleeper::SleeperAddon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)

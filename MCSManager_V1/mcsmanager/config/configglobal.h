@@ -4,7 +4,7 @@
 #include <QVector>
 #include <QPair>
 
-namespace ConfigGlobal {
+namespace Config {
 typedef QVector<QPair<QString, QString>> ConfigData;
 typedef QVector<QPair<QString, ConfigData>> DefaultList;
 

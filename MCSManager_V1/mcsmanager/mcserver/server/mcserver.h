@@ -2,11 +2,12 @@
 #define MCSERVER_H
 
 #include "interfaces/imcserver.h"
-#include "mcsmanager/config/interfaces/iserverconfig.h"
-#include "mcsmanager/mcserver/addons/interfaces/imcserveraddon.h"
 #include "serverconfigreader.h"
 #include "mcsmanager/core/mcsmanagercorechild.h"
+#include "mcsmanager/config/interfaces/iserverconfig.h"
+#include "mcsmanager/mcserver/addons/interfaces/imcserveraddon.h"
 #include "mcsmanager/mcserver/addons/mcscp/interfaces/imcscpaddon.h"
+#include "mcsmanager/mcserver/addons/mcscp/mcscpglobal.h"
 
 #include <QObject>
 #include <QProcess>
@@ -14,21 +15,23 @@
 #include <QHash>
 #include <QDebug>
 
-class McServer : public IMcServer, public McsManagerCoreChild
+namespace Server { class McServer; }
+
+class Server::McServer : public Server::IMcServer, public Core::McsManagerCoreChild
 {
     Q_OBJECT
 public:
-    McServer(IServerConfig *config, IMcsManagerCore *core = nullptr,
+    McServer(Config::IServerConfig *config, Core::IMcsManagerCore *core = nullptr,
              QObject *parent = nullptr);
     ~McServer();
 
     // IMcServer interface
     QString getName() const;
-    IServerConfig *getConfig() override;
+    Config::IServerConfig *getConfig() override;
 
-    void addAddon(IMcServerAddon *addon) override;
+    void addAddon(Addon::IMcServerAddon *addon) override;
     void removeAddon(const QString &addonName) override;
-    IMcServerAddon *getAddon(const QString &addonName) override;
+    Addon::IMcServerAddon *getAddon(const QString &addonName) override;
     QStringList getAddonList() const override;
 
     void start() override;
@@ -37,15 +40,10 @@ public:
     bool isRunning() const override;
 
 protected:
-    IMcsManagerCore *getCore() override;
-    IConfigManager *getConfigManager()  override;
-    IBackupManager *getBackupManager()  override;
-    IMcServerBuilder *getServerBuilder()  override;
-
-signals:
-    void started();
-    void stopped(bool expected);
-    void error(QString errorMessage);
+    Core::IMcsManagerCore *getCore() override;
+    Config::IConfigManager *getConfigManager()  override;
+    Backup::IBackupManager *getBackupManager()  override;
+    Server::IMcServerBuilder *getServerBuilder()  override;
 
 private slots:
     void serverStarted();
@@ -59,22 +57,22 @@ private:
 
     bool mFirstStart = true;
 
-    IServerConfig *mConfig;
+    Config::IServerConfig *mConfig;
     bool mIsRealServer;
-    ConfigGlobal::ShutdownBehavior mShutdownBehavior;
+    Config::ShutdownBehavior mShutdownBehavior;
     QString mAltServer;
 
     QProcess mProcess;
     ServerState mState = Stopped;
 
-    QHash<QString, IMcServerAddon *> mAddons;
+    QHash<QString, Addon::IMcServerAddon*> mAddons;
 
     void stopServer();
 
     void initAddons();
     void startAddons();
     void stopAddons();
-    void deleteAddon(IMcServerAddon *addon);
+    void deleteAddon(Addon::IMcServerAddon *addon);
 };
 
 #endif // MCSERVER_H

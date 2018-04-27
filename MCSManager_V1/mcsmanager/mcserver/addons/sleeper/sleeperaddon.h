@@ -6,15 +6,20 @@
 #include "../mcscp/interfaces/imcscpplayertable.h"
 #include "../mcscp/interfaces/imcscpaddon.h"
 #include "sleeperconfigreader.h"
+#include "mcsmanager/config/interfaces/iserverconfig.h"
+#include "mcsmanager/mcserver/addons/mcscp/mcscpglobal.h"
 
 #include <QObject>
 #include <QTimer>
+#include <QDebug>
 
-class SleeperAddon : public QObject, public McServerAddonBase
+namespace Sleeper { class SleeperAddon; }
+
+class Sleeper::SleeperAddon : public QObject, public Addon::McServerAddonBase
 {
     Q_OBJECT
 public:
-    SleeperAddon(IMcServer *server, QObject *parent = nullptr);
+    SleeperAddon(Server::IMcServer *server, QObject *parent = nullptr);
 
     // IMcServerAddon interface
     void preInit() override;
@@ -34,7 +39,7 @@ private:
 
     bool mConfigIsValid = false;
     int mPeriod;
-    ConfigGlobal::ShutdownBehavior mShutdownBehavior;
+    Config::ShutdownBehavior mShutdownBehavior;
     QString mAltServer;
 
     const IMcscpServerTable *mTable = nullptr;

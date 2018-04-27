@@ -20,30 +20,30 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_IBackupProcess_t {
+struct qt_meta_stringdata_Backup__IBackupProcess_t {
     QByteArrayData data[5];
-    char stringdata0[44];
+    char stringdata0[52];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_IBackupProcess_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Backup__IBackupProcess_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_IBackupProcess_t qt_meta_stringdata_IBackupProcess = {
+static const qt_meta_stringdata_Backup__IBackupProcess_t qt_meta_stringdata_Backup__IBackupProcess = {
     {
-QT_MOC_LITERAL(0, 0, 14), // "IBackupProcess"
-QT_MOC_LITERAL(1, 15, 12), // "aboutToStart"
-QT_MOC_LITERAL(2, 28, 0), // ""
-QT_MOC_LITERAL(3, 29, 8), // "finished"
-QT_MOC_LITERAL(4, 38, 5) // "error"
+QT_MOC_LITERAL(0, 0, 22), // "Backup::IBackupProcess"
+QT_MOC_LITERAL(1, 23, 12), // "aboutToStart"
+QT_MOC_LITERAL(2, 36, 0), // ""
+QT_MOC_LITERAL(3, 37, 8), // "finished"
+QT_MOC_LITERAL(4, 46, 5) // "error"
 
     },
-    "IBackupProcess\0aboutToStart\0\0finished\0"
-    "error"
+    "Backup::IBackupProcess\0aboutToStart\0"
+    "\0finished\0error"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_IBackupProcess[] = {
+static const uint qt_meta_data_Backup__IBackupProcess[] = {
 
  // content:
        7,       // revision
@@ -69,7 +69,7 @@ static const uint qt_meta_data_IBackupProcess[] = {
        0        // eod
 };
 
-void IBackupProcess::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Backup::IBackupProcess::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         IBackupProcess *_t = static_cast<IBackupProcess *>(_o);
@@ -107,26 +107,26 @@ void IBackupProcess::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject IBackupProcess::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_IBackupProcess.data,
-      qt_meta_data_IBackupProcess,  qt_static_metacall, nullptr, nullptr}
+QT_INIT_METAOBJECT const QMetaObject Backup::IBackupProcess::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_Backup__IBackupProcess.data,
+      qt_meta_data_Backup__IBackupProcess,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *IBackupProcess::metaObject() const
+const QMetaObject *Backup::IBackupProcess::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *IBackupProcess::qt_metacast(const char *_clname)
+void *Backup::IBackupProcess::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_IBackupProcess.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_Backup__IBackupProcess.stringdata0))
         return static_cast<void*>(this);
     return QObject::qt_metacast(_clname);
 }
 
-int IBackupProcess::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Backup::IBackupProcess::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
@@ -144,19 +144,19 @@ int IBackupProcess::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void IBackupProcess::aboutToStart()
+void Backup::IBackupProcess::aboutToStart()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 
 // SIGNAL 1
-void IBackupProcess::finished()
+void Backup::IBackupProcess::finished()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }
 
 // SIGNAL 2
-void IBackupProcess::error()
+void Backup::IBackupProcess::error()
 {
     QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
 }

@@ -1,32 +1,17 @@
 #include "mcscpconfigreader.h"
 
-const QString McscpConfigReader::ADDON_NAME = QStringLiteral("mcscp"),
-              McscpConfigReader::ADDRESS_KEY = QStringLiteral("address"),
-              McscpConfigReader::PORT_KEY = QStringLiteral("port");
+using Mcscp::McscpConfigReader;
 
-McscpConfigReader::McscpConfigReader(IConfigFile *config) : mConfig(config)
+McscpConfigReader::McscpConfigReader(Config::IConfigFile *config) : mConfig(config)
 {
 }
 
 QString McscpConfigReader::address() const
 {
-    return mConfig->readString(ADDRESS_KEY);
+    return mConfig->readString(Mcscp::ADDRESS_KEY);
 }
 
 int McscpConfigReader::port() const
 {
-    return mConfig->readDouble(PORT_KEY);
-}
-
-QString McscpConfigReader::getAddonName()
-{
-    return ADDON_NAME;
-}
-
-ConfigGlobal::ConfigData McscpConfigReader::getDefaults()
-{
-    ConfigGlobal::ConfigData data;
-    data.append(qMakePair(ADDRESS_KEY, QStringLiteral("127.0.0.1")));
-    data.append(qMakePair(PORT_KEY, QStringLiteral("25566")));;
-    return data;
+    return mConfig->readDouble(Mcscp::PORT_KEY);
 }

@@ -8,25 +8,27 @@
 #include "addons/mcscp/mcscpaddon.h"
 #include "addons/restarter/restarteraddon.h"
 #include "addons/sleeper/sleeperaddon.h"
+#include "addons/backup_service/backupserviceglobal.h"
+#include "addons/backup_service/backupserviceaddon.h"
 
 #include <QVector>
 
-class McServerBuilder : public IMcServerBuilder, public McsManagerCoreChild
+namespace Server { class McServerBuilder; }
+
+class Server::McServerBuilder : public Server::IMcServerBuilder, public Core::McsManagerCoreChild
 {
 public:
-    McServerBuilder(IMcsManagerCore *core);
+    McServerBuilder(Core::IMcsManagerCore *core);
 
     // IMcServerBuilder interface
-    IMcServer *getMcServer(IServerConfig *serverConfig) override;
-    void deleteMcServer(IMcServer *server) override;
-
-    virtual ConfigGlobal::DefaultList getAddonDefaults() const override;
+    Server::IMcServer *getMcServer(Config::IServerConfig *serverConfig) override;
+    void deleteMcServer(Server::IMcServer *server) override;
 
 protected:
-    virtual IMcServerAddon *getAddon(const QString &name, IMcServer *server);
+    virtual Addon::IMcServerAddon *getAddon(const QString &name, Server::IMcServer *server);
 
 private:
-    QVector<IMcServer*> mServers;
+    QVector<Server::IMcServer*> mServers;
 };
 
 #endif // MCSERVERBUILDER_H

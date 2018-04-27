@@ -1,28 +1,22 @@
 #ifndef BACKUPSERVICECONFIGREADER_H
 #define BACKUPSERVICECONFIGREADER_H
 
+#include "backupserviceglobal.h"
 #include "mcsmanager/config/interfaces/iconfigfile.h"
 
-class BackupServiceConfigReader
+namespace BackupService { class BackupServiceConfigReader; }
+
+class BackupService::BackupServiceConfigReader
 {
 public:
-    BackupServiceConfigReader(IConfigFile *config);
+    BackupServiceConfigReader(Config::IConfigFile *config);
 
     bool runOnServerStart() const;
     int period() const;
     int minimumTimeBetweenBackups() const;
 
-    static QString getAddonName();
-    static ConfigGlobal::ConfigData getDefaults();
-
 private:
-    IConfigFile *mConfig;
-
-    //BackupServiceConfigReader constants
-    static const QString ADDON_NAME,
-                         RUN_ON_SEVER_START_KEY,
-                         PERIOD_KEY,
-                         MINIMUM_TIME_BETWEEN_BACKUPS_KEY;
+    Config::IConfigFile *mConfig;
 };
 
 #endif // BACKUPSERVICECONFIGREADER_H

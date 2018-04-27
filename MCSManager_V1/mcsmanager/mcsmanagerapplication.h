@@ -6,7 +6,9 @@
 #include "mcserver/mcserverbuilder.h"
 #include "core/mcsmanagercore.h"
 
-class McsManagerApplication
+namespace Application { class McsManagerApplication; }
+
+class Application::McsManagerApplication
 {
 public:
     McsManagerApplication();
@@ -14,7 +16,10 @@ public:
     void start();
 
 private:
-
+    Core::McsManagerCore mCore;
+    Config::ConfigManager mConfigManager;
+    Backup::BackupManager mBackupManager;
+    Server::McServerBuilder mServerBuilder;
 };
 
 #endif // MCSMANAGERAPPLICATION_H

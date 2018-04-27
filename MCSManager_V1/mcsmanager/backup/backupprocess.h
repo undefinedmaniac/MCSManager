@@ -9,7 +9,9 @@
 #include <QFile>
 #include <QTimer>
 
-class BackupProcess : public IBackupProcess
+namespace Backup { class BackupProcess; }
+
+class Backup::BackupProcess : public Backup::IBackupProcess
 {
     Q_OBJECT
 public:

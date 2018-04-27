@@ -1,5 +1,7 @@
 #include "configfile.h"
 
+using Config::ConfigFile;
+
 ConfigFile::ConfigFile(const QString &filePath) :
     mSettings(filePath, QSettings::IniFormat)
 {
@@ -47,7 +49,7 @@ void ConfigFile::writeDouble(const QString &key, double value)
     mSettings.setValue(key, value);
 }
 
-void ConfigFile::applyDefaults(const ConfigGlobal::ConfigData &defaults)
+void ConfigFile::applyDefaults(const Config::ConfigData &defaults)
 {
     for (int i = 0; i < defaults.size(); i++) {
         const QPair<QString, QString> &pair = defaults.at(i);

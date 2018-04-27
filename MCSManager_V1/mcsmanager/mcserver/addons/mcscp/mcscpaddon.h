@@ -1,6 +1,7 @@
 #ifndef MCSCPADDON_H
 #define MCSCPADDON_H
 
+#include "mcscpglobal.h"
 #include "../mcserveraddonbase.h"
 #include "mcscpconfigreader.h"
 #include "mcscphandshake.h"
@@ -8,6 +9,7 @@
 #include "mcscpservertable.h"
 #include "mcscpplayertable.h"
 #include "interfaces/imcscpplayertable.h"
+#include "mcsmanager/config/interfaces/iserverconfig.h"
 
 #include <QObject>
 #include <QString>
@@ -17,11 +19,13 @@
 #include <QRegularExpression>
 #include <QHash>
 
-class McscpAddon : public IMcscpAddon, public McServerAddonBase
+namespace Mcscp { class McscpAddon; }
+
+class Mcscp::McscpAddon : public IMcscpAddon, public Addon::McServerAddonBase
 {
     Q_OBJECT
 public:
-    McscpAddon(IMcServer *server, QObject *parent = nullptr);
+    McscpAddon(Server::IMcServer *server, QObject *parent = nullptr);
 
     // IMcscpAddon interface
     bool isConnected() const;
@@ -59,11 +63,11 @@ private:
     int mPort;
 
     QTcpSocket mSocket;
-    McscpHandshake mHandshake;
+    Mcscp::McscpHandshake mHandshake;
     QTimer mConnectionTimer;
 
-    McscpServerTable mServerTable;
-    QHash<QString, McscpPlayerTable*> mPlayerTables;
+    Mcscp::McscpServerTable mServerTable;
+    QHash<QString, Mcscp::McscpPlayerTable*> mPlayerTables;
 
     QString mServerLog;
 

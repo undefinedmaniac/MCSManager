@@ -1,10 +1,14 @@
 #ifndef MCSCPHANDSHAKE_H
 #define MCSCPHANDSHAKE_H
 
+#include "mcscpglobal.h"
+
 #include <QString>
 #include <QRegularExpression>
 
-class McscpHandshake
+namespace Mcscp { class McscpHandshake; }
+
+class Mcscp::McscpHandshake
 {
 public:
     McscpHandshake();

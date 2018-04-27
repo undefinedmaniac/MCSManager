@@ -20,40 +20,40 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_IMcscpAddon_t {
+struct qt_meta_stringdata_Mcscp__IMcscpAddon_t {
     QByteArrayData data[13];
-    char stringdata0[130];
+    char stringdata0[137];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_IMcscpAddon_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Mcscp__IMcscpAddon_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_IMcscpAddon_t qt_meta_stringdata_IMcscpAddon = {
+static const qt_meta_stringdata_Mcscp__IMcscpAddon_t qt_meta_stringdata_Mcscp__IMcscpAddon = {
     {
-QT_MOC_LITERAL(0, 0, 11), // "IMcscpAddon"
-QT_MOC_LITERAL(1, 12, 9), // "connected"
-QT_MOC_LITERAL(2, 22, 0), // ""
-QT_MOC_LITERAL(3, 23, 12), // "disconnected"
-QT_MOC_LITERAL(4, 36, 12), // "playerJoined"
-QT_MOC_LITERAL(5, 49, 4), // "uuid"
-QT_MOC_LITERAL(6, 54, 10), // "playerLeft"
-QT_MOC_LITERAL(7, 65, 10), // "playerDied"
-QT_MOC_LITERAL(8, 76, 12), // "deathMessage"
-QT_MOC_LITERAL(9, 89, 9), // "chatEvent"
-QT_MOC_LITERAL(10, 99, 7), // "message"
-QT_MOC_LITERAL(11, 107, 10), // "newLogData"
-QT_MOC_LITERAL(12, 118, 11) // "startingPos"
+QT_MOC_LITERAL(0, 0, 18), // "Mcscp::IMcscpAddon"
+QT_MOC_LITERAL(1, 19, 9), // "connected"
+QT_MOC_LITERAL(2, 29, 0), // ""
+QT_MOC_LITERAL(3, 30, 12), // "disconnected"
+QT_MOC_LITERAL(4, 43, 12), // "playerJoined"
+QT_MOC_LITERAL(5, 56, 4), // "uuid"
+QT_MOC_LITERAL(6, 61, 10), // "playerLeft"
+QT_MOC_LITERAL(7, 72, 10), // "playerDied"
+QT_MOC_LITERAL(8, 83, 12), // "deathMessage"
+QT_MOC_LITERAL(9, 96, 9), // "chatEvent"
+QT_MOC_LITERAL(10, 106, 7), // "message"
+QT_MOC_LITERAL(11, 114, 10), // "newLogData"
+QT_MOC_LITERAL(12, 125, 11) // "startingPos"
 
     },
-    "IMcscpAddon\0connected\0\0disconnected\0"
-    "playerJoined\0uuid\0playerLeft\0playerDied\0"
-    "deathMessage\0chatEvent\0message\0"
-    "newLogData\0startingPos"
+    "Mcscp::IMcscpAddon\0connected\0\0"
+    "disconnected\0playerJoined\0uuid\0"
+    "playerLeft\0playerDied\0deathMessage\0"
+    "chatEvent\0message\0newLogData\0startingPos"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_IMcscpAddon[] = {
+static const uint qt_meta_data_Mcscp__IMcscpAddon[] = {
 
  // content:
        7,       // revision
@@ -87,7 +87,7 @@ static const uint qt_meta_data_IMcscpAddon[] = {
        0        // eod
 };
 
-void IMcscpAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Mcscp::IMcscpAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         IMcscpAddon *_t = static_cast<IMcscpAddon *>(_o);
@@ -156,26 +156,26 @@ void IMcscpAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
     }
 }
 
-QT_INIT_METAOBJECT const QMetaObject IMcscpAddon::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_IMcscpAddon.data,
-      qt_meta_data_IMcscpAddon,  qt_static_metacall, nullptr, nullptr}
+QT_INIT_METAOBJECT const QMetaObject Mcscp::IMcscpAddon::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_Mcscp__IMcscpAddon.data,
+      qt_meta_data_Mcscp__IMcscpAddon,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *IMcscpAddon::metaObject() const
+const QMetaObject *Mcscp::IMcscpAddon::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *IMcscpAddon::qt_metacast(const char *_clname)
+void *Mcscp::IMcscpAddon::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_IMcscpAddon.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_Mcscp__IMcscpAddon.stringdata0))
         return static_cast<void*>(this);
     return QObject::qt_metacast(_clname);
 }
 
-int IMcscpAddon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Mcscp::IMcscpAddon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
@@ -193,47 +193,47 @@ int IMcscpAddon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void IMcscpAddon::connected()
+void Mcscp::IMcscpAddon::connected()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 
 // SIGNAL 1
-void IMcscpAddon::disconnected()
+void Mcscp::IMcscpAddon::disconnected()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }
 
 // SIGNAL 2
-void IMcscpAddon::playerJoined(QString _t1)
+void Mcscp::IMcscpAddon::playerJoined(QString _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 
 // SIGNAL 3
-void IMcscpAddon::playerLeft(QString _t1)
+void Mcscp::IMcscpAddon::playerLeft(QString _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 3, _a);
 }
 
 // SIGNAL 4
-void IMcscpAddon::playerDied(QString _t1, QString _t2)
+void Mcscp::IMcscpAddon::playerDied(QString _t1, QString _t2)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 4, _a);
 }
 
 // SIGNAL 5
-void IMcscpAddon::chatEvent(QString _t1, QString _t2)
+void Mcscp::IMcscpAddon::chatEvent(QString _t1, QString _t2)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 5, _a);
 }
 
 // SIGNAL 6
-void IMcscpAddon::newLogData(int _t1)
+void Mcscp::IMcscpAddon::newLogData(int _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 6, _a);

@@ -1,35 +1,37 @@
 #include "serverconfig.h"
 
+using Config::ServerConfig;
+
 const QString ServerConfig::SERVER_CONFIG_FILE_NAME = QStringLiteral("config.ini"),
               ServerConfig::BACKUP_CONFIG_FILE_NAME = QStringLiteral("backup.ini"),
               ServerConfig::ADDON_FOLDER_NAME = QStringLiteral("addons"),
               ServerConfig::ENABLED_ADDONS_CONFIG_FILE_NAME = QStringLiteral("enabled_addons.ini");
 
-ServerConfig::ServerConfig(const QString &name, const QString &folderPath, const QHash<QString, ConfigGlobal::ConfigData> &registeredAddons) :
+ServerConfig::ServerConfig(const QString &name, const QString &folderPath, const QHash<QString, Config::ConfigData> &registeredAddons) :
     mServerName(name), mServerFolderPath(folderPath), mAddonsFolderPath(joinPaths(folderPath, ADDON_FOLDER_NAME)),
     mEnabledAddons(joinPaths(mAddonsFolderPath, ENABLED_ADDONS_CONFIG_FILE_NAME)), mRegisteredAddons(registeredAddons)
 {
     mEnabledAddons.setGroup(QStringLiteral("enabled_addons"));
 }
 
-void ServerConfig::setRegisteredAddons(const QHash<QString, ConfigGlobal::ConfigData> &addons)
+void ServerConfig::setRegisteredAddons(const QHash<QString, Config::ConfigData> &addons)
 {
     mRegisteredAddons = addons;
 }
 
-void ServerConfig::initServerConfig(const ConfigGlobal::ConfigData &defaults)
+void ServerConfig::initServerConfig(const Config::ConfigData &defaults)
 {
     mServerConfig = loadFile(joinPaths(mServerFolderPath, SERVER_CONFIG_FILE_NAME), defaults);
 }
 
-void ServerConfig::initBackupConfig(const ConfigGlobal::ConfigData &defaults)
+void ServerConfig::initBackupConfig(const Config::ConfigData &defaults)
 {
     mBackupConfig = loadFile(joinPaths(mServerFolderPath, BACKUP_CONFIG_FILE_NAME), defaults);
 }
 
 void ServerConfig::initEnabledAddons()
 {
-    ConfigGlobal::ConfigData enabledAddonsDefaults;
+    Config::ConfigData enabledAddonsDefaults;
 
     foreach (const QString &addon, mRegisteredAddons.keys())
         enabledAddonsDefaults.append(qMakePair(addon, QStringLiteral("false")));
@@ -48,19 +50,19 @@ QString ServerConfig::getServerName() const
     return mServerName;
 }
 
-IConfigFile *ServerConfig::getServerConfig()
+Config::IConfigFile *ServerConfig::getServerConfig()
 {
     return mServerConfig;
 }
 
-IConfigFile *ServerConfig::getBackupConfig()
+Config::IConfigFile *ServerConfig::getBackupConfig()
 {
     return mBackupConfig;
 }
 
-IConfigFile *ServerConfig::getAddonConfig(const QString &addonName)
+Config::IConfigFile *ServerConfig::getAddonConfig(const QString &addonName)
 {
-    IConfigFile *file = mAddonConfigs.value(addonName, nullptr);
+    Config::IConfigFile *file = mAddonConfigs.value(addonName, nullptr);
 
     if (file == nullptr)
         file = createAddonConfig(addonName);
@@ -80,19 +82,19 @@ QStringList ServerConfig::getEnabledAddons()
     return enabledAddons;
 }
 
-IConfigFile *ServerConfig::loadFile(const QString &filePath, const ConfigGlobal::ConfigData &defaults)
+Config::IConfigFile *ServerConfig::loadFile(const QString &filePath, const Config::ConfigData &defaults)
 {
     IConfigFile *file = getConfigFile(filePath);
     file->applyDefaults(defaults);
     return file;
 }
 
-IConfigFile *ServerConfig::createAddonConfig(const QString &addonName)
+Config::IConfigFile *ServerConfig::createAddonConfig(const QString &addonName)
 {
     const QString addonsFolderPath = joinPaths(mServerFolderPath, ADDON_FOLDER_NAME);
     const QString filePath = joinPaths(addonsFolderPath, addonName + QStringLiteral(".ini"));
 
-    IConfigFile * file = loadFile(filePath, mRegisteredAddons.value(addonName, ConfigGlobal::ConfigData()));
+    Config::IConfigFile *file = loadFile(filePath, mRegisteredAddons.value(addonName, Config::ConfigData()));
     mAddonConfigs.insert(addonName, file);
 
     return file;

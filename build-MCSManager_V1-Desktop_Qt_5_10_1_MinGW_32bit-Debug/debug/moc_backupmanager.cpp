@@ -20,29 +20,29 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_BackupManager_t {
+struct qt_meta_stringdata_Backup__BackupManager_t {
     QByteArrayData data[4];
-    char stringdata0[51];
+    char stringdata0[59];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_BackupManager_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Backup__BackupManager_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_BackupManager_t qt_meta_stringdata_BackupManager = {
+static const qt_meta_stringdata_Backup__BackupManager_t qt_meta_stringdata_Backup__BackupManager = {
     {
-QT_MOC_LITERAL(0, 0, 13), // "BackupManager"
-QT_MOC_LITERAL(1, 14, 19), // "processAboutToStart"
-QT_MOC_LITERAL(2, 34, 0), // ""
-QT_MOC_LITERAL(3, 35, 15) // "processFinished"
+QT_MOC_LITERAL(0, 0, 21), // "Backup::BackupManager"
+QT_MOC_LITERAL(1, 22, 19), // "processAboutToStart"
+QT_MOC_LITERAL(2, 42, 0), // ""
+QT_MOC_LITERAL(3, 43, 15) // "processFinished"
 
     },
-    "BackupManager\0processAboutToStart\0\0"
-    "processFinished"
+    "Backup::BackupManager\0processAboutToStart\0"
+    "\0processFinished"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_BackupManager[] = {
+static const uint qt_meta_data_Backup__BackupManager[] = {
 
  // content:
        7,       // revision
@@ -66,7 +66,7 @@ static const uint qt_meta_data_BackupManager[] = {
        0        // eod
 };
 
-void BackupManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Backup::BackupManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         BackupManager *_t = static_cast<BackupManager *>(_o);
@@ -80,30 +80,30 @@ void BackupManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject BackupManager::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_BackupManager.data,
-      qt_meta_data_BackupManager,  qt_static_metacall, nullptr, nullptr}
+QT_INIT_METAOBJECT const QMetaObject Backup::BackupManager::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_Backup__BackupManager.data,
+      qt_meta_data_Backup__BackupManager,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *BackupManager::metaObject() const
+const QMetaObject *Backup::BackupManager::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *BackupManager::qt_metacast(const char *_clname)
+void *Backup::BackupManager::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_BackupManager.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_Backup__BackupManager.stringdata0))
         return static_cast<void*>(this);
-    if (!strcmp(_clname, "IBackupManager"))
-        return static_cast< IBackupManager*>(this);
-    if (!strcmp(_clname, "McsManagerCoreChild"))
-        return static_cast< McsManagerCoreChild*>(this);
+    if (!strcmp(_clname, "Backup::IBackupManager"))
+        return static_cast< Backup::IBackupManager*>(this);
+    if (!strcmp(_clname, "Core::McsManagerCoreChild"))
+        return static_cast< Core::McsManagerCoreChild*>(this);
     return QObject::qt_metacast(_clname);
 }
 
-int BackupManager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Backup::BackupManager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)

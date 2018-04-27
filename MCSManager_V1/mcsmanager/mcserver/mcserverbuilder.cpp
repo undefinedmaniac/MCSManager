@@ -1,12 +1,14 @@
 #include "mcserverbuilder.h"
 
-McServerBuilder::McServerBuilder(IMcsManagerCore *core) : McsManagerCoreChild(core)
+using Server::McServerBuilder;
+
+McServerBuilder::McServerBuilder(Core::IMcsManagerCore *core) : McsManagerCoreChild(core)
 {
 }
 
-IMcServer *McServerBuilder::getMcServer(IServerConfig *serverConfig)
+Server::IMcServer *McServerBuilder::getMcServer(Config::IServerConfig *serverConfig)
 {
-    IMcServer *server = new McServer(serverConfig, getCore());
+    Server::IMcServer *server = new Server::McServer(serverConfig, getCore());
     mServers.append(server);
 
     const QStringList enabledAddons = serverConfig->getEnabledAddons();
@@ -17,7 +19,7 @@ IMcServer *McServerBuilder::getMcServer(IServerConfig *serverConfig)
     return server;
 }
 
-void McServerBuilder::deleteMcServer(IMcServer *server)
+void McServerBuilder::deleteMcServer(Server::IMcServer *server)
 {
     if (!server)
         return;
@@ -26,23 +28,16 @@ void McServerBuilder::deleteMcServer(IMcServer *server)
     server->deleteLater();
 }
 
-ConfigGlobal::DefaultList McServerBuilder::getAddonDefaults() const
+Addon::IMcServerAddon *McServerBuilder::getAddon(const QString &name, Server::IMcServer *server)
 {
-    ConfigGlobal::DefaultList defaults;
-    defaults.append(qMakePair(McscpConfigReader::getAddonName(), McscpConfigReader::getDefaults()));
-    defaults.append(qMakePair(RestarterConfigReader::getAddonName(), RestarterConfigReader::getDefaults()));
-    defaults.append(qMakePair(SleeperConfigReader::getAddonName(), SleeperConfigReader::getDefaults()));
-    return defaults;
-}
-
-IMcServerAddon *McServerBuilder::getAddon(const QString &name, IMcServer *server)
-{
-    if (name == McscpConfigReader::getAddonName())
-        return new McscpAddon(server);
-    else if (name == RestarterConfigReader::getAddonName())
-        return new RestarterAddon(server);
-    else if (name == SleeperConfigReader::getAddonName())
-        return new SleeperAddon(server);
+    if (name == Mcscp::ADDON_NAME)
+        return new Mcscp::McscpAddon(server);
+    else if (name == Restarter::ADDON_NAME)
+        return new Restarter::RestarterAddon(server);
+    else if (name == Sleeper::ADDON_NAME)
+        return new Sleeper::SleeperAddon(server);
+    else if (name == BackupService::ADDON_NAME)
+        return new BackupService::BackupServiceAddon(server);
 
     return nullptr;
 }

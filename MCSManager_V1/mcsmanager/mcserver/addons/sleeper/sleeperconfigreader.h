@@ -1,29 +1,23 @@
 #ifndef SLEEPERCONFIGREADER_H
 #define SLEEPERCONFIGREADER_H
 
+#include "sleeperglobal.h"
 #include "mcsmanager/config/interfaces/iconfigfile.h"
 #include "mcsmanager/config/configfunctions.h"
 
-class SleeperConfigReader
+namespace Sleeper { class SleeperConfigReader; }
+
+class Sleeper::SleeperConfigReader
 {
 public:
-    SleeperConfigReader(IConfigFile *config);
+    SleeperConfigReader(Config::IConfigFile *config);
 
-    int period() const;
-    ConfigGlobal::ShutdownBehavior shutdownBehavior() const;
+    float period() const;
+    Config::ShutdownBehavior shutdownBehavior() const;
     QString alternativeServer() const;
 
-    static QString getAddonName();
-    static ConfigGlobal::ConfigData getDefaults();
-
 private:
-    IConfigFile *mConfig;
-
-    //SleeperConfigReader constants
-    static const QString ADDON_NAME,
-                         PERIOD_KEY,
-                         SHUTDOWN_BEHAVIOR_KEY,
-                         ALTERNATIVE_SERVER_KEY;
+    Config::IConfigFile *mConfig;
 };
 
 #endif // SLEEPERCONFIGREADER_H

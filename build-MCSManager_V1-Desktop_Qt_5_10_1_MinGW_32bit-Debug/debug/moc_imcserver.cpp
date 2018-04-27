@@ -20,32 +20,32 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_IMcServer_t {
+struct qt_meta_stringdata_Server__IMcServer_t {
     QByteArrayData data[7];
-    char stringdata0[55];
+    char stringdata0[63];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_IMcServer_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Server__IMcServer_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_IMcServer_t qt_meta_stringdata_IMcServer = {
+static const qt_meta_stringdata_Server__IMcServer_t qt_meta_stringdata_Server__IMcServer = {
     {
-QT_MOC_LITERAL(0, 0, 9), // "IMcServer"
-QT_MOC_LITERAL(1, 10, 7), // "started"
-QT_MOC_LITERAL(2, 18, 0), // ""
-QT_MOC_LITERAL(3, 19, 7), // "stopped"
-QT_MOC_LITERAL(4, 27, 8), // "expected"
-QT_MOC_LITERAL(5, 36, 5), // "error"
-QT_MOC_LITERAL(6, 42, 12) // "errorMessage"
+QT_MOC_LITERAL(0, 0, 17), // "Server::IMcServer"
+QT_MOC_LITERAL(1, 18, 7), // "started"
+QT_MOC_LITERAL(2, 26, 0), // ""
+QT_MOC_LITERAL(3, 27, 7), // "stopped"
+QT_MOC_LITERAL(4, 35, 8), // "expected"
+QT_MOC_LITERAL(5, 44, 5), // "error"
+QT_MOC_LITERAL(6, 50, 12) // "errorMessage"
 
     },
-    "IMcServer\0started\0\0stopped\0expected\0"
-    "error\0errorMessage"
+    "Server::IMcServer\0started\0\0stopped\0"
+    "expected\0error\0errorMessage"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_IMcServer[] = {
+static const uint qt_meta_data_Server__IMcServer[] = {
 
  // content:
        7,       // revision
@@ -71,7 +71,7 @@ static const uint qt_meta_data_IMcServer[] = {
        0        // eod
 };
 
-void IMcServer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Server::IMcServer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         IMcServer *_t = static_cast<IMcServer *>(_o);
@@ -108,26 +108,26 @@ void IMcServer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
     }
 }
 
-QT_INIT_METAOBJECT const QMetaObject IMcServer::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_IMcServer.data,
-      qt_meta_data_IMcServer,  qt_static_metacall, nullptr, nullptr}
+QT_INIT_METAOBJECT const QMetaObject Server::IMcServer::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_Server__IMcServer.data,
+      qt_meta_data_Server__IMcServer,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *IMcServer::metaObject() const
+const QMetaObject *Server::IMcServer::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *IMcServer::qt_metacast(const char *_clname)
+void *Server::IMcServer::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_IMcServer.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_Server__IMcServer.stringdata0))
         return static_cast<void*>(this);
     return QObject::qt_metacast(_clname);
 }
 
-int IMcServer::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Server::IMcServer::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
@@ -145,20 +145,20 @@ int IMcServer::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void IMcServer::started()
+void Server::IMcServer::started()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 
 // SIGNAL 1
-void IMcServer::stopped(bool _t1)
+void Server::IMcServer::stopped(bool _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 
 // SIGNAL 2
-void IMcServer::error(QString _t1)
+void Server::IMcServer::error(QString _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 2, _a);

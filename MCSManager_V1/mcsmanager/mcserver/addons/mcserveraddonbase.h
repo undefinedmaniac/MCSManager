@@ -2,18 +2,20 @@
 #define MCSERVERADDONBASE_H
 
 #include "interfaces/imcserveraddon.h"
-#include "mcsmanager/mcserver/server/mcserver.h"
+#include "mcsmanager/mcserver/server/interfaces/imcserver.h"
 #include "mcsmanager/core/mcsmanagercorechild.h"
 
-class McServerAddonBase : public IMcServerAddon
+namespace Addon { class McServerAddonBase; }
+
+class Addon::McServerAddonBase : public Addon::IMcServerAddon
 {
 public:
-    McServerAddonBase(const QString &name, IMcServer *server);
+    McServerAddonBase(const QString &name, Server::IMcServer *server);
     virtual ~McServerAddonBase() {}
 
     // IMcServerAddon interface
     QString getName() const override;
-    IMcServer *getServer() override;
+    Server::IMcServer *getServer() override;
 
     virtual void preInit() = 0;
     virtual void init() = 0;
@@ -22,14 +24,14 @@ public:
     virtual bool isRunning() const = 0;
 
 protected:
-    IMcsManagerCore *getCore();
-    IConfigManager *getConfigManager();
-    IBackupManager *getBackupManager();
-    IMcServerBuilder *getServerBuilder();
+    Core::IMcsManagerCore *getCore();
+    Config::IConfigManager *getConfigManager();
+    Backup::IBackupManager *getBackupManager();
+    Server::IMcServerBuilder *getServerBuilder();
 
 private:
     const QString mName;
-    IMcServer *mServer;
+    Server::IMcServer *mServer;
 };
 
 #endif // MCSERVERADDONBASE_H

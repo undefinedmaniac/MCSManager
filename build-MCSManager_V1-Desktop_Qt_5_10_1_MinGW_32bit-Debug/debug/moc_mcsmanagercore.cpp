@@ -20,27 +20,28 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_McsManagerCore_t {
+struct qt_meta_stringdata_Core__McsManagerCore_t {
     QByteArrayData data[3];
-    char stringdata0[32];
+    char stringdata0[38];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_McsManagerCore_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Core__McsManagerCore_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_McsManagerCore_t qt_meta_stringdata_McsManagerCore = {
+static const qt_meta_stringdata_Core__McsManagerCore_t qt_meta_stringdata_Core__McsManagerCore = {
     {
-QT_MOC_LITERAL(0, 0, 14), // "McsManagerCore"
-QT_MOC_LITERAL(1, 15, 15), // "startNextServer"
-QT_MOC_LITERAL(2, 31, 0) // ""
+QT_MOC_LITERAL(0, 0, 20), // "Core::McsManagerCore"
+QT_MOC_LITERAL(1, 21, 15), // "startNextServer"
+QT_MOC_LITERAL(2, 37, 0) // ""
 
     },
-    "McsManagerCore\0startNextServer\0"
+    "Core::McsManagerCore\0startNextServer\0"
+    ""
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_McsManagerCore[] = {
+static const uint qt_meta_data_Core__McsManagerCore[] = {
 
  // content:
        7,       // revision
@@ -62,7 +63,7 @@ static const uint qt_meta_data_McsManagerCore[] = {
        0        // eod
 };
 
-void McsManagerCore::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Core::McsManagerCore::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         McsManagerCore *_t = static_cast<McsManagerCore *>(_o);
@@ -75,28 +76,28 @@ void McsManagerCore::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject McsManagerCore::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_McsManagerCore.data,
-      qt_meta_data_McsManagerCore,  qt_static_metacall, nullptr, nullptr}
+QT_INIT_METAOBJECT const QMetaObject Core::McsManagerCore::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_Core__McsManagerCore.data,
+      qt_meta_data_Core__McsManagerCore,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *McsManagerCore::metaObject() const
+const QMetaObject *Core::McsManagerCore::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *McsManagerCore::qt_metacast(const char *_clname)
+void *Core::McsManagerCore::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_McsManagerCore.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_Core__McsManagerCore.stringdata0))
         return static_cast<void*>(this);
-    if (!strcmp(_clname, "IMcsManagerCore"))
-        return static_cast< IMcsManagerCore*>(this);
+    if (!strcmp(_clname, "Core::IMcsManagerCore"))
+        return static_cast< Core::IMcsManagerCore*>(this);
     return QObject::qt_metacast(_clname);
 }
 
-int McsManagerCore::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Core::McsManagerCore::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)

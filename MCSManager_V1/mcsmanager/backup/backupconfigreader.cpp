@@ -1,17 +1,16 @@
 #include "backupconfigreader.h"
 
+using Backup::BackupConfigReader;
+
 const QRegularExpression BackupConfigReader::SOURCES_MATCHER(QStringLiteral(" *([^;]+?) *(?:;|$)"));
 
-const QString BackupConfigReader::SOURCES_KEY = QStringLiteral("sources"),
-              BackupConfigReader::DESTINATION_KEY = QStringLiteral("destination");
-
-BackupConfigReader::BackupConfigReader(IConfigFile *config) : mConfig(config)
+BackupConfigReader::BackupConfigReader(Config::IConfigFile *config) : mConfig(config)
 {
 }
 
 QStringList BackupConfigReader::sources() const
 {
-    const QString subject = mConfig->readString(SOURCES_KEY);
+    const QString subject = mConfig->readString(Backup::SOURCES_KEY);
     QRegularExpressionMatchIterator iterator = SOURCES_MATCHER.globalMatch(subject);
     QStringList list;
 
@@ -27,13 +26,5 @@ QStringList BackupConfigReader::sources() const
 
 QString BackupConfigReader::destination() const
 {
-    return mConfig->readString(DESTINATION_KEY);
-}
-
-ConfigGlobal::ConfigData BackupConfigReader::getDefaults()
-{
-    ConfigGlobal::ConfigData data;
-    data.append(qMakePair(SOURCES_KEY, QStringLiteral("")));
-    data.append(qMakePair(DESTINATION_KEY, QStringLiteral("")));
-    return data;
+    return mConfig->readString(Backup::DESTINATION_KEY);
 }

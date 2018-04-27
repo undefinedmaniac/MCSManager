@@ -1,30 +1,32 @@
 #include "configmanager.h"
 
+using Config::ConfigManager;
+
 const QString ConfigManager::PRIMARY_CONFIG_NAME = QStringLiteral("config.ini"),
               ConfigManager::BACKUP_CONFIG_NAME = QStringLiteral("backup.ini"),
               ConfigManager::ADDONS_FOLDER_NAME = QStringLiteral("addons"),
               ConfigManager::ADDONS_ENABLED_CONFIG_NAME = QStringLiteral("enabled_addons.ini");
 
-ConfigManager::ConfigManager()
+ConfigManager::ConfigManager(Core::IMcsManagerCore *core) : McsManagerCoreChild(core)
 {
 }
 
-void ConfigManager::registerAddon(const QString &addonName, const ConfigGlobal::ConfigData &defaults)
+void ConfigManager::registerAddon(const QString &addonName, const Config::ConfigData &defaults)
 {
     mRegisteredAddons.insert(addonName, defaults);
 }
 
-void ConfigManager::setAppConfigDefaults(const ConfigGlobal::ConfigData &defaults)
+void ConfigManager::setAppConfigDefaults(const Config::ConfigData &defaults)
 {
     mAppDefaults = defaults;
 }
 
-void ConfigManager::setServerConfigDefaults(const ConfigGlobal::ConfigData &defaults)
+void ConfigManager::setServerConfigDefaults(const Config::ConfigData &defaults)
 {
     mServerDefaults = defaults;
 }
 
-void ConfigManager::setBackupConfigDefaults(const ConfigGlobal::ConfigData &defaults)
+void ConfigManager::setBackupConfigDefaults(const Config::ConfigData &defaults)
 {
     mBackupDefaults = defaults;
 }
@@ -52,12 +54,12 @@ void ConfigManager::loadConfigs(const QString &configDirectory)
     }
 }
 
-IConfigFile *ConfigManager::getAppConfig()
+Config::IConfigFile *ConfigManager::getAppConfig()
 {
     return mAppConfig;
 }
 
-IServerConfig *ConfigManager::getServerConfig(const QString &serverName)
+Config::IServerConfig *ConfigManager::getServerConfig(const QString &serverName)
 {
     return mServerConfigs.value(serverName, nullptr);
 }

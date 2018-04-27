@@ -1,5 +1,7 @@
 #include "mcscpservertable.h"
 
+using Mcscp::McscpServerTable;
+
 McscpServerTable::McscpServerTable(QObject *parent) : IMcscpServerTable(parent)
 {
 }

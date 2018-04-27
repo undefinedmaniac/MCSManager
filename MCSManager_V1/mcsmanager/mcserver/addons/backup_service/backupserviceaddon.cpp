@@ -1,7 +1,9 @@
 #include "backupserviceaddon.h"
 
-BackupServiceAddon::BackupServiceAddon(IMcServer *server, QObject *parent) :
-    QObject(parent), McServerAddonBase(BackupServiceConfigReader::getAddonName(), server)
+using BackupService::BackupServiceAddon;
+
+BackupServiceAddon::BackupServiceAddon(Server::IMcServer *server, QObject *parent) :
+    QObject(parent), Addon::McServerAddonBase(BackupService::ADDON_NAME, server)
 {
     mTimer.setTimerType(Qt::VeryCoarseTimer);
     connect(&mTimer, SIGNAL(timeout()), SLOT(timeout()));
@@ -9,7 +11,7 @@ BackupServiceAddon::BackupServiceAddon(IMcServer *server, QObject *parent) :
 
 void BackupServiceAddon::preInit()
 {
-    BackupServiceConfigReader reader(getServer()->getConfig()->getAddonConfig(getName()));
+    BackupService::BackupServiceConfigReader reader(getServer()->getConfig()->getAddonConfig(getName()));
     mRunOnServerStart = reader.runOnServerStart();
     mPeriod = reader.period() * 60000; //Convert minutes to milliseconds
     mMinimumTimeBetweenBackups = reader.minimumTimeBetweenBackups();
@@ -21,17 +23,17 @@ void BackupServiceAddon::preInit()
 void BackupServiceAddon::init()
 {
     if (mConfigIsValid) {
-        if (IBackupManager *manager = getBackupManager()) {
+        if (Backup::IBackupManager *manager = getBackupManager()) {
 
             const QString serverName = getServer()->getName();
-            IConfigFile *backupConfig = getServer()->getConfig()->getBackupConfig();
+            Config::IConfigFile *backupConfig = getServer()->getConfig()->getBackupConfig();
 
-            if (IBackupProcess *process = manager->getBackupProcess(serverName, backupConfig)) {
+            if (Backup::IBackupProcess *process = manager->getBackupProcess(serverName, backupConfig)) {
                 mTimer.setInterval(mPeriod);
                 connect(process, SIGNAL(finished()), SLOT(backupFinished()));
                 mProcess = process;
 
-                mAddon = dynamic_cast<IMcscpAddon*>(getServer()->getAddon(QStringLiteral("mcscp")));
+                mAddon = dynamic_cast<Mcscp::IMcscpAddon*>(getServer()->getAddon(QStringLiteral("mcscp")));
             }
         }
     }
@@ -75,9 +77,8 @@ void BackupServiceAddon::backupFinished()
 void BackupServiceAddon::runBackup()
 {
     int timeSinceLastBackup = getBackupManager()->secsSinceLastBackup(getServer()->getName());
-    timeSinceLastBackup /= 60; //Convert to minutes
 
-    if (timeSinceLastBackup >= mMinimumTimeBetweenBackups) {
+    if (timeSinceLastBackup == -1 || timeSinceLastBackup / 60 >= mMinimumTimeBetweenBackups) {
 
         if (mAddon && mAddon->isConnected()) {
             mAddon->broadcast(QStringLiteral("&b[Backup] Running automated server backup!"));

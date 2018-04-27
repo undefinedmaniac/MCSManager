@@ -3,7 +3,9 @@
 
 #include <QObject>
 
-class IBackupProcess : public QObject
+namespace Backup { class IBackupProcess; }
+
+class Backup::IBackupProcess : public QObject
 {
     Q_OBJECT
 public:

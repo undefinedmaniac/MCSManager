@@ -3,19 +3,23 @@
 
 #include "mcsmanager/config/configglobal.h"
 
-class IMcServer;
-class IServerConfig;
 class QString;
 
-class IMcServerBuilder
+namespace Config { class IServerConfig; }
+
+namespace Server
+{
+    class IMcServer;
+    class IMcServerBuilder;
+}
+
+class Server::IMcServerBuilder
 {
 public:
     virtual ~IMcServerBuilder() {}
 
-    virtual IMcServer *getMcServer(IServerConfig *serverConfig) = 0;
-    virtual void deleteMcServer(IMcServer *server) = 0;
-
-    virtual ConfigGlobal::DefaultList getAddonDefaults() const = 0;
+    virtual Server::IMcServer *getMcServer(Config::IServerConfig *serverConfig) = 0;
+    virtual void deleteMcServer(Server::IMcServer *server) = 0;
 };
 
 #endif // IMCSERVERBUILDER_H

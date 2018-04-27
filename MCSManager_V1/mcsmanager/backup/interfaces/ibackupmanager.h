@@ -2,16 +2,23 @@
 #define IBACKUPMANAGER_H
 
 class QString;
-class IBackupProcess;
-class IConfigFile;
+class QStringList;
 
-class IBackupManager
+namespace Config { class IConfigFile; }
+
+namespace Backup
+{
+    class IBackupManager;
+    class IBackupProcess;
+}
+
+class Backup::IBackupManager
 {
 public:
     virtual ~IBackupManager() {}
 
-    virtual IBackupProcess *getBackupProcess(const QString &serverName, IConfigFile *file) = 0;
-    virtual void deleteBackupProcess(IBackupProcess *process) = 0;
+    virtual Backup::IBackupProcess *getBackupProcess(const QString &serverName, Config::IConfigFile *config) = 0;
+    virtual QStringList getBackupList(Config::IConfigFile *config);
 
     virtual int secsSinceLastBackup(const QString &serverName) = 0;
 };

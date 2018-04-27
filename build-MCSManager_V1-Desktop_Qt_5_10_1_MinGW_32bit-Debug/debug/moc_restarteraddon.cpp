@@ -20,27 +20,27 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_RestarterAddon_t {
+struct qt_meta_stringdata_Restarter__RestarterAddon_t {
     QByteArrayData data[3];
-    char stringdata0[24];
+    char stringdata0[35];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_RestarterAddon_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Restarter__RestarterAddon_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_RestarterAddon_t qt_meta_stringdata_RestarterAddon = {
+static const qt_meta_stringdata_Restarter__RestarterAddon_t qt_meta_stringdata_Restarter__RestarterAddon = {
     {
-QT_MOC_LITERAL(0, 0, 14), // "RestarterAddon"
-QT_MOC_LITERAL(1, 15, 7), // "timeout"
-QT_MOC_LITERAL(2, 23, 0) // ""
+QT_MOC_LITERAL(0, 0, 25), // "Restarter::RestarterAddon"
+QT_MOC_LITERAL(1, 26, 7), // "timeout"
+QT_MOC_LITERAL(2, 34, 0) // ""
 
     },
-    "RestarterAddon\0timeout\0"
+    "Restarter::RestarterAddon\0timeout\0"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_RestarterAddon[] = {
+static const uint qt_meta_data_Restarter__RestarterAddon[] = {
 
  // content:
        7,       // revision
@@ -62,7 +62,7 @@ static const uint qt_meta_data_RestarterAddon[] = {
        0        // eod
 };
 
-void RestarterAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Restarter::RestarterAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         RestarterAddon *_t = static_cast<RestarterAddon *>(_o);
@@ -75,28 +75,28 @@ void RestarterAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject RestarterAddon::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_RestarterAddon.data,
-      qt_meta_data_RestarterAddon,  qt_static_metacall, nullptr, nullptr}
+QT_INIT_METAOBJECT const QMetaObject Restarter::RestarterAddon::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_Restarter__RestarterAddon.data,
+      qt_meta_data_Restarter__RestarterAddon,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *RestarterAddon::metaObject() const
+const QMetaObject *Restarter::RestarterAddon::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *RestarterAddon::qt_metacast(const char *_clname)
+void *Restarter::RestarterAddon::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_RestarterAddon.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_Restarter__RestarterAddon.stringdata0))
         return static_cast<void*>(this);
-    if (!strcmp(_clname, "McServerAddonBase"))
-        return static_cast< McServerAddonBase*>(this);
+    if (!strcmp(_clname, "Addon::McServerAddonBase"))
+        return static_cast< Addon::McServerAddonBase*>(this);
     return QObject::qt_metacast(_clname);
 }
 
-int RestarterAddon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Restarter::RestarterAddon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)

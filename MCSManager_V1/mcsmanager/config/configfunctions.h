@@ -48,6 +48,6 @@ bool convertToBool(const QVariant &data);
  * @param data The string
  * @return The ShutdownBehavior
  */
-ConfigGlobal::ShutdownBehavior convertToShutdownBehavior(const QString &data);
+Config::ShutdownBehavior convertToShutdownBehavior(const QString &data);
 
 #endif // CONFIGFUNCTIONS_H

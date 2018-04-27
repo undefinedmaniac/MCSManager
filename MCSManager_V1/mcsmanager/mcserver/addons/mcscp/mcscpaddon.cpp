@@ -1,22 +1,21 @@
 #include "mcscpaddon.h"
 
+using Mcscp::McscpAddon;
+
 const QRegularExpression McscpAddon::SERVER_UPDATE_MATCHER(QStringLiteral("(?i)\\[UPDATE]:\\[KEY:(.*)]:\\[VALUE:(.*)]")),
                          McscpAddon::PLAYER_UPDATE_MATCHER(QStringLiteral("(?i)\\[UPDATE]:\\[KEY:PLAYER:(.*)]:\\[UUID:(.*)]:\\[VALUE:(.*)]")),
                          McscpAddon::PLAYER_EVENT_MATCHER(QStringLiteral("(?i)\\[EVENT]:\\[TYPE:(.*)]:\\[UUID:(.*)]")),
                          McscpAddon::MESSAGE_EVENT_MATCHER(QStringLiteral("(?i)\\[EVENT]:\\[TYPE:(.*)]:\\[UUID:(.*)]:\\[MESSAGE:(.*)]")),
                          McscpAddon::SERVER_LOG_MATCHER(QStringLiteral("(?i)\\[LOG]:\\[DATA:(.*)]"));
 
-McscpAddon::McscpAddon(IMcServer *server, QObject *parent) :
-    IMcscpAddon(parent), McServerAddonBase(McscpConfigReader::getAddonName(), server)
+McscpAddon::McscpAddon(Server::IMcServer *server, QObject *parent) :
+    IMcscpAddon(parent), McServerAddonBase(Mcscp::ADDON_NAME, server)
 {
     connect(&mSocket, SIGNAL(connected()), SLOT(clientConnected()));
     connect(&mSocket, SIGNAL(disconnected()), SLOT(clientDisconnected()));
     connect(&mSocket, SIGNAL(error(QAbstractSocket::SocketError)),
             SLOT(error(QAbstractSocket::SocketError)));
-    connect(&mSocket, SIGNAL(stateChanged(QAbstractSocket::SocketState)),
-            SLOT(stateChanged(QAbstractSocket::SocketState)));
 
-    connect(&mSocket, SIGNAL(bytesWritten(qint64)), SLOT(bytesWritten(qint64)));
     connect(&mSocket, SIGNAL(readyRead()), SLOT(readyRead()));
 
     connect(&mConnectionTimer, SIGNAL(timeout()), SLOT(attemptConnection()));
@@ -71,7 +70,7 @@ void McscpAddon::stopServer()
 
 void McscpAddon::preInit()
 {
-    McscpConfigReader reader(getServer()->getConfig()->getAddonConfig(getName()));
+    Mcscp::McscpConfigReader reader(getServer()->getConfig()->getAddonConfig(getName()));
     mAddress = reader.address();
     mPort = reader.port();
 }
@@ -107,7 +106,6 @@ void McscpAddon::attemptConnection()
 
 void McscpAddon::clientConnected()
 {
-    qDebug() << "MCSCP Connected!";
     mHandshake.reset();
 }
 
@@ -115,7 +113,6 @@ void McscpAddon::clientConnected()
 //"That hasen't happened for the longest time" - Billy Joel
 void McscpAddon::clientDisconnected()
 {
-    qDebug() << "MCSCP Disconnected!";
     foreach (const QString &uuid, mPlayerTables.keys())
         playerDisconnected(uuid);
     mServerLog.clear();
@@ -126,8 +123,10 @@ void McscpAddon::error(QAbstractSocket::SocketError error)
 {
     if (error == QAbstractSocket::ConnectionRefusedError)
         delayedConnection(5000);
-    else
-        qDebug() << "MCSCP Error:" << mSocket.errorString();
+    else if (error == QAbstractSocket::RemoteHostClosedError)
+        return;
+
+   qDebug() << "MCSCP Error:" << mSocket.errorString();
 }
 
 void McscpAddon::readyRead()

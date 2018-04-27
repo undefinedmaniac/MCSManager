@@ -20,28 +20,29 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_BackupServiceAddon_t {
+struct qt_meta_stringdata_BackupService__BackupServiceAddon_t {
     QByteArrayData data[4];
-    char stringdata0[43];
+    char stringdata0[58];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_BackupServiceAddon_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_BackupService__BackupServiceAddon_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_BackupServiceAddon_t qt_meta_stringdata_BackupServiceAddon = {
+static const qt_meta_stringdata_BackupService__BackupServiceAddon_t qt_meta_stringdata_BackupService__BackupServiceAddon = {
     {
-QT_MOC_LITERAL(0, 0, 18), // "BackupServiceAddon"
-QT_MOC_LITERAL(1, 19, 7), // "timeout"
-QT_MOC_LITERAL(2, 27, 0), // ""
-QT_MOC_LITERAL(3, 28, 14) // "backupFinished"
+QT_MOC_LITERAL(0, 0, 33), // "BackupService::BackupServiceA..."
+QT_MOC_LITERAL(1, 34, 7), // "timeout"
+QT_MOC_LITERAL(2, 42, 0), // ""
+QT_MOC_LITERAL(3, 43, 14) // "backupFinished"
 
     },
-    "BackupServiceAddon\0timeout\0\0backupFinished"
+    "BackupService::BackupServiceAddon\0"
+    "timeout\0\0backupFinished"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_BackupServiceAddon[] = {
+static const uint qt_meta_data_BackupService__BackupServiceAddon[] = {
 
  // content:
        7,       // revision
@@ -65,7 +66,7 @@ static const uint qt_meta_data_BackupServiceAddon[] = {
        0        // eod
 };
 
-void BackupServiceAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void BackupService::BackupServiceAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         BackupServiceAddon *_t = static_cast<BackupServiceAddon *>(_o);
@@ -79,28 +80,28 @@ void BackupServiceAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject BackupServiceAddon::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_BackupServiceAddon.data,
-      qt_meta_data_BackupServiceAddon,  qt_static_metacall, nullptr, nullptr}
+QT_INIT_METAOBJECT const QMetaObject BackupService::BackupServiceAddon::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_BackupService__BackupServiceAddon.data,
+      qt_meta_data_BackupService__BackupServiceAddon,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *BackupServiceAddon::metaObject() const
+const QMetaObject *BackupService::BackupServiceAddon::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *BackupServiceAddon::qt_metacast(const char *_clname)
+void *BackupService::BackupServiceAddon::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_BackupServiceAddon.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_BackupService__BackupServiceAddon.stringdata0))
         return static_cast<void*>(this);
-    if (!strcmp(_clname, "McServerAddonBase"))
-        return static_cast< McServerAddonBase*>(this);
+    if (!strcmp(_clname, "Addon::McServerAddonBase"))
+        return static_cast< Addon::McServerAddonBase*>(this);
     return QObject::qt_metacast(_clname);
 }
 
-int BackupServiceAddon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int BackupService::BackupServiceAddon::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)

@@ -1,12 +1,14 @@
 #include <QCoreApplication>
 
-#include "mcsmanager/core/mcsmanagercore.h"
+#include "mcsmanager/mcsmanagerapplication.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
+    Application::McsManagerApplication application;
 
+    application.start();
 
     return a.exec();
 }

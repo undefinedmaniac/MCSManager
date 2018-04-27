@@ -1,39 +1,22 @@
 #include "sleeperconfigreader.h"
 
-const QString SleeperConfigReader::ADDON_NAME = QStringLiteral("sleeper"),
-              SleeperConfigReader::PERIOD_KEY = QStringLiteral("period"),
-              SleeperConfigReader::SHUTDOWN_BEHAVIOR_KEY = QStringLiteral("shutdownBehavior"),
-              SleeperConfigReader::ALTERNATIVE_SERVER_KEY = QStringLiteral("alternativeServer");
+using Sleeper::SleeperConfigReader;
 
-SleeperConfigReader::SleeperConfigReader(IConfigFile *config) : mConfig(config)
+SleeperConfigReader::SleeperConfigReader(Config::IConfigFile *config) : mConfig(config)
 {
 }
 
 QString SleeperConfigReader::alternativeServer() const
 {
-    return mConfig->readString(ALTERNATIVE_SERVER_KEY);
+    return mConfig->readString(Sleeper::ALTERNATIVE_SERVER_KEY);
 }
 
-QString SleeperConfigReader::getAddonName()
+float SleeperConfigReader::period() const
 {
-    return ADDON_NAME;
+    return mConfig->readDouble(Sleeper::PERIOD_KEY);
 }
 
-int SleeperConfigReader::period() const
+Config::ShutdownBehavior SleeperConfigReader::shutdownBehavior() const
 {
-    return mConfig->readDouble(PERIOD_KEY);
-}
-
-ConfigGlobal::ShutdownBehavior SleeperConfigReader::shutdownBehavior() const
-{
-    return convertToShutdownBehavior(mConfig->readString(SHUTDOWN_BEHAVIOR_KEY));
-}
-
-ConfigGlobal::ConfigData SleeperConfigReader::getDefaults()
-{
-    ConfigGlobal::ConfigData data;
-    data.append(qMakePair(PERIOD_KEY, QStringLiteral("60")));
-    data.append(qMakePair(SHUTDOWN_BEHAVIOR_KEY, QStringLiteral("DoNothing")));
-    data.append(qMakePair(ALTERNATIVE_SERVER_KEY, QStringLiteral("")));
-    return data;
+    return convertToShutdownBehavior(mConfig->readString(Sleeper::SHUTDOWN_BEHAVIOR_KEY));
 }

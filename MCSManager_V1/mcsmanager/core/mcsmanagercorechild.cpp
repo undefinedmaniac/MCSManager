@@ -1,15 +1,17 @@
 #include "mcsmanagercorechild.h"
 
+using Core::McsManagerCoreChild;
+
 McsManagerCoreChild::McsManagerCoreChild(IMcsManagerCore *core) : mCore(core)
 {
 }
 
-IMcsManagerCore *McsManagerCoreChild::getCore()
+Core::IMcsManagerCore *McsManagerCoreChild::getCore()
 {
     return mCore;
 }
 
-IConfigManager *McsManagerCoreChild::getConfigManager()
+Config::IConfigManager *McsManagerCoreChild::getConfigManager()
 {
     if (mCore)
         return mCore->getConfigManager();
@@ -17,7 +19,7 @@ IConfigManager *McsManagerCoreChild::getConfigManager()
     return nullptr;
 }
 
-IBackupManager *McsManagerCoreChild::getBackupManager()
+Backup::IBackupManager *McsManagerCoreChild::getBackupManager()
 {
     if (mCore)
         return mCore->getBackupManager();
@@ -25,7 +27,7 @@ IBackupManager *McsManagerCoreChild::getBackupManager()
     return nullptr;
 }
 
-IMcServerBuilder *McsManagerCoreChild::getServerBuilder()
+Server::IMcServerBuilder *McsManagerCoreChild::getServerBuilder()
 {
     if (mCore)
         return mCore->getServerBuilder();
@@ -33,7 +35,7 @@ IMcServerBuilder *McsManagerCoreChild::getServerBuilder()
     return nullptr;
 }
 
-IMcServer *McsManagerCoreChild::getCurrentServer()
+Server::IMcServer *McsManagerCoreChild::getCurrentServer()
 {
     if (mCore)
         return mCore->getCurrentServer();

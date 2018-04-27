@@ -3,19 +3,21 @@
 
 #include "serverconfig.h"
 
-class ServerConfigFactory
+namespace Config { class ServerConfigFactory; }
+
+class Config::ServerConfigFactory
 {
 public:
     ServerConfigFactory();
     virtual ~ServerConfigFactory();
 
 protected:
-    ServerConfig *getServerConfig(const QString &name, const QString &folderPath,
-                                  const QHash<QString, ConfigGlobal::ConfigData> &registeredAddons =
-                                  QHash<QString, ConfigGlobal::ConfigData>());
+    Config::ServerConfig *getServerConfig(const QString &name, const QString &folderPath,
+                                          const QHash<QString, Config::ConfigData> &registeredAddons =
+                                          QHash<QString, Config::ConfigData>());
 
 private:
-    QVector<IServerConfig *> mServerConfigs;
+    QVector<Config::IServerConfig*> mServerConfigs;
 };
 
 #endif // SERVERCONFIGFACTORY_H

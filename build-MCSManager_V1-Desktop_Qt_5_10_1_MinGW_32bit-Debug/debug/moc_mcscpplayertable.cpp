@@ -20,25 +20,25 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_McscpPlayerTable_t {
+struct qt_meta_stringdata_Mcscp__McscpPlayerTable_t {
     QByteArrayData data[1];
-    char stringdata0[17];
+    char stringdata0[24];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_McscpPlayerTable_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Mcscp__McscpPlayerTable_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_McscpPlayerTable_t qt_meta_stringdata_McscpPlayerTable = {
+static const qt_meta_stringdata_Mcscp__McscpPlayerTable_t qt_meta_stringdata_Mcscp__McscpPlayerTable = {
     {
-QT_MOC_LITERAL(0, 0, 16) // "McscpPlayerTable"
+QT_MOC_LITERAL(0, 0, 23) // "Mcscp::McscpPlayerTable"
 
     },
-    "McscpPlayerTable"
+    "Mcscp::McscpPlayerTable"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_McscpPlayerTable[] = {
+static const uint qt_meta_data_Mcscp__McscpPlayerTable[] = {
 
  // content:
        7,       // revision
@@ -54,7 +54,7 @@ static const uint qt_meta_data_McscpPlayerTable[] = {
        0        // eod
 };
 
-void McscpPlayerTable::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Mcscp::McscpPlayerTable::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     Q_UNUSED(_o);
     Q_UNUSED(_id);
@@ -62,26 +62,26 @@ void McscpPlayerTable::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject McscpPlayerTable::staticMetaObject = {
-    { &IMcscpPlayerTable::staticMetaObject, qt_meta_stringdata_McscpPlayerTable.data,
-      qt_meta_data_McscpPlayerTable,  qt_static_metacall, nullptr, nullptr}
+QT_INIT_METAOBJECT const QMetaObject Mcscp::McscpPlayerTable::staticMetaObject = {
+    { &IMcscpPlayerTable::staticMetaObject, qt_meta_stringdata_Mcscp__McscpPlayerTable.data,
+      qt_meta_data_Mcscp__McscpPlayerTable,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *McscpPlayerTable::metaObject() const
+const QMetaObject *Mcscp::McscpPlayerTable::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *McscpPlayerTable::qt_metacast(const char *_clname)
+void *Mcscp::McscpPlayerTable::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_McscpPlayerTable.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_Mcscp__McscpPlayerTable.stringdata0))
         return static_cast<void*>(this);
     return IMcscpPlayerTable::qt_metacast(_clname);
 }
 
-int McscpPlayerTable::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Mcscp::McscpPlayerTable::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = IMcscpPlayerTable::qt_metacall(_c, _id, _a);
     return _id;

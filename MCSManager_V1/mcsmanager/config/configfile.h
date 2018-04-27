@@ -6,7 +6,9 @@
 
 #include <QSettings>
 
-class ConfigFile : public IConfigFile
+namespace Config { class ConfigFile; }
+
+class Config::ConfigFile : public Config::IConfigFile
 {
 public:
     ConfigFile(const QString &filePath);
@@ -22,7 +24,7 @@ public:
     void writeBool(const QString &key, bool value) override;
     void writeDouble(const QString &key, double value) override;
 
-    void applyDefaults(const ConfigGlobal::ConfigData &defaults) override;
+    void applyDefaults(const Config::ConfigData &defaults) override;
 
 private:
     QSettings mSettings;

@@ -5,7 +5,9 @@
 
 #include <QObject>
 
-class McscpServerTable : public IMcscpServerTable
+namespace Mcscp { class McscpServerTable; }
+
+class Mcscp::McscpServerTable : public IMcscpServerTable
 {
     Q_OBJECT
 public:

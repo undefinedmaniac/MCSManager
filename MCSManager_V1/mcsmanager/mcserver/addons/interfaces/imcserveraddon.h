@@ -2,15 +2,18 @@
 #define IMCSERVERADDON_H
 
 class QString;
-class IMcServer;
 
-class IMcServerAddon
+namespace Server { class IMcServer; }
+
+namespace Addon { class IMcServerAddon; }
+
+class Addon::IMcServerAddon
 {
 public:
     virtual ~IMcServerAddon() {}
 
     virtual QString getName() const = 0;
-    virtual IMcServer *getServer() = 0;
+    virtual Server::IMcServer *getServer() = 0;
 
     virtual void preInit() = 0;
     virtual void init() = 0;

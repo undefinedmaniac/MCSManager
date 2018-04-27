@@ -1,7 +1,9 @@
 #include "sleeperaddon.h"
 
-SleeperAddon::SleeperAddon(IMcServer *server, QObject *parent) :
-    QObject(parent), McServerAddonBase(SleeperConfigReader::getAddonName(), server)
+using Sleeper::SleeperAddon;
+
+SleeperAddon::SleeperAddon(Server::IMcServer *server, QObject *parent) :
+    QObject(parent), Addon::McServerAddonBase(Sleeper::ADDON_NAME, server)
 {
     mTimer.setTimerType(Qt::VeryCoarseTimer);
     mTimer.setSingleShot(true);
@@ -10,7 +12,7 @@ SleeperAddon::SleeperAddon(IMcServer *server, QObject *parent) :
 
 void SleeperAddon::preInit()
 {
-    SleeperConfigReader reader(getServer()->getConfig()->getAddonConfig(getName()));
+    Sleeper::SleeperConfigReader reader(getServer()->getConfig()->getAddonConfig(getName()));
 
     mPeriod = reader.period() * 60000; //Convert minutes to milliseconds
     mShutdownBehavior = reader.shutdownBehavior();
@@ -22,8 +24,10 @@ void SleeperAddon::preInit()
 
 void SleeperAddon::init()
 {
+    using Mcscp::IMcscpAddon;
+
     if (mConfigIsValid) {
-        IMcscpAddon *mcscpAddon = dynamic_cast<IMcscpAddon*>(getServer()->getAddon(QStringLiteral("mcscp")));
+        IMcscpAddon *mcscpAddon = dynamic_cast<IMcscpAddon*>(getServer()->getAddon(Mcscp::ADDON_NAME));
         if (mcscpAddon) {
             mTable = mcscpAddon->getServerTable();
 
@@ -63,11 +67,11 @@ void SleeperAddon::playerCountChanged(IMcscpServerTable::Key key)
 void SleeperAddon::sleepTimerExpired()
 {
     switch (mShutdownBehavior) {
-    case ConfigGlobal::Restart:
+    case Config::Restart:
         getServer()->restart();
         break;
-    case ConfigGlobal::StartAltServer:
-        if (IMcsManagerCore *core = getCore())
+    case Config::StartAltServer:
+        if (Core::IMcsManagerCore *core = getCore())
             core->startServer(mAltServer);
         break;
     default:

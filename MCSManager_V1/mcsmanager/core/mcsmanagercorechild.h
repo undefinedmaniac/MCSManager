@@ -3,21 +3,23 @@
 
 #include "interfaces/imcsmanagercore.h"
 
-class McsManagerCoreChild
+namespace Core { class McsManagerCoreChild; }
+
+class Core::McsManagerCoreChild
 {
 public:
     McsManagerCoreChild(IMcsManagerCore *core);
     virtual ~McsManagerCoreChild() {}
 
 protected:
-    IMcsManagerCore *getCore();
-    IConfigManager *getConfigManager();
-    IBackupManager *getBackupManager();
-    IMcServerBuilder *getServerBuilder();
-    IMcServer *getCurrentServer();
+    Core::IMcsManagerCore *getCore();
+    Config::IConfigManager *getConfigManager();
+    Backup::IBackupManager *getBackupManager();
+    Server::IMcServerBuilder *getServerBuilder();
+    Server::IMcServer *getCurrentServer();
 
 private:
-    IMcsManagerCore *mCore;
+    Core::IMcsManagerCore *mCore;
 };
 
 #endif // MCSMANAGERCORECHILD_H

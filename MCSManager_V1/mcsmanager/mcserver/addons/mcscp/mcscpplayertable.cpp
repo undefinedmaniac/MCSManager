@@ -1,5 +1,7 @@
 #include "mcscpplayertable.h"
 
+using Mcscp::McscpPlayerTable;
+
 McscpPlayerTable::McscpPlayerTable(QObject *object) : IMcscpPlayerTable(object)
 {
 }

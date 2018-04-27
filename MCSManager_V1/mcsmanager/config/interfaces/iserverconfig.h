@@ -2,10 +2,15 @@
 #define ISERVERCONFIG_H
 
 class QString;
-class IConfigFile;
 class QStringList;
 
-class IServerConfig
+namespace Config
+{
+    class IServerConfig;
+    class IConfigFile;
+}
+
+class Config::IServerConfig
 {
 public:
     virtual ~IServerConfig() {}
@@ -20,20 +25,20 @@ public:
      * @brief getServerConfig Gets the server config file
      * @return The server config if available, otherwise nullptr
      */
-    virtual IConfigFile *getServerConfig() = 0;
+    virtual Config::IConfigFile *getServerConfig() = 0;
 
     /**
      * @brief getBackupConfig Gets the backup config file
      * @return The backup config if available, otherwise nullptr
      */
-    virtual IConfigFile *getBackupConfig() = 0;
+    virtual Config::IConfigFile *getBackupConfig() = 0;
 
     /**
      * @brief getAddonConfig Gets an addon config file
      * @param addonName The addon name
      * @return The addon config if available, otherwise nullptr
      */
-    virtual IConfigFile *getAddonConfig(const QString &addonName) = 0;
+    virtual Config::IConfigFile *getAddonConfig(const QString &addonName) = 0;
 
     /**
      * @brief getEnabledAddons Gets a list of the enabled addons

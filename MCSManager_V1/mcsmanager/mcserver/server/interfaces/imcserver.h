@@ -2,31 +2,42 @@
 #define IMCSERVER_H
 
 class QString;
-class IMcServerAddon;
-class IServerConfig;
 class QStringList;
-class IMcsManagerCore;
-class IConfigManager;
-class IBackupManager;
-class IMcServerBuilder;
+namespace Server { class IMcServerBuilder; }
+namespace Core { class IMcsManagerCore; }
+namespace Backup { class IBackupManager; }
+
+namespace Config
+{
+    class IServerConfig;
+    class IConfigManager;
+}
+
+namespace Addon
+{
+    class McServerAddonBase;
+    class IMcServerAddon;
+}
 
 #include <QObject>
 
-class IMcServer : public QObject
+namespace Server { class IMcServer; }
+
+class Server::IMcServer : public QObject
 {
     Q_OBJECT
 public:
-    friend class McServerAddonBase;
+    friend class Addon::McServerAddonBase;
 
     IMcServer(QObject *parent = nullptr) : QObject(parent) {}
     virtual ~IMcServer() {}
 
     virtual QString getName() const = 0;
-    virtual IServerConfig *getConfig() = 0;
+    virtual Config::IServerConfig *getConfig() = 0;
 
-    virtual void addAddon(IMcServerAddon *addon) = 0;
+    virtual void addAddon(Addon::IMcServerAddon *addon) = 0;
     virtual void removeAddon(const QString &addonName) = 0;
-    virtual IMcServerAddon *getAddon(const QString &addonName) = 0;
+    virtual Addon::IMcServerAddon *getAddon(const QString &addonName) = 0;
     virtual QStringList getAddonList() const = 0;
 
     virtual void start() = 0;
@@ -41,10 +52,10 @@ signals:
     void error(QString errorMessage);
 
 protected:
-    virtual IMcsManagerCore *getCore() = 0;
-    virtual IConfigManager *getConfigManager() = 0;
-    virtual IBackupManager *getBackupManager() = 0;
-    virtual IMcServerBuilder *getServerBuilder() = 0;
+    virtual Core::IMcsManagerCore *getCore() = 0;
+    virtual Config::IConfigManager *getConfigManager() = 0;
+    virtual Backup::IBackupManager *getBackupManager() = 0;
+    virtual Server::IMcServerBuilder *getServerBuilder() = 0;
 };
 
 #endif // IMCSERVER_H

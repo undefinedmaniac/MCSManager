@@ -5,7 +5,9 @@
 
 class QString;
 
-class IConfigFile
+namespace Config { class IConfigFile; }
+
+class Config::IConfigFile
 {
 public:
     virtual ~IConfigFile() {}
@@ -63,7 +65,7 @@ public:
      * config file
      * @param defaults The list of default keys and values
      */
-    virtual void applyDefaults(const ConfigGlobal::ConfigData &defaults) = 0;
+    virtual void applyDefaults(const Config::ConfigData &defaults) = 0;
 };
 
 #endif // ICONFIGFILE_H

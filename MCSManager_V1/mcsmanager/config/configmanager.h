@@ -6,6 +6,7 @@
 #include "configfunctions.h"
 #include "configfilefactory.h"
 #include "serverconfigfactory.h"
+#include "mcsmanager/core/mcsmanagercorechild.h"
 
 #include <QDir>
 #include <QHash>
@@ -14,31 +15,34 @@
 #include <QDirIterator>
 #include <QString>
 
-class ConfigManager : public ServerConfigFactory, public ConfigFileFactory, public IConfigManager
+namespace Config { class ConfigManager; }
+
+class Config::ConfigManager : public Config::ServerConfigFactory,
+        public Config::ConfigFileFactory, public Core::McsManagerCoreChild, public Config::IConfigManager
 {
 public:
-    ConfigManager();
+    ConfigManager(Core::IMcsManagerCore *core);
 
     // IConfigManager interface
-    void registerAddon(const QString &addonName, const ConfigGlobal::ConfigData &defaults) override;
+    void registerAddon(const QString &addonName, const Config::ConfigData &defaults) override;
 
-    void setAppConfigDefaults(const ConfigGlobal::ConfigData &defaults) override;
-    void setServerConfigDefaults(const ConfigGlobal::ConfigData &defaults) override;
-    void setBackupConfigDefaults(const ConfigGlobal::ConfigData &defaults) override;
+    void setAppConfigDefaults(const Config::ConfigData &defaults) override;
+    void setServerConfigDefaults(const Config::ConfigData &defaults) override;
+    void setBackupConfigDefaults(const Config::ConfigData &defaults) override;
 
     void loadConfigs(const QString &configDirectory) override;
 
-    IConfigFile *getAppConfig() override;
-    IServerConfig *getServerConfig(const QString &serverName) override;
+    Config::IConfigFile *getAppConfig() override;
+    Config::IServerConfig *getServerConfig(const QString &serverName) override;
 
     QStringList getServerList() const override;
 
 private:
-    ConfigGlobal::ConfigData mAppDefaults, mServerDefaults, mBackupDefaults;
-    QHash<QString, ConfigGlobal::ConfigData> mRegisteredAddons;
+    Config::ConfigData mAppDefaults, mServerDefaults, mBackupDefaults;
+    QHash<QString, Config::ConfigData> mRegisteredAddons;
 
-    IConfigFile *mAppConfig = nullptr;
-    QHash<QString, IServerConfig *> mServerConfigs;
+    Config::IConfigFile *mAppConfig = nullptr;
+    QHash<QString, Config::IServerConfig *> mServerConfigs;
 
     static const QString PRIMARY_CONFIG_NAME,
                          BACKUP_CONFIG_NAME,

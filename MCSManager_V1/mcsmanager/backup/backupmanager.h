@@ -8,21 +8,27 @@
 #include "mcsmanager/mcserver/server/interfaces/imcserver.h"
 #include "mcsmanager/mcserver/addons/mcscp/interfaces/imcscpaddon.h"
 #include "mcsmanager/mcserver/addons/interfaces/imcserveraddon.h"
+#include "mcsmanager/mcserver/addons/mcscp/mcscpglobal.h"
 #include "backupprocess.h"
 #include "backupconfigreader.h"
 
 #include <QHash>
 #include <QTime>
 #include <QVector>
+#include <QDebug>
+#include <QDir>
 
-class BackupManager : public QObject, public IBackupManager, public McsManagerCoreChild
+namespace Backup { class BackupManager; }
+
+class Backup::BackupManager : public QObject, public Backup::IBackupManager, public Core::McsManagerCoreChild
 {
     Q_OBJECT
 public:
-    BackupManager(IMcsManagerCore *core);
+    BackupManager(Core::IMcsManagerCore *core);
 
     // IBackupManager interface
-    IBackupProcess *getBackupProcess(const QString &serverName, IConfigFile *file) override;
+    Backup::IBackupProcess *getBackupProcess(const QString &serverName, Config::IConfigFile *config) override;
+    QStringList getBackupList(Config::IConfigFile *config) override;
 
     int secsSinceLastBackup(const QString &serverName) override;
 

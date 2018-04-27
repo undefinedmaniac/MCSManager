@@ -1,5 +1,7 @@
 #include "backupprocess.h"
 
+using Backup::BackupProcess;
+
 #ifdef Q_OS_WIN
     const QString BackupProcess::SEVEN_ZIP_EXECUTABLE = QStringLiteral("7za.exe");
 #elif Q_OS_LINUX
@@ -71,6 +73,7 @@ void BackupProcess::stepFinished()
 
         mState = CreateBz2;
         mProcess.start(SEVEN_ZIP_EXECUTABLE, arguments);
+        break;
     }
     case CreateBz2: {
         QStringList arguments;

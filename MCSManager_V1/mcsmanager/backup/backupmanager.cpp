@@ -1,21 +1,31 @@
 #include "backupmanager.h"
 
-BackupManager::BackupManager(IMcsManagerCore *core) : McsManagerCoreChild(core)
+using Backup::BackupManager;
+
+BackupManager::BackupManager(Core::IMcsManagerCore *core) : McsManagerCoreChild(core)
 {
 }
 
-IBackupProcess *BackupManager::getBackupProcess(const QString &serverName, IConfigFile *file)
+Backup::IBackupProcess *BackupManager::getBackupProcess(const QString &serverName, Config::IConfigFile *config)
 {    
-    BackupConfigReader reader(file);
+    Backup::BackupConfigReader reader(config);
 
-    BackupProcess *process = new BackupProcess(this);
+    Backup::BackupProcess *process = new Backup::BackupProcess(this);
     process->setServer(serverName);
     process->setSources(reader.sources());
     process->setDestination(reader.destination());
 
+    connect(process, SIGNAL(aboutToStart()), SLOT(processAboutToStart()));
     connect(process, SIGNAL(finished()), SLOT(processFinished()));
 
     return process;
+}
+
+QStringList BackupManager::getBackupList(Config::IConfigFile *config)
+{
+    Backup::BackupConfigReader reader(config);
+    QDir destination(reader.destination(), QStringLiteral(".tar.bz2"), filter = QDir::Dirs | QDir::NoDotAndDotDot);
+    return destination.entryList();
 }
 
 int BackupManager::secsSinceLastBackup(const QString &serverName)
@@ -31,19 +41,24 @@ int BackupManager::secsSinceLastBackup(const QString &serverName)
 
 void BackupManager::processAboutToStart()
 {
-    BackupProcess *process = dynamic_cast<BackupProcess*>(sender());
-    IMcServer *server = getCurrentServer();
+    using Mcscp::IMcscpAddon;
+
+    qDebug() << "Process about to start!";
+
+    Backup::BackupProcess *process = dynamic_cast<Backup::BackupProcess*>(sender());
+    Server::IMcServer *server = getCurrentServer();
 
     if (process && server && process->getServer() == server->getName()) {
-        IMcscpAddon *mcscpAddon = dynamic_cast<IMcscpAddon*>(server->getAddon(QStringLiteral("mcscp")));
-        if (mcscpAddon)
+        qDebug() << "Sending save-all";
+        IMcscpAddon *mcscpAddon = dynamic_cast<IMcscpAddon*>(server->getAddon(Mcscp::ADDON_NAME));
+        if (mcscpAddon && mcscpAddon->isConnected())
             mcscpAddon->sendToConsole(QStringLiteral("save-all"));
     }
 }
 
 void BackupManager::processFinished()
 {
-    BackupProcess *process = dynamic_cast<BackupProcess*>(sender());
+    Backup::BackupProcess *process = dynamic_cast<Backup::BackupProcess*>(sender());
     if (process)
         mBackupTimes.insert(process->getServer(), QTime::currentTime());
 }

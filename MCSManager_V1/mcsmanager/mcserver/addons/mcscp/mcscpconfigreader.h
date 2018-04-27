@@ -1,29 +1,24 @@
 #ifndef MCSCPCONFIGREADER_H
 #define MCSCPCONFIGREADER_H
 
+#include "mcscpglobal.h"
 #include "mcsmanager/config/interfaces/iconfigfile.h"
 #include "mcsmanager/config/configfunctions.h"
 
 #include <QString>
 
-class McscpConfigReader
+namespace Mcscp { class McscpConfigReader; }
+
+class Mcscp::McscpConfigReader
 {
 public:
-    McscpConfigReader(IConfigFile *config);
+    McscpConfigReader(Config::IConfigFile *config);
 
     QString address() const;
     int port() const;
 
-    static QString getAddonName();
-    static ConfigGlobal::ConfigData getDefaults();
-
 private:
-    IConfigFile *mConfig;
-
-    //McscpConfigReader constants
-    static const QString ADDON_NAME,
-                         ADDRESS_KEY,
-                         PORT_KEY;
+    Config::IConfigFile *mConfig;
 };
 
 #endif // MCSCPCONFIGREADER_H

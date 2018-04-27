@@ -1,5 +1,7 @@
 #include "mcscphandshake.h"
 
+using Mcscp::McscpHandshake;
+
 const QRegularExpression McscpHandshake::PROTOCOL_MATCHER(QStringLiteral("\\[HANDSHAKE]:\\[PROTOCOL:(.*)]"));
 
 const QString McscpHandshake::PROTOCOL = QStringLiteral("MCSCPV1.0.0");

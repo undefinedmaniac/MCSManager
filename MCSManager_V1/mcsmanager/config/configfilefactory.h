@@ -5,7 +5,9 @@
 
 #include <QVector>
 
-class ConfigFileFactory
+namespace Config { class ConfigFileFactory; }
+
+class Config::ConfigFileFactory
 {
 public:
     ConfigFileFactory();
@@ -19,10 +21,10 @@ protected:
      * @param filePath The filepath for the file
      * @return The config file
      */
-    virtual ConfigFile *getConfigFile(const QString &filePath);
+    virtual Config::ConfigFile *getConfigFile(const QString &filePath);
 
 private:
-    QVector<IConfigFile *> mConfigFiles;
+    QVector<Config::IConfigFile *> mConfigFiles;
 };
 
 #endif // CONFIGFILEFACTORY_H

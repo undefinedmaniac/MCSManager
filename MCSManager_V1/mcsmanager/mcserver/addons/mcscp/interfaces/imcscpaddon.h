@@ -8,7 +8,9 @@ class QStringList;
 
 #include <QObject>
 
-class IMcscpAddon : public QObject
+namespace Mcscp { class IMcscpAddon; }
+
+class Mcscp::IMcscpAddon : public QObject
 {
     Q_OBJECT
 public:

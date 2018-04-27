@@ -1,17 +1,20 @@
 #include "mcserver.h"
 
-McServer::McServer(IServerConfig *config, IMcsManagerCore *core, QObject *parent) :
+using Server::McServer;
+
+McServer::McServer(Config::IServerConfig *config, Core::IMcsManagerCore *core, QObject *parent) :
     IMcServer(parent), McsManagerCoreChild(core), mConfig(config)
 {
-    ServerConfigReader reader(config->getServerConfig());
+    Server::ServerConfigReader reader(config->getServerConfig());
 
     mProcess.setProgram(reader.javaPath());
     mProcess.setWorkingDirectory(reader.workingDirectory());
 
     QStringList arguments;
+    arguments.append(reader.beforeArguments());
     arguments.append(QStringLiteral("-jar"));
     arguments.append(reader.jarName());
-    arguments.append(reader.arguments());
+    arguments.append(reader.afterArguments());
     mProcess.setArguments(arguments);
 
     mIsRealServer = reader.isRealServer();
@@ -30,7 +33,7 @@ McServer::~McServer()
         mProcess.waitForFinished(-1);
     }
 
-    foreach (IMcServerAddon *addon, mAddons)
+    foreach (Addon::IMcServerAddon *addon, mAddons)
         deleteAddon(addon);
 }
 
@@ -39,12 +42,12 @@ QString McServer::getName() const
     return mConfig->getServerName();
 }
 
-IServerConfig *McServer::getConfig()
+Config::IServerConfig *McServer::getConfig()
 {
     return mConfig;
 }
 
-void McServer::addAddon(IMcServerAddon *addon)
+void McServer::addAddon(Addon::IMcServerAddon *addon)
 {
     if (!addon)
         return;
@@ -57,7 +60,7 @@ void McServer::removeAddon(const QString &addonName)
     mAddons.remove(addonName);
 }
 
-IMcServerAddon *McServer::getAddon(const QString &addonName)
+Addon::IMcServerAddon *McServer::getAddon(const QString &addonName)
 {
     return mAddons.value(addonName, nullptr);
 }
@@ -105,22 +108,22 @@ bool McServer::isRunning() const
     return (mProcess.state() == QProcess::Running);
 }
 
-IMcsManagerCore *McServer::getCore()
+Core::IMcsManagerCore *McServer::getCore()
 {
     return McsManagerCoreChild::getCore();
 }
 
-IConfigManager *McServer::getConfigManager()
+Config::IConfigManager *McServer::getConfigManager()
 {
     return McsManagerCoreChild::getConfigManager();
 }
 
-IBackupManager *McServer::getBackupManager()
+Backup::IBackupManager *McServer::getBackupManager()
 {
     return McsManagerCoreChild::getBackupManager();
 }
 
-IMcServerBuilder *McServer::getServerBuilder()
+Server::IMcServerBuilder *McServer::getServerBuilder()
 {
     return McsManagerCoreChild::getServerBuilder();
 }
@@ -154,14 +157,14 @@ void McServer::serverStopped(int exitCode, QProcess::ExitStatus exitStatus)
                 start();
             } else {
                 switch (mShutdownBehavior) {
-                case ConfigGlobal::DoNothing:
+                case Config::DoNothing:
                     break;
-                case ConfigGlobal::Restart:
+                case Config::Restart:
                     qDebug() << "Restarting!";
                     start();
                     break;
-                case ConfigGlobal::StartAltServer:
-                    if (IMcsManagerCore *core = getCore())
+                case Config::StartAltServer:
+                    if (Core::IMcsManagerCore *core = getCore())
                         core->startServer(mAltServer);
                     break;
                 }
@@ -205,9 +208,11 @@ void McServer::serverErrorOccurred(QProcess::ProcessError errorType)
 
 void McServer::stopServer()
 {
+    using Mcscp::IMcscpAddon;
+
     if (mIsRealServer) {
-        IMcscpAddon *addon = dynamic_cast<IMcscpAddon*>(getAddon(QStringLiteral("mcscp")));
-        if (addon) {
+        IMcscpAddon *addon = dynamic_cast<IMcscpAddon*>(getAddon(Mcscp::ADDON_NAME));
+        if (addon && addon->isConnected()) {
             addon->stopServer();
             return;
         }
@@ -218,26 +223,26 @@ void McServer::stopServer()
 
 void McServer::initAddons()
 {
-    foreach (IMcServerAddon *addon, mAddons)
+    foreach (Addon::IMcServerAddon *addon, mAddons)
         addon->preInit();
 
-    foreach (IMcServerAddon *addon, mAddons)
+    foreach (Addon::IMcServerAddon *addon, mAddons)
         addon->init();
 }
 
 void McServer::startAddons()
 {
-    foreach (IMcServerAddon *addon, mAddons)
+    foreach (Addon::IMcServerAddon *addon, mAddons)
         addon->start();
 }
 
 void McServer::stopAddons()
 {
-    foreach (IMcServerAddon *addon, mAddons)
+    foreach (Addon::IMcServerAddon *addon, mAddons)
         addon->stop();
 }
 
-void McServer::deleteAddon(IMcServerAddon *addon)
+void McServer::deleteAddon(Addon::IMcServerAddon *addon)
 {
     if (QObject *object = dynamic_cast<QObject *>(addon))
         object->deleteLater();

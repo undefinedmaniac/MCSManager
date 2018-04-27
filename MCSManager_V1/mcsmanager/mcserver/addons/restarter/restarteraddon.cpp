@@ -1,17 +1,18 @@
 #include "restarteraddon.h"
 
-RestarterAddon::RestarterAddon(IMcServer *server, QObject *parent) :
-    QObject(parent), McServerAddonBase(RestarterConfigReader::getAddonName(), server)
+using Restarter::RestarterAddon;
+
+RestarterAddon::RestarterAddon(Server::IMcServer *server, QObject *parent) :
+    QObject(parent), Addon::McServerAddonBase(Restarter::ADDON_NAME, server)
 {   
     mTimer.setTimerType(Qt::VeryCoarseTimer);
-    mTimer.setSingleShot(true);
     mTimer.setInterval(1000);
     connect(&mTimer, SIGNAL(timeout()), SLOT(timeout()));
 }
 
 void RestarterAddon::preInit()
 {
-    RestarterConfigReader reader(getServer()->getConfig()->getAddonConfig(getName()));
+    Restarter::RestarterConfigReader reader(getServer()->getConfig()->getAddonConfig(getName()));
     mPeriod = reader.period() * 60; //Convert minutes to seconds
 
     if (mPeriod >= 300)
@@ -20,8 +21,10 @@ void RestarterAddon::preInit()
 
 void RestarterAddon::init()
 {
+    using Mcscp::IMcscpAddon;
+
     if (mConfigIsValid) {
-        IMcscpAddon *addon = dynamic_cast<IMcscpAddon*>(getServer()->getAddon(QStringLiteral("mcscp")));
+        IMcscpAddon *addon = dynamic_cast<IMcscpAddon*>(getServer()->getAddon(Mcscp::ADDON_NAME));
         if (addon) {
             mMcscpAddonLocated = true;
             mMcscpAddon = addon;
@@ -64,7 +67,8 @@ void RestarterAddon::timeout()
         getServer()->restart();
     } else if ((mSeconds == 300 || mSeconds == 180 || mSeconds == 60 ||
                 mSeconds == 30 || mSeconds == 10 || mSeconds <= 5)) {
-        mMcscpAddon->broadcast(getBroadcastMessage());
+        if (mMcscpAddon->isConnected())
+            mMcscpAddon->broadcast(getBroadcastMessage());
     }
 
     mSeconds--;
@@ -72,7 +76,7 @@ void RestarterAddon::timeout()
 
 QString RestarterAddon::getBroadcastMessage()
 {
-    QString message = QStringLiteral("&d[Server Restarter] The server will restart in ");
+    QString message = QStringLiteral("&b[Server Restarter] The server will restart in ");
 
     if (mSeconds > 60) {
         message += QString::number(mSeconds / 60);

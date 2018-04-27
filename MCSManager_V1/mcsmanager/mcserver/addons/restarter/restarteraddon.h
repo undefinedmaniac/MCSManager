@@ -1,19 +1,25 @@
 #ifndef RESTARTERADDON_H
 #define RESTARTERADDON_H
 
+#include "restarterglobal.h"
+#include "mcsmanager/config/interfaces/iserverconfig.h"
 #include "mcsmanager/mcserver/addons/mcscp/interfaces/imcscpaddon.h"
 #include "mcsmanager/config/configglobal.h"
 #include "restarterconfigreader.h"
 #include "../mcserveraddonbase.h"
+#include "mcsmanager/mcserver/addons/mcscp/mcscpglobal.h"
 
 #include <QObject>
 #include <QTimer>
+#include <QDebug>
 
-class RestarterAddon : public QObject, public McServerAddonBase
+namespace Restarter { class RestarterAddon; }
+
+class Restarter::RestarterAddon : public QObject, public Addon::McServerAddonBase
 {
     Q_OBJECT
 public:
-    RestarterAddon(IMcServer *server, QObject *parent = nullptr);
+    RestarterAddon(Server::IMcServer *server, QObject *parent = nullptr);
 
     // IMcServerAddon interface
     void preInit() override;
@@ -32,7 +38,7 @@ private:
     int mPeriod;
 
     bool mMcscpAddonLocated = false;
-    IMcscpAddon *mMcscpAddon = nullptr;
+    Mcscp::IMcscpAddon *mMcscpAddon = nullptr;
 
     QTimer mTimer;
     int mSeconds;
