@@ -13,7 +13,7 @@ using Backup::BackupProcess;
 BackupProcess::BackupProcess(QObject *parent) : IBackupProcess(parent)
 {
     connect(&mProcess, SIGNAL(finished(int)), SLOT(stepFinished()));
-    connect(&mProcess, SIGNAL(error(QProcess::ProcessError)), SIGNAL(error()));
+    connect(&mProcess, SIGNAL(error(QProcess::ProcessError)), SLOT(processError(QProcess::ProcessError)));
 }
 
 void BackupProcess::setSources(const QStringList &sources)
@@ -39,7 +39,7 @@ QString BackupProcess::getServer() const
 void BackupProcess::start()
 {
     if (mSources.size() > 0 && !mDestination.isEmpty()) {
-        emit aboutToStart();
+        emit starting();
         mState = CreateTar;
         QTimer::singleShot(2000, this, SLOT(stepFinished()));
     }
@@ -96,4 +96,32 @@ void BackupProcess::stepFinished()
     default:
         break;
     }
+}
+
+void BackupProcess::processError(QProcess::ProcessError errorType)
+{
+    QString errorString;
+
+    switch (errorType) {
+    case QProcess::FailedToStart:
+        errorString = QStringLiteral("Backup process failed to start!");
+        break;
+    case QProcess::Crashed:
+        errorString = QStringLiteral("Backup process crashed!");
+        break;
+    case QProcess::Timedout:
+        errorString = QStringLiteral("Backup process timed out!");
+        break;
+    case QProcess::WriteError:
+        errorString = QStringLiteral("Backup process write error!");
+        break;
+    case QProcess::ReadError:
+        errorString = QStringLiteral("Backup process read error!");
+        break;
+    default:
+        errorString = QStringLiteral("Backup process unknown error!");
+        break;
+    }
+
+    emit error(errorString);
 }

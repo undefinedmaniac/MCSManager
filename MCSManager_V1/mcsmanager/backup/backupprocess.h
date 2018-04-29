@@ -28,6 +28,7 @@ public:
 
 private slots:
     void stepFinished();
+    void processError(QProcess::ProcessError errorType);
 
 private:
     enum State {

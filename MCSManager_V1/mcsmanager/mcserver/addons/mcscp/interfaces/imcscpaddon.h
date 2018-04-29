@@ -22,6 +22,7 @@ public:
     virtual const IMcscpServerTable *getServerTable() const = 0;
     virtual const IMcscpPlayerTable *getPlayerTable(const QString &uuid) const = 0;
     virtual QStringList getPlayerUuids() const = 0;
+    virtual QStringList getPlayerList() const = 0;
 
     virtual QString readEntireLog() = 0;
     virtual QString readLogFromPos(int startingPos) = 0;

@@ -130,7 +130,6 @@ Server::IMcServerBuilder *McServer::getServerBuilder()
 
 void McServer::serverStarted()
 {
-    qDebug() << "Server Started!";
     mState = Started;
     startAddons();
     emit started();
@@ -138,12 +137,13 @@ void McServer::serverStarted()
 
 void McServer::serverStopped(int exitCode, QProcess::ExitStatus exitStatus)
 {
-    qDebug() << "Server Stopped!";
     Q_UNUSED(exitCode);
 
     stopAddons();
 
     bool expected = (mState == Stopping || mState == Restarting);
+
+    emit stopped(expected);
 
     if (mState == Restarting) {
         start();
@@ -151,16 +151,13 @@ void McServer::serverStopped(int exitCode, QProcess::ExitStatus exitStatus)
         mState = Stopped;
 
         if (!expected) {
-            qDebug() << "Unexpected stop!";
             if (exitStatus == QProcess::CrashExit) {
-                qDebug() << "Crash Exit!";
                 start();
             } else {
                 switch (mShutdownBehavior) {
                 case Config::DoNothing:
                     break;
                 case Config::Restart:
-                    qDebug() << "Restarting!";
                     start();
                     break;
                 case Config::StartAltServer:
@@ -170,9 +167,7 @@ void McServer::serverStopped(int exitCode, QProcess::ExitStatus exitStatus)
                 }
             }
         }
-    }
-
-    emit stopped(expected);
+    } 
 }
 
 void McServer::serverErrorOccurred(QProcess::ProcessError errorType)
@@ -181,22 +176,24 @@ void McServer::serverErrorOccurred(QProcess::ProcessError errorType)
 
     switch (errorType) {
     case QProcess::FailedToStart:
-        errorMessage = QStringLiteral("ERROR: Server failed to start!");
+        errorMessage = QStringLiteral("Server failed to start!");
         break;
     case QProcess::Crashed:
-        errorMessage = QStringLiteral("ERROR: Server crashed!");
+        if (!mIsRealServer)
+            return;
+        errorMessage = QStringLiteral("Server crashed!");
         break;
     case QProcess::Timedout:
-        errorMessage = QStringLiteral("ERROR: Server timed out!");
+        errorMessage = QStringLiteral("Server timed out!");
         break;
     case QProcess::WriteError:
-        errorMessage = QStringLiteral("ERROR: Could not send data to server!");
+        errorMessage = QStringLiteral("Could not send data to server!");
         break;
     case QProcess::ReadError:
-        errorMessage = QStringLiteral("ERROR: Could not read data from the server!");
+        errorMessage = QStringLiteral("Could not read data from the server!");
         break;
     case QProcess::UnknownError:
-        errorMessage = QStringLiteral("ERROR: Unknown error");
+        errorMessage = QStringLiteral("Unknown error");
         break;
     default:
         errorMessage = QStringLiteral("");

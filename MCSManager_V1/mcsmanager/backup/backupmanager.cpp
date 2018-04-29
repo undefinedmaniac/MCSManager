@@ -2,12 +2,12 @@
 
 using Backup::BackupManager;
 
-BackupManager::BackupManager(Core::IMcsManagerCore *core) : McsManagerCoreChild(core)
+BackupManager::BackupManager(Core::IMcsManagerCore *core, QObject *parent) : IBackupManager(parent), McsManagerCoreChild(core)
 {
 }
 
 Backup::IBackupProcess *BackupManager::getBackupProcess(const QString &serverName, Config::IConfigFile *config)
-{    
+{
     Backup::BackupConfigReader reader(config);
 
     Backup::BackupProcess *process = new Backup::BackupProcess(this);
@@ -15,8 +15,9 @@ Backup::IBackupProcess *BackupManager::getBackupProcess(const QString &serverNam
     process->setSources(reader.sources());
     process->setDestination(reader.destination());
 
-    connect(process, SIGNAL(aboutToStart()), SLOT(processAboutToStart()));
+    connect(process, SIGNAL(starting()), SLOT(processStarted()));
     connect(process, SIGNAL(finished()), SLOT(processFinished()));
+    connect(process, SIGNAL(error(QString)), SLOT(processError(QString)));
 
     return process;
 }
@@ -24,8 +25,8 @@ Backup::IBackupProcess *BackupManager::getBackupProcess(const QString &serverNam
 QStringList BackupManager::getBackupList(Config::IConfigFile *config)
 {
     Backup::BackupConfigReader reader(config);
-    QDir destination(reader.destination(), QStringLiteral(".tar.bz2"), filter = QDir::Dirs | QDir::NoDotAndDotDot);
-    return destination.entryList();
+    QDir destination(reader.destination());
+    return destination.entryList(QStringList(QStringLiteral(".tar.bz2")), QDir::Files | QDir::NoDotAndDotDot);
 }
 
 int BackupManager::secsSinceLastBackup(const QString &serverName)
@@ -39,26 +40,53 @@ int BackupManager::secsSinceLastBackup(const QString &serverName)
     return -1;
 }
 
-void BackupManager::processAboutToStart()
+void BackupManager::processStarted()
 {
     using Mcscp::IMcscpAddon;
-
-    qDebug() << "Process about to start!";
 
     Backup::BackupProcess *process = dynamic_cast<Backup::BackupProcess*>(sender());
     Server::IMcServer *server = getCurrentServer();
 
-    if (process && server && process->getServer() == server->getName()) {
-        qDebug() << "Sending save-all";
+    QString serverName;
+    if (process)
+        serverName = process->getServer();
+    else
+        serverName = QStringLiteral("");
+
+    if (server && serverName == server->getName()) {
         IMcscpAddon *mcscpAddon = dynamic_cast<IMcscpAddon*>(server->getAddon(Mcscp::ADDON_NAME));
         if (mcscpAddon && mcscpAddon->isConnected())
             mcscpAddon->sendToConsole(QStringLiteral("save-all"));
     }
+
+    emit backupStarted(serverName);
 }
 
 void BackupManager::processFinished()
 {
     Backup::BackupProcess *process = dynamic_cast<Backup::BackupProcess*>(sender());
+
+    QString serverName;
     if (process)
-        mBackupTimes.insert(process->getServer(), QTime::currentTime());
+        serverName = process->getServer();
+    else
+        serverName = QStringLiteral("");
+
+    if (!serverName.isEmpty())
+        mBackupTimes.insert(serverName, QTime::currentTime());
+
+    emit backupFinished(serverName);
+}
+
+void BackupManager::processError(QString errorString)
+{
+    Backup::BackupProcess *process = dynamic_cast<Backup::BackupProcess*>(sender());
+
+    QString serverName;
+    if (process)
+        serverName = process->getServer();
+    else
+        serverName = QStringLiteral("");
+
+    emit backupError(serverName, errorString);
 }

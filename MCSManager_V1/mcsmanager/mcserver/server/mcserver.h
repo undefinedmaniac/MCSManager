@@ -13,7 +13,6 @@
 #include <QProcess>
 #include <QString>
 #include <QHash>
-#include <QDebug>
 
 namespace Server { class McServer; }
 

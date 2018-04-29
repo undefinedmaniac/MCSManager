@@ -19,10 +19,13 @@ namespace Backup
 
 namespace Server { class IMcServer; }
 
+#include <QObject>
+
 namespace Core { class IMcsManagerCore; }
 
-class Core::IMcsManagerCore
+class Core::IMcsManagerCore : public QObject
 {
+    Q_OBJECT
 public:
     friend class McsManagerCoreChild;
 
@@ -34,6 +37,13 @@ public:
     virtual Config::IServerConfig *getServerConfig(const QString &serverName) = 0;
     virtual Backup::IBackupProcess *getBackupProcess(const QString &serverName) = 0;
     virtual QStringList getBackupList(const QString &serverName) = 0;
+
+signals:
+    void currentServerChanged();
+
+    void backupStarted(QString server);
+    void backupFinished(QString server);
+    void backupError(QString server, QString errorString);
 
 protected:
     virtual Config::IConfigManager *getConfigManager() = 0;

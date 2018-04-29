@@ -43,6 +43,17 @@ QStringList McscpAddon::getPlayerUuids() const
     return mPlayerTables.keys();
 }
 
+QStringList McscpAddon::getPlayerList() const
+{
+    QStringList playerList;
+
+    const QStringList uuids = getPlayerUuids();
+    foreach (const QString &uuid, uuids)
+        playerList.append(mPlayerTables.value(uuid)->getDisplayName());
+
+    return playerList;
+}
+
 QString McscpAddon::readEntireLog()
 {
     return mServerLog;

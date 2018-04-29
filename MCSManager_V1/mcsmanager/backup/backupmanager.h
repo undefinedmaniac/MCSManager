@@ -12,6 +12,7 @@
 #include "backupprocess.h"
 #include "backupconfigreader.h"
 
+#include <QObject>
 #include <QHash>
 #include <QTime>
 #include <QVector>
@@ -20,11 +21,11 @@
 
 namespace Backup { class BackupManager; }
 
-class Backup::BackupManager : public QObject, public Backup::IBackupManager, public Core::McsManagerCoreChild
+class Backup::BackupManager : public Backup::IBackupManager, public Core::McsManagerCoreChild
 {
     Q_OBJECT
 public:
-    BackupManager(Core::IMcsManagerCore *core);
+    BackupManager(Core::IMcsManagerCore *core, QObject *parent = nullptr);
 
     // IBackupManager interface
     Backup::IBackupProcess *getBackupProcess(const QString &serverName, Config::IConfigFile *config) override;
@@ -33,8 +34,9 @@ public:
     int secsSinceLastBackup(const QString &serverName) override;
 
 private slots:
-    void processAboutToStart();
+    void processStarted();
     void processFinished();
+    void processError(QString errorString);
 
 private:
     QHash<QString, QTime> mBackupTimes;

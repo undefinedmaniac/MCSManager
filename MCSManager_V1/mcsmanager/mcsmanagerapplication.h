@@ -5,6 +5,7 @@
 #include "backup/backupmanager.h"
 #include "mcserver/mcserverbuilder.h"
 #include "core/mcsmanagercore.h"
+#include "commandline/commandline.h"
 
 namespace Application { class McsManagerApplication; }
 
@@ -20,6 +21,7 @@ private:
     Config::ConfigManager mConfigManager;
     Backup::BackupManager mBackupManager;
     Server::McServerBuilder mServerBuilder;
+    Cli::CommandLine mCommandLine;
 };
 
 #endif // MCSMANAGERAPPLICATION_H

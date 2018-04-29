@@ -16,9 +16,9 @@ public:
     virtual bool isRunning() const = 0;
 
 signals:
-    void aboutToStart();
+    void starting();
     void finished();
-    void error();
+    void error(QString error);
 };
 
 #endif // IBACKUPPROCESS_H

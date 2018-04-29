@@ -33,6 +33,7 @@ public:
     const IMcscpServerTable *getServerTable() const override;
     const IMcscpPlayerTable *getPlayerTable(const QString &uuid) const override;
     QStringList getPlayerUuids() const override;
+    QStringList getPlayerList() const override;
 
     QString readEntireLog() override;
     QString readLogFromPos(int startingPos) override;

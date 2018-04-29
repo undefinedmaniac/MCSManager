@@ -12,6 +12,10 @@ void McsManagerCore::setComponents(Config::IConfigManager *configManager, Backup
     mConfigManager = configManager;
     mBackupManager = backupManager;
     mServerBuilder = serverBuilder;
+
+    connect(backupManager, SIGNAL(backupStarted(QString)), SIGNAL(backupStarted(QString)));
+    connect(backupManager, SIGNAL(backupFinished(QString)), SIGNAL(backupFinished(QString)));
+    connect(backupManager, SIGNAL(backupError(QString,QString)), SIGNAL(backupError(QString,QString)));
 }
 
 void McsManagerCore::loadConfigs(const QString &configPath)
@@ -119,6 +123,8 @@ void McsManagerCore::startNextServer()
         mServerBuilder->deleteMcServer(mCurrentServer);
 
         mCurrentServer = mServerBuilder->getMcServer(config);
+        emit currentServerChanged();
+
         mCurrentServer->start();
     }
 }

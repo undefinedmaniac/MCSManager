@@ -10,6 +10,8 @@ McsManagerApplication::McsManagerApplication() : mCore(), mConfigManager(&mCore)
 
 void McsManagerApplication::start()
 {
+    mCommandLine.start(&mCore);
+
     mCore.loadConfigs(joinPaths(QCoreApplication::applicationDirPath(), QStringLiteral("config")));
     mCore.startDefaultServer();
 }

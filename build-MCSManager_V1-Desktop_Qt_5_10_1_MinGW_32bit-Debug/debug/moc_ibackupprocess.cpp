@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Backup__IBackupProcess_t {
     QByteArrayData data[5];
-    char stringdata0[52];
+    char stringdata0[48];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,14 +32,14 @@ struct qt_meta_stringdata_Backup__IBackupProcess_t {
 static const qt_meta_stringdata_Backup__IBackupProcess_t qt_meta_stringdata_Backup__IBackupProcess = {
     {
 QT_MOC_LITERAL(0, 0, 22), // "Backup::IBackupProcess"
-QT_MOC_LITERAL(1, 23, 12), // "aboutToStart"
-QT_MOC_LITERAL(2, 36, 0), // ""
-QT_MOC_LITERAL(3, 37, 8), // "finished"
-QT_MOC_LITERAL(4, 46, 5) // "error"
+QT_MOC_LITERAL(1, 23, 8), // "starting"
+QT_MOC_LITERAL(2, 32, 0), // ""
+QT_MOC_LITERAL(3, 33, 8), // "finished"
+QT_MOC_LITERAL(4, 42, 5) // "error"
 
     },
-    "Backup::IBackupProcess\0aboutToStart\0"
-    "\0finished\0error"
+    "Backup::IBackupProcess\0starting\0\0"
+    "finished\0error"
 };
 #undef QT_MOC_LITERAL
 
@@ -59,12 +59,12 @@ static const uint qt_meta_data_Backup__IBackupProcess[] = {
  // signals: name, argc, parameters, tag, flags
        1,    0,   29,    2, 0x06 /* Public */,
        3,    0,   30,    2, 0x06 /* Public */,
-       4,    0,   31,    2, 0x06 /* Public */,
+       4,    1,   31,    2, 0x06 /* Public */,
 
  // signals: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    4,
 
        0        // eod
 };
@@ -75,16 +75,16 @@ void Backup::IBackupProcess::qt_static_metacall(QObject *_o, QMetaObject::Call _
         IBackupProcess *_t = static_cast<IBackupProcess *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->aboutToStart(); break;
+        case 0: _t->starting(); break;
         case 1: _t->finished(); break;
-        case 2: _t->error(); break;
+        case 2: _t->error((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             typedef void (IBackupProcess::*_t)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&IBackupProcess::aboutToStart)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&IBackupProcess::starting)) {
                 *result = 0;
                 return;
             }
@@ -97,14 +97,13 @@ void Backup::IBackupProcess::qt_static_metacall(QObject *_o, QMetaObject::Call _
             }
         }
         {
-            typedef void (IBackupProcess::*_t)();
+            typedef void (IBackupProcess::*_t)(QString );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&IBackupProcess::error)) {
                 *result = 2;
                 return;
             }
         }
     }
-    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject Backup::IBackupProcess::staticMetaObject = {
@@ -144,7 +143,7 @@ int Backup::IBackupProcess::qt_metacall(QMetaObject::Call _c, int _id, void **_a
 }
 
 // SIGNAL 0
-void Backup::IBackupProcess::aboutToStart()
+void Backup::IBackupProcess::starting()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
@@ -156,9 +155,10 @@ void Backup::IBackupProcess::finished()
 }
 
 // SIGNAL 2
-void Backup::IBackupProcess::error()
+void Backup::IBackupProcess::error(QString _t1)
 {
-    QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

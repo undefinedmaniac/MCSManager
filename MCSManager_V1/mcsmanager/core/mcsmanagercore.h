@@ -19,13 +19,12 @@
 #include "mcsmanager/mcserver/addons/sleeper/sleeperglobal.h"
 
 #include <QCoreApplication>
-#include <QObject>
 #include <QStringList>
 #include <QDebug>
 
 namespace Core { class McsManagerCore; }
 
-class Core::McsManagerCore : public QObject, public Core::IMcsManagerCore
+class Core::McsManagerCore : public Core::IMcsManagerCore
 {
     Q_OBJECT
 public:
