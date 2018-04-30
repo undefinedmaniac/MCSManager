@@ -21,6 +21,10 @@ McServer::McServer(Config::IServerConfig *config, Core::IMcsManagerCore *core, Q
     mShutdownBehavior = reader.unexpectedShutdownBehavior();
     mAltServer = reader.alternativeServer();
 
+    mStopTimer.setInterval(5000);
+    mStopTimer.setSingleShot(true);
+    connect(&mStopTimer, SIGNAL(timeout()), &mProcess, SLOT(kill()));
+
     connect(&mProcess, SIGNAL(started()), SLOT(serverStarted()));
     connect(&mProcess, SIGNAL(finished(int, QProcess::ExitStatus)), SLOT(serverStopped(int, QProcess::ExitStatus)));
     connect(&mProcess, SIGNAL(errorOccurred(QProcess::ProcessError)), SLOT(serverErrorOccurred(QProcess::ProcessError)));
@@ -28,11 +32,6 @@ McServer::McServer(Config::IServerConfig *config, Core::IMcsManagerCore *core, Q
 
 McServer::~McServer()
 {
-    if (isRunning()) {
-        stop();
-        mProcess.waitForFinished(-1);
-    }
-
     foreach (Addon::IMcServerAddon *addon, mAddons)
         deleteAddon(addon);
 }
@@ -139,6 +138,8 @@ void McServer::serverStopped(int exitCode, QProcess::ExitStatus exitStatus)
 {
     Q_UNUSED(exitCode);
 
+    mStopTimer.stop();
+
     stopAddons();
 
     bool expected = (mState == Stopping || mState == Restarting);
@@ -211,6 +212,7 @@ void McServer::stopServer()
         IMcscpAddon *addon = dynamic_cast<IMcscpAddon*>(getAddon(Mcscp::ADDON_NAME));
         if (addon && addon->isConnected()) {
             addon->stopServer();
+            mStopTimer.start();
             return;
         }
     }

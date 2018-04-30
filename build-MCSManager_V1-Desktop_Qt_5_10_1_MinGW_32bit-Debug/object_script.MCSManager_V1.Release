@@ -53,6 +53,7 @@ INPUT(
 ./release\moc_sleeperaddon.o
 ./release\moc_imcserver.o
 ./release\moc_mcserver.o
+./release\moc_mcsmanagerapplication.o
 ./release\moc_commandline.o
 ./release\moc_commandlinereader.o
 ./release\moc_commandlinewriter.o

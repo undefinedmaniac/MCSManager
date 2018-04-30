@@ -7,14 +7,21 @@
 #include "core/mcsmanagercore.h"
 #include "commandline/commandline.h"
 
+#include <QObject>
+#include <QEventLoop>
+
 namespace Application { class McsManagerApplication; }
 
-class Application::McsManagerApplication
+class Application::McsManagerApplication : public QObject
 {
+    Q_OBJECT
 public:
-    McsManagerApplication();
+    McsManagerApplication(QObject *parent = nullptr);
 
     void start();
+
+private slots:
+    void exitApplication();
 
 private:
     Core::McsManagerCore mCore;

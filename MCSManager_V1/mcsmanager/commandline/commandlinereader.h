@@ -5,6 +5,9 @@
 #include <QThread>
 #include <QTextStream>
 #include <QTimer>
+#include <QMutex>
+#include <QDebug>
+#include <QMutexLocker>
 
 namespace Cli { class CommandLineReader; }
 
@@ -15,20 +18,21 @@ public:
     CommandLineReader(QObject *parent = nullptr);
 
     void start();
+    void stop();
 
 signals:
+    void started();
+    void stopped();
     void newCommand(QString command);
 
-public slots:
-    void startRunning();
-    void stopRunning();
-
 private slots:
-    void run();
+    void runLoop();
+    void readStdin();
 
 private:
     QThread mThread;
     QTextStream mInput;
+    QMutex mMutex;
     bool mContinue;
 };
 

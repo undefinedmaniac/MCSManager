@@ -5,7 +5,8 @@ using Cli::CommandLine;
 CommandLine::CommandLine(QObject *parent) : QObject(parent)
 {
     connect(&mReader, SIGNAL(newCommand(QString)), SLOT(newCommand(QString)), Qt::BlockingQueuedConnection);
-    connect(QCoreApplication::instance(), SIGNAL(aboutToQuit()), &mReader, SLOT(stopRunning()), Qt::QueuedConnection);
+    connect(&mReader, SIGNAL(started()), SIGNAL(started()));
+    connect(&mReader, SIGNAL(stopped()), SIGNAL(stopped()));
 }
 
 void CommandLine::start(Core::IMcsManagerCore *core)
@@ -25,27 +26,53 @@ void CommandLine::start(Core::IMcsManagerCore *core)
     mReader.start();
 }
 
+void CommandLine::stop()
+{
+    mReader.stop();
+}
+
 void CommandLine::newCommand(QString command)
 {
     mIsRunningCommand = true;
-    processCommand(command);
-    mWriter.writePrefix();
+    processCommand(command.trimmed());
+
+    if (!mHasRequestedQuit)
+        mWriter.writePrefix();
+
     mIsRunningCommand = false;
 }
 
 void CommandLine::backupStarted(QString server)
 {
-
+    if (mMode == Standard) {
+        QString message;
+        message += QStringLiteral("Backing up ");
+        message += server;
+        message += QStringLiteral("...");
+        interruptPrint(message);
+    }
 }
 
 void CommandLine::backupFinished(QString server)
 {
-
+    if (mMode == Standard) {
+        QString message;
+        message += QStringLiteral("Finished backing up ");
+        message += server;
+        interruptPrint(message);
+    }
 }
 
 void CommandLine::backupError(QString server, QString errorString)
 {
-
+    if (mMode == Standard) {
+        QString message;
+        message += QStringLiteral("Error while backing up ");
+        message += server;
+        message += QStringLiteral(": ");
+        message += errorString;
+        interruptPrint(message);
+    }
 }
 
 void CommandLine::currentServerChanged()
@@ -151,8 +178,6 @@ QString CommandLine::getError(CommandLine::ErrorType type)
         return QStringLiteral("Console mode unavailable for the current server: MCSCP is disabled");
     case InvalidCommand:
         return QStringLiteral("Invalid command, type help to view all commands");
-    case ListItemNotSpecified:
-        return QStringLiteral("No item specified, use servers, addons, or players");
     case NoServersFound:
         return QStringLiteral("No servers found");
     case ServerInvalid:
@@ -169,6 +194,22 @@ QString CommandLine::getError(CommandLine::ErrorType type)
         return QStringLiteral("No server specified");
     case ServerNotRunning:
         return QStringLiteral("There is no running server");
+    case ServerAlreadyRunning:
+        return QStringLiteral("The server is already running!");
+    case NoActionSpecified:
+        return QStringLiteral("No action specified, use run or view");
+    case NoBackupsFound:
+        return QStringLiteral("No backups found");
+    case InvalidObject:
+        return QStringLiteral("Invalid object");
+    case InvalidAction:
+        return QStringLiteral("Invalid action");
+    case NoObjectSpecified:
+        return QStringLiteral("No object specified");
+    case CannotPrintLog:
+        return QStringLiteral("Cannot print server log: MCSCP is disabled");
+    case ServerLogEmpty:
+        return QStringLiteral("The server log is empty");
     default:
         return QStringLiteral("Unknown error");
     }
@@ -236,8 +277,15 @@ void CommandLine::processStandardCommand(const QString &type, const QStringList 
         stopCommand();
     else if (type == QStringLiteral("RESTART"))
         restartCommand();
-    else if (type == QStringLiteral("EXIT"))
-        QCoreApplication::quit();
+    else if (type == QStringLiteral("BACKUP"))
+        backupCommand(parameters);
+    else if (type == QStringLiteral("PRINT"))
+        printCommand(parameters);
+    else if (type == QStringLiteral("EXIT")) {
+        mHasRequestedQuit = true;
+        mReader.stop();
+        QTimer::singleShot(0, this, SIGNAL(exitApplication()));
+    }
     else
         mWriter.writeLine(getError(InvalidCommand));
 }
@@ -245,7 +293,7 @@ void CommandLine::processStandardCommand(const QString &type, const QStringList 
 void CommandLine::listCommand(const QStringList &parameters)
 {
     if (parameters.isEmpty()) {
-        mWriter.writeLine(getError(ListItemNotSpecified));
+        mWriter.writeLine(getError(NoObjectSpecified) + QStringLiteral(". Use Servers, Addons, or Players"));
         return;
     }
 
@@ -296,21 +344,42 @@ void CommandLine::listCommand(const QStringList &parameters)
             mWriter.writeLine(getError(NoPlayersOnline));
         else
             mWriter.writeLines(playerList);
+    } else {
+        mWriter.writeLine(getError(InvalidObject) + QStringLiteral(". Use Servers, Addons, or Players"));
     }
 }
 
 void CommandLine::startCommand(const QStringList &parameters)
-{   
+{
+    //If no server is specified, see if we can work with our current one
     if (parameters.isEmpty()) {
         if (!mServer) {
             mWriter.writeLine(getError(NoServerSpecified));
             return;
         }
+
+        if (mServer->isRunning()) {
+            mWriter.writeLine(getError(ServerAlreadyRunning));
+            return;
+        }
+
         mServer->start();
         return;
     }
 
+    //If a server is specified, see if it is our current one
     const QString serverName = parameters.first();
+    if (mServer && mServer->getName() == serverName) {
+        if (mServer->isRunning()) {
+            mWriter.writeLine(getError(ServerAlreadyRunning));
+            return;
+        }
+
+        mServer->start();
+        return;
+    }
+
+    //If a server is specified but it isn't our current one
     if (!mCore->getServerList().contains(serverName)) {
         mWriter.writeLine(getError(ServerInvalid));
         return;
@@ -344,6 +413,75 @@ void CommandLine::restartCommand()
     mServer->restart();
 }
 
+void CommandLine::backupCommand(const QStringList &parameters)
+{
+    if (parameters.isEmpty()) {
+        mWriter.writeLine(getError(NoActionSpecified));
+        return;
+    }
+
+    const QString action = parameters.first().toUpper();
+    QString serverName;
+
+    if (parameters.size() >= 2) {
+        serverName = parameters.at(1);
+    } else {
+        if (!mServer) {
+            mWriter.writeLine(getError(NoCurrentServer) + QStringLiteral(". Start a server or specify a server name"));
+            return;
+        }
+        serverName = mServer->getName();
+    }
+
+    if (!mCore->getServerList().contains(serverName)) {
+        mWriter.writeLine(getError(ServerInvalid));
+        return;
+    }
+
+    if (action == QStringLiteral("RUN")) {
+        Backup::IBackupProcess *process = mCore->getBackupProcess(serverName);
+        process->start();
+    } else if (action == QStringLiteral("VIEW")) {
+        const QStringList backupList = mCore->getBackupList(serverName);
+        if (backupList.isEmpty())
+            mWriter.writeLine(getError(NoBackupsFound));
+        else
+            mWriter.writeLines(backupList);
+    } else {
+        mWriter.writeLine(getError(InvalidAction) + QStringLiteral(". Use Run or View"));
+    }
+}
+
+void CommandLine::printCommand(const QStringList &parameters)
+{
+    if (parameters.isEmpty()) {
+        mWriter.writeLine(getError(NoObjectSpecified) + QStringLiteral(". Use ServerLog or AppLog"));
+        return;
+    }
+
+    const QString object = parameters.first().toUpper();
+    if (object == QStringLiteral("SERVERLOG")) {
+        if (!mServer) {
+            mWriter.writeLine(getError(NoCurrentServer));
+            return;
+        }
+        if (!mAddon) {
+            mWriter.writeLine(getError(CannotPrintLog));
+            return;
+        }
+
+        const QString log = mAddon->readEntireLog();
+        if (log.isEmpty())
+            mWriter.writeLine(getError(ServerLogEmpty));
+        else
+            mWriter.writeLine(log);
+    } else if (object == QStringLiteral("APPLOG")) {
+
+    } else {
+        mWriter.writeLine(getError(InvalidObject) + QStringLiteral(". Use ServerLog or AppLog"));
+    }
+}
+
 void CommandLine::processConsoleCommand(const QString &command)
 {
     if (mAddon && mAddon->isConnected())
@@ -355,6 +493,6 @@ void CommandLine::interruptPrint(const QString &line)
     mWriter.erasePrefix();
     mWriter.writeLine(line);
 
-    if (!mIsRunningCommand)
+    if (!mIsRunningCommand && !mHasRequestedQuit)
         mWriter.writePrefix();
 }

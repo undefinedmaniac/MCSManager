@@ -26,7 +26,7 @@ QStringList BackupManager::getBackupList(Config::IConfigFile *config)
 {
     Backup::BackupConfigReader reader(config);
     QDir destination(reader.destination());
-    return destination.entryList(QStringList(QStringLiteral(".tar.bz2")), QDir::Files | QDir::NoDotAndDotDot);
+    return destination.entryList(QStringList(QStringLiteral("*.tar.bz2")), QDir::Files | QDir::NoDotAndDotDot);
 }
 
 int BackupManager::secsSinceLastBackup(const QString &serverName)
@@ -67,10 +67,12 @@ void BackupManager::processFinished()
     Backup::BackupProcess *process = dynamic_cast<Backup::BackupProcess*>(sender());
 
     QString serverName;
-    if (process)
+    if (process) {
         serverName = process->getServer();
-    else
+        process->deleteLater();
+    } else {
         serverName = QStringLiteral("");
+    }
 
     if (!serverName.isEmpty())
         mBackupTimes.insert(serverName, QTime::currentTime());
@@ -83,10 +85,12 @@ void BackupManager::processError(QString errorString)
     Backup::BackupProcess *process = dynamic_cast<Backup::BackupProcess*>(sender());
 
     QString serverName;
-    if (process)
+    if (process) {
         serverName = process->getServer();
-    else
+        process->deleteLater();
+    } else {
         serverName = QStringLiteral("");
+    }
 
     emit backupError(serverName, errorString);
 }

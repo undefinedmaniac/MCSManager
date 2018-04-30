@@ -2,7 +2,7 @@
 
 using Cli::CommandLineWriter;
 
-CommandLineWriter::CommandLineWriter(QObject *parent) : QObject(parent), mOutput(stdout)
+CommandLineWriter::CommandLineWriter(QObject *parent) : QObject(parent), mOutput(stdout, QIODevice::WriteOnly)
 {
 }
 
@@ -13,7 +13,7 @@ void CommandLineWriter::writeChars(const QString &chars)
 }
 
 void CommandLineWriter::writeLine(const QString &line)
-{    
+{
     const QString trimmedLine = line.trimmed();
     mOutput << trimmedLine << endl;
     mOutput.flush();
@@ -49,5 +49,4 @@ void CommandLineWriter::erasePrefix()
 
     writeChars(eraseString);
 }
-
 

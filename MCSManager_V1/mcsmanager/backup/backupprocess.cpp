@@ -42,6 +42,8 @@ void BackupProcess::start()
         emit starting();
         mState = CreateTar;
         QTimer::singleShot(2000, this, SLOT(stepFinished()));
+    } else {
+        emit error(QStringLiteral("Backup settings are missing or invalid!"));
     }
 }
 

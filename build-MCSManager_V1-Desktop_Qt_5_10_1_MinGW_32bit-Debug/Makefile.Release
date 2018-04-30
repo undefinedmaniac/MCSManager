@@ -98,6 +98,7 @@ SOURCES       = ..\MCSManager_V1\mcsmanager\backup\backupconfigreader.cpp \
 		release\moc_sleeperaddon.cpp \
 		release\moc_imcserver.cpp \
 		release\moc_mcserver.cpp \
+		release\moc_mcsmanagerapplication.cpp \
 		release\moc_commandline.cpp \
 		release\moc_commandlinereader.cpp \
 		release\moc_commandlinewriter.cpp
@@ -155,6 +156,7 @@ OBJECTS       = release/backupconfigreader.o \
 		release/moc_sleeperaddon.o \
 		release/moc_imcserver.o \
 		release/moc_mcserver.o \
+		release/moc_mcsmanagerapplication.o \
 		release/moc_commandline.o \
 		release/moc_commandlinereader.o \
 		release/moc_commandlinewriter.o
@@ -266,7 +268,7 @@ dist:
 	$(ZIP) MCSManager_V1.zip $(SOURCES) $(DIST) ..\MCSManager_V1\MCSManager_V1.pro ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\spec_pre.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\qdevice.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\device_config.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\common\sanitize.conf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\common\gcc-base.conf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\common\g++-base.conf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\common\angle.conf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\common\windows-vulkan.conf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\qconfig.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3danimation.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3danimation_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dcore.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dcore_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dextras.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dextras_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dinput.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dinput_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dlogic.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dlogic_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquick.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquick_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickextras.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickextras_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickinput.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickinput_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickrender.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickrender_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3drender.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_3drender_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_accessibility_support_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_axbase.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_axbase_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_axcontainer.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_axcontainer_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_axserver.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_axserver_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_bluetooth.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_bluetooth_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_bootstrap_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_concurrent.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_concurrent_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_core.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_core_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_dbus.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_dbus_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_designer.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_designer_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_designercomponents_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_devicediscovery_support_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_edid_support_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_egl_support_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_fb_support_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_fontdatabase_support_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_gamepad.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_gamepad_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_gui.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_gui_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_help.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_help_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_location.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_location_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_multimedia.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_multimedia_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_network.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_network_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_nfc.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_nfc_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_opengl.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_opengl_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_openglextensions.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_openglextensions_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_packetprotocol_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_platformcompositor_support_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_positioning.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_positioning_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_printsupport.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_printsupport_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qml.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qml_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qmldebug_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qmldevtools_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qmltest.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qmltest_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quick.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quick_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quickparticles_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quicktemplates2_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quickwidgets.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_quickwidgets_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_scxml.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_scxml_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_sensors.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_sensors_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_serialbus.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_serialbus_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_serialport.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_serialport_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_sql.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_sql_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_svg.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_svg_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_testlib.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_testlib_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_texttospeech.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_texttospeech_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_theme_support_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_uiplugin.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_uitools.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_uitools_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_webchannel.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_webchannel_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_websockets.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_websockets_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_widgets.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_widgets_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_winextras.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_winextras_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_xml.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_xml_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\qt_functions.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\qt_config.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\win32-g++\qmake.conf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\spec_post.prf .qmake.stash ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\exclusive_builds.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\toolchain.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\default_pre.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\win32\default_pre.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\resolve_config.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\exclusive_builds_post.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\default_post.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\build_pass.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\win32\console.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\qml_debug.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\precompile_header.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\warn_on.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\qt.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\resources.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\moc.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\qmake_use.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\file_copies.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\testcase_targets.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\exceptions.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\yacc.prf ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\lex.prf ..\MCSManager_V1\MCSManager_V1.pro ..\..\..\Qt\5.10.1\mingw53_32\lib\Qt5Network.prl ..\..\..\Qt\5.10.1\mingw53_32\lib\Qt5Core.prl    ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\data\dummy.cpp ..\MCSManager_V1\mcsmanager\backup\interfaces\ibackupmanager.h ..\MCSManager_V1\mcsmanager\backup\interfaces\ibackupprocess.h ..\MCSManager_V1\mcsmanager\backup\backupconfigreader.h ..\MCSManager_V1\mcsmanager\backup\backupglobal.h ..\MCSManager_V1\mcsmanager\backup\backupmanager.h ..\MCSManager_V1\mcsmanager\backup\backupprocess.h ..\MCSManager_V1\mcsmanager\config\interfaces\iconfigfile.h ..\MCSManager_V1\mcsmanager\config\interfaces\iconfigmanager.h ..\MCSManager_V1\mcsmanager\config\interfaces\iserverconfig.h ..\MCSManager_V1\mcsmanager\config\configfile.h ..\MCSManager_V1\mcsmanager\config\configfilefactory.h ..\MCSManager_V1\mcsmanager\config\configfunctions.h ..\MCSManager_V1\mcsmanager\config\configglobal.h ..\MCSManager_V1\mcsmanager\config\configmanager.h ..\MCSManager_V1\mcsmanager\config\serverconfig.h ..\MCSManager_V1\mcsmanager\config\serverconfigfactory.h ..\MCSManager_V1\mcsmanager\core\interfaces\imcsmanagercore.h ..\MCSManager_V1\mcsmanager\core\mcsmanagercore.h ..\MCSManager_V1\mcsmanager\core\mcsmanagercorechild.h ..\MCSManager_V1\mcsmanager\mcserver\addons\backup_service\backupserviceaddon.h ..\MCSManager_V1\mcsmanager\mcserver\addons\backup_service\backupserviceconfigreader.h ..\MCSManager_V1\mcsmanager\mcserver\addons\backup_service\backupserviceglobal.h ..\MCSManager_V1\mcsmanager\mcserver\addons\interfaces\imcserveraddon.h ..\MCSManager_V1\mcsmanager\mcserver\addons\mcscp\interfaces\imcscpaddon.h ..\MCSManager_V1\mcsmanager\mcserver\addons\mcscp\interfaces\imcscpplayertable.h ..\MCSManager_V1\mcsmanager\mcserver\addons\mcscp\interfaces\imcscpservertable.h ..\MCSManager_V1\mcsmanager\mcserver\addons\mcscp\mcscpaddon.h ..\MCSManager_V1\mcsmanager\mcserver\addons\mcscp\mcscpconfigreader.h ..\MCSManager_V1\mcsmanager\mcserver\addons\mcscp\mcscpglobal.h ..\MCSManager_V1\mcsmanager\mcserver\addons\mcscp\mcscphandshake.h ..\MCSManager_V1\mcsmanager\mcserver\addons\mcscp\mcscpplayertable.h ..\MCSManager_V1\mcsmanager\mcserver\addons\mcscp\mcscpservertable.h ..\MCSManager_V1\mcsmanager\mcserver\addons\restarter\restarteraddon.h ..\MCSManager_V1\mcsmanager\mcserver\addons\restarter\restarterconfigreader.h ..\MCSManager_V1\mcsmanager\mcserver\addons\restarter\restarterglobal.h ..\MCSManager_V1\mcsmanager\mcserver\addons\sleeper\sleeperaddon.h ..\MCSManager_V1\mcsmanager\mcserver\addons\sleeper\sleeperconfigreader.h ..\MCSManager_V1\mcsmanager\mcserver\addons\sleeper\sleeperglobal.h ..\MCSManager_V1\mcsmanager\mcserver\addons\mcserveraddonbase.h ..\MCSManager_V1\mcsmanager\mcserver\interfaces\imcserverbuilder.h ..\MCSManager_V1\mcsmanager\mcserver\server\interfaces\imcserver.h ..\MCSManager_V1\mcsmanager\mcserver\server\mcserver.h ..\MCSManager_V1\mcsmanager\mcserver\server\serverconfigreader.h ..\MCSManager_V1\mcsmanager\mcserver\server\serverglobal.h ..\MCSManager_V1\mcsmanager\mcserver\mcserverbuilder.h ..\MCSManager_V1\mcsmanager\mcsmanagerapplication.h ..\MCSManager_V1\mcsmanager\commandline\commandline.h ..\MCSManager_V1\mcsmanager\commandline\commandlinereader.h ..\MCSManager_V1\mcsmanager\commandline\commandlinewriter.h  ..\MCSManager_V1\mcsmanager\backup\backupconfigreader.cpp ..\MCSManager_V1\mcsmanager\backup\backupglobal.cpp ..\MCSManager_V1\mcsmanager\backup\backupmanager.cpp ..\MCSManager_V1\mcsmanager\backup\backupprocess.cpp ..\MCSManager_V1\mcsmanager\config\configfile.cpp ..\MCSManager_V1\mcsmanager\config\configfilefactory.cpp ..\MCSManager_V1\mcsmanager\config\configfunctions.cpp ..\MCSManager_V1\mcsmanager\config\configmanager.cpp ..\MCSManager_V1\mcsmanager\config\serverconfig.cpp ..\MCSManager_V1\mcsmanager\config\serverconfigfactory.cpp ..\MCSManager_V1\mcsmanager\core\mcsmanagercore.cpp ..\MCSManager_V1\mcsmanager\core\mcsmanagercorechild.cpp ..\MCSManager_V1\mcsmanager\mcserver\addons\backup_service\backupserviceaddon.cpp ..\MCSManager_V1\mcsmanager\mcserver\addons\backup_service\backupserviceconfigreader.cpp ..\MCSManager_V1\mcsmanager\mcserver\addons\backup_service\backupserviceglobal.cpp ..\MCSManager_V1\mcsmanager\mcserver\addons\mcscp\mcscpaddon.cpp ..\MCSManager_V1\mcsmanager\mcserver\addons\mcscp\mcscpconfigreader.cpp ..\MCSManager_V1\mcsmanager\mcserver\addons\mcscp\mcscpglobal.cpp ..\MCSManager_V1\mcsmanager\mcserver\addons\mcscp\mcscphandshake.cpp ..\MCSManager_V1\mcsmanager\mcserver\addons\mcscp\mcscpplayertable.cpp ..\MCSManager_V1\mcsmanager\mcserver\addons\mcscp\mcscpservertable.cpp ..\MCSManager_V1\mcsmanager\mcserver\addons\restarter\restarteraddon.cpp ..\MCSManager_V1\mcsmanager\mcserver\addons\restarter\restarterconfigreader.cpp ..\MCSManager_V1\mcsmanager\mcserver\addons\restarter\restarterglobal.cpp ..\MCSManager_V1\mcsmanager\mcserver\addons\sleeper\sleeperaddon.cpp ..\MCSManager_V1\mcsmanager\mcserver\addons\sleeper\sleeperconfigreader.cpp ..\MCSManager_V1\mcsmanager\mcserver\addons\sleeper\sleeperglobal.cpp ..\MCSManager_V1\mcsmanager\mcserver\addons\mcserveraddonbase.cpp ..\MCSManager_V1\mcsmanager\mcserver\server\mcserver.cpp ..\MCSManager_V1\mcsmanager\mcserver\server\serverconfigreader.cpp ..\MCSManager_V1\mcsmanager\mcserver\server\serverglobal.cpp ..\MCSManager_V1\mcsmanager\mcserver\mcserverbuilder.cpp ..\MCSManager_V1\mcsmanager\mcsmanagerapplication.cpp ..\MCSManager_V1\main.cpp ..\MCSManager_V1\mcsmanager\commandline\commandline.cpp ..\MCSManager_V1\mcsmanager\commandline\commandlinereader.cpp ..\MCSManager_V1\mcsmanager\commandline\commandlinewriter.cpp    
 
 clean: compiler_clean 
-	-$(DEL_FILE) release\backupconfigreader.o release\backupglobal.o release\backupmanager.o release\backupprocess.o release\configfile.o release\configfilefactory.o release\configfunctions.o release\configmanager.o release\serverconfig.o release\serverconfigfactory.o release\mcsmanagercore.o release\mcsmanagercorechild.o release\backupserviceaddon.o release\backupserviceconfigreader.o release\backupserviceglobal.o release\mcscpaddon.o release\mcscpconfigreader.o release\mcscpglobal.o release\mcscphandshake.o release\mcscpplayertable.o release\mcscpservertable.o release\restarteraddon.o release\restarterconfigreader.o release\restarterglobal.o release\sleeperaddon.o release\sleeperconfigreader.o release\sleeperglobal.o release\mcserveraddonbase.o release\mcserver.o release\serverconfigreader.o release\serverglobal.o release\mcserverbuilder.o release\mcsmanagerapplication.o release\main.o release\commandline.o release\commandlinereader.o release\commandlinewriter.o release\moc_ibackupmanager.o release\moc_ibackupprocess.o release\moc_backupmanager.o release\moc_backupprocess.o release\moc_imcsmanagercore.o release\moc_mcsmanagercore.o release\moc_backupserviceaddon.o release\moc_imcscpaddon.o release\moc_imcscpplayertable.o release\moc_imcscpservertable.o release\moc_mcscpaddon.o release\moc_mcscpplayertable.o release\moc_mcscpservertable.o release\moc_restarteraddon.o release\moc_sleeperaddon.o release\moc_imcserver.o release\moc_mcserver.o release\moc_commandline.o release\moc_commandlinereader.o release\moc_commandlinewriter.o
+	-$(DEL_FILE) release\backupconfigreader.o release\backupglobal.o release\backupmanager.o release\backupprocess.o release\configfile.o release\configfilefactory.o release\configfunctions.o release\configmanager.o release\serverconfig.o release\serverconfigfactory.o release\mcsmanagercore.o release\mcsmanagercorechild.o release\backupserviceaddon.o release\backupserviceconfigreader.o release\backupserviceglobal.o release\mcscpaddon.o release\mcscpconfigreader.o release\mcscpglobal.o release\mcscphandshake.o release\mcscpplayertable.o release\mcscpservertable.o release\restarteraddon.o release\restarterconfigreader.o release\restarterglobal.o release\sleeperaddon.o release\sleeperconfigreader.o release\sleeperglobal.o release\mcserveraddonbase.o release\mcserver.o release\serverconfigreader.o release\serverglobal.o release\mcserverbuilder.o release\mcsmanagerapplication.o release\main.o release\commandline.o release\commandlinereader.o release\commandlinewriter.o release\moc_ibackupmanager.o release\moc_ibackupprocess.o release\moc_backupmanager.o release\moc_backupprocess.o release\moc_imcsmanagercore.o release\moc_mcsmanagercore.o release\moc_backupserviceaddon.o release\moc_imcscpaddon.o release\moc_imcscpplayertable.o release\moc_imcscpservertable.o release\moc_mcscpaddon.o release\moc_mcscpplayertable.o release\moc_mcscpservertable.o release\moc_restarteraddon.o release\moc_sleeperaddon.o release\moc_imcserver.o release\moc_mcserver.o release\moc_mcsmanagerapplication.o release\moc_commandline.o release\moc_commandlinereader.o release\moc_commandlinewriter.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -291,9 +293,9 @@ compiler_moc_predefs_clean:
 release/moc_predefs.h: ../../../Qt/5.10.1/mingw53_32/mkspecs/features/data/dummy.cpp
 	g++ -fno-keep-inline-dllexport -O2 -std=gnu++11 -Wall -W -Wextra -dM -E -o release\moc_predefs.h ..\..\..\Qt\5.10.1\mingw53_32\mkspecs\features\data\dummy.cpp
 
-compiler_moc_header_make_all: release/moc_ibackupmanager.cpp release/moc_ibackupprocess.cpp release/moc_backupmanager.cpp release/moc_backupprocess.cpp release/moc_imcsmanagercore.cpp release/moc_mcsmanagercore.cpp release/moc_backupserviceaddon.cpp release/moc_imcscpaddon.cpp release/moc_imcscpplayertable.cpp release/moc_imcscpservertable.cpp release/moc_mcscpaddon.cpp release/moc_mcscpplayertable.cpp release/moc_mcscpservertable.cpp release/moc_restarteraddon.cpp release/moc_sleeperaddon.cpp release/moc_imcserver.cpp release/moc_mcserver.cpp release/moc_commandline.cpp release/moc_commandlinereader.cpp release/moc_commandlinewriter.cpp
+compiler_moc_header_make_all: release/moc_ibackupmanager.cpp release/moc_ibackupprocess.cpp release/moc_backupmanager.cpp release/moc_backupprocess.cpp release/moc_imcsmanagercore.cpp release/moc_mcsmanagercore.cpp release/moc_backupserviceaddon.cpp release/moc_imcscpaddon.cpp release/moc_imcscpplayertable.cpp release/moc_imcscpservertable.cpp release/moc_mcscpaddon.cpp release/moc_mcscpplayertable.cpp release/moc_mcscpservertable.cpp release/moc_restarteraddon.cpp release/moc_sleeperaddon.cpp release/moc_imcserver.cpp release/moc_mcserver.cpp release/moc_mcsmanagerapplication.cpp release/moc_commandline.cpp release/moc_commandlinereader.cpp release/moc_commandlinewriter.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) release\moc_ibackupmanager.cpp release\moc_ibackupprocess.cpp release\moc_backupmanager.cpp release\moc_backupprocess.cpp release\moc_imcsmanagercore.cpp release\moc_mcsmanagercore.cpp release\moc_backupserviceaddon.cpp release\moc_imcscpaddon.cpp release\moc_imcscpplayertable.cpp release\moc_imcscpservertable.cpp release\moc_mcscpaddon.cpp release\moc_mcscpplayertable.cpp release\moc_mcscpservertable.cpp release\moc_restarteraddon.cpp release\moc_sleeperaddon.cpp release\moc_imcserver.cpp release\moc_mcserver.cpp release\moc_commandline.cpp release\moc_commandlinereader.cpp release\moc_commandlinewriter.cpp
+	-$(DEL_FILE) release\moc_ibackupmanager.cpp release\moc_ibackupprocess.cpp release\moc_backupmanager.cpp release\moc_backupprocess.cpp release\moc_imcsmanagercore.cpp release\moc_mcsmanagercore.cpp release\moc_backupserviceaddon.cpp release\moc_imcscpaddon.cpp release\moc_imcscpplayertable.cpp release\moc_imcscpservertable.cpp release\moc_mcscpaddon.cpp release\moc_mcscpplayertable.cpp release\moc_mcscpservertable.cpp release\moc_restarteraddon.cpp release\moc_sleeperaddon.cpp release\moc_imcserver.cpp release\moc_mcserver.cpp release\moc_mcsmanagerapplication.cpp release\moc_commandline.cpp release\moc_commandlinereader.cpp release\moc_commandlinewriter.cpp
 release/moc_ibackupmanager.cpp: ../../../Qt/5.10.1/mingw53_32/include/QtCore/QObject \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qobject.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qobjectdefs.h \
@@ -1549,6 +1551,9 @@ release/moc_mcserver.cpp: ../MCSManager_V1/mcsmanager/mcserver/server/interfaces
 		../MCSManager_V1/mcsmanager/mcserver/addons/interfaces/imcserveraddon.h \
 		../MCSManager_V1/mcsmanager/mcserver/addons/mcscp/interfaces/imcscpaddon.h \
 		../MCSManager_V1/mcsmanager/mcserver/addons/mcscp/mcscpglobal.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QCoreApplication \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qcoreapplication.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qeventloop.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QProcess \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qprocess.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QHash \
@@ -1556,6 +1561,167 @@ release/moc_mcserver.cpp: ../MCSManager_V1/mcsmanager/mcserver/server/interfaces
 		release/moc_predefs.h \
 		../../../Qt/5.10.1/mingw53_32/bin/moc.exe
 	D:\Qt\5.10.1\mingw53_32\bin\moc.exe $(DEFINES) --include release/moc_predefs.h -ID:/Qt/5.10.1/mingw53_32/mkspecs/win32-g++ -ID:/github/MCSManager/MCSManager_V1 -ID:/Qt/5.10.1/mingw53_32/include -ID:/Qt/5.10.1/mingw53_32/include/QtNetwork -ID:/Qt/5.10.1/mingw53_32/include/QtCore -I. -ID:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\MCSManager_V1\mcsmanager\mcserver\server\mcserver.h -o release\moc_mcserver.cpp
+
+release/moc_mcsmanagerapplication.cpp: ../MCSManager_V1/mcsmanager/config/configmanager.h \
+		../MCSManager_V1/mcsmanager/config/interfaces/iconfigmanager.h \
+		../MCSManager_V1/mcsmanager/config/interfaces/iconfigfile.h \
+		../MCSManager_V1/mcsmanager/config/configglobal.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QVector \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qvector.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qalgorithms.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qglobal.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qconfig-bootstrapped.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qconfig.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qtcore-config.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qsystemdetection.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qprocessordetection.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qcompilerdetection.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qtypeinfo.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qsysinfo.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qlogging.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qflags.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qatomic.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qbasicatomic.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qatomic_bootstrap.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qgenericatomic.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qatomic_cxx11.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qatomic_msvc.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qglobalstatic.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qmutex.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qnumeric.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qversiontagging.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qiterator.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qlist.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qrefcount.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qarraydata.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qhashfunctions.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qstring.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qchar.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qbytearray.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qnamespace.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qstringliteral.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qstringalgorithms.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qstringview.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qstringbuilder.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qpair.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qbytearraylist.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qstringlist.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qregexp.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qstringmatcher.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qpoint.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QPair \
+		../MCSManager_V1/mcsmanager/config/interfaces/iserverconfig.h \
+		../MCSManager_V1/mcsmanager/config/configfunctions.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QVariant \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qvariant.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qmetatype.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qvarlengtharray.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qcontainerfwd.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qobjectdefs.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qobjectdefs_impl.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qmap.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qdebug.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qhash.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qtextstream.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qiodevice.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qobject.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qcoreevent.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qscopedpointer.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qobject_impl.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qlocale.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qshareddata.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qset.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qcontiguouscache.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qsharedpointer.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qsharedpointer_impl.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QString \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QDir \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qdir.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qfileinfo.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qfile.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qfiledevice.h \
+		../MCSManager_V1/mcsmanager/config/configfilefactory.h \
+		../MCSManager_V1/mcsmanager/config/configfile.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QSettings \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qsettings.h \
+		../MCSManager_V1/mcsmanager/config/serverconfigfactory.h \
+		../MCSManager_V1/mcsmanager/config/serverconfig.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QHash \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QList \
+		../MCSManager_V1/mcsmanager/core/mcsmanagercorechild.h \
+		../MCSManager_V1/mcsmanager/core/interfaces/imcsmanagercore.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QObject \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QFile \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QStringList \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QDirIterator \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qdiriterator.h \
+		../MCSManager_V1/mcsmanager/backup/backupmanager.h \
+		../MCSManager_V1/mcsmanager/backup/interfaces/ibackupmanager.h \
+		../MCSManager_V1/mcsmanager/mcserver/server/interfaces/imcserver.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/mcscp/interfaces/imcscpaddon.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/interfaces/imcserveraddon.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/mcscp/mcscpglobal.h \
+		../MCSManager_V1/mcsmanager/backup/backupprocess.h \
+		../MCSManager_V1/mcsmanager/backup/interfaces/ibackupprocess.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QProcess \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qprocess.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QDateTime \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qdatetime.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QStringBuilder \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QTimer \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qtimer.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qbasictimer.h \
+		../MCSManager_V1/mcsmanager/backup/backupconfigreader.h \
+		../MCSManager_V1/mcsmanager/backup/backupglobal.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QRegularExpression \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qregularexpression.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QTime \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QDebug \
+		../MCSManager_V1/mcsmanager/mcserver/mcserverbuilder.h \
+		../MCSManager_V1/mcsmanager/mcserver/interfaces/imcserverbuilder.h \
+		../MCSManager_V1/mcsmanager/mcserver/server/mcserver.h \
+		../MCSManager_V1/mcsmanager/mcserver/server/serverconfigreader.h \
+		../MCSManager_V1/mcsmanager/mcserver/server/serverglobal.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QStandardPaths \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qstandardpaths.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QCoreApplication \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qcoreapplication.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qeventloop.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/mcscp/mcscpaddon.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/mcserveraddonbase.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/mcscp/mcscpconfigreader.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/mcscp/mcscphandshake.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/mcscp/mcscpservertable.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/mcscp/interfaces/imcscpservertable.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/mcscp/mcscpplayertable.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/mcscp/interfaces/imcscpplayertable.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QScopedPointer \
+		../../../Qt/5.10.1/mingw53_32/include/QtNetwork/QTcpSocket \
+		../../../Qt/5.10.1/mingw53_32/include/QtNetwork/qtcpsocket.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtNetwork/qtnetworkglobal.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtNetwork/qtnetwork-config.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtNetwork/qabstractsocket.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/restarter/restarteraddon.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/restarter/restarterglobal.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/restarter/restarterconfigreader.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/sleeper/sleeperaddon.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/sleeper/sleeperconfigreader.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/sleeper/sleeperglobal.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/backup_service/backupserviceglobal.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/backup_service/backupserviceaddon.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/backup_service/backupserviceconfigreader.h \
+		../MCSManager_V1/mcsmanager/core/mcsmanagercore.h \
+		../MCSManager_V1/mcsmanager/commandline/commandline.h \
+		../MCSManager_V1/mcsmanager/commandline/commandlinereader.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QThread \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qthread.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QTextStream \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QMutex \
+		../MCSManager_V1/mcsmanager/commandline/commandlinewriter.h \
+		../MCSManager_V1/mcsmanager/mcsmanagerapplication.h \
+		release/moc_predefs.h \
+		../../../Qt/5.10.1/mingw53_32/bin/moc.exe
+	D:\Qt\5.10.1\mingw53_32\bin\moc.exe $(DEFINES) --include release/moc_predefs.h -ID:/Qt/5.10.1/mingw53_32/mkspecs/win32-g++ -ID:/github/MCSManager/MCSManager_V1 -ID:/Qt/5.10.1/mingw53_32/include -ID:/Qt/5.10.1/mingw53_32/include/QtNetwork -ID:/Qt/5.10.1/mingw53_32/include/QtCore -I. -ID:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\MCSManager_V1\mcsmanager\mcsmanagerapplication.h -o release\moc_mcsmanagerapplication.cpp
 
 release/moc_commandline.cpp: ../MCSManager_V1/mcsmanager/core/interfaces/imcsmanagercore.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QObject \
@@ -1618,6 +1784,8 @@ release/moc_commandline.cpp: ../MCSManager_V1/mcsmanager/core/interfaces/imcsman
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qpoint.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QPair \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QString \
+		../MCSManager_V1/mcsmanager/config/interfaces/iserverconfig.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/mcscp/interfaces/imcscpservertable.h \
 		../MCSManager_V1/mcsmanager/commandline/commandlinereader.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QThread \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qthread.h \
@@ -1637,11 +1805,14 @@ release/moc_commandline.cpp: ../MCSManager_V1/mcsmanager/core/interfaces/imcsman
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QTimer \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qtimer.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qbasictimer.h \
-		../MCSManager_V1/mcsmanager/commandline/commandlinewriter.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QMutex \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QDebug \
+		../MCSManager_V1/mcsmanager/commandline/commandlinewriter.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QStringBuilder \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QStringList \
-		../../../Qt/5.10.1/mingw53_32/include/QtCore/QStringListIterator \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QCoreApplication \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qcoreapplication.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qeventloop.h \
 		../MCSManager_V1/mcsmanager/commandline/commandline.h \
 		release/moc_predefs.h \
 		../../../Qt/5.10.1/mingw53_32/bin/moc.exe
@@ -1717,6 +1888,8 @@ release/moc_commandlinereader.cpp: ../../../Qt/5.10.1/mingw53_32/include/QtCore/
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QTimer \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qtimer.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qbasictimer.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QMutex \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QDebug \
 		../MCSManager_V1/mcsmanager/commandline/commandlinereader.h \
 		release/moc_predefs.h \
 		../../../Qt/5.10.1/mingw53_32/bin/moc.exe
@@ -3957,6 +4130,9 @@ release/mcserver.o: ../MCSManager_V1/mcsmanager/mcserver/server/mcserver.cpp ../
 		../MCSManager_V1/mcsmanager/mcserver/addons/interfaces/imcserveraddon.h \
 		../MCSManager_V1/mcsmanager/mcserver/addons/mcscp/interfaces/imcscpaddon.h \
 		../MCSManager_V1/mcsmanager/mcserver/addons/mcscp/mcscpglobal.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QCoreApplication \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qcoreapplication.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qeventloop.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QProcess \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qprocess.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QHash
@@ -4186,6 +4362,9 @@ release/mcserverbuilder.o: ../MCSManager_V1/mcsmanager/mcserver/mcserverbuilder.
 		../MCSManager_V1/mcsmanager/mcserver/addons/interfaces/imcserveraddon.h \
 		../MCSManager_V1/mcsmanager/mcserver/addons/mcscp/interfaces/imcscpaddon.h \
 		../MCSManager_V1/mcsmanager/mcserver/addons/mcscp/mcscpglobal.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QCoreApplication \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qcoreapplication.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qeventloop.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QProcess \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qprocess.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QHash \
@@ -4343,6 +4522,9 @@ release/mcsmanagerapplication.o: ../MCSManager_V1/mcsmanager/mcsmanagerapplicati
 		../MCSManager_V1/mcsmanager/mcserver/server/serverglobal.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QStandardPaths \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qstandardpaths.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QCoreApplication \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qcoreapplication.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qeventloop.h \
 		../MCSManager_V1/mcsmanager/mcserver/addons/mcscp/mcscpaddon.h \
 		../MCSManager_V1/mcsmanager/mcserver/addons/mcserveraddonbase.h \
 		../MCSManager_V1/mcsmanager/mcserver/addons/mcscp/mcscpconfigreader.h \
@@ -4367,16 +4549,13 @@ release/mcsmanagerapplication.o: ../MCSManager_V1/mcsmanager/mcsmanagerapplicati
 		../MCSManager_V1/mcsmanager/mcserver/addons/backup_service/backupserviceaddon.h \
 		../MCSManager_V1/mcsmanager/mcserver/addons/backup_service/backupserviceconfigreader.h \
 		../MCSManager_V1/mcsmanager/core/mcsmanagercore.h \
-		../../../Qt/5.10.1/mingw53_32/include/QtCore/QCoreApplication \
-		../../../Qt/5.10.1/mingw53_32/include/QtCore/qcoreapplication.h \
-		../../../Qt/5.10.1/mingw53_32/include/QtCore/qeventloop.h \
 		../MCSManager_V1/mcsmanager/commandline/commandline.h \
 		../MCSManager_V1/mcsmanager/commandline/commandlinereader.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QThread \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qthread.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QTextStream \
-		../MCSManager_V1/mcsmanager/commandline/commandlinewriter.h \
-		../../../Qt/5.10.1/mingw53_32/include/QtCore/QStringListIterator
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QMutex \
+		../MCSManager_V1/mcsmanager/commandline/commandlinewriter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mcsmanagerapplication.o ..\MCSManager_V1\mcsmanager\mcsmanagerapplication.cpp
 
 release/main.o: ../MCSManager_V1/main.cpp ../../../Qt/5.10.1/mingw53_32/include/QtCore/QCoreApplication \
@@ -4534,8 +4713,8 @@ release/main.o: ../MCSManager_V1/main.cpp ../../../Qt/5.10.1/mingw53_32/include/
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QThread \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qthread.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QTextStream \
-		../MCSManager_V1/mcsmanager/commandline/commandlinewriter.h \
-		../../../Qt/5.10.1/mingw53_32/include/QtCore/QStringListIterator
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QMutex \
+		../MCSManager_V1/mcsmanager/commandline/commandlinewriter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\MCSManager_V1\main.cpp
 
 release/commandline.o: ../MCSManager_V1/mcsmanager/commandline/commandline.cpp ../MCSManager_V1/mcsmanager/commandline/commandline.h \
@@ -4600,6 +4779,8 @@ release/commandline.o: ../MCSManager_V1/mcsmanager/commandline/commandline.cpp .
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qpoint.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QPair \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QString \
+		../MCSManager_V1/mcsmanager/config/interfaces/iserverconfig.h \
+		../MCSManager_V1/mcsmanager/mcserver/addons/mcscp/interfaces/imcscpservertable.h \
 		../MCSManager_V1/mcsmanager/commandline/commandlinereader.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QThread \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qthread.h \
@@ -4619,11 +4800,14 @@ release/commandline.o: ../MCSManager_V1/mcsmanager/commandline/commandline.cpp .
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QTimer \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qtimer.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qbasictimer.h \
-		../MCSManager_V1/mcsmanager/commandline/commandlinewriter.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QMutex \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QDebug \
+		../MCSManager_V1/mcsmanager/commandline/commandlinewriter.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QStringBuilder \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QStringList \
-		../../../Qt/5.10.1/mingw53_32/include/QtCore/QStringListIterator
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QCoreApplication \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qcoreapplication.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qeventloop.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\commandline.o ..\MCSManager_V1\mcsmanager\commandline\commandline.cpp
 
 release/commandlinereader.o: ../MCSManager_V1/mcsmanager/commandline/commandlinereader.cpp ../MCSManager_V1/mcsmanager/commandline/commandlinereader.h \
@@ -4696,7 +4880,9 @@ release/commandlinereader.o: ../MCSManager_V1/mcsmanager/commandline/commandline
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qsharedpointer_impl.h \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/QTimer \
 		../../../Qt/5.10.1/mingw53_32/include/QtCore/qtimer.h \
-		../../../Qt/5.10.1/mingw53_32/include/QtCore/qbasictimer.h
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/qbasictimer.h \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QMutex \
+		../../../Qt/5.10.1/mingw53_32/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\commandlinereader.o ..\MCSManager_V1\mcsmanager\commandline\commandlinereader.cpp
 
 release/commandlinewriter.o: ../MCSManager_V1/mcsmanager/commandline/commandlinewriter.cpp ../MCSManager_V1/mcsmanager/commandline/commandlinewriter.h \
@@ -4819,6 +5005,9 @@ release/moc_imcserver.o: release/moc_imcserver.cpp
 
 release/moc_mcserver.o: release/moc_mcserver.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\moc_mcserver.o release\moc_mcserver.cpp
+
+release/moc_mcsmanagerapplication.o: release/moc_mcsmanagerapplication.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\moc_mcsmanagerapplication.o release\moc_mcsmanagerapplication.cpp
 
 release/moc_commandline.o: release/moc_commandline.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\moc_commandline.o release\moc_commandline.cpp

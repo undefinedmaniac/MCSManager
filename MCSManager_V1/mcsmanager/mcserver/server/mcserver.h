@@ -13,6 +13,7 @@
 #include <QProcess>
 #include <QString>
 #include <QHash>
+#include <QTimer>
 
 namespace Server { class McServer; }
 
@@ -63,6 +64,7 @@ private:
 
     QProcess mProcess;
     ServerState mState = Stopped;
+    QTimer mStopTimer;
 
     QHash<QString, Addon::IMcServerAddon*> mAddons;
 

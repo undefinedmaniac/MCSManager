@@ -8,14 +8,13 @@
 #include "mcsmanager/mcserver/addons/mcscp/mcscpglobal.h"
 #include "mcsmanager/config/interfaces/iserverconfig.h"
 #include "mcsmanager/mcserver/addons/mcscp/interfaces/imcscpservertable.h"
+#include "mcsmanager/backup/interfaces/ibackupprocess.h"
 #include "commandlinereader.h"
 #include "commandlinewriter.h"
 
 #include <QObject>
 #include <QStringList>
-#include <QStringListIterator>
-#include <QDebug>
-#include <QCoreApplication>
+#include <QTimer>
 
 namespace Cli { class CommandLine; }
 
@@ -26,6 +25,12 @@ public:
     CommandLine(QObject *parent = nullptr);
 
     void start(Core::IMcsManagerCore *core);
+    void stop();
+
+signals:
+    void started();
+    void stopped();
+    void exitApplication();
 
 private slots:
     void newCommand(QString processCommand);
@@ -48,13 +53,15 @@ private:
 
     enum ErrorType {
         ConsoleClosed, InvalidMode, ConsoleModeUnavailable, InvalidCommand,
-        ListItemNotSpecified, NoServersFound, ServerInvalid, NoCurrentServer,
-        NoAddonsFound, CannotPrintPlayers, NoPlayersOnline, NoServerSpecified,
-        ServerNotRunning
+        NoServersFound, ServerInvalid, NoCurrentServer, NoAddonsFound,
+        CannotPrintPlayers, NoPlayersOnline, NoServerSpecified, ServerNotRunning,
+        ServerAlreadyRunning, NoActionSpecified, NoBackupsFound, InvalidObject,
+        InvalidAction, NoObjectSpecified, CannotPrintLog, ServerLogEmpty
     };
 
     Mode mMode;
     bool mIsRunningCommand = false;
+    bool mHasRequestedQuit = false;
 
     Core::IMcsManagerCore *mCore;
     Cli::CommandLineReader mReader;
@@ -76,6 +83,8 @@ private:
     void startCommand(const QStringList &parameters);
     void stopCommand();
     void restartCommand();
+    void backupCommand(const QStringList &parameters);
+    void printCommand(const QStringList &parameters);
 
     void processConsoleCommand(const QString &command);
 
