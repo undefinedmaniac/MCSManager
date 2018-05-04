@@ -249,20 +249,15 @@ void CommandLine::changeMode(const QStringList &parameters)
     if (mode == QStringLiteral("STANDARD")) {
         setMode(Standard);
     } else if (mode == QStringLiteral("CONSOLE")) {
-        if (!mServer) {
-            mWriter.writeLine(getError(NoCurrentServer));
+        if (!checkForServer(getError(NoCurrentServer)))
             return;
-        }
 
-        if (!mServer->isRunning()) {
-            mWriter.writeLine(getError(ServerNotRunning));
+        if (!checkForRunningServer(getError(ServerNotRunning)))
             return;
-        }
 
-        if (!mAddon) {
-            mWriter.writeLine(getError(ConsoleModeUnavailable));
+        if (!checkForAddon(getError(ConsoleModeUnavailable)))
             return;
-        }
+
         setMode(Console);
     }
 }
@@ -317,10 +312,9 @@ void CommandLine::listCommand(const QStringList &parameters)
                 return;
             }
         } else {
-            if (!mServer) {
-                mWriter.writeLine(getError(NoCurrentServer) + QStringLiteral(". Start a server or specify a server name"));
+            if (!checkForServer(getError(NoCurrentServer) + QStringLiteral(". Start a server or specify a server name")))
                 return;
-            }
+
             serverConfig = mServer->getConfig();
         }
 
@@ -329,11 +323,10 @@ void CommandLine::listCommand(const QStringList &parameters)
             mWriter.writeLine(getError(NoAddonsFound));
         else
             mWriter.writeLines(enabledAddons);
-    } else if (item == QStringLiteral("PLAYERS")) {
-        if (!mServer) {
-            mWriter.writeLine(getError(NoCurrentServer));
+    } else if (item == QStringLiteral("PLAYERS")) {        
+        if (!checkForServer(getError(NoCurrentServer)))
             return;
-        }
+
         if(!mAddon || !mAddon->isConnected()) {
             mWriter.writeLine(getError(CannotPrintPlayers));
             return;
@@ -353,15 +346,11 @@ void CommandLine::startCommand(const QStringList &parameters)
 {
     //If no server is specified, see if we can work with our current one
     if (parameters.isEmpty()) {
-        if (!mServer) {
-            mWriter.writeLine(getError(NoServerSpecified));
+        if (!checkForServer(getError(NoServerSpecified)))
             return;
-        }
 
-        if (mServer->isRunning()) {
-            mWriter.writeLine(getError(ServerAlreadyRunning));
+        if (!checkForRunningServer(getError(ServerAlreadyRunning)))
             return;
-        }
 
         mServer->start();
         return;
@@ -370,10 +359,8 @@ void CommandLine::startCommand(const QStringList &parameters)
     //If a server is specified, see if it is our current one
     const QString serverName = parameters.first();
     if (mServer && mServer->getName() == serverName) {
-        if (mServer->isRunning()) {
-            mWriter.writeLine(getError(ServerAlreadyRunning));
+        if (!checkForRunningServer(getError(ServerAlreadyRunning)))
             return;
-        }
 
         mServer->start();
         return;
@@ -390,25 +377,19 @@ void CommandLine::startCommand(const QStringList &parameters)
 
 void CommandLine::stopCommand()
 {
-    if (!mServer) {
-        mWriter.writeLine(getError(NoCurrentServer));
+    if (!checkForServer(getError(NoCurrentServer)))
         return;
-    }
 
-    if (!mServer->isRunning()) {
-        mWriter.writeLine(getError(ServerNotRunning));
+    if (!checkForRunningServer(getError(ServerNotRunning)))
         return;
-    }
 
     mServer->stop();
 }
 
 void CommandLine::restartCommand()
 {
-    if (!mServer) {
-        mWriter.writeLine(getError(NoCurrentServer));
+    if (!checkForServer(getError(NoCurrentServer)))
         return;
-    }
 
     mServer->restart();
 }
@@ -426,10 +407,10 @@ void CommandLine::backupCommand(const QStringList &parameters)
     if (parameters.size() >= 2) {
         serverName = parameters.at(1);
     } else {
-        if (!mServer) {
-            mWriter.writeLine(getError(NoCurrentServer) + QStringLiteral(". Start a server or specify a server name"));
+        if (!checkForServer(getError(NoCurrentServer) +
+                            QStringLiteral(". Start a server or specify a server name")))
             return;
-        }
+
         serverName = mServer->getName();
     }
 
@@ -460,15 +441,12 @@ void CommandLine::printCommand(const QStringList &parameters)
     }
 
     const QString object = parameters.first().toUpper();
-    if (object == QStringLiteral("SERVERLOG")) {
-        if (!mServer) {
-            mWriter.writeLine(getError(NoCurrentServer));
+    if (object == QStringLiteral("SERVERLOG")) {        
+        if (!checkForServer(getError(NoCurrentServer)))
             return;
-        }
-        if (!mAddon) {
-            mWriter.writeLine(getError(CannotPrintLog));
+
+        if (!checkForAddon(getError(CannotPrintLog)))
             return;
-        }
 
         const QString log = mAddon->readEntireLog();
         if (log.isEmpty())
@@ -486,6 +464,33 @@ void CommandLine::processConsoleCommand(const QString &command)
 {
     if (mAddon && mAddon->isConnected())
         mAddon->sendToConsole(command);
+}
+
+bool CommandLine::checkForServer(const QString &error)
+{
+    if (mServer)
+        return true;
+
+    mWriter.writeLine(error);
+    return false;
+}
+
+bool CommandLine::checkForRunningServer(const QString &error)
+{
+    if (mServer->isRunning())
+        return true;
+
+    mWriter.writeLine(error);
+    return false;
+}
+
+bool CommandLine::checkForAddon(const QString &error)
+{
+    if (mAddon)
+        return true;
+
+    mWriter.writeLine(error);
+    return false;
 }
 
 void CommandLine::interruptPrint(const QString &line)

@@ -88,6 +88,10 @@ private:
 
     void processConsoleCommand(const QString &command);
 
+    bool checkForServer(const QString &error);
+    bool checkForRunningServer(const QString &error);
+    bool checkForAddon(const QString &error);
+
     void interruptPrint(const QString &line);
 };
 

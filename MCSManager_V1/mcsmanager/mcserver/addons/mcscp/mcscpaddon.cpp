@@ -2,11 +2,16 @@
 
 using Mcscp::McscpAddon;
 
-const QRegularExpression McscpAddon::SERVER_UPDATE_MATCHER(QStringLiteral("(?i)\\[UPDATE]:\\[KEY:(.*)]:\\[VALUE:(.*)]")),
-                         McscpAddon::PLAYER_UPDATE_MATCHER(QStringLiteral("(?i)\\[UPDATE]:\\[KEY:PLAYER:(.*)]:\\[UUID:(.*)]:\\[VALUE:(.*)]")),
-                         McscpAddon::PLAYER_EVENT_MATCHER(QStringLiteral("(?i)\\[EVENT]:\\[TYPE:(.*)]:\\[UUID:(.*)]")),
-                         McscpAddon::MESSAGE_EVENT_MATCHER(QStringLiteral("(?i)\\[EVENT]:\\[TYPE:(.*)]:\\[UUID:(.*)]:\\[MESSAGE:(.*)]")),
-                         McscpAddon::SERVER_LOG_MATCHER(QStringLiteral("(?i)\\[LOG]:\\[DATA:(.*)]"));
+const QRegularExpression McscpAddon::SERVER_UPDATE_MATCHER(QStringLiteral("(?i)\\[UPDATE]:\\[KEY:(.*)]:\\[VALUE:(.*)]"),
+                                                           QRegularExpression::OptimizeOnFirstUsageOption),
+                         McscpAddon::PLAYER_UPDATE_MATCHER(QStringLiteral("(?i)\\[UPDATE]:\\[KEY:PLAYER:(.*)]:\\[UUID:(.*)]:\\[VALUE:(.*)]"),
+                                                           QRegularExpression::OptimizeOnFirstUsageOption),
+                         McscpAddon::PLAYER_EVENT_MATCHER(QStringLiteral("(?i)\\[EVENT]:\\[TYPE:(.*)]:\\[UUID:(.*)]"),
+                                                          QRegularExpression::OptimizeOnFirstUsageOption),
+                         McscpAddon::MESSAGE_EVENT_MATCHER(QStringLiteral("(?i)\\[EVENT]:\\[TYPE:(.*)]:\\[UUID:(.*)]:\\[MESSAGE:(.*)]"),
+                                                           QRegularExpression::OptimizeOnFirstUsageOption),
+                         McscpAddon::SERVER_LOG_MATCHER(QStringLiteral("(?i)\\[LOG]:\\[DATA:(.*)]"),
+                                                        QRegularExpression::OptimizeOnFirstUsageOption);
 
 McscpAddon::McscpAddon(Server::IMcServer *server, QObject *parent) :
     IMcscpAddon(parent), McServerAddonBase(Mcscp::ADDON_NAME, server)
@@ -15,7 +20,6 @@ McscpAddon::McscpAddon(Server::IMcServer *server, QObject *parent) :
     connect(&mSocket, SIGNAL(disconnected()), SLOT(clientDisconnected()));
     connect(&mSocket, SIGNAL(error(QAbstractSocket::SocketError)),
             SLOT(error(QAbstractSocket::SocketError)));
-
     connect(&mSocket, SIGNAL(readyRead()), SLOT(readyRead()));
 
     connect(&mConnectionTimer, SIGNAL(timeout()), SLOT(attemptConnection()));
@@ -180,7 +184,6 @@ void McscpAddon::readyRead()
             }
 
             match = MESSAGE_EVENT_MATCHER.match(data);
-
             if (match.hasMatch()) {
                 const QString type = match.captured(1);
                 const QString uuid = match.captured(2);
@@ -201,7 +204,7 @@ void McscpAddon::readyRead()
             if (match.hasMatch()) {
                 const QString logData = match.captured(1);
                 int oldSize = mServerLog.size();
-                mServerLog.append(logData);
+                mServerLog.append(logData + '\n');
                 logEvent(oldSize);
             }
         }
@@ -210,9 +213,9 @@ void McscpAddon::readyRead()
 
 void McscpAddon::removePlayerTable(const QString &uuid)
 {
-    McscpPlayerTable *table = mPlayerTables.value(uuid, nullptr);
+    Mcscp::McscpPlayerTable *table = mPlayerTables.value(uuid, nullptr);
 
-    if (table != nullptr) {
+    if (table) {
         mPlayerTables.remove(uuid);
         table->alertPlayerDisconnected();
         table->deleteLater();
@@ -268,9 +271,9 @@ void McscpAddon::playerTableUpdate(const QString &uuid, const QString &key, cons
     const QString upperUuid = uuid.toUpper();
     const QString upperKey = key.toUpper();
 
-    McscpPlayerTable *table = mPlayerTables.value(upperUuid, nullptr);
+    Mcscp::McscpPlayerTable *table = mPlayerTables.value(upperUuid, nullptr);
 
-    if (table == nullptr) {
+    if (!table) {
         table = new McscpPlayerTable(this);
         mPlayerTables.insert(upperUuid, table);
         playerConnected(uuid);
