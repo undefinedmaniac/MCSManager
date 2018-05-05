@@ -56,7 +56,7 @@ private:
         NoServersFound, ServerInvalid, NoCurrentServer, NoAddonsFound,
         CannotPrintPlayers, NoPlayersOnline, NoServerSpecified, ServerNotRunning,
         ServerAlreadyRunning, NoActionSpecified, NoBackupsFound, InvalidObject,
-        InvalidAction, NoObjectSpecified, CannotPrintLog, ServerLogEmpty
+        InvalidAction, NoObjectSpecified, CannotPrintLog, ServerLogEmpty, AppLogEmpty
     };
 
     Mode mMode;
@@ -69,6 +69,8 @@ private:
 
     Server::IMcServer *mServer = nullptr;
     Mcscp::IMcscpAddon *mAddon = nullptr;
+
+    QString mLog;
 
     void setMode(Mode mode);
 
@@ -87,10 +89,6 @@ private:
     void printCommand(const QStringList &parameters);
 
     void processConsoleCommand(const QString &command);
-
-    bool checkForServer(const QString &error);
-    bool checkForRunningServer(const QString &error);
-    bool checkForAddon(const QString &error);
 
     void interruptPrint(const QString &line);
 };
