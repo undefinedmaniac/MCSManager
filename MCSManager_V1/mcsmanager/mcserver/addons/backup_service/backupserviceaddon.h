@@ -11,7 +11,6 @@
 
 #include <QObject>
 #include <QTimer>
-#include <QDebug>
 
 namespace BackupService { class BackupServiceAddon; }
 

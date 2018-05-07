@@ -41,10 +41,10 @@ void RestarterAddon::start()
             mSeconds = mPeriod;
             mTimer.start();
         } else {
-            //Tell the user that the MCSCP addon is required
+            getCore()->printMessage(QStringLiteral("Restarter Error: The MCSCP addon is not enabled."));
         }
     } else {
-        //Tell user that period must be >= 5 minutes;
+        getCore()->printMessage(QStringLiteral("Restarter Error: The period cannot be less than 5 minutes!"));
     }
 }
 

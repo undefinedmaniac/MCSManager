@@ -3,7 +3,9 @@
 
 #include <QObject>
 
-class IMcscpPlayerTable : public QObject
+namespace Mcscp { class IMcscpPlayerTable; }
+
+class Mcscp::IMcscpPlayerTable : public QObject
 {
     Q_OBJECT
 public:

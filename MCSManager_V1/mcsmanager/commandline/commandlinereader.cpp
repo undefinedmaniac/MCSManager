@@ -26,6 +26,11 @@ void CommandLineReader::stop()
     mMutex.unlock();
 }
 
+bool CommandLineReader::isRunning()
+{
+    return mThread.isRunning();
+}
+
 void CommandLineReader::runLoop()
 {
     mMutex.lock();

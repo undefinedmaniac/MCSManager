@@ -35,7 +35,7 @@ void SleeperAddon::init()
                 mTimer.setInterval(mPeriod);
                 connect(mcscpAddon, SIGNAL(connected()), SLOT(mcscpConnected()));
                 connect(mcscpAddon, SIGNAL(disconnected()), SLOT(mcscpDisconnected()));
-                connect(mTable, SIGNAL(KeyUpdate(IMcscpServerTable::Key)), SLOT(playerCountChanged(IMcscpServerTable::Key)));
+                connect(mTable, SIGNAL(KeyUpdate(Mcscp::IMcscpServerTable::Key)), SLOT(playerCountChanged(Mcscp::IMcscpServerTable::Key)));
             }
         }
     }
@@ -58,9 +58,9 @@ bool SleeperAddon::isRunning() const
     return mIsRunning;
 }
 
-void SleeperAddon::playerCountChanged(IMcscpServerTable::Key key)
+void SleeperAddon::playerCountChanged(Mcscp::IMcscpServerTable::Key key)
 {
-    if (key == IMcscpServerTable::PlayerCount)
+    if (key == Mcscp::IMcscpServerTable::PlayerCount)
         checkPlayerCount();
 }
 

@@ -68,17 +68,17 @@ float McscpServerTable::getTps() const
     return mTps;
 }
 
-float McscpServerTable::maxRam() const
+float McscpServerTable::getMaxRam() const
 {
     return mMaxRam;
 }
 
-float McscpServerTable::totalRam() const
+float McscpServerTable::getTotalRam() const
 {
     return mTotalRam;
 }
 
-float McscpServerTable::usedRam() const
+float McscpServerTable::getUsedRam() const
 {
     return mUsedRam;
 }

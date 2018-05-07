@@ -49,6 +49,7 @@ private slots:
     void serverStarted();
     void serverStopped(int exitCode, QProcess::ExitStatus exitStatus);
     void serverErrorOccurred(QProcess::ProcessError errorType);
+    void crashTimerTimeout();
 
 private:
     enum ServerState {
@@ -64,7 +65,8 @@ private:
 
     QProcess mProcess;
     ServerState mState = Stopped;
-    QTimer mStopTimer;
+    QTimer mStopTimer, mCrashTimer;
+    int mCrashCount = 0;
 
     QHash<QString, Addon::IMcServerAddon*> mAddons;
 

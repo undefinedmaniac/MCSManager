@@ -20,30 +20,30 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_IMcscpServerTable_t {
+struct qt_meta_stringdata_Mcscp__IMcscpServerTable_t {
     QByteArrayData data[5];
-    char stringdata0[56];
+    char stringdata0[63];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_IMcscpServerTable_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Mcscp__IMcscpServerTable_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_IMcscpServerTable_t qt_meta_stringdata_IMcscpServerTable = {
+static const qt_meta_stringdata_Mcscp__IMcscpServerTable_t qt_meta_stringdata_Mcscp__IMcscpServerTable = {
     {
-QT_MOC_LITERAL(0, 0, 17), // "IMcscpServerTable"
-QT_MOC_LITERAL(1, 18, 9), // "KeyUpdate"
-QT_MOC_LITERAL(2, 28, 0), // ""
-QT_MOC_LITERAL(3, 29, 22), // "IMcscpServerTable::Key"
-QT_MOC_LITERAL(4, 52, 3) // "key"
+QT_MOC_LITERAL(0, 0, 24), // "Mcscp::IMcscpServerTable"
+QT_MOC_LITERAL(1, 25, 9), // "KeyUpdate"
+QT_MOC_LITERAL(2, 35, 0), // ""
+QT_MOC_LITERAL(3, 36, 22), // "IMcscpServerTable::Key"
+QT_MOC_LITERAL(4, 59, 3) // "key"
 
     },
-    "IMcscpServerTable\0KeyUpdate\0\0"
+    "Mcscp::IMcscpServerTable\0KeyUpdate\0\0"
     "IMcscpServerTable::Key\0key"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_IMcscpServerTable[] = {
+static const uint qt_meta_data_Mcscp__IMcscpServerTable[] = {
 
  // content:
        7,       // revision
@@ -65,7 +65,7 @@ static const uint qt_meta_data_IMcscpServerTable[] = {
        0        // eod
 };
 
-void IMcscpServerTable::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Mcscp::IMcscpServerTable::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         IMcscpServerTable *_t = static_cast<IMcscpServerTable *>(_o);
@@ -86,26 +86,26 @@ void IMcscpServerTable::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
     }
 }
 
-QT_INIT_METAOBJECT const QMetaObject IMcscpServerTable::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_IMcscpServerTable.data,
-      qt_meta_data_IMcscpServerTable,  qt_static_metacall, nullptr, nullptr}
+QT_INIT_METAOBJECT const QMetaObject Mcscp::IMcscpServerTable::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_Mcscp__IMcscpServerTable.data,
+      qt_meta_data_Mcscp__IMcscpServerTable,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *IMcscpServerTable::metaObject() const
+const QMetaObject *Mcscp::IMcscpServerTable::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *IMcscpServerTable::qt_metacast(const char *_clname)
+void *Mcscp::IMcscpServerTable::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_IMcscpServerTable.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_Mcscp__IMcscpServerTable.stringdata0))
         return static_cast<void*>(this);
     return QObject::qt_metacast(_clname);
 }
 
-int IMcscpServerTable::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Mcscp::IMcscpServerTable::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
@@ -123,7 +123,7 @@ int IMcscpServerTable::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void IMcscpServerTable::KeyUpdate(IMcscpServerTable::Key _t1)
+void Mcscp::IMcscpServerTable::KeyUpdate(IMcscpServerTable::Key _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

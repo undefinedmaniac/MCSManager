@@ -5,7 +5,9 @@ class QString;
 
 #include <QObject>
 
-class IMcscpServerTable : public QObject
+namespace Mcscp { class IMcscpServerTable; }
+
+class Mcscp::IMcscpServerTable : public QObject
 {
     Q_OBJECT
 public:
@@ -21,9 +23,9 @@ public:
     virtual int getPlayerCount() const = 0;
     virtual QString getMotd() const = 0;
     virtual float getTps() const = 0;
-    virtual float maxRam() const = 0;
-    virtual float totalRam() const = 0;
-    virtual float usedRam() const = 0;
+    virtual float getMaxRam() const = 0;
+    virtual float getTotalRam() const = 0;
+    virtual float getUsedRam() const = 0;
 
 signals:
     void KeyUpdate(IMcscpServerTable::Key key);

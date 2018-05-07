@@ -20,32 +20,32 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_IMcscpPlayerTable_t {
+struct qt_meta_stringdata_Mcscp__IMcscpPlayerTable_t {
     QByteArrayData data[6];
-    char stringdata0[75];
+    char stringdata0[82];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_IMcscpPlayerTable_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Mcscp__IMcscpPlayerTable_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_IMcscpPlayerTable_t qt_meta_stringdata_IMcscpPlayerTable = {
+static const qt_meta_stringdata_Mcscp__IMcscpPlayerTable_t qt_meta_stringdata_Mcscp__IMcscpPlayerTable = {
     {
-QT_MOC_LITERAL(0, 0, 17), // "IMcscpPlayerTable"
-QT_MOC_LITERAL(1, 18, 9), // "KeyUpdate"
-QT_MOC_LITERAL(2, 28, 0), // ""
-QT_MOC_LITERAL(3, 29, 22), // "IMcscpPlayerTable::Key"
-QT_MOC_LITERAL(4, 52, 3), // "key"
-QT_MOC_LITERAL(5, 56, 18) // "playerDisconnected"
+QT_MOC_LITERAL(0, 0, 24), // "Mcscp::IMcscpPlayerTable"
+QT_MOC_LITERAL(1, 25, 9), // "KeyUpdate"
+QT_MOC_LITERAL(2, 35, 0), // ""
+QT_MOC_LITERAL(3, 36, 22), // "IMcscpPlayerTable::Key"
+QT_MOC_LITERAL(4, 59, 3), // "key"
+QT_MOC_LITERAL(5, 63, 18) // "playerDisconnected"
 
     },
-    "IMcscpPlayerTable\0KeyUpdate\0\0"
+    "Mcscp::IMcscpPlayerTable\0KeyUpdate\0\0"
     "IMcscpPlayerTable::Key\0key\0"
     "playerDisconnected"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_IMcscpPlayerTable[] = {
+static const uint qt_meta_data_Mcscp__IMcscpPlayerTable[] = {
 
  // content:
        7,       // revision
@@ -69,7 +69,7 @@ static const uint qt_meta_data_IMcscpPlayerTable[] = {
        0        // eod
 };
 
-void IMcscpPlayerTable::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Mcscp::IMcscpPlayerTable::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         IMcscpPlayerTable *_t = static_cast<IMcscpPlayerTable *>(_o);
@@ -98,26 +98,26 @@ void IMcscpPlayerTable::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
     }
 }
 
-QT_INIT_METAOBJECT const QMetaObject IMcscpPlayerTable::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_IMcscpPlayerTable.data,
-      qt_meta_data_IMcscpPlayerTable,  qt_static_metacall, nullptr, nullptr}
+QT_INIT_METAOBJECT const QMetaObject Mcscp::IMcscpPlayerTable::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_Mcscp__IMcscpPlayerTable.data,
+      qt_meta_data_Mcscp__IMcscpPlayerTable,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *IMcscpPlayerTable::metaObject() const
+const QMetaObject *Mcscp::IMcscpPlayerTable::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *IMcscpPlayerTable::qt_metacast(const char *_clname)
+void *Mcscp::IMcscpPlayerTable::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_IMcscpPlayerTable.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_Mcscp__IMcscpPlayerTable.stringdata0))
         return static_cast<void*>(this);
     return QObject::qt_metacast(_clname);
 }
 
-int IMcscpPlayerTable::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Mcscp::IMcscpPlayerTable::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
@@ -135,14 +135,14 @@ int IMcscpPlayerTable::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void IMcscpPlayerTable::KeyUpdate(IMcscpPlayerTable::Key _t1)
+void Mcscp::IMcscpPlayerTable::KeyUpdate(IMcscpPlayerTable::Key _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
-void IMcscpPlayerTable::playerDisconnected()
+void Mcscp::IMcscpPlayerTable::playerDisconnected()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }

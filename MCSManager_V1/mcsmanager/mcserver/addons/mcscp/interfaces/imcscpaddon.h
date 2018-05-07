@@ -1,14 +1,17 @@
 #ifndef IMCSCPADDON_H
 #define IMCSCPADDON_H
 
-class IMcscpServerTable;
-class IMcscpPlayerTable;
 class QString;
 class QStringList;
 
 #include <QObject>
 
-namespace Mcscp { class IMcscpAddon; }
+namespace Mcscp
+{
+    class IMcscpAddon;
+    class IMcscpServerTable;
+    class IMcscpPlayerTable;
+}
 
 class Mcscp::IMcscpAddon : public QObject
 {
@@ -19,8 +22,8 @@ public:
 
     virtual bool isConnected() const = 0;
 
-    virtual const IMcscpServerTable *getServerTable() const = 0;
-    virtual const IMcscpPlayerTable *getPlayerTable(const QString &uuid) const = 0;
+    virtual const Mcscp::IMcscpServerTable *getServerTable() const = 0;
+    virtual const Mcscp::IMcscpPlayerTable *getPlayerTable(const QString &uuid) const = 0;
     virtual QStringList getPlayerUuids() const = 0;
     virtual QStringList getPlayerList() const = 0;
 

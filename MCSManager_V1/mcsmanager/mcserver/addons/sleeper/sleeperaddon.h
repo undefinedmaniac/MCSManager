@@ -11,7 +11,6 @@
 
 #include <QObject>
 #include <QTimer>
-#include <QDebug>
 
 namespace Sleeper { class SleeperAddon; }
 
@@ -29,7 +28,7 @@ public:
     bool isRunning() const override;
 
 public slots:
-    void playerCountChanged(IMcscpServerTable::Key key);
+    void playerCountChanged(Mcscp::IMcscpServerTable::Key key);
     void sleepTimerExpired();
     void mcscpConnected();
     void mcscpDisconnected();
@@ -42,7 +41,7 @@ private:
     Config::ShutdownBehavior mShutdownBehavior;
     QString mAltServer;
 
-    const IMcscpServerTable *mTable = nullptr;
+    const Mcscp::IMcscpServerTable *mTable = nullptr;
 
     QTimer mTimer;
 

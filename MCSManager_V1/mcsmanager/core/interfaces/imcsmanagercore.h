@@ -39,6 +39,8 @@ public:
     virtual QStringList getBackupList(const QString &serverName) = 0;
 
 signals:
+    void printMessage(QString message);
+
     void currentServerChanged();
 
     void backupStarted(QString server);

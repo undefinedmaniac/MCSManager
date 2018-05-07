@@ -17,18 +17,18 @@ public:
     void setPlayerCount(int playerCount);
     void setMotd(const QString &motd);
     void setTps(float tps);
-    void setMaxRam(float maxRam);
-    void setTotalRam(float totalRam);
-    void setUsedRam(float usedRam);
+    void setMaxRam(float getMaxRam);
+    void setTotalRam(float getTotalRam);
+    void setUsedRam(float getUsedRam);
 
     // IMcscpServerTable interface
     int getMaxPlayers() const override;
     int getPlayerCount() const override;
     QString getMotd() const override;
     float getTps() const override;
-    float maxRam() const override;
-    float totalRam() const override;
-    float usedRam() const override;
+    float getMaxRam() const override;
+    float getTotalRam() const override;
+    float getUsedRam() const override;
 
 private:
     int mMaxPlayers, mPlayerCount;

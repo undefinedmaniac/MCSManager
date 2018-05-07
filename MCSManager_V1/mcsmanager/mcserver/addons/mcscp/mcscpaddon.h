@@ -30,8 +30,8 @@ public:
     // IMcscpAddon interface
     bool isConnected() const;
 
-    const IMcscpServerTable *getServerTable() const override;
-    const IMcscpPlayerTable *getPlayerTable(const QString &uuid) const override;
+    const Mcscp::IMcscpServerTable *getServerTable() const override;
+    const Mcscp::IMcscpPlayerTable *getPlayerTable(const QString &uuid) const override;
     QStringList getPlayerUuids() const override;
     QStringList getPlayerList() const override;
 

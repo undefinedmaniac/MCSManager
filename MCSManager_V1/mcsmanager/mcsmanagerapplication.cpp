@@ -8,6 +8,7 @@ McsManagerApplication::McsManagerApplication(QObject *parent) : QObject(parent),
     mCore.setComponents(&mConfigManager, &mBackupManager, &mServerBuilder);
 
     connect(&mCommandLine, SIGNAL(exitApplication()), SLOT(exitApplication()));
+    connect(&mCore, SIGNAL(printMessage(QString)), &mCommandLine, SLOT(consolePrint(QString)));
 }
 
 void McsManagerApplication::start()
@@ -28,6 +29,8 @@ void McsManagerApplication::exitApplication()
             loop.exec();
         }
     }
+
+    mCommandLine.waitForStop();
 
     QCoreApplication::quit();
 }

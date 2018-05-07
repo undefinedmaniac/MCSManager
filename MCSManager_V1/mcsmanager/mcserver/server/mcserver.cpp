@@ -25,6 +25,10 @@ McServer::McServer(Config::IServerConfig *config, Core::IMcsManagerCore *core, Q
     mStopTimer.setSingleShot(true);
     connect(&mStopTimer, SIGNAL(timeout()), &mProcess, SLOT(kill()));
 
+    mCrashTimer.setInterval(60000);
+    mCrashTimer.setSingleShot(true);
+    connect(&mCrashTimer, SIGNAL(timeout()), SLOT(crashTimerTimeout()));
+
     connect(&mProcess, SIGNAL(started()), SLOT(serverStarted()));
     connect(&mProcess, SIGNAL(finished(int, QProcess::ExitStatus)), SLOT(serverStopped(int, QProcess::ExitStatus)));
     connect(&mProcess, SIGNAL(errorOccurred(QProcess::ProcessError)), SLOT(serverErrorOccurred(QProcess::ProcessError)));
@@ -132,6 +136,9 @@ void McServer::serverStarted()
     mState = Started;
     startAddons();
     emit started();
+
+    if (!mCrashTimer.isActive())
+        mCrashTimer.start();
 }
 
 void McServer::serverStopped(int exitCode, QProcess::ExitStatus exitStatus)
@@ -145,6 +152,14 @@ void McServer::serverStopped(int exitCode, QProcess::ExitStatus exitStatus)
     bool expected = (mState == Stopping || mState == Restarting);
 
     emit stopped(expected);
+
+    if (!expected)
+        mCrashCount++;
+
+    if (mCrashCount >= 3) {
+        emit error(QStringLiteral("Server crashed 3 times within one minute. Stopping."));
+        return;
+    }
 
     if (mState == Restarting) {
         start();
@@ -181,7 +196,7 @@ void McServer::serverErrorOccurred(QProcess::ProcessError errorType)
         break;
     case QProcess::Crashed:
         if (!mIsRealServer)
-            return;
+            break;
         errorMessage = QStringLiteral("Server crashed!");
         break;
     case QProcess::Timedout:
@@ -202,6 +217,11 @@ void McServer::serverErrorOccurred(QProcess::ProcessError errorType)
     }
 
     emit error(errorMessage);
+}
+
+void McServer::crashTimerTimeout()
+{
+    mCrashCount = 0;
 }
 
 void McServer::stopServer()

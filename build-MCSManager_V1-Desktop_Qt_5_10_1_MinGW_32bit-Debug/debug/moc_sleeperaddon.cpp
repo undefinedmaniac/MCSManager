@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Sleeper__SleeperAddon_t {
     QByteArrayData data[8];
-    char stringdata0[120];
+    char stringdata0[127];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,15 +34,15 @@ static const qt_meta_stringdata_Sleeper__SleeperAddon_t qt_meta_stringdata_Sleep
 QT_MOC_LITERAL(0, 0, 21), // "Sleeper::SleeperAddon"
 QT_MOC_LITERAL(1, 22, 18), // "playerCountChanged"
 QT_MOC_LITERAL(2, 41, 0), // ""
-QT_MOC_LITERAL(3, 42, 22), // "IMcscpServerTable::Key"
-QT_MOC_LITERAL(4, 65, 3), // "key"
-QT_MOC_LITERAL(5, 69, 17), // "sleepTimerExpired"
-QT_MOC_LITERAL(6, 87, 14), // "mcscpConnected"
-QT_MOC_LITERAL(7, 102, 17) // "mcscpDisconnected"
+QT_MOC_LITERAL(3, 42, 29), // "Mcscp::IMcscpServerTable::Key"
+QT_MOC_LITERAL(4, 72, 3), // "key"
+QT_MOC_LITERAL(5, 76, 17), // "sleepTimerExpired"
+QT_MOC_LITERAL(6, 94, 14), // "mcscpConnected"
+QT_MOC_LITERAL(7, 109, 17) // "mcscpDisconnected"
 
     },
     "Sleeper::SleeperAddon\0playerCountChanged\0"
-    "\0IMcscpServerTable::Key\0key\0"
+    "\0Mcscp::IMcscpServerTable::Key\0key\0"
     "sleepTimerExpired\0mcscpConnected\0"
     "mcscpDisconnected"
 };
@@ -82,7 +82,7 @@ void Sleeper::SleeperAddon::qt_static_metacall(QObject *_o, QMetaObject::Call _c
         SleeperAddon *_t = static_cast<SleeperAddon *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->playerCountChanged((*reinterpret_cast< IMcscpServerTable::Key(*)>(_a[1]))); break;
+        case 0: _t->playerCountChanged((*reinterpret_cast< Mcscp::IMcscpServerTable::Key(*)>(_a[1]))); break;
         case 1: _t->sleepTimerExpired(); break;
         case 2: _t->mcscpConnected(); break;
         case 3: _t->mcscpDisconnected(); break;

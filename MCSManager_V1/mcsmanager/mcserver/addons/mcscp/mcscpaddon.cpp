@@ -29,15 +29,15 @@ McscpAddon::McscpAddon(Server::IMcServer *server, QObject *parent) :
 
 bool McscpAddon::isConnected() const
 {
-    return mSocket.isOpen();
+    return (mSocket.isReadable() && mSocket.isWritable());
 }
 
-const IMcscpServerTable *McscpAddon::getServerTable() const
+const Mcscp::IMcscpServerTable *McscpAddon::getServerTable() const
 {
     return &mServerTable;
 }
 
-const IMcscpPlayerTable *McscpAddon::getPlayerTable(const QString &uuid) const
+const Mcscp::IMcscpPlayerTable *McscpAddon::getPlayerTable(const QString &uuid) const
 {
     return mPlayerTables.value(uuid.toUpper(), nullptr);
 }
@@ -140,8 +140,8 @@ void McscpAddon::error(QAbstractSocket::SocketError error)
         delayedConnection(5000);
     else if (error == QAbstractSocket::RemoteHostClosedError)
         return;
-
-   qDebug() << "MCSCP Error:" << mSocket.errorString();
+    else
+        getCore()->printMessage(QStringLiteral("MCSCP ERROR: %1").arg(error));
 }
 
 void McscpAddon::readyRead()
