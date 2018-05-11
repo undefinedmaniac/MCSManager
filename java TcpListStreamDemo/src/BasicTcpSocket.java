@@ -5,8 +5,10 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 public class BasicTcpSocket implements IBasicTcpSocket {
 
@@ -15,7 +17,7 @@ public class BasicTcpSocket implements IBasicTcpSocket {
     private SelectionKey mKey;
 
     private ByteArrayOutputStream mReadBuffer = new ByteArrayOutputStream();
-    private ByteArrayOutputStream mWriteBuffer = new ByteArrayOutputStream();
+    private Queue<ByteBuffer> mWriteQueue = new ArrayDeque<>();
 
     private List<IBasicIODeviceListener> mListeners = new ArrayList<>();
 
@@ -55,7 +57,7 @@ public class BasicTcpSocket implements IBasicTcpSocket {
 
         //Loop until we cannot fill the buffer anymore
         do {
-            ByteBuffer buffer = ByteBuffer.allocate(1024);
+            ByteBuffer buffer = ByteBuffer.allocate(2048);
 
             try {
                 bytesRead = mChannel.read(buffer);
@@ -71,7 +73,7 @@ public class BasicTcpSocket implements IBasicTcpSocket {
                 e.printStackTrace();
                 return;
             }
-        } while (bytesRead == 1024);
+        } while (bytesRead == 2048);
 
         //Emit readyRead
         for (IBasicIODeviceListener listener : mListeners)
@@ -79,13 +81,17 @@ public class BasicTcpSocket implements IBasicTcpSocket {
     }
 
     public void selectedForWrite() {
-        byte[] bytes = mWriteBuffer.toByteArray();
-        mWriteBuffer.reset();
-
-        if (!writeBuffer(bytes))
-            return;
-
         try {
+            while (!mWriteQueue.isEmpty()) {
+                ByteBuffer buffer = mWriteQueue.peek();
+
+                mChannel.write(buffer);
+
+                if (!buffer.hasRemaining())
+                    mWriteQueue.poll();
+                else
+                    return;
+            }
             //Deregister write
             mKey = mChannel.register(mSelector, SelectionKey.OP_READ);
         } catch (Exception e) {
@@ -94,7 +100,12 @@ public class BasicTcpSocket implements IBasicTcpSocket {
     }
 
     public int writeBufferSize() {
-        return mWriteBuffer.size();
+        int sumBytes = 0;
+
+        for (ByteBuffer buffer : mWriteQueue)
+            sumBytes += buffer.remaining();
+
+        return sumBytes;
     }
 
     public int readBufferSize() {
@@ -106,14 +117,24 @@ public class BasicTcpSocket implements IBasicTcpSocket {
         if (bytes.length == 0)
             return;
 
-        try {
-            if (writeBuffer(bytes))
-                return;
+        ByteBuffer buffer = ByteBuffer.wrap(bytes);
 
-            //Register this socket for read/write
-            mKey = mChannel.register(mSelector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (mWriteQueue.isEmpty()) {
+            try {
+                mChannel.write(buffer);
+
+                if (!buffer.hasRemaining())
+                    return;
+
+                mWriteQueue.add(buffer);
+
+                //Register this socket for read/write
+                mKey = mChannel.register(mSelector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            mWriteQueue.add(buffer);
         }
     }
 
@@ -129,29 +150,5 @@ public class BasicTcpSocket implements IBasicTcpSocket {
 
     public void removeListener(IBasicIODeviceListener listener) {
         mListeners.remove(listener);
-    }
-
-    private boolean writeBuffer(byte[] bytes) {
-        ByteBuffer buffer = ByteBuffer.wrap(bytes);
-
-        try {
-            mChannel.write(buffer);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        boolean complete = !buffer.hasRemaining();
-
-        if (!complete) {
-            byte[] bufferBytes = new byte[buffer.remaining()];
-            buffer.get(bufferBytes);
-            try {
-                mWriteBuffer.write(bufferBytes);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        return complete;
     }
 }
