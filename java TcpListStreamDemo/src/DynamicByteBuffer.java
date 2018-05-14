@@ -9,7 +9,10 @@ public class DynamicByteBuffer extends ByteArrayOutputStream {
 
         final int maxLength = count - pos;
 
-        if (length <= 0 || length > maxLength)
+        if (length == -1 || length > maxLength)
+            length = maxLength;
+
+        if (length <= 0)
             return;
 
         byte[] array;
@@ -26,7 +29,7 @@ public class DynamicByteBuffer extends ByteArrayOutputStream {
             System.arraycopy(rightBytes, 0, array, leftBytes.length, rightBytes.length);
         }
 
-        buf = array;
+        System.arraycopy(array, 0, buf, 0, array.length);
         count = array.length;
     }
 
@@ -43,19 +46,30 @@ public class DynamicByteBuffer extends ByteArrayOutputStream {
     }
 
     public byte[] mid(int pos, int length) {
-        if (pos < 0 || pos >= count)
+        if (pos < 0 || pos > count)
             return null;
-
-        if (length == -1) {
-            length = count - pos;
-        }
 
         final int maxLength = count - pos;
 
-        if (length <= 0 || length > maxLength)
+        if (length == -1 || length > maxLength)
+            length = maxLength;
+
+        if (length < 0)
             return null;
 
         return Arrays.copyOfRange(buf, pos, length + pos);
+    }
+
+    public int indexOf(byte data) {
+        byte[] singleByte = new byte[1];
+        singleByte[0] = data;
+        return indexOf(singleByte);
+    }
+
+    public int indexOf(byte data, int startingPos) {
+        byte[] singleByte = new byte[1];
+        singleByte[0] = data;
+        return indexOf(singleByte, startingPos);
     }
 
     public int indexOf(byte[] data) {

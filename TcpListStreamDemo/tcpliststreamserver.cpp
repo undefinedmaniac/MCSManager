@@ -9,10 +9,12 @@ TcpListStreamServer::TcpListStreamServer()
 
 void TcpListStreamServer::newConnection()
 {
+    qDebug() << "New connection!";
+
     TcpListStream stream;
     stream.setSocket(nextPendingConnection());
 
-    for (int i = 0; i < 1000000; i++) {
+    for (int i = 0; i < 100; i++) {
         QStringList list;
 
         list.append(QString::number(i));

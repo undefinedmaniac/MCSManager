@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
     QCoreApplication app(argc, argv);
 
-    TcpListStreamServer server;
+    //TcpListStreamServer server;
     TcpListStreamClient client;
 
     return app.exec();

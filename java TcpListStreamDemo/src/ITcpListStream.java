@@ -1,9 +1,8 @@
-import java.util.Collection;
 import java.util.List;
 
 public interface ITcpListStream {
-    void setSocket(BasicTcpSocket socket);
-    BasicTcpSocket getSocket();
+    void setSocket(IBasicTcpSocket socket);
+    IBasicTcpSocket getSocket();
 
     void writeList(List<String> list);
     List<String> readList();

@@ -11,7 +11,7 @@ TcpListStreamClient::TcpListStreamClient()
 
 void TcpListStreamClient::readyRead()
 {
-    if (mCount == 0)
+    /*if (mCount == 0)
         mTime = QTime::currentTime();
 
     mStream.readList();
@@ -21,5 +21,16 @@ void TcpListStreamClient::readyRead()
     if (mCount >= 1000000) {
         qDebug() << QStringLiteral("Received 1,000,000 lists!");
         qDebug() << QStringLiteral("You computer took %1 seconds!").arg(mTime.secsTo(QTime::currentTime()));
-    }
+    }*/
+
+    const QStringList &list = mStream.readList();
+
+    qDebug() << list;
+
+    QStringList newList;
+
+    for (const QString &number : list)
+        newList.append(QString::number(number.toInt() + 1));
+
+    mStream.writeList(newList);
 }

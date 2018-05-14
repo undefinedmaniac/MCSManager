@@ -5,10 +5,8 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 
 public class BasicTcpSocket implements IBasicTcpSocket {
 
@@ -17,7 +15,7 @@ public class BasicTcpSocket implements IBasicTcpSocket {
     private SelectionKey mKey;
 
     private ByteArrayOutputStream mReadBuffer = new ByteArrayOutputStream();
-    private Queue<ByteBuffer> mWriteQueue = new ArrayDeque<>();
+    private DynamicByteBuffer mWriteQueue = new DynamicByteBuffer();
 
     private List<IBasicIODeviceListener> mListeners = new ArrayList<>();
 
@@ -30,7 +28,7 @@ public class BasicTcpSocket implements IBasicTcpSocket {
             mChannel.configureBlocking(false);
             mKey = mChannel.register(mSelector, SelectionKey.OP_READ);
         } catch (Exception e) {
-            e.printStackTrace();
+            emitError(e);
         }
     }
 
@@ -47,31 +45,41 @@ public class BasicTcpSocket implements IBasicTcpSocket {
             mChannel.close();
             mKey.cancel();
         } catch (Exception e) {
-            e.printStackTrace();
+            emitError(e);
         }
     }
 
     public void selectedForRead() {
 
-        int bytesRead = 0;
+        int bytesRead;
 
         //Loop until we cannot fill the buffer anymore
         do {
+            bytesRead = -1;
+
             ByteBuffer buffer = ByteBuffer.allocate(2048);
 
             try {
                 bytesRead = mChannel.read(buffer);
+            } catch (Exception e) {
+                emitError(e);
+            }
 
-                //End of stream
-                if (bytesRead == -1)
-                    return;
+            //End of stream
+            if (bytesRead == -1) {
+                close();
+                return;
+            }
 
-                byte[] bytes = new byte[bytesRead];
-                buffer.get(bytes, 0, bytesRead);
+            buffer.flip();
+
+            byte[] bytes = new byte[bytesRead];
+            buffer.get(bytes, 0, bytesRead);
+
+            try {
                 mReadBuffer.write(bytes);
             } catch (Exception e) {
-                e.printStackTrace();
-                return;
+                emitError(e);
             }
         } while (bytesRead == 2048);
 
@@ -81,31 +89,29 @@ public class BasicTcpSocket implements IBasicTcpSocket {
     }
 
     public void selectedForWrite() {
+        ByteBuffer buffer = ByteBuffer.wrap(mWriteQueue.toByteArray());
+
         try {
-            while (!mWriteQueue.isEmpty()) {
-                ByteBuffer buffer = mWriteQueue.peek();
+            mChannel.write(buffer);
+        } catch (Exception e) {
+            emitError(e);
+        }
 
-                mChannel.write(buffer);
+        mWriteQueue.remove(0, buffer.position());
 
-                if (!buffer.hasRemaining())
-                    mWriteQueue.poll();
-                else
-                    return;
-            }
-            //Deregister write
+        if (buffer.hasRemaining())
+            return;
+
+        //Deregister write
+        try {
             mKey = mChannel.register(mSelector, SelectionKey.OP_READ);
         } catch (Exception e) {
-            e.printStackTrace();
+            emitError(e);
         }
     }
 
     public int writeBufferSize() {
-        int sumBytes = 0;
-
-        for (ByteBuffer buffer : mWriteQueue)
-            sumBytes += buffer.remaining();
-
-        return sumBytes;
+        return mWriteQueue.size();
     }
 
     public int readBufferSize() {
@@ -119,22 +125,26 @@ public class BasicTcpSocket implements IBasicTcpSocket {
 
         ByteBuffer buffer = ByteBuffer.wrap(bytes);
 
-        if (mWriteQueue.isEmpty()) {
+        if (mWriteQueue.size() == 0) {
             try {
                 mChannel.write(buffer);
+            } catch (Exception e) {
+                emitError(e);
+            }
 
-                if (!buffer.hasRemaining())
-                    return;
+            if (!buffer.hasRemaining())
+                return;
 
-                mWriteQueue.add(buffer);
+            addToWriteQueue(buffer);
 
-                //Register this socket for read/write
+            //Register this socket for read/write
+            try {
                 mKey = mChannel.register(mSelector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
             } catch (Exception e) {
-                e.printStackTrace();
+                emitError(e);
             }
         } else {
-            mWriteQueue.add(buffer);
+            addToWriteQueue(buffer);
         }
     }
 
@@ -150,5 +160,20 @@ public class BasicTcpSocket implements IBasicTcpSocket {
 
     public void removeListener(IBasicIODeviceListener listener) {
         mListeners.remove(listener);
+    }
+
+    private void addToWriteQueue(ByteBuffer buffer) {
+        byte[] bufferBytes = new byte[buffer.remaining()];
+        buffer.get(bufferBytes);
+        try {
+            mWriteQueue.write(bufferBytes);
+        } catch (Exception e) {
+            emitError(e);
+        }
+    }
+
+    private void emitError(Exception e) {
+        for (IBasicIODeviceListener listener : mListeners)
+            listener.error(e);
     }
 }

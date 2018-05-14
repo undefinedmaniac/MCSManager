@@ -24,7 +24,7 @@ void TcpListStream::writeList(const QStringList &list)
 {
     const int listSize = list.size();
 
-    QVector<int> headerData(listSize);
+    int headerData[listSize];
 
     //Concatinate the strings and grab the header positions
     QString message;
@@ -45,7 +45,7 @@ void TcpListStream::writeList(const QStringList &list)
     QString header;
     header.reserve(listSize * 2);
     for (int i = 0; i < listSize; i++) {
-        header += QString::number(headerData.at(i));
+        header += QString::number(headerData[i]);
 
         if (i != listSize - 1)
             header += QChar('.');
@@ -87,11 +87,14 @@ void TcpListStream::socketReadyRead()
             mSpaceLocation = mBuffer.indexOf(' ', mSpaceSearchPos);
 
             //Levae if we could not find a space
-            if (mSpaceLocation == -1)
+            if (mSpaceLocation == -1) {
+                if (mBuffer.size() > 1024)
+                    mSocket->close();
                 return;
+            }
 
             if (!fetchHeader()) {
-                resetReadData(-1);
+                mSocket->close();
                 return;
             }
 
