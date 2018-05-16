@@ -1,5 +1,6 @@
 package com.gmail.undifinedmaniac.mcscpplugin.network;
 
+import com.gmail.undifinedmaniac.mcscpplugin.network.enums.ServerDataType;
 import com.gmail.undifinedmaniac.mcscpplugin.network.interfaces.IBasicIODeviceListener;
 import com.gmail.undifinedmaniac.mcscpplugin.network.interfaces.IBasicTcpSocket;
 
@@ -11,7 +12,7 @@ public class McscpClient implements IBasicIODeviceListener {
 
     private IBasicTcpSocket mSocket;
     private TcpListStream mStream = new TcpListStream();
-    private Map<DataType, Boolean> mRequestedData = new HashMap<>();
+    private Map<ServerDataType, Boolean> mRequestedData = new HashMap<>();
 
     public McscpClient(IBasicTcpSocket socket) {
         mSocket = socket;
@@ -19,11 +20,11 @@ public class McscpClient implements IBasicIODeviceListener {
         mStream.addListener(this);
     }
 
-    public void setRequestState(DataType type, boolean value) {
+    public void setRequestState(ServerDataType type, boolean value) {
         mRequestedData.put(type, value);
     }
 
-    public boolean getRequestState(DataType type) {
+    public boolean getRequestState(ServerDataType type) {
         Boolean value = mRequestedData.get(type);
 
         if (value == null)

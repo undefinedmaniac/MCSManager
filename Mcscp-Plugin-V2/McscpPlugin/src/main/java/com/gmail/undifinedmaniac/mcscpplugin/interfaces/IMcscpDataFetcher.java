@@ -11,6 +11,7 @@ public interface IMcscpDataFetcher {
     int getMaxPlayers();
     int getPlayerCount();
     String getMotd();
+    String getWeather();
 
     //Performance data
     float getTps();

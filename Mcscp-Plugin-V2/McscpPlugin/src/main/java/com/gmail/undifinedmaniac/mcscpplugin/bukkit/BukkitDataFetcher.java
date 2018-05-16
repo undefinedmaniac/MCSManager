@@ -5,6 +5,7 @@ import com.gmail.undifinedmaniac.mcscpplugin.interfaces.IMcscpPlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
+import org.bukkit.World;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -38,6 +39,21 @@ public class BukkitDataFetcher implements IMcscpDataFetcher {
     @Override
     public String getMotd() {
         return mServer.getMotd();
+    }
+
+    @Override
+    public String getWeather() {
+        World overworld = mServer.getWorlds().get(0);
+
+        boolean thundering = overworld.isThundering();
+        boolean storming = overworld.hasStorm();
+
+        if (storming)
+            return "STORM";
+        else if (thundering)
+            return "THUNDER";
+        else
+            return "CLEAR";
     }
 
     //Performance data

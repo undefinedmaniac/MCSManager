@@ -1,4 +1,5 @@
 import QtQuick 2.9
+import QtQuick.Layouts 1.3
 import "../Style"
 
 Item {
@@ -15,8 +16,31 @@ Item {
         }
     }
 
-    SpecialTextField {
-        width: 200
-        height: 30
+    ColumnLayout {
+        id: textFieldLayout
+
+        anchors.centerIn: parent
+
+        RowLayout {
+            Text {
+                text: "Hostname / IP"
+                color: Style.text
+            }
+
+            SpecialTextField {
+                id: ipField
+            }
+        }
+
+        RowLayout {
+            Text {
+                text: "Port"
+                color: Style.text
+            }
+
+            SpecialTextField {
+                id: portField
+            }
+        }
     }
 }

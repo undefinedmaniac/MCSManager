@@ -2,80 +2,146 @@ package com.gmail.undifinedmaniac.mcscpplugin.network;
 
 import com.gmail.undifinedmaniac.mcscpplugin.interfaces.IMcscpDataFetcher;
 import com.gmail.undifinedmaniac.mcscpplugin.interfaces.IMcscpPlayerData;
-import com.gmail.undifinedmaniac.mcscpplugin.network.interfaces.IServerDataMonitorListener;
+import com.gmail.undifinedmaniac.mcscpplugin.network.enums.PlayerDataType;
+import com.gmail.undifinedmaniac.mcscpplugin.network.enums.ServerDataType;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import javafx.util.Pair;
+import java.util.*;
 
 class PlayerDataMonitor {
-    private ServerDataMonitor mParent;
-    private String mUuid;
     private IMcscpPlayerData mData;
-    private Map<DataType, Boolean> mMonitorData = null;
+    private AbstractSet<PlayerDataType> mMonitorData;
 
-    private Map<DataType, String> mStringData = new HashMap<>();
-    private Map<DataType, Integer> mIntData = new HashMap<>();
+    private Map<PlayerDataType, Object> mPlayerData = new HashMap<>();
 
-    PlayerDataMonitor(ServerDataMonitor parent, String uuid, IMcscpPlayerData playerData) {
-        mParent = parent;
-        mUuid = uuid;
+    PlayerDataMonitor(IMcscpPlayerData playerData, AbstractSet<PlayerDataType> monitorData) {
         mData = playerData;
-    }
-
-    public void updateMonitorData(Map<DataType, Boolean> monitorData, Collection<DataType> removedTypes) {
         mMonitorData = monitorData;
-
-        if (removedTypes != null) {
-            for (DataType type : removedTypes) {
-                mStringData.remove(type);
-                mIntData.remove(type);
-            }
-        }
     }
 
-    public void pollChanges() {
+    public void setPlayerDataTypes(AbstractSet<PlayerDataType> dataTypes) {
+        if (mMonitorData.size() != 0) {
+            mMonitorData.removeAll(dataTypes);
 
+            for (PlayerDataType key : mMonitorData)
+                mPlayerData.remove(key);
+
+            mMonitorData.clear();
+        }
+
+        mMonitorData.addAll(dataTypes);
+    }
+
+    public List<Pair<PlayerDataType, Object>> pollPlayerChanges() {
+        List<Pair<PlayerDataType, Object>> changes = new ArrayList<>();
+
+        for (PlayerDataType type : mMonitorData) {
+            Object newValue = fetchData(type);
+
+            if (newValue == null)
+                continue;
+
+            Object oldValue = mPlayerData.put(type, newValue);
+
+            if (!newValue.equals(oldValue))
+                changes.add(new Pair<>(type, newValue));
+        }
+
+        return changes;
+    }
+
+    private Object fetchData(PlayerDataType type) {
+        switch (type) {
+            case ListName:
+                return mData.getName();
+            case DisplayName:
+                return mData.getDisplayName();
+            case IpAddress:
+                return mData.getMaxHealth();
+            case MaxHealth:
+                return mData.getMaxHealth();
+            case Health:
+                return mData.getHealth();
+            case Hunger:
+                return mData.getHunger();
+            case Level:
+                return mData.getLevel();
+            case World:
+                return mData.getWorld();
+            default:
+                return null;
+        }
     }
 }
 
 public class ServerDataMonitor {
-
-    private McscpNetworkCore mCore;
     private IMcscpDataFetcher mFetcher;
-    private Collection<DataType> mMonitorData = null;
+    private AbstractSet<ServerDataType> mServerMonitorData = EnumSet.noneOf(ServerDataType.class);
+    private AbstractSet<PlayerDataType> mPlayerMonitorData = EnumSet.noneOf(PlayerDataType.class);
 
-    private Map<DataType, String> mStringData = new HashMap<>();
-    private Map<DataType, Integer> mIntData = new HashMap<>();
-    private Map<DataType, Float> mFloatData = new HashMap<>();
-
+    private Map<ServerDataType, Object> mServerData = new HashMap<>();
     private Map<String, PlayerDataMonitor> mPlayers = new HashMap<>();
 
-    private Collection<IServerDataMonitorListener> mListeners = new ArrayList<>();
-
     public ServerDataMonitor(McscpNetworkCore core) {
-        mCore = core;
-        mFetcher = mCore.getFetcher();
+        mFetcher = core.getFetcher();
     }
 
-    public void setMonitorData(Map<DataType, Boolean> monitorData) {
-        if (mMonitorData != null) {
-            Collection<DataType> removedTypes = getRemovedDataTypes(mMonitorData, monitorData);
-            updateMonitorData(monitorData, removedTypes);
-            return;
+    public void setServerDataTypes(AbstractSet<ServerDataType> dataTypes) {
+        if (mServerMonitorData.size() != 0) {
+            mServerMonitorData.removeAll(dataTypes);
+
+            for (ServerDataType key : mServerMonitorData)
+                mServerData.remove(key);
+
+            mServerMonitorData.clear();
         }
 
-        updateMonitorData(monitorData, null);
+        mServerMonitorData.addAll(dataTypes);
     }
 
-    public void pollChanges() {
+    public List<Pair<ServerDataType, Object>> pollServerChanges() {
+        List<Pair<ServerDataType, Object>> changes = new ArrayList<>();
 
+        for (ServerDataType type : mServerMonitorData) {
+            Object newValue = fetchData(type);
+
+            if (newValue == null)
+                continue;
+
+            Object oldValue = mServerData.put(type, newValue);
+
+            if (!newValue.equals(oldValue))
+                changes.add(new Pair<>(type, newValue));
+        }
+
+        return changes;
+    }
+
+    public void setPlayerDataTypes(AbstractSet<PlayerDataType> dataTypes) {
+        if (mPlayerMonitorData.size() != 0) {
+            mPlayerMonitorData.removeAll(dataTypes);
+
+            for (PlayerDataType key : mPlayerMonitorData)
+                mPlayerMonitorData.remove(key);
+
+            mPlayerMonitorData.clear();
+        }
+
+        mPlayerMonitorData.addAll(dataTypes);
+    }
+
+    public List<Pair<String, List<Pair<PlayerDataType, Object>>>> pollPlayerChanges() {
+        List<Pair<String, List<Pair<PlayerDataType, Object>>>> changes = new ArrayList<>();
+
+        for (Map.Entry<String, PlayerDataMonitor> entry : mPlayers.entrySet())
+            changes.add(new Pair<>(entry.getKey(), entry.getValue().pollPlayerChanges()));
+
+        return changes;
     }
 
     //Slots
     public void playerJoinEvent(String uuid) {
-        PlayerDataMonitor player = new PlayerDataMonitor(this, uuid, mFetcher.getPlayerData(uuid));
+        PlayerDataMonitor player = new PlayerDataMonitor(mFetcher.getPlayerData(uuid), mPlayerMonitorData);
         mPlayers.put(uuid, player);
     }
 
@@ -83,50 +149,27 @@ public class ServerDataMonitor {
         mPlayers.remove(uuid);
     }
 
-    //Signals
-    public void addListener(IServerDataMonitorListener listener) {
-        mListeners.add(listener);
-    }
-
-    public void removeListener(IServerDataMonitorListener listener) {
-        mListeners.remove(listener);
-    }
-
-    public void emitServerTableUpdate(DataType type, String value) {
-        for (IServerDataMonitorListener listener : mListeners)
-            listener.serverTableUpdate(type, value);
-    }
-
-    public void emitPlayerTableUpdate(String uuid, DataType type, String value) {
-        for (IServerDataMonitorListener listener : mListeners)
-            listener.playerTableUpdate(uuid, type, value);
-    }
-
-    private void updateMonitorData(Map<DataType, Boolean> monitorData, Collection<DataType> removedTypes) {
-        mMonitorData = monitorData;
-
-        if (removedTypes != null) {
-            for (DataType type : removedTypes) {
-                mStringData.remove(type);
-                mIntData.remove(type);
-                mFloatData.remove(type);
-            }
+    //Private functions
+    private Object fetchData(ServerDataType type) {
+        switch (type) {
+            case MaxPlayers:
+                return mFetcher.getMaxPlayers();
+            case Motd:
+                return mFetcher.getMotd();
+            case MaxRam:
+                return mFetcher.getMaxRam();
+            case PlayerCount:
+                return mFetcher.getPlayerCount();
+            case Weather:
+                return mFetcher.getWeather();
+            case Tps:
+                return mFetcher.getTps();
+            case TotalRam:
+                return mFetcher.getTotalRam();
+            case UsedRam:
+                return mFetcher.getUsedRam();
+            default:
+                return null;
         }
-
-        for (PlayerDataMonitor monitor : mPlayers.values())
-            monitor.updateMonitorData(monitorData, removedTypes);
-    }
-
-    static private Collection<DataType> getRemovedDataTypes(Map<DataType, Boolean> oldTypes,
-                                                            Map<DataType, Boolean> newTypes) {
-        Collection<DataType> types = new ArrayList<>();
-
-        for (DataType type : oldTypes.keySet()) {
-            if (oldTypes.getOrDefault(type, false) &&
-                    !newTypes.getOrDefault(type, false))
-                types.add(type);
-        }
-
-        return types;
     }
 }
