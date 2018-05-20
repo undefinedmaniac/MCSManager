@@ -17,7 +17,7 @@ public class BasicTcpSocket implements IBasicTcpSocket {
 
     private SocketChannel mChannel;
     private Selector mSelector;
-    private SelectionKey mKey;
+    private SelectionKey mKey = null;
 
     private ByteArrayOutputStream mReadBuffer = new ByteArrayOutputStream();
     private DynamicByteBuffer mWriteQueue = new DynamicByteBuffer();
@@ -51,11 +51,17 @@ public class BasicTcpSocket implements IBasicTcpSocket {
             mKey.cancel();
         } catch (Exception e) {
             emitError(e);
+        } finally {
+            for (IBasicIODeviceListener listener : mListeners)
+                listener.closed();
         }
     }
 
-    public void selectedForRead() {
+    public SocketAddress getAddress() {
+        return mChannel.socket().getRemoteSocketAddress();
+    }
 
+    public void selectedForRead() {
         int bytesRead;
 
         //Loop until we cannot fill the buffer anymore
@@ -165,6 +171,10 @@ public class BasicTcpSocket implements IBasicTcpSocket {
 
     public void removeListener(IBasicIODeviceListener listener) {
         mListeners.remove(listener);
+    }
+
+    public SelectionKey getKey() {
+        return mKey;
     }
 
     private void addToWriteQueue(ByteBuffer buffer) {

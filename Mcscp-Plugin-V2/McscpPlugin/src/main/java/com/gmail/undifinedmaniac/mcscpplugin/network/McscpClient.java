@@ -1,36 +1,52 @@
 package com.gmail.undifinedmaniac.mcscpplugin.network;
 
+import com.gmail.undifinedmaniac.mcscpplugin.network.enums.PlayerDataType;
 import com.gmail.undifinedmaniac.mcscpplugin.network.enums.ServerDataType;
 import com.gmail.undifinedmaniac.mcscpplugin.network.interfaces.IBasicIODeviceListener;
 import com.gmail.undifinedmaniac.mcscpplugin.network.interfaces.IBasicTcpSocket;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.net.SocketAddress;
+import java.util.*;
 
 public class McscpClient implements IBasicIODeviceListener {
 
     private IBasicTcpSocket mSocket;
+    private McscpClientList mList;
     private TcpListStream mStream = new TcpListStream();
-    private Map<ServerDataType, Boolean> mRequestedData = new HashMap<>();
+    private AbstractSet<ServerDataType> mRequestedServerData = EnumSet.noneOf(ServerDataType.class);
+    private AbstractSet<PlayerDataType> mRequestedPlayerData = EnumSet.noneOf(PlayerDataType.class);
 
-    public McscpClient(IBasicTcpSocket socket) {
+    public McscpClient(IBasicTcpSocket socket, McscpClientList list) {
         mSocket = socket;
+        mList = list;
         mStream.setSocket(mSocket);
         mStream.addListener(this);
     }
 
-    public void setRequestState(ServerDataType type, boolean value) {
-        mRequestedData.put(type, value);
+    public void close() {
+        mSocket.close();
     }
 
-    public boolean getRequestState(ServerDataType type) {
-        Boolean value = mRequestedData.get(type);
+    public void setRequestedServerData(AbstractSet<ServerDataType> requestedData) {
+        mRequestedServerData = requestedData;
+        mList.clientServerDataTypesChanged(mRequestedServerData);
+    }
 
-        if (value == null)
-            return false;
+    public void setRequestedPlayerData(AbstractSet<PlayerDataType> requestedData) {
+        mRequestedPlayerData = requestedData;
+        mList.clientPlayerDataTypesChanged(mRequestedPlayerData);
+    }
 
-        return value;
+    public AbstractSet<ServerDataType> getRequestedServerData() {
+        return mRequestedServerData;
+    }
+
+    public AbstractSet<PlayerDataType> getRequestedPlayerData() {
+        return mRequestedPlayerData;
+    }
+
+    public SocketAddress getAddress() {
+        return mSocket.getAddress();
     }
 
     public void writeList(List<String> stringList) {
@@ -45,7 +61,11 @@ public class McscpClient implements IBasicIODeviceListener {
 
     }
 
-    public void error(Exception e) {
+    public void closed() {
+        mList.clientClosedConnection(this);
+    }
 
+    public void error(Exception e) {
+        mList.clientException(e);
     }
 }

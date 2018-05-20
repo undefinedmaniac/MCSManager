@@ -8,6 +8,8 @@ public interface IBasicTcpSocket extends IBasicIODevice {
     boolean connect(SocketAddress remote) throws IOException;
     void close();
 
+    SocketAddress getAddress();
+
     void selectedForRead();
     void selectedForWrite();
 }
