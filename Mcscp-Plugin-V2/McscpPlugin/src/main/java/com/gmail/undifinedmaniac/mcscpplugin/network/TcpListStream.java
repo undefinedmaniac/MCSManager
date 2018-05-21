@@ -3,7 +3,6 @@ package com.gmail.undifinedmaniac.mcscpplugin.network;
 import com.gmail.undifinedmaniac.mcscpplugin.network.exceptions.HeaderOverflowException;
 import com.gmail.undifinedmaniac.mcscpplugin.network.exceptions.InvalidHeaderException;
 import com.gmail.undifinedmaniac.mcscpplugin.network.exceptions.MessageOverflowException;
-import com.gmail.undifinedmaniac.mcscpplugin.network.interfaces.IBasicIODevice;
 import com.gmail.undifinedmaniac.mcscpplugin.network.interfaces.IBasicIODeviceListener;
 import com.gmail.undifinedmaniac.mcscpplugin.network.interfaces.IBasicTcpSocket;
 import com.gmail.undifinedmaniac.mcscpplugin.network.interfaces.ITcpListStream;

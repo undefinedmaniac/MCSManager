@@ -57,9 +57,7 @@ public class BasicTcpSocket implements IBasicTcpSocket {
         }
     }
 
-    public SocketAddress getAddress() {
-        return mChannel.socket().getRemoteSocketAddress();
-    }
+    public SocketChannel getChannel() { return mChannel; }
 
     public void selectedForRead() {
         int bytesRead;

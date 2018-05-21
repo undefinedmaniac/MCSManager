@@ -1,5 +1,6 @@
 package com.gmail.undifinedmaniac.mcscpplugin.network;
 
+import com.gmail.undifinedmaniac.mcscpplugin.network.enums.EventType;
 import com.gmail.undifinedmaniac.mcscpplugin.network.enums.PlayerDataType;
 import com.gmail.undifinedmaniac.mcscpplugin.network.enums.ServerDataType;
 import javafx.util.Pair;
@@ -25,6 +26,58 @@ public class McscpMessageFormatter {
         list.add(uuid);
         list.add(formatPlayerDataType(change.getKey()));
         list.add(String.valueOf(change.getValue()));
+
+        return list;
+    }
+
+    public static List<String> formatPlayerJoinEvent(String uuid) {
+        List<String> list = new ArrayList<>();
+
+        list.add("e");
+        list.add("a");
+        list.add(uuid);
+
+        return list;
+    }
+
+    public static List<String> formatPlayerLeaveEvent(String uuid) {
+        List<String> list = new ArrayList<>();
+
+        list.add("e");
+        list.add("b");
+        list.add(uuid);
+
+        return list;
+    }
+
+    public static List<String> formatDeathEvent(String uuid, String message) {
+        List<String> list = new ArrayList<>();
+
+        list.add("e");
+        list.add("c");
+        list.add(uuid);
+        list.add(message);
+
+        return list;
+    }
+
+    public static List<String> formatChatEvent(String uuid, String message) {
+        List<String> list = new ArrayList<>();
+
+        list.add("e");
+        list.add("d");
+        list.add(uuid);
+        list.add(message);
+
+        return list;
+    }
+
+    public static List<String> formatLogEvent(String newData) {
+        List<String> list = new ArrayList<>();
+
+        list.add("e");
+        list.add("e");
+        list.add(newData);
 
         return list;
     }
@@ -70,6 +123,23 @@ public class McscpMessageFormatter {
                 return "g";
             case World:
                 return "h";
+            default:
+                return null;
+        }
+    }
+
+    private static String formationEventDataType(EventType type) {
+        switch (type) {
+            case JoinEvent:
+                return "a";
+            case LeaveEvent:
+                return "b";
+            case DeathEvent:
+                return "c";
+            case ChatEvent:
+                return "d";
+            case LogEvent:
+                return "e";
             default:
                 return null;
         }

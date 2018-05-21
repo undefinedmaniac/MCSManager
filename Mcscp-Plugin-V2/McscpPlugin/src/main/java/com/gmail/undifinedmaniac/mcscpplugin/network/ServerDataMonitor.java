@@ -6,8 +6,9 @@ import com.gmail.undifinedmaniac.mcscpplugin.network.enums.PlayerDataType;
 import com.gmail.undifinedmaniac.mcscpplugin.network.enums.ServerDataType;
 
 import javafx.util.Pair;
+import org.bukkit.entity.Player;
+
 import java.util.*;
-import java.util.logging.Level;
 
 class PlayerDataMonitor {
     private IMcscpPlayerData mData;
@@ -18,19 +19,6 @@ class PlayerDataMonitor {
     PlayerDataMonitor(IMcscpPlayerData playerData, AbstractSet<PlayerDataType> monitorData) {
         mData = playerData;
         mMonitorData = monitorData;
-    }
-
-    public void setPlayerDataTypes(AbstractSet<PlayerDataType> dataTypes) {
-        if (mMonitorData.size() != 0) {
-            mMonitorData.removeAll(dataTypes);
-
-            for (PlayerDataType key : mMonitorData)
-                mPlayerData.remove(key);
-
-            mMonitorData.clear();
-        }
-
-        mMonitorData.addAll(dataTypes);
     }
 
     public List<Pair<PlayerDataType, Object>> pollPlayerChanges() {
@@ -49,6 +37,10 @@ class PlayerDataMonitor {
         }
 
         return changes;
+    }
+
+    public Object getPlayerData(PlayerDataType type) {
+        return mPlayerData.get(type);
     }
 
     private Object fetchData(PlayerDataType type) {
@@ -87,16 +79,11 @@ public class ServerDataMonitor {
         mFetcher = core.getFetcher();
     }
 
-    public void setServerDataTypes(AbstractSet<ServerDataType> dataTypes) {
-        if (mServerMonitorData.size() != 0) {
-            mServerMonitorData.removeAll(dataTypes);
+    public void setServerDataTypes(AbstractSet<ServerDataType> removedTypes, AbstractSet<ServerDataType> dataTypes) {
+        for (ServerDataType key : removedTypes)
+            mServerData.remove(key);
 
-            for (ServerDataType key : mServerMonitorData)
-                mServerData.remove(key);
-
-            mServerMonitorData.clear();
-        }
-
+        mServerMonitorData.clear();
         mServerMonitorData.addAll(dataTypes);
     }
 
@@ -118,16 +105,11 @@ public class ServerDataMonitor {
         return changes;
     }
 
-    public void setPlayerDataTypes(AbstractSet<PlayerDataType> dataTypes) {
-        if (mPlayerMonitorData.size() != 0) {
-            mPlayerMonitorData.removeAll(dataTypes);
+    public void setPlayerDataTypes(AbstractSet<PlayerDataType> removedTypes, AbstractSet<PlayerDataType> dataTypes) {
+        for (PlayerDataType key : removedTypes)
+            mPlayerMonitorData.remove(key);
 
-            for (PlayerDataType key : mPlayerMonitorData)
-                mPlayerMonitorData.remove(key);
-
-            mPlayerMonitorData.clear();
-        }
-
+        mPlayerMonitorData.clear();
         mPlayerMonitorData.addAll(dataTypes);
     }
 
@@ -138,6 +120,19 @@ public class ServerDataMonitor {
             changes.add(new Pair<>(entry.getKey(), entry.getValue().pollPlayerChanges()));
 
         return changes;
+    }
+
+    public Object getServerData(ServerDataType type) {
+        return mServerData.get(type);
+    }
+
+    public List<Pair<String, Object>> getPlayerData(PlayerDataType type) {
+        List<Pair<String, Object>> data = new ArrayList<>();
+
+        for (Map.Entry<String, PlayerDataMonitor> entry : mPlayers.entrySet())
+            data.add(new Pair<>(entry.getKey(), entry.getValue().getPlayerData(type)));
+
+        return data;
     }
 
     //Slots
