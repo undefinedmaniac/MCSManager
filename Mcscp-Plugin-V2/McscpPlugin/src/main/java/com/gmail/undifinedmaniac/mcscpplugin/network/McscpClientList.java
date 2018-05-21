@@ -1,5 +1,6 @@
 package com.gmail.undifinedmaniac.mcscpplugin.network;
 
+import com.gmail.undifinedmaniac.mcscpplugin.command.McscpCommandProcessor;
 import com.gmail.undifinedmaniac.mcscpplugin.network.enums.EventType;
 import com.gmail.undifinedmaniac.mcscpplugin.network.enums.PlayerDataType;
 import com.gmail.undifinedmaniac.mcscpplugin.network.enums.ServerDataType;
@@ -7,7 +8,6 @@ import com.gmail.undifinedmaniac.mcscpplugin.network.exceptions.HeaderOverflowEx
 import com.gmail.undifinedmaniac.mcscpplugin.network.exceptions.InvalidHeaderException;
 import com.gmail.undifinedmaniac.mcscpplugin.network.exceptions.MessageOverflowException;
 import javafx.util.Pair;
-import org.bukkit.Server;
 
 import java.util.AbstractSet;
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public class McscpClientList {
         List<McscpClient> clients = new ArrayList<>(mClients);
 
         for (McscpClient client : clients)
-            client.getBasicSocket().close();
+            client.close();
     }
 
     public void clientServerDataTypesChanged(AbstractSet<ServerDataType> oldTypes,
@@ -65,7 +65,7 @@ public class McscpClientList {
         }
 
         for (ServerDataType type : existingTypes) {
-            sender.getListStream().writeList(McscpMessageFormatter.formatServerChangeMessage(
+            sender.writeList(McscpMessageFormatter.formatServerChangeMessage(
                     new Pair<>(type, mCore.getMonitor().getServerData(type))));
         }
 
@@ -94,7 +94,7 @@ public class McscpClientList {
 
         for (PlayerDataType type : existingTypes) {
             for (Pair<String, Object> pair : mCore.getMonitor().getPlayerData(type)) {
-                sender.getListStream().writeList(McscpMessageFormatter.formatPlayerChangeMessage(
+                sender.writeList(McscpMessageFormatter.formatPlayerChangeMessage(
                         pair.getKey(), new Pair<>(type, pair.getValue())));
             }
         }
@@ -114,7 +114,7 @@ public class McscpClientList {
 
             for (McscpClient client : mClients) {
                 if (client.getRequestedServerData().contains(change.getKey()))
-                    client.getBasicSocket().write(message);
+                    client.writeBytes(message);
             }
         }
     }
@@ -128,7 +128,7 @@ public class McscpClientList {
 
                 for (McscpClient client : mClients) {
                     if (client.getRequestedPlayerData().contains(change.getKey()))
-                        client.getBasicSocket().write(message);
+                        client.writeBytes(message);
                 }
             }
         }
@@ -161,7 +161,7 @@ public class McscpClientList {
 
     public void clientClosedConnection(McscpClient client) {
         mCore.getFetcher().logMessage(Level.INFO, String.format("Client disconnected: %s",
-                client.getBasicSocket().getChannel().socket().getRemoteSocketAddress()));
+                client.getAddress()));
         removeClient(client);
 
         clientServerDataTypesChanged(client.getRequestedServerData(), EnumSet.noneOf(ServerDataType.class), null);
@@ -171,7 +171,7 @@ public class McscpClientList {
     public void clientException(Exception e, McscpClient client) {
         if (e instanceof HeaderOverflowException || e instanceof InvalidHeaderException ||
                 e instanceof MessageOverflowException) {
-            client.getBasicSocket().close();
+            client.close();
         }
 
         String message = e.getMessage();
@@ -194,7 +194,7 @@ public class McscpClientList {
         byte[] message = TcpListStream.formatStringlist(list);
 
         for (McscpClient client : receivers)
-            client.getBasicSocket().write(message);
+            client.writeBytes(message);
     }
 
     private boolean removeClientServerTypes(AbstractSet<ServerDataType> serverTypes) {

@@ -1,12 +1,12 @@
-package com.gmail.undifinedmaniac.mcscpplugin.network;
+package com.gmail.undifinedmaniac.mcscpplugin.data;
 
 import com.gmail.undifinedmaniac.mcscpplugin.interfaces.IMcscpDataFetcher;
 import com.gmail.undifinedmaniac.mcscpplugin.interfaces.IMcscpPlayerData;
+import com.gmail.undifinedmaniac.mcscpplugin.network.McscpNetworkCore;
 import com.gmail.undifinedmaniac.mcscpplugin.network.enums.PlayerDataType;
 import com.gmail.undifinedmaniac.mcscpplugin.network.enums.ServerDataType;
 
 import javafx.util.Pair;
-import org.bukkit.entity.Player;
 
 import java.util.*;
 

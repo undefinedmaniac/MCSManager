@@ -1,5 +1,6 @@
 package com.gmail.undifinedmaniac.mcscpplugin.network;
 
+import com.gmail.undifinedmaniac.mcscpplugin.data.ServerDataMonitor;
 import com.gmail.undifinedmaniac.mcscpplugin.interfaces.IMcscpDataFetcher;
 import com.gmail.undifinedmaniac.mcscpplugin.network.interfaces.IBasicTcpSocket;
 

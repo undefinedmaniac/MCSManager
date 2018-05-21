@@ -5,8 +5,8 @@ import com.gmail.undifinedmaniac.mcscpplugin.network.enums.PlayerDataType;
 import com.gmail.undifinedmaniac.mcscpplugin.network.enums.ServerDataType;
 import com.gmail.undifinedmaniac.mcscpplugin.network.interfaces.IBasicIODeviceListener;
 import com.gmail.undifinedmaniac.mcscpplugin.network.interfaces.IBasicTcpSocket;
-import com.gmail.undifinedmaniac.mcscpplugin.network.interfaces.ITcpListStream;
 
+import java.net.SocketAddress;
 import java.util.*;
 
 public class McscpClient implements IBasicIODeviceListener {
@@ -25,9 +25,25 @@ public class McscpClient implements IBasicIODeviceListener {
         mStream.addListener(this);
     }
 
-    public IBasicTcpSocket getBasicSocket() { return mSocket; }
+    public SocketAddress getAddress() {
+        return mSocket.getChannel().socket().getRemoteSocketAddress();
+    }
 
-    public ITcpListStream getListStream() { return mStream; }
+    public void writeBytes(byte[] data) {
+        mSocket.write(data);
+    }
+
+    public void writeList(List<String> list) {
+        mStream.writeList(list);
+    }
+
+    public void close() {
+        mSocket.close();
+    }
+
+    public boolean isConnected() {
+        return mSocket.isConnected();
+    }
 
     public void setRequestedServerData(AbstractSet<ServerDataType> requestedData) {
         EnumSet<ServerDataType> oldTypes = EnumSet.copyOf(mRequestedServerData);

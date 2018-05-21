@@ -1,6 +1,7 @@
-package com.gmail.undifinedmaniac.mcscpplugin.network;
+package com.gmail.undifinedmaniac.mcscpplugin.command;
 
 import com.gmail.undifinedmaniac.mcscpplugin.interfaces.IMcscpDataFetcher;
+import com.gmail.undifinedmaniac.mcscpplugin.network.McscpClient;
 import com.gmail.undifinedmaniac.mcscpplugin.network.enums.EventType;
 import com.gmail.undifinedmaniac.mcscpplugin.network.enums.PlayerDataType;
 import com.gmail.undifinedmaniac.mcscpplugin.network.enums.ServerDataType;
@@ -72,7 +73,7 @@ public class McscpCommandProcessor {
                             ping.add("f");
                             ping.add("a");
 
-                            sender.getListStream().writeList(ping);
+                            sender.writeList(ping);
                             break;
                         }
                         case "b": {
@@ -118,7 +119,7 @@ public class McscpCommandProcessor {
 
     private void invalidCommandError(McscpClient sender) {
         mFetcher.logMessage(Level.WARNING, String.format("ERROR: client sent invalid command: %s",
-                sender.getBasicSocket().getChannel().socket().getRemoteSocketAddress()));
+                sender.getAddress()));
     }
 
     private AbstractSet<ServerDataType> getServerDataTypes(String dataString) {
