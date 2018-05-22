@@ -40,6 +40,10 @@ public class McscpClientList {
         return mCommandProcessor;
     }
 
+    public McscpNetworkCore getCore() {
+        return mCore;
+    }
+
     public void disconnectAllClients() {
         //Copy our list to prevent concurrent access errors
         List<McscpClient> clients = new ArrayList<>(mClients);

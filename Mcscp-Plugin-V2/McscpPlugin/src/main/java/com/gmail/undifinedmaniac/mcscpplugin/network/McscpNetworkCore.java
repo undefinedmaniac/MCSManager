@@ -7,8 +7,17 @@ import com.gmail.undifinedmaniac.mcscpplugin.network.interfaces.IBasicTcpSocket;
 import java.net.InetSocketAddress;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
+import java.util.ArrayDeque;
 import java.util.Iterator;
+import java.util.Queue;
 import java.util.logging.Level;
+
+class ScheduledTask {
+    public DelayedTask task;
+    public int tickDelay;
+    public int tickCount = 0;
+    public boolean repeat;
+}
 
 public class McscpNetworkCore {
 
@@ -20,6 +29,8 @@ public class McscpNetworkCore {
     private McscpServer mServer;
     private McscpClientList mClientList;
     private ServerDataMonitor mMonitor;
+
+    private Queue<ScheduledTask> mTasks = new ArrayDeque<>();
 
     private int tickCount = 0;
 
@@ -49,6 +60,26 @@ public class McscpNetworkCore {
         } finally {
             mClientList.disconnectAllClients();
         }
+    }
+
+    public void scheduleTask(DelayedTask task, int secs) {
+        scheduleTask(task, secs, false);
+    }
+
+    public void scheduleTask(DelayedTask task, int secs, boolean repeat) {
+        scheduleTask(task, secs, repeat, false);
+    }
+
+    public void scheduleTask(DelayedTask task, int secs, boolean repeat, boolean runImmediately) {
+        ScheduledTask scheduledTask = new ScheduledTask();
+        scheduledTask.task = task;
+        scheduledTask.tickDelay = secs * 20;
+        scheduledTask.repeat = repeat;
+
+        if (runImmediately)
+            runTask(scheduledTask);
+        else
+            mTasks.add(scheduledTask);
     }
 
     public void processEvents() {
@@ -83,9 +114,20 @@ public class McscpNetworkCore {
             }
         }
 
-        if (tickCount % 20 == 0) {
+        if (tickCount % 10 == 0) {
             mClientList.sendServerChanges(mMonitor.pollServerChanges());
             mClientList.sendPlayerChanges(mMonitor.pollPlayerChanges());
+        }
+
+        for (int i = 0; i < mTasks.size(); i++) {
+            ScheduledTask scheduledTask = mTasks.remove();
+
+            if (scheduledTask.tickCount == scheduledTask.tickDelay) {
+                runTask(scheduledTask);
+            } else {
+                scheduledTask.tickCount++;
+                mTasks.add(scheduledTask);
+            }
         }
 
         if (tickCount >= 20)
@@ -133,4 +175,16 @@ public class McscpNetworkCore {
     }
 
     public ServerDataMonitor getMonitor() { return mMonitor; }
+
+    private void runTask(ScheduledTask scheduledTask) {
+        if (scheduledTask.task.isCanceled())
+            return;
+
+        scheduledTask.task.run();
+
+        if (scheduledTask.repeat) {
+            scheduledTask.tickCount = 0;
+            mTasks.add(scheduledTask);
+        }
+    }
 }

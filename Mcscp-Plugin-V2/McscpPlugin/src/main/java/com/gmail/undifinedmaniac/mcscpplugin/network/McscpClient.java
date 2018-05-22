@@ -14,6 +14,7 @@ public class McscpClient implements IBasicIODeviceListener {
     private IBasicTcpSocket mSocket;
     private McscpClientList mList;
     private TcpListStream mStream = new TcpListStream();
+    private McscpHandshake mHandshake;
     private AbstractSet<ServerDataType> mRequestedServerData = EnumSet.noneOf(ServerDataType.class);
     private AbstractSet<PlayerDataType> mRequestedPlayerData = EnumSet.noneOf(PlayerDataType.class);
     private AbstractSet<EventType> mRequestedEvents = EnumSet.noneOf(EventType.class);
@@ -23,6 +24,11 @@ public class McscpClient implements IBasicIODeviceListener {
         mList = list;
         mStream.setSocket(mSocket);
         mStream.addListener(this);
+
+        mHandshake = new McscpHandshake(this, mList.getCore());
+
+        //Start the handshake
+        directWriteList(mHandshake.getFirstMessage());
     }
 
     public SocketAddress getAddress() {
@@ -30,11 +36,13 @@ public class McscpClient implements IBasicIODeviceListener {
     }
 
     public void writeBytes(byte[] data) {
-        mSocket.write(data);
+        if (mHandshake.isComplete())
+            directWriteBytes(data);
     }
 
     public void writeList(List<String> list) {
-        mStream.writeList(list);
+        if (mHandshake.isComplete())
+            directWriteList(list);
     }
 
     public void close() {
@@ -74,7 +82,19 @@ public class McscpClient implements IBasicIODeviceListener {
     }
 
     public void readyRead() {
-        mList.getCommandProcessor().command(mStream.readList(), this);
+        if (mHandshake.isComplete()) {
+            mList.getCommandProcessor().command(mStream.readList(), this);
+        } else {
+            List<String> message = mHandshake.processHandshake(mStream.readList());
+
+            if (message == null) {
+                close();
+                return;
+            }
+
+            if (!message.isEmpty())
+                directWriteList(message);
+        }
     }
 
     public void closed() {
@@ -83,5 +103,13 @@ public class McscpClient implements IBasicIODeviceListener {
 
     public void error(Exception e) {
         mList.clientException(e, this);
+    }
+
+    private void directWriteBytes(byte[] data) {
+        mSocket.write(data);
+    }
+
+    private void directWriteList(List<String> list) {
+        mStream.writeList(list);
     }
 }
